@@ -13,11 +13,8 @@
 
 Auth::routes();
 
-
-Route::get('auth/github', 'Auth\LoginController@redirectToProvider');
-Route::get('auth/github/callback', 'Auth\LoginController@handleProviderCallback');
-Route::get('/redirect', 'Auth\LoginController@redirectToProvidergoogle');
-Route::get('/callback', 'Auth\LoginController@handleProviderCallbackgoogle');
+Route::get('/', 'Frontend\HomeController@index')->name('home');
+Route::get('/home', 'Frontend\HomeController@index')->name('home');
 
 
 
@@ -29,9 +26,6 @@ Route::post('/emails/validatecode', 'Frontend\EmailsController@validatecode')->n
 Route::get('/emails/directconfirmpage/{email}/{role}/{codes}', 'Frontend\EmailsController@directconfirmpage')->name('emails.directconfirmpage');
 Route::get('/emailverifyforresend/{email}/{role}', 'Auth\RegisterController@emailverifyforresend')->name('emailverifyforresend');
 
-
-
-Route::get('/', 'Frontend\HomeController@index')->name('home');
 Route::get('/account', 'Frontend\AccountController@index')->name('account');
 Route::get('/changepass', 'Frontend\AccountController@changepass')->name('changepass');
 Route::get('/myreviews', 'Frontend\AccountController@myreviews')->name('myreviews');
@@ -176,8 +170,6 @@ Route::get('/admin/emails', 'Admin\EmailsController@index')->name('emails.index'
 
 Route::resource('admin/logs', 'Admin\AdminlogsController');
 Route::get('/admin/logs', 'Admin\AdminlogsController@index')->name('logs.index');
-
-Route::get('/home', 'Frontend\HomeController@index')->name('home');
 
 // Axios AJAX call
 Route::get('/getproducts-byfilter/{word}/{by}/{min}/{max}/{category}', 'Frontend\ProductController@getproductsbyfilter');
