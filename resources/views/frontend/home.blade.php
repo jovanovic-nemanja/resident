@@ -38,11 +38,13 @@
                                             <a href="#" id="{{ $resident->id }}" class="btn btn-success btn-lg" style="width:100%; margin-bottom: 2%;"> Activities</a>
                                             <div class="ui-dropdowns" data-example-id="single-button-dropdown">
                                                 <div class="btn-group" style="width: 100%;">
-                                                    <button type="button" class="btn btn-danger btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  style="width: 100%;">Incidence <span class="caret"></span></button>
+                                                    <button type="button" class="btn btn-danger btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  style="width: 100%;">
+                                                        Incidence <span class="caret"></span>
+                                                    </button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li><a href="#">Family visit</a></li>
                                                         <li><a href="#">Mood Change</a></li>
-                                                        <li><a href="webgl.php">Body harm</a></li>
+                                                        <li><a href="{{ route('resident.bodyharm') }}">Body harm</a></li>
                                                     </ul>
                                                 </div>
                                             </div>

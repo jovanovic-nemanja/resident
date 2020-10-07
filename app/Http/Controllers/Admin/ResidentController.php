@@ -56,11 +56,7 @@ class ResidentController extends Controller
             'profile_logo'      => 'required',
         ]);
         
-        if($request['gender'] == "male") {
-            $request['gender'] = 0;
-        }else{
-            $request['gender'] = 1;
-        }
+        $request['gender'] == "male" ? $request['gender'] = 0 : $request['gender'] = 1;
 
         DB::beginTransaction();
 
@@ -90,6 +86,17 @@ class ResidentController extends Controller
         }  
 
         return redirect()->route('home')->with('flash', 'Successfully added new Resident.');
+    }
+
+    /**
+     * Display the Incidence Body harm page.
+     *
+     * @param  int  $id userid
+     * @return \Illuminate\Http\Response
+     */
+    public function bodyharm()
+    {
+        return view('frontend.webgl');
     }
 
     /**

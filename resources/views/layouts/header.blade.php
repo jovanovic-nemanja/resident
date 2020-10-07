@@ -40,6 +40,12 @@
                                 <a href="{{ route('login') }}"><i class="fa fa-wrench"></i>{{ __('Login') }}</a>
                             </li>
                         @else
+                            @if(auth()->user()->hasRole('admin'))
+                                <li class="">
+                                    <a href="{{ route('admin.generalsetting') }}"><i class="fa fa-cog"></i>Settings </a>
+                                </li>
+                            @endif
+                                
                             <li class="last">
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>{{ __('Logout') }} ({{ Auth::user()->name }})</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
