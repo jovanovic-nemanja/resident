@@ -19,12 +19,12 @@ class UserSeeder extends Seeder
 	        'name' => 'Admin',
 	        'email' => 'admin@gmail.com',
             'email_verified_at' => 1,
-            'password' => '$2y$10$43Lgdx7qDxGdj3cDyfcw4uLj5nVQ6vsQ3obexrb/axByYf4B6roZO', // secret
+            'profile_logo' => '1.png',
+            'password' => '$2y$10$43Lgdx7qDxGdj3cDyfcw4uLj5nVQ6vsQ3obexrb/axByYf4B6roZO', // 111111
             'phone_number' => '029292162',
             'gender' => 0,
             'birthday' => '1999-10-29',
             'address' => 'Serbia Beograd',
-            'block' => 0,
             'remember_token' => str_random(10),
             'sign_date' => date('y-m-d h:m:s'),
 		]);

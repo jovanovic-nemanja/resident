@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://rfq.projexonlineservices.com'),
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------

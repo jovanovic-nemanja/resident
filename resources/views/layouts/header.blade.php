@@ -22,10 +22,18 @@
         <div class="pull-right">
             <ul class="info-menu right-links list-inline list-unstyled">
                 <li class="profile showopacity">
-                    <a href="#" data-toggle="dropdown" class="toggle">
-                        <img src="{{ asset('Dashboard_files/profile.jpg') }}" alt="user-image" class="img-circle img-inline">
-                        <span>nurse <i class="fa fa-angle-down"></i></span>
-                    </a>
+                    @guest
+                        <a href="#" data-toggle="dropdown" class="toggle">
+                            <img src="{{ asset('Dashboard_files/profile.jpg') }}" alt="user-image" class="img-circle img-inline">
+                            <span>Login <i class="fa fa-angle-down"></i></span>
+                        </a>
+                    @else
+                        <a href="#" data-toggle="dropdown" class="toggle">
+                            <img src="{{ asset('Dashboard_files/profile.jpg') }}" alt="user-image" class="img-circle img-inline">
+                            <span>{{ Auth::user()->name }} <i class="fa fa-angle-down"></i></span>
+                        </a>
+                    @endguest
+                    
                     <ul class="dropdown-menu profile animated fadeIn">
                         @guest
                             <li class="last">
@@ -33,7 +41,7 @@
                             </li>
                         @else
                             <li class="last">
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>{{ __('Logout') }}</a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>{{ __('Logout') }} ({{ Auth::user()->name }})</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>

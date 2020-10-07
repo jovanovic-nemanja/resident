@@ -3,7 +3,9 @@
 namespace App;
 
 use App\Reviews;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -17,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'company_name', 'company_logo', 'email', 'github_id', 'google_id', 'password', 'phone_number', 'sign_date', 'block', 'email_verified_at'
+        'name', 'email', 'birthday', 'address', 'password', 'phone_number', 'sign_date', 'gender', 'email_verified_at', 'profile_logo'
     ];
 
     /**
@@ -28,18 +30,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function shop() {
-        return $this->hasOne('App\Shop')->withDefault();
-    }
-
-    public function addresses() {
-        return $this->hasMany('App\Address');
-    }
-
-    public function products() {
-        return $this->hasMany('App\Product');
-    }
 
     public function roles() {
     	return $this->belongsToMany('App\Role');
@@ -57,30 +47,6 @@ class User extends Authenticatable
         return false;
     }
 
-    public function getBlockstatus($id) {
-        if (@$id) {
-            if ($id == 0) { //normal status
-                $result = "Normal";
-            }else if ($id == 1) {   //user blocked status
-                $result = "Blocked";
-            }
-        }else{
-            $result = "Normal";
-        }
-
-        return $result;
-    }
-
-    public static function getMarks($id) {
-        if (@$id) {
-            $marks = DB::table('reviews')
-                        ->where('receiver', $id)
-                        ->avg('mark');
-
-            return $marks;
-        }
-    }
-
     public function getUsername($id) {
         if (@$id) {
             $user = User::where('id', $id)->first();
@@ -88,5 +54,29 @@ class User extends Authenticatable
         }
 
         return $name;
+    }
+
+    /**
+    * @param user_id
+    * This is a feature to upload a company logo
+    */
+    public static function upload_logo_img($user_id, $existings = null) {
+        if(!request()->hasFile('profile_logo')) {
+            return false;
+        }
+
+        Storage::disk('public_local')->put('uploads/', request()->file('profile_logo'));
+
+        self::save_logo_img($user_id, request()->file('profile_logo'));
+    }
+
+    public static function save_logo_img($user_id, $image) {
+        $user = User::where('id', $user_id)->first();
+
+        if($user) {
+            Storage::disk('public_local')->delete('uploads/', $user->profile_logo);
+            $user->profile_logo = $image->hashName();
+            $user->update();
+        }
     }
 }

@@ -26,8 +26,7 @@ class ManagemanagersController extends Controller
      */
     public function index()
     {
-        $categories = User::all();
-        return view('admin.managemanagers.index', compact('categories'));
+        return view('admin.managemanagers.index');
     }
 
     /**
@@ -50,9 +49,12 @@ class ManagemanagersController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'gender' => 'required|integer',
+            'birthday' => 'required|date',
+            'address' => 'required|string',
             'password' => 'required|string|min:6|confirmed',
-            'phone_number' => 'required|string|max:255',
+            'phone_number' => 'string|max:20',
         ]);
 
         $user = User::create([

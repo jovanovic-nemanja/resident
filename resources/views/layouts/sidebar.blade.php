@@ -16,7 +16,7 @@
                         <a class="" href="{{ route('home') }}">All Residents</a>
                     </li>
                     <li>
-                        <a class="" href="{{ route('home') }}">Add Resident</a>
+                        <a class="" href="{{ route('resident.add') }}">Add Resident</a>
                     </li>
                 </ul>
             </li>

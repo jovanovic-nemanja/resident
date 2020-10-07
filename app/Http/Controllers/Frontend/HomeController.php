@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -20,6 +21,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.home');
+        $residents =  User::all();
+
+        return view('frontend.home', compact('residents'));
     }
 }

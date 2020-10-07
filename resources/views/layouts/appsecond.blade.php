@@ -26,5 +26,7 @@
     </div>
 
     @include('layouts.foot')
+
+    @yield('script')
 </body>
 </html>

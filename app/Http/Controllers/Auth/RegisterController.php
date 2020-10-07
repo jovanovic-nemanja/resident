@@ -6,9 +6,7 @@ use Mail;
 use Session;
 use App\User;
 use App\Role;
-use App\Image;
 use App\RoleUser;
-use App\VerifyEmailcodes;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -62,7 +60,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            // 'password' => 'required|string|min:6|confirmed',
+            'gender' => 'required|integer',
+            'birthday' => 'required|date',
+            'address' => 'required|string',
+            'password' => 'required|string|min:6|confirmed',
             'phone_number' => 'string|max:255',
         ]);
     }
