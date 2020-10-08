@@ -24,12 +24,12 @@
                 <li class="profile showopacity">
                     @guest
                         <a href="#" data-toggle="dropdown" class="toggle">
-                            <img src="{{ asset('Dashboard_files/profile.jpg') }}" alt="user-image" class="img-circle img-inline">
+                            <img src="{{ asset('newdesign/data/profile/profile.jpg') }}" alt="user-image" class="img-circle img-inline">
                             <span>Login <i class="fa fa-angle-down"></i></span>
                         </a>
                     @else
                         <a href="#" data-toggle="dropdown" class="toggle">
-                            <img src="{{ asset('Dashboard_files/profile.jpg') }}" alt="user-image" class="img-circle img-inline">
+                            <img src="{{ asset('newdesign/data/profile/profile.jpg') }}" alt="user-image" class="img-circle img-inline">
                             <span>{{ Auth::user()->name }} <i class="fa fa-angle-down"></i></span>
                         </a>
                     @endguest

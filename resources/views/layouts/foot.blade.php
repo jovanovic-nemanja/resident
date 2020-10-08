@@ -1,19 +1,12 @@
 <!-- CORE JS FRAMEWORK - START -->
-<script src="{{ asset('Dashboard_files/jquery.min.js') }}"></script>
-<script src="{{ asset('Dashboard_files/jquery.easing.min.js') }}"></script>
-<script src="{{ asset('Dashboard_files/bootstrap.min.js') }}"></script>
-<script src="{{ asset('Dashboard_files/pace.min.js') }}"></script>
-<script src="{{ asset('Dashboard_files/perfect-scrollbar.min.js') }}"></script>
-<script src="{{ asset('Dashboard_files/viewportchecker.js') }}"></script>
+<script src="{{ asset('newdesign/assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('newdesign/assets/js/jquery.easing.min.js') }}"></script>
+<script src="{{ asset('newdesign/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('newdesign/assets/plugins/pace/pace.min.js') }}"></script>
+<script src="{{ asset('newdesign/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('newdesign/assets/plugins/viewport/viewportchecker.js') }}"></script>
 <!-- CORE JS FRAMEWORK - END -->
 
-<!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
-<script src="{{ asset('Dashboard_files/jquery.sparkline.min.js') }}"></script>
-<script src="{{ asset('Dashboard_files/Chart.min.js') }}"></script>
-<script src="{{ asset('Dashboard_files/chart-chartjs.js') }}"></script>
-
-<!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
-
 <!-- CORE TEMPLATE JS - START -->
-<script src="{{ asset('Dashboard_files/scripts.js') }}"></script>
+<script src="{{ asset('newdesign/assets/js/scripts.js') }}"></script>
 <!-- END CORE TEMPLATE JS - END -->

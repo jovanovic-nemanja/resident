@@ -6,7 +6,7 @@
             <li class="open">
                 <a href="javascript:;">
                     <i class="img">
-                        <img src="{{ asset('Dashboard_files/5.png') }}" alt="" class="width-20">
+                        <img src="{{ asset('newdesign/assets/images/5.png') }}" alt="" class="width-20">
                     </i>
                     <span class="title">Residents</span>
                     <span class="arrow "></span>

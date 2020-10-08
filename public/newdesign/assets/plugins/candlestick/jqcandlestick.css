@@ -1,0 +1,12 @@
+.jqcandlestick-container {
+  position: relative;
+  min-height: 435px
+}
+.jqcandlestick-canvas:last-of-type {
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
