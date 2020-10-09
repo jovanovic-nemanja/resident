@@ -11,12 +11,29 @@
                     <span class="title">Residents</span>
                     <span class="arrow "></span>
                 </a>
-                <ul class="sub-menu" style="display:block;">
+                <ul class="sub-menu" style="display: block;">
                     <li>
                         <a class="" href="{{ route('home') }}">All Residents</a>
                     </li>
                     <li>
                         <a class="" href="{{ route('resident.add') }}">Add Resident</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="img">
+                        <img src="{{ asset('newdesign/assets/images/5.png') }}" alt="" class="width-20">
+                    </i>
+                    <span class="title">Care Takers</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a class="" href="{{ route('home') }}">Vendors</a>
+                    </li>
+                    <li>
+                        <a class="" href="{{ route('resident.add') }}">Setup</a>
                     </li>
                 </ul>
             </li>
