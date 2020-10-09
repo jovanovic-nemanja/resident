@@ -27,7 +27,9 @@
                                 <div class="doctors-list patient relative">
                                     <div class="doctors-head relative text-center">
                                         <div class="patient-img img-circle">
-                                            <img src="{{ asset('uploads/').'/'.$resident->profile_logo }}" class="rad-50 center-block" alt="">
+                                            <a href="{{ route('resident.show', $resident->id) }}">
+                                                <img src="{{ asset('uploads/').'/'.$resident->profile_logo }}" class="rad-50 center-block" alt="">
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="row">

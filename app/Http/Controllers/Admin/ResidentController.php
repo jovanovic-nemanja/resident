@@ -106,7 +106,9 @@ class ResidentController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::where('id', $id)->first();
+
+        return view('admin.resident.viewuser', compact('user'));
     }
 
     /**
