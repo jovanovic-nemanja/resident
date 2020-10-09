@@ -12,7 +12,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Add Activity </h1>
+                <h1 class="title">Add Incidence </h1>
                 <!-- PAGE HEADING TAG - END -->
             </div>
 
@@ -23,9 +23,9 @@
 
     <div class="col-xs-12">
         <div class="add-header-wrapper gradient-blue curved-section text-center">
-            <h2 class="uppercase bold w-text">Add New Activity</h2>
-            <div class="before-text">add Activity</div>
-            <p class="g-text">Please add new Activity</p>
+            <h2 class="uppercase bold w-text">Add New Incidence</h2>
+            <div class="before-text">add Incidence</div>
+            <p class="g-text">Please add new Incidences</p>
         </div>
         <div class=" bg-w">
             <div class="col-lg-10 col-lg-offset-1 col-xs-12">
@@ -39,7 +39,7 @@
                     <div class="content-body">
                         <div class="row">
                             <div class="col-xs-12">
-                                <form action="{{ route('activities.store') }}" method="POST">
+                                <form action="{{ route('incidences.store') }}" method="POST">
                                     @csrf
 
                                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
@@ -71,8 +71,9 @@
                                         <div class="controls">
                                             <select class="form-control" name="type" required>
                                                 <option value="">Choose Type</option>
-                                                <option value="1">Primary ADL</option>
-                                                <option value="2">Secondary ADL</option>
+                                                <option value="1">Family Visit</option>
+                                                <option value="2">Mood Change</option>
+                                                <option value="3">Body Harm</option>
                                             </select>
                                         </div>
                                         @if ($errors->has('type'))

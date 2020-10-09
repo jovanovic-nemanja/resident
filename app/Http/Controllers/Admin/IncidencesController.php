@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Incidences;
+
 class IncidencesController extends Controller
 {
     /**
@@ -14,7 +16,9 @@ class IncidencesController extends Controller
      */
     public function index()
     {
-        //
+        $incidences = Incidences::all();
+
+        return view('admin.incidences.index', compact('incidences'));
     }
 
     /**
@@ -24,7 +28,7 @@ class IncidencesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.incidences.create');
     }
 
     /**
@@ -35,7 +39,19 @@ class IncidencesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'title' => 'required',
+            'type' => 'required'
+        ]);
+
+        $incidences = Incidences::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'type' => $request->type,
+            'sign_date' => date('y-m-d h:i:s'),
+        ]);
+
+        return redirect()->route('incidences.index')->with('flash', 'Incidence has been successfully created.');
     }
 
     /**
@@ -46,7 +62,9 @@ class IncidencesController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = Incidences::where('id', $id)->first();
+
+        return view('admin.incidences.edit', compact('result'));
     }
 
     /**
@@ -69,7 +87,21 @@ class IncidencesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'title' => 'required',
+            'type' => 'required'
+        ]);
+
+        $record = Incidences::where('id', $id)->first();
+        if (@$record) {
+            $record->title = $request->title;
+            $record->type = $request->type;
+            $record->content = $request->content;
+
+            $record->update();
+        }
+
+        return redirect()->route('incidences.index');
     }
 
     /**
@@ -80,6 +112,8 @@ class IncidencesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $record = Incidences::where('id', $id)->delete();
+        
+        return redirect()->route('incidences.index');
     }
 }

@@ -28,7 +28,7 @@ class ActivitiesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.activities.create');
     }
 
     /**
@@ -39,7 +39,19 @@ class ActivitiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'title' => 'required',
+            'type' => 'required'
+        ]);
+
+        $activities = Activities::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'type' => $request->type,
+            'sign_date' => date('y-m-d h:i:s'),
+        ]);
+
+        return redirect()->route('activities.index')->with('flash', 'Activity has been successfully created.');
     }
 
     /**
@@ -50,7 +62,9 @@ class ActivitiesController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = Activities::where('id', $id)->first();
+
+        return view('admin.activities.edit', compact('result'));
     }
 
     /**
@@ -73,7 +87,21 @@ class ActivitiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'title' => 'required',
+            'type' => 'required'
+        ]);
+
+        $record = Activities::where('id', $id)->first();
+        if (@$record) {
+            $record->title = $request->title;
+            $record->type = $request->type;
+            $record->content = $request->content;
+
+            $record->update();
+        }
+
+        return redirect()->route('activities.index');
     }
 
     /**
@@ -84,6 +112,8 @@ class ActivitiesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $record = Activities::where('id', $id)->delete();
+        
+        return redirect()->route('activities.index');
     }
 }

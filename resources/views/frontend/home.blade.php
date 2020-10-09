@@ -34,11 +34,23 @@
                                     </div><!-- end row -->
                                     <div class="col-xs-12 mb-30">
                                         <div class="form-group no-mb">
-                                            <!-- <a href="view-resident.php" class="btn btn-primary btn-lg gradient-blue" style="width:100%; margin-bottom: 2%;"> Medications</a> -->
-                                            <a href="#" id="{{ $resident->id }}" class="btn btn-success btn-lg" style="width:100%; margin-bottom: 2%;"> Activities</a>
                                             <div class="ui-dropdowns" data-example-id="single-button-dropdown">
                                                 <div class="btn-group" style="width: 100%;">
-                                                    <button type="button" class="btn btn-danger btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  style="width: 100%;">
+                                                    <button type="button" class="btn btn-success btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  style="width: 100%;">
+                                                        Activities <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="{{ route('resident.bodyharm') }}">Primary ADL</a></li>
+                                                        <li><a href="{{ route('resident.bodyharm') }}">Secondary ADL</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <a href="#" class="btn btn-primary btn-lg gradient-blue" style="width:100%; margin-bottom: 2%;"> Medications</a>
+
+                                            <div class="ui-dropdowns" data-example-id="single-button-dropdown">
+                                                <div class="btn-group" style="width: 100%;">
+                                                    <button type="button" class="btn btn-warning btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  style="width: 100%;">
                                                         Incidence <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">

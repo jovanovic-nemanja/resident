@@ -33,7 +33,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Activities </h1>
+                <h1 class="title">Incidences </h1>
                 <!-- PAGE HEADING TAG - END -->
             </div>
 
@@ -45,9 +45,9 @@
     <div class="col-xs-12">
         <section class="box">
             <header class="panel_header">
-                <h2 class="title pull-left">Activities</h2>
+                <h2 class="title pull-left">Incidences</h2>
                 <div class="actions panel_actions pull-right">
-                	<a href="{{ route('activities.create') }}" class="btn btn-success">Add</a>
+                	<a href="{{ route('incidences.create') }}" class="btn btn-success">Add</a>
                 </div>
             </header>
             <div class="content-body">
@@ -66,28 +66,26 @@
                                 </thead>
                                 <tbody>
                                 	<?php 
-                                		if($activities) {
+                                		if($incidences) {
 	                                		$i = 1;
-		                                	foreach($activities as $activity) { ?>
+		                                	foreach($incidences as $incidence) { ?>
 		                                		<tr>
 		                                			<td>{{ $i }}</td>
 			                                        <td>
-			                                            <!-- <div class="round">{{ $activity->title }}</div> -->
 			                                            <div class="designer-info">
-			                                                <h6>{{ $activity->title }}</h6>
-			                                                <!-- <small class="text-muted">Male, 34 Years</small> -->
+			                                                <h6>{{ $incidence->title }}</h6>
 			                                            </div>
 			                                        </td>
 			                                        
-			                                        <td>{{ $activity->getTypeasstring($activity->type) }}</td>
+			                                        <td>{{ $incidence->getTypeasstring($incidence->type) }}</td>
 			                                        <td>
-			                                        	<span class="badge round-primary">{{ $activity->sign_date }}</span>
+			                                        	<span class="badge round-primary">{{ $incidence->sign_date }}</span>
 			                                        </td>
 			                                        <td>
-			                                        	<a href="{{ route('activities.show', $activity->id) }}" class="btn btn-success">Edit</a>
-			                                        	<a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$activity->id}}').submit();" class="btn btn-warning">Delete</a>
+			                                        	<a href="{{ route('incidences.show', $incidence->id) }}" class="btn btn-success">Edit</a>
+			                                        	<a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$incidence->id}}').submit();" class="btn btn-warning">Delete</a>
 
-			                                        	<form id="delete-form-{{$activity->id}}" action="{{ route('activities.destroy', $activity->id) }}" method="POST" style="display: none;">
+			                                        	<form id="delete-form-{{$incidence->id}}" action="{{ route('incidences.destroy', $incidence->id) }}" method="POST" style="display: none;">
 											                  <input type="hidden" name="_method" value="delete">
 											                  @csrf
 											            </form>

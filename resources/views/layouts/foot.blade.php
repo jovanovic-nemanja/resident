@@ -10,3 +10,7 @@
 <!-- CORE TEMPLATE JS - START -->
 <script src="{{ asset('newdesign/assets/js/scripts.js') }}"></script>
 <!-- END CORE TEMPLATE JS - END -->
+
+<script src="{{ asset('newdesign/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('newdesign/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ asset('newdesign/data-table.js') }}"></script>
