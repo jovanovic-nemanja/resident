@@ -51,7 +51,6 @@ class ResidentController extends Controller
             'gender' => 'required',
             'birthday' => 'required|date',
             'address' => 'required|string',
-            'password' => 'required|string|min:6|confirmed',
             'phone_number' => 'string|max:20',
             'profile_logo'      => 'required',
         ]);
@@ -68,7 +67,7 @@ class ResidentController extends Controller
                 'gender' => $request['gender'],
                 'birthday' => $request['birthday'],
                 'address' => $request['address'],
-                'password' => Hash::make($request['password']),
+                'password' => '',
                 'phone_number' => $request['phone_number'],
                 'sign_date' => date('Y-m-d h:i:s'),
             ]);

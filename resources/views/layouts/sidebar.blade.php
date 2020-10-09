@@ -20,20 +20,41 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="">
+                <a href="{{ route('home') }}">
+                    <i class="img">
+                        <img src="{{ asset('newdesign/data/hos-dash/icons/2.png') }}" alt="" class="width-20">
+                    </i>
+                    <span class="title">Care Takers</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="{{ route('home') }}">
+                    <i class="img">
+                        <img src="{{ asset('newdesign/data/hos-dash/icons/2.png') }}" alt="" class="width-20">
+                    </i>
+                    <span class="title">Vendors</span>
+                </a>
+            </li>
+
             <li>
                 <a href="javascript:;">
                     <i class="img">
-                        <img src="{{ asset('newdesign/assets/images/5.png') }}" alt="" class="width-20">
+                        <img src="{{ asset('newdesign/data/crypto-dash/icons/13.png') }}" alt="" class="width-20">
                     </i>
-                    <span class="title">Care Takers</span>
+                    <span class="title">Setup</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a class="" href="{{ route('home') }}">Vendors</a>
+                        <a class="" href="{{ route('activities.index') }}">Activities</a>
                     </li>
                     <li>
-                        <a class="" href="{{ route('resident.add') }}">Setup</a>
+                        <a class="" href="{{ route('incidences.index') }}">Incidences</a>
+                    </li>
+                    <li>
+                        <a class="" href="#">Medications</a>
                     </li>
                 </ul>
             </li>

@@ -28,6 +28,10 @@ Route::get('/resident/bodyharm', 'Admin\ResidentController@bodyharm')->name('res
 Route::resource('resident', 'Admin\ResidentController');
 
 
+Route::resource('activities', 'Admin\ActivitiesController');
+Route::resource('incidences', 'Admin\IncidencesController');
+
+
 
 Route::get('/account', 'Frontend\AccountController@index')->name('account');
 Route::get('/changepass', 'Frontend\AccountController@changepass')->name('changepass');

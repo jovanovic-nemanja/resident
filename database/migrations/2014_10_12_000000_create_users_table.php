@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('profile_logo', '256');
             $table->integer('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('phone_number')->nullable();
             $table->datetime('sign_date');
             $table->rememberToken();

@@ -63,7 +63,7 @@ class RegisterController extends Controller
             'gender' => 'required|integer',
             'birthday' => 'required|date',
             'address' => 'required|string',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'string|min:6|confirmed',
             'phone_number' => 'string|max:255',
         ]);
     }
