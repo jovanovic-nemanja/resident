@@ -41,12 +41,14 @@ class ActivitiesController extends Controller
     {
         $this->validate(request(), [
             'title' => 'required',
+            'time' => 'required',
             'type' => 'required'
         ]);
 
         $activities = Activities::create([
             'title' => $request->title,
-            'content' => $request->content,
+            'time' => $request->time,
+            'comment' => $request->comment,
             'type' => $request->type,
             'sign_date' => date('y-m-d h:i:s'),
         ]);
@@ -89,14 +91,16 @@ class ActivitiesController extends Controller
     {
         $this->validate(request(), [
             'title' => 'required',
+            'time' => 'required',
             'type' => 'required'
         ]);
 
         $record = Activities::where('id', $id)->first();
         if (@$record) {
             $record->title = $request->title;
+            $record->time = $request->time;
             $record->type = $request->type;
-            $record->content = $request->content;
+            $record->comment = $request->comment;
 
             $record->update();
         }

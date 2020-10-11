@@ -42,30 +42,6 @@
                                 <form action="{{ route('activities.store') }}" method="POST">
                                     @csrf
 
-                                    <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                                        <label class="form-label">Title</label>
-                                        <div class="controls">
-                                            <input type="text" class="form-control" name='title' placeholder="Title" value="{{ old('title') }}" required>
-                                        </div>
-                                        @if ($errors->has('title'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('title') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-
-                                    <div class="form-group {{ $errors->has('content') ? 'has-error' : '' }}">
-                                        <label class="form-label">Content</label>
-                                        <div class="controls">
-                                            <input type="text" class="form-control" id="content" name="content" placeholder="Content" value="{{ old('content') }}">
-                                        </div>
-                                        @if ($errors->has('content'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('content') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-
                                     <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
                                         <label class="form-label">Type</label>
                                         <div class="controls">
@@ -78,6 +54,42 @@
                                         @if ($errors->has('type'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('type') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
+                                        <label class="form-label">Title</label>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" name='title' placeholder="Title" value="{{ old('title') }}" required>
+                                        </div>
+                                        @if ($errors->has('title'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('title') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
+                                        <label class="form-label">Time</label>
+                                        <div class="controls">
+                                            <input type="time" class="form-control" name='time' placeholder="Time" value="{{ old('time') }}" required>
+                                        </div>
+                                        @if ($errors->has('time'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('time') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
+                                        <label class="form-label">Comment</label>
+                                        <div class="controls">
+                                            <textarea rows="7" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ old('comment') }}"></textarea>
+                                        </div>
+                                        @if ($errors->has('comment'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('comment') }}</strong>
                                             </span>
                                         @endif
                                     </div>

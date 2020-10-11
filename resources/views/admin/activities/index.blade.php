@@ -58,9 +58,10 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Title</th>
                                         <th>Type</th>
-                                        <th>Date</th>
+                                        <th>Title</th>
+                                        <th>Time</th>
+                                        <th>comment</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -71,6 +72,7 @@
 		                                	foreach($activities as $activity) { ?>
 		                                		<tr>
 		                                			<td>{{ $i }}</td>
+		                                			<td>{{ $activity->getTypeasstring($activity->type) }}</td>
 			                                        <td>
 			                                            <!-- <div class="round">{{ $activity->title }}</div> -->
 			                                            <div class="designer-info">
@@ -78,10 +80,11 @@
 			                                                <!-- <small class="text-muted">Male, 34 Years</small> -->
 			                                            </div>
 			                                        </td>
-			                                        
-			                                        <td>{{ $activity->getTypeasstring($activity->type) }}</td>
 			                                        <td>
-			                                        	<span class="badge round-primary">{{ $activity->sign_date }}</span>
+			                                        	<span class="badge round-primary">{{ $activity->time }}</span>
+			                                        </td>
+			                                        <td>
+			                                        	{{ $activity->comment }}
 			                                        </td>
 			                                        <td>
 			                                        	<a href="{{ route('activities.show', $activity->id) }}" class="btn btn-success">Edit</a>
