@@ -29,7 +29,16 @@ Route::resource('resident', 'Admin\ResidentController');
 
 
 Route::resource('activities', 'Admin\ActivitiesController');
+
+
+
 Route::resource('incidences', 'Admin\IncidencesController');
+
+
+
+Route::resource('useractivities', 'Admin\UseractivitiesController');
+Route::get('useractivities/indexuseractivity/{type}', 'Admin\UseractivitiesController@indexuseractivity')->name('useractivities.indexuseractivity');
+Route::get('useractivities/createuseractivity/{type}/{resident}', 'Admin\UseractivitiesController@createuseractivity')->name('useractivities.createuseractivity');
 
 
 

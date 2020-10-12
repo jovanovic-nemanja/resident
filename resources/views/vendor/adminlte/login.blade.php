@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    
+    <img src="{{ asset('newdesign/assets/css/logo.png') }}" alt="login-icon" style="width: auto; position: absolute;">
 
     <div id="login" class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">    
         <div class="login-form-header">

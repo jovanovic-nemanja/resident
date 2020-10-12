@@ -1,4 +1,4 @@
-@extends('layouts.appsecond')
+@extends('layouts.appsecond', ['menu' => ''])
 
 @section('content')
 <div class="card">

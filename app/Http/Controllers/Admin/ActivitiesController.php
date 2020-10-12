@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Activities;
+use App\Useractivities;
 
 class ActivitiesController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth', 'admin']);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -41,14 +46,11 @@ class ActivitiesController extends Controller
     {
         $this->validate(request(), [
             'title' => 'required',
-            'time' => 'required',
             'type' => 'required'
         ]);
 
         $activities = Activities::create([
             'title' => $request->title,
-            'time' => $request->time,
-            'comment' => $request->comment,
             'type' => $request->type,
             'sign_date' => date('y-m-d h:i:s'),
         ]);
@@ -91,16 +93,13 @@ class ActivitiesController extends Controller
     {
         $this->validate(request(), [
             'title' => 'required',
-            'time' => 'required',
             'type' => 'required'
         ]);
 
         $record = Activities::where('id', $id)->first();
         if (@$record) {
             $record->title = $request->title;
-            $record->time = $request->time;
             $record->type = $request->type;
-            $record->comment = $request->comment;
 
             $record->update();
         }
@@ -116,6 +115,7 @@ class ActivitiesController extends Controller
      */
     public function destroy($id)
     {
+        $useractivities = Useractivities::where('activities', $id)->delete();
         $record = Activities::where('id', $id)->delete();
         
         return redirect()->route('activities.index');

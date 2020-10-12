@@ -1,4 +1,4 @@
-@extends('layouts.appsecond')
+@extends('layouts.appsecond', ['menu' => 'activities'])
 
 @section('content')
 
@@ -66,30 +66,6 @@
                                         @if ($errors->has('title'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('title') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-
-                                    <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
-                                        <label class="form-label">Time</label>
-                                        <div class="controls">
-                                            <input type="time" class="form-control" name='time' placeholder="Time" value="{{ old('time') }}" required>
-                                        </div>
-                                        @if ($errors->has('time'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('time') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-
-                                    <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
-                                        <label class="form-label">Comment</label>
-                                        <div class="controls">
-                                            <textarea rows="7" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ old('comment') }}"></textarea>
-                                        </div>
-                                        @if ($errors->has('comment'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('comment') }}</strong>
                                             </span>
                                         @endif
                                     </div>

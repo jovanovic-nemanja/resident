@@ -17,9 +17,7 @@ class CreateActivitiesTable extends Migration
             $table->increments('id');
 
             $table->string('title', '256');
-            $table->time('time');
             $table->integer('type');
-            $table->string('comment', '2048')->nullable();
             $table->datetime('sign_date');
 
             $table->timestamps();

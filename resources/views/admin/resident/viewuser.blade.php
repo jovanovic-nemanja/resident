@@ -1,4 +1,4 @@
-@extends('layouts.appsecond')
+@extends('layouts.appsecond', ['menu' => 'residents'])
 
 @section('content')
 	@if(session('flash'))

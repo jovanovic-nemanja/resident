@@ -1,4 +1,4 @@
-@extends('layouts.appsecond')
+@extends('layouts.appsecond', ['menu' => 'activities'])
 
 @section('content')
 	
@@ -60,8 +60,6 @@
                                         <th>No</th>
                                         <th>Type</th>
                                         <th>Title</th>
-                                        <th>Time</th>
-                                        <th>comment</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -81,14 +79,8 @@
 			                                            </div>
 			                                        </td>
 			                                        <td>
-			                                        	<span class="badge round-primary">{{ $activity->time }}</span>
-			                                        </td>
-			                                        <td>
-			                                        	{{ $activity->comment }}
-			                                        </td>
-			                                        <td>
 			                                        	<a href="{{ route('activities.show', $activity->id) }}" class="btn btn-success">Edit</a>
-			                                        	<a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$activity->id}}').submit();" class="btn btn-warning">Delete</a>
+			                                        	<a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$activity->id}}').submit();" class="btn btn-primary">Delete</a>
 
 			                                        	<form id="delete-form-{{$activity->id}}" action="{{ route('activities.destroy', $activity->id) }}" method="POST" style="display: none;">
 											                  <input type="hidden" name="_method" value="delete">

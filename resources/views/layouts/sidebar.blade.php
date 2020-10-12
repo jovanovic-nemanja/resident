@@ -3,7 +3,7 @@
     <div class="page-sidebar-wrapper ps-container" id="main-menu-wrapper" style="height: 860px;">
         <ul class="wraplist" style="height: auto;">
             <li class="menusection">Main</li>
-            <li class="open">
+            <li class="<?= ($menu == 'residents') ? "open" : "" ?>">
                 <a href="javascript:;">
                     <i class="img">
                         <img src="{{ asset('newdesign/assets/images/5.png') }}" alt="" class="width-20">
@@ -11,7 +11,7 @@
                     <span class="title">Residents</span>
                     <span class="arrow "></span>
                 </a>
-                <ul class="sub-menu" style="display: block;">
+                <ul class="sub-menu">
                     <li>
                         <a class="" href="{{ route('home') }}">All Residents</a>
                     </li>
@@ -38,7 +38,7 @@
                 </a>
             </li>
 
-            <li>
+            <li class="<?= ($menu == 'activities') ? "open" : "" ?>">
                 <a href="javascript:;">
                     <i class="img">
                         <img src="{{ asset('newdesign/data/crypto-dash/icons/13.png') }}" alt="" class="width-20">

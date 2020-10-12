@@ -1,4 +1,4 @@
-@extends('layouts.app3d')
+@extends('layouts.app3d', ['menu' => 'residents'])
 
 @section('content')
     <!-- START CONTENT -->

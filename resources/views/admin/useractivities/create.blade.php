@@ -1,4 +1,4 @@
-@extends('layouts.appsecond', ['menu' => 'activities'])
+@extends('layouts.appsecond', ['menu' => 'residents'])
 
 @section('content')
 
@@ -12,7 +12,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Edit Activity </h1>
+                <h1 class="title">Add Resident Activity </h1>
                 <!-- PAGE HEADING TAG - END -->
             </div>
 
@@ -23,9 +23,15 @@
 
     <div class="col-xs-12">
         <div class="add-header-wrapper gradient-blue curved-section text-center">
-            <h2 class="uppercase bold w-text">Edit Activity</h2>
-            <div class="before-text">Edit Activity</div>
-            <p class="g-text">Please Edit Activity</p>
+            <div class="doctors-head relative text-center">
+                <div class="patient-img img-circle">
+                    <a href="{{ route('resident.show', $result['user']->id) }}">
+                        <img src="{{ asset('uploads/').'/'.$result['user']->profile_logo }}" class="rad-50 center-block">
+
+                        <h4 style="color: #fff;">{{ $result['user']->name }}</h4>
+                    </a>
+                </div>
+            </div>
         </div>
         <div class=" bg-w">
             <div class="col-lg-10 col-lg-offset-1 col-xs-12">
@@ -39,22 +45,21 @@
                     <div class="content-body">
                         <div class="row">
                             <div class="col-xs-12">
-                                <form action="{{ route('activities.update', $result->id) }}" method="POST">
+                                <form action="{{ route('useractivities.store') }}" method="POST">
                                     @csrf
-
-                                    <input type="hidden" name="_method" value="put">
 
                                     <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
                                         <label class="form-label">Type</label>
                                         <div class="controls">
-                                            <?php if($result->type == 1) {
+                                            <?php if($result['type'] == 1) {
                                                 $selected1 = "selected"; 
                                                 $selected2 = "";
                                             }else{
                                                 $selected2 = "selected"; 
                                                 $selected1 = "";
                                             } ?>
-                                            <select class="form-control" name="type" required>
+
+                                            <select class="form-control" name="type" required disabled>
                                                 <option value="">Choose Type</option>
                                                 <option value="1" <?= $selected1; ?>>Primary ADL</option>
                                                 <option value="2" <?= $selected2; ?>>Secondary ADL</option>
@@ -67,14 +72,45 @@
                                         @endif
                                     </div>
 
-                                    <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                                        <label class="form-label">Title</label>
+                                    <input type="hidden" name="resident" value="{{ $result['user']->id }}">
+
+                                    <div class="form-group {{ $errors->has('activities') ? 'has-error' : '' }}">
+                                        <label class="form-label">Activity</label>
                                         <div class="controls">
-                                            <input type="text" class="form-control" name='title' placeholder="Title" required value="{{ $result->title }}">
+                                            <select class="form-control" name="activities" required>
+                                                <option value="">Choose Activity</option>
+                                                @foreach($result['activities'] as $ac)
+                                                    <option value="{{ $ac->id }}">{{ $ac->title }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                        @if ($errors->has('title'))
+                                        @if ($errors->has('activities'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('title') }}</strong>
+                                                <strong>{{ $errors->first('activities') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
+                                        <label class="form-label">Time</label>
+                                        <div class="controls">
+                                            <input type="time" class="form-control" name='time' placeholder="Time" value="{{ old('time') }}" required>
+                                        </div>
+                                        @if ($errors->has('time'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('time') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
+                                        <label class="form-label">Comment</label>
+                                        <div class="controls">
+                                            <textarea rows="7" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ old('comment') }}"></textarea>
+                                        </div>
+                                        @if ($errors->has('comment'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('comment') }}</strong>
                                             </span>
                                         @endif
                                     </div>

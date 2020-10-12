@@ -7,7 +7,7 @@
     @include('layouts.header')
 
     <div class="page-container row-fluid container-fluid">
-        @include('layouts.sidebar')
+        @include('layouts.sidebar', ['menu' => $menu])
 
         <!-- START CONTENT -->
         

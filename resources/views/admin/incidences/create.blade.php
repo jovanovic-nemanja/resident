@@ -1,4 +1,4 @@
-@extends('layouts.appsecond')
+@extends('layouts.appsecond', ['menu' => 'activities'])
 
 @section('content')
 
