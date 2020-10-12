@@ -95,7 +95,7 @@
                                     <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
                                         <label class="form-label">Time</label>
                                         <div class="controls">
-                                            <input type="time" class="form-control" name='time' placeholder="Time" value="{{ $result['useractivities']->time }}" required>
+                                            <input type="time" class="form-control" name='time' placeholder="Time" value="{{ $result['useractivities']->time }}" required id="time">
                                         </div>
                                         @if ($errors->has('time'))
                                             <span class="help-block">
@@ -116,6 +116,18 @@
                                         @endif
                                     </div>
 
+                                    <div class="form-group {{ $errors->has('file') ? 'has-error' : '' }}">
+                                        <label class="form-label">Attached File</label>
+                                        <div class="controls">
+                                            <input type="file" name="file" class="form-control" id="file" placeholder="Attached File" value="{{ asset('uploads/').'/'.$result['useractivities']->file }}">
+                                        </div>
+                                        @if ($errors->has('file'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('file') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
                                     <div class="padding-bottom-30">
                                         <div class="text-left">
                                             <button type="submit" class="btn btn-primary gradient-blue">Save</button>
@@ -131,3 +143,24 @@
         </div>
     </div>
 @stop
+
+@section('script')
+<script>
+    $(document).ready(function(){
+        $("#time").on("focusout",function(e){
+            var currentTime = new Date();
+            var userTime = $("#time").val().split(":"); 
+            if(currentTime.getHours() < parseInt(userTime[0])){
+                alert("You can choose a time before current time.");
+                $(this).focus();                
+            }
+            if(currentTime.getHours() >= parseInt(userTime[0])){
+                if(currentTime.getMinutes() < parseInt(userTime[1])){
+                    alert("You can choose a time before current time.");
+                    $(this).focus();
+                }
+            }
+        });
+    });
+</script>
+@endsection

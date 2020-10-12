@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 
 use App\User;
@@ -14,7 +15,7 @@ class Useractivities extends Model
 {
     public $table = "user_activities";
 
-    public $fillable = ['activities', 'time', 'resident', 'comment', 'status', 'sign_date'];
+    public $fillable = ['activities', 'time', 'resident', 'comment', 'file', 'status', 'sign_date'];
 
     public function getActivities($id) 
     {
@@ -63,5 +64,29 @@ class Useractivities extends Model
     	}
 
     	return $result;
+    }
+
+    /**
+    * @param user_id
+    * This is a feature to upload a company logo
+    */
+    public static function upload_file($id, $existings = null) {
+        if(!request()->hasFile('file')) {
+            return false;
+        }
+
+        Storage::disk('public_local')->put('uploads/', request()->file('file'));
+
+        self::save_file($id, request()->file('file'));
+    }
+
+    public static function save_file($id, $file) {
+        $activities = Useractivities::where('id', $id)->first();
+
+        if($activities) {
+            Storage::disk('public_local')->delete('uploads/', $activities->file);
+            $activities->file = $file->hashName();
+            $activities->update();
+        }
     }
 }

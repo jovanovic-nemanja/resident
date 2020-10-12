@@ -25,6 +25,8 @@ class CreateUserActivitiesTable extends Migration
             $table->foreign('resident')->references('id')->on('users');
 
             $table->string('comment', '2048')->nullable();
+            $table->string('file', '2048')->nullable();
+
             $table->integer('status')->nullable();
             $table->datetime('sign_date');
 

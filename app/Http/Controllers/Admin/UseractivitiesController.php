@@ -89,9 +89,12 @@ class UseractivitiesController extends Controller
             'time' => $request->time,
             'resident' => $request->resident,
             'comment' => $request->comment,
+            'file' => $request->file,
             'status' => 1,
             'sign_date' => date('y-m-d h:i:s'),
         ]);
+
+        Useractivities::upload_file($useractivities->id);
 
         return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully created.');
     }
@@ -148,10 +151,13 @@ class UseractivitiesController extends Controller
             $record->time = $request->time;
             $record->resident = $request->resident;
             $record->comment = $request->comment;
+            $record->file = $request->file;
             $record->status = 2;
 
             $record->update();
         }
+
+        Useractivities::upload_file($record->id);
 
         return redirect()->route('useractivities.indexuseractivity', $request->resident);
     }

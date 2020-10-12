@@ -70,6 +70,7 @@
                                         <th>Title</th>
                                         <th>Time</th>
                                         <th>comment</th>
+                                        <th>Attached File</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -96,6 +97,9 @@
 			                                        </td>
 			                                        <td>
 			                                        	{{ $useractivity->comment }}
+			                                        </td>
+			                                        <td>
+			                                        	<a href="{{ asset('uploads/').'/'.$useractivity->file }}">{{ $useractivity->file }}</a>
 			                                        </td>
 			                                        <td>
 			                                        	<a href="{{ route('useractivities.show', $useractivity->id) }}" class="btn btn-success">Edit</a>
