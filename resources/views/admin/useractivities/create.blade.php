@@ -132,20 +132,20 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        $("#time").on("focusout",function(e){
-            var currentTime = new Date();
-            var userTime = $("#time").val().split(":"); 
-            if(currentTime.getHours() < parseInt(userTime[0])){
-                alert("You can choose a time before current time.");
-                $(this).focus();                
-            }
-            if(currentTime.getHours() >= parseInt(userTime[0])){
-                if(currentTime.getMinutes() < parseInt(userTime[1])){
-                    alert("You can choose a time before current time.");
-                    $(this).focus();
-                }
-            }
-        });
+        // $("#time").on("focusout",function(e){
+        //     var currentTime = new Date();
+        //     var userTime = $("#time").val().split(":"); 
+        //     if(currentTime.getHours() < parseInt(userTime[0])){
+        //         alert("You can choose a time before current time.");
+        //         $(this).focus();                
+        //     }
+        //     if(currentTime.getHours() >= parseInt(userTime[0])){
+        //         if(currentTime.getMinutes() < parseInt(userTime[1])){
+        //             alert("You can choose a time before current time.");
+        //             $(this).focus();
+        //         }
+        //     }
+        // });
     });
 </script>
 @endsection

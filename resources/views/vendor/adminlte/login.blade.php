@@ -28,15 +28,15 @@
                                 </div>
                             <?php } ?>
 
-                            <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                                <label class="form-label">Email</label>
+                            <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                                <label class="form-label">Username</label>
                                 <div class="controls">
-                                    <input required type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                                    <input required type="text" class="form-control" id="username" name="username" placeholder="Username" value="{{ old('username') }}">
                                 </div>
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('username'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('username') }}</strong>
                                     </span>
                                 @endif
                             </div>

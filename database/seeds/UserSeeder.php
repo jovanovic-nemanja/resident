@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
 		User::create([
 			'id'   => 1,
 	        'name' => 'Admin',
+            'username' => 'admin',
 	        'email' => 'admin@gmail.com',
             'email_verified_at' => 1,
             'profile_logo' => '1.png',
@@ -35,7 +36,7 @@ class UserSeeder extends Seeder
         ]);
         Role::create([
             'id' => 2,
-            'name' => 'nurse' 
+            'name' => 'care taker' 
         ]);
         Role::create([
             'id' => 3,
