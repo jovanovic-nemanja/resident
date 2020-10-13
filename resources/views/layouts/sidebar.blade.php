@@ -21,8 +21,8 @@
                 </ul>
             </li>
 
-            <li class="">
-                <a href="{{ route('home') }}">
+            <li class="<?= ($menu == 'caretaker') ? "open" : "" ?>">
+                <a href="{{ route('caretaker.index') }}">
                     <i class="img">
                         <img src="{{ asset('newdesign/data/hos-dash/icons/2.png') }}" alt="" class="width-20">
                     </i>

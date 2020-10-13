@@ -36,6 +36,10 @@ Route::resource('incidences', 'Admin\IncidencesController');
 
 
 
+Route::resource('caretaker', 'Admin\CaretakerController');
+
+
+
 Route::resource('useractivities', 'Admin\UseractivitiesController');
 Route::get('useractivities/indexuseractivity/{type}', 'Admin\UseractivitiesController@indexuseractivity')->name('useractivities.indexuseractivity');
 Route::get('useractivities/createuseractivity/{type}/{resident}', 'Admin\UseractivitiesController@createuseractivity')->name('useractivities.createuseractivity');

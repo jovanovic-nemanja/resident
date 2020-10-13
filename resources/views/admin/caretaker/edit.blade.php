@@ -1,7 +1,7 @@
-@extends('layouts.appsecond', ['menu' => 'residents'])
+@extends('layouts.appsecond', ['menu' => 'caretaker'])
 
 @section('content')
-	<style>
+    <style>
         .inputfile {
             width: 0.1px;
             height: 0.1px;
@@ -31,7 +31,7 @@
             display: none !important;
         }
     </style>
-    
+
 	@if(session('flash'))
 		<div class="alert alert-primary">
 			{{ session('flash') }}
@@ -42,7 +42,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Add Resident </h1>
+                <h1 class="title">Edit Care taker </h1>
                 <!-- PAGE HEADING TAG - END -->
             </div>
 
@@ -64,12 +64,15 @@
                     <div class="content-body">
                         <div class="row">
                             <div class="col-xs-12">
-                                <form action="{{ route('resident.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('caretaker.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
+
+                                    <input type="hidden" name="_method" value="put">
+
                                     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                                         <label class="form-label">Name</label>
                                         <div class="controls">
-                                            <input type="text" value="" class="form-control" name='name' placeholder="Name" value="{{ old('name') }}" required>
+                                            <input type="text" class="form-control" name='name' placeholder="Name" value="{{ $user->name }}" required>
                                         </div>
                                         @if ($errors->has('name'))
                                             <span class="help-block">
@@ -78,10 +81,22 @@
                                         @endif
                                     </div>
 
+                                    <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                                        <label class="form-label">Username</label>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" name='username' placeholder="Username" value="{{ $user->username }}" required>
+                                        </div>
+                                        @if ($errors->has('username'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('username') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
                                     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                                         <label class="form-label">Email</label>
                                         <div class="controls">
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ $user->email }}" required disabled>
                                         </div>
                                         @if ($errors->has('email'))
                                             <span class="help-block">
@@ -90,29 +105,28 @@
                                         @endif
                                     </div>
 
-                                    <div class="form-group {{ $errors->has('birthday') ? 'has-error' : '' }}">
-                                        <label class="form-label">Date of Birth</label>
+                                    <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                                        <label class="form-label">Password</label>
                                         <div class="controls">
-                                            <input type="date" value="" name="birthday" class="form-control datepicker" data-format="mm/dd/yyyy" required>
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="{{ old('password') }}" required> 
                                         </div>
 
-                                        @if ($errors->has('birthday'))
+                                        @if ($errors->has('password'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('birthday') }}</strong>
+                                                <strong>{{ $errors->first('password') }}</strong>
                                             </span>
                                         @endif
                                     </div>
 
-                                    <div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }}">
-                                        <label class="form-label">Gender</label>
-                                        <select class="form-control" name="gender" required>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-
-                                        @if ($errors->has('gender'))
+                                    <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">   
+                                        <label class="form-label">Password Confirm</label>
+                                        <div class="controls">
+                                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Password Confirm" value="{{ old('password') }}" required> 
+                                        </div>
+                                        
+                                        @if ($errors->has('password_confirmation'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('gender') }}</strong>
+                                                <strong>{{ $errors->first('password_confirmation') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -120,7 +134,7 @@
                                     <div class="form-group {{ $errors->has('phone_number') ? 'has-error' : '' }}">   
                                         <label class="form-label">Phone Number</label>
                                         <div class="controls">
-                                            <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Phone number" value="{{ old('phone_number') }}" required> 
+                                            <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Phone number" value="{{ $user->phone_number }}" required> 
                                         </div>
                                         
                                         @if ($errors->has('phone_number'))
@@ -135,7 +149,17 @@
                                         <div class="controls">
                                             <span>
                                                 <input type="file" name="profile_logo" id="file" onchange="loadPreview(this, 'preview_img');" class="inputfile">
-                                                <label for="file" @click="onClick" inputId="1" style="" id='preview_img'><i class="fa fa-plus-circle"></i></label>
+                                                <?php 
+                                                    if(@$user->profile_logo) {
+                                                        $path = asset('uploads/') . "/" . $user->profile_logo;
+                                                    }else{
+                                                        $path = "";
+                                                    }
+                                                ?>
+
+                                                <label for="file" @click="onClick" inputId="1" style="background-image: url(<?= $path ?>);" id='preview_img'>
+                                                    <i class="fa fa-plus-circle"></i>
+                                                </label>
                                             </span>
                                         </div>
 
@@ -146,25 +170,13 @@
                                         @endif
                                     </div>
 
-                                    <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
-                                        <label class="form-label">Address</label>
-                                        <div class="controls">
-                                            <textarea required class="form-control autogrow" name="address" cols="5" style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 54px;"></textarea>
-                                        </div>
-
-                                        @if ($errors->has('address'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('address') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-
                                     <div class="padding-bottom-30">
                                         <div class="text-left">
                                             <button type="submit" class="btn btn-primary gradient-blue">Save</button>
                                             <button type="button" class="btn">Cancel</button>
                                         </div>
                                     </div>
+
                                 </form>
                             </div>
                         </div>

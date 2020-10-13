@@ -22,12 +22,7 @@
     <div class="clearfix"></div>
 
     <div class="col-xs-12">
-        <div class="add-header-wrapper gradient-blue curved-section text-center">
-            <h2 class="uppercase bold w-text">Edit Activity</h2>
-            <div class="before-text">Edit Activity</div>
-            <p class="g-text">Please Edit Activity</p>
-        </div>
-        <div class=" bg-w">
+        <div class=" bg-w" style="padding-top: 1%;">
             <div class="col-lg-10 col-lg-offset-1 col-xs-12">
                 <section class="box ">
                     <header class="panel_header">
