@@ -30,6 +30,13 @@
 
                         <h4 style="color: #fff;">{{ $result['user']->name }}</h4>
                     </a>
+                    <div class="row">
+                        @if($result['type'] == 1)
+                            <h4 style="color: #fff;">Primary ADL</h4>
+                        @else
+                            <h4 style="color: #fff;">Secondary ADL</h4>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,83 +56,61 @@
                                     @csrf
                                     <input type="hidden" name="_method" value="put">
 
-                                    <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                                        <label class="form-label">Type</label>
-                                        <div class="controls">
-                                            <?php if($result['type'] == 1) {
-                                                $selected1 = "selected"; 
-                                                $selected2 = "";
-                                            }else{
-                                                $selected2 = "selected"; 
-                                                $selected1 = "";
-                                            } ?>
+                                    <div class="row">
+                                        <input type="hidden" name="resident" value="{{ $result['user']->id }}">
 
-                                            <select class="form-control" name="type" required disabled>
-                                                <option value="">Choose Type</option>
-                                                <option value="1" <?= $selected1; ?>>Primary ADL</option>
-                                                <option value="2" <?= $selected2; ?>>Secondary ADL</option>
-                                            </select>
+                                        <div class="col-md-3 form-group {{ $errors->has('activities') ? 'has-error' : '' }}">
+                                            <label class="form-label">Activity</label>
+                                            <div class="controls">
+                                                <select class="form-control" name="activities" required>
+                                                    <option value="">Choose Activity</option>
+                                                    @foreach($result['activities'] as $ac)
+                                                        <option <?php if($ac->id==$result["activity"]->id){echo 'selected';} ?> value="{{ $ac->id }}">{{ $ac->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            @if ($errors->has('activities'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('activities') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
-                                        @if ($errors->has('type'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('type') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
 
-                                    <input type="hidden" name="resident" value="{{ $result['user']->id }}">
-
-                                    <div class="form-group {{ $errors->has('activities') ? 'has-error' : '' }}">
-                                        <label class="form-label">Activity</label>
-                                        <div class="controls">
-                                            <select class="form-control" name="activities" required>
-                                                <option value="">Choose Activity</option>
-                                                @foreach($result['activities'] as $ac)
-                                                    <option <?php if($ac->id==$result["activity"]->id){echo 'selected';} ?> value="{{ $ac->id }}">{{ $ac->title }}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="col-md-3 form-group {{ $errors->has('time') ? 'has-error' : '' }}">
+                                            <label class="form-label">Time</label>
+                                            <div class="controls">
+                                                <input type="time" class="form-control" name='time' placeholder="Time" value="{{ $result['useractivities']->time }}" required id="time">
+                                            </div>
+                                            @if ($errors->has('time'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('time') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
-                                        @if ($errors->has('activities'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('activities') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
 
-                                    <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
-                                        <label class="form-label">Time</label>
-                                        <div class="controls">
-                                            <input type="time" class="form-control" name='time' placeholder="Time" value="{{ $result['useractivities']->time }}" required id="time">
+                                        <div class="col-md-3 form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
+                                            <label class="form-label">Comment</label>
+                                            <div class="controls">
+                                                <textarea rows="7" class="form-control" id="comment" name="comment" placeholder="Comment">{{ $result['useractivities']->comment }}</textarea>
+                                            </div>
+                                            @if ($errors->has('comment'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('comment') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
-                                        @if ($errors->has('time'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('time') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
 
-                                    <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
-                                        <label class="form-label">Comment</label>
-                                        <div class="controls">
-                                            <textarea rows="7" class="form-control" id="comment" name="comment" placeholder="Comment">{{ $result['useractivities']->comment }}</textarea>
+                                        <div class="col-md-3 form-group {{ $errors->has('file') ? 'has-error' : '' }}">
+                                            <label class="form-label">Attached File</label>
+                                            <div class="controls">
+                                                <input type="file" name="file" class="form-control" id="file" placeholder="Attached File" value="{{ asset('uploads/').'/'.$result['useractivities']->file }}">
+                                            </div>
+                                            @if ($errors->has('file'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('file') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
-                                        @if ($errors->has('comment'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('comment') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-
-                                    <div class="form-group {{ $errors->has('file') ? 'has-error' : '' }}">
-                                        <label class="form-label">Attached File</label>
-                                        <div class="controls">
-                                            <input type="file" name="file" class="form-control" id="file" placeholder="Attached File" value="{{ asset('uploads/').'/'.$result['useractivities']->file }}">
-                                        </div>
-                                        @if ($errors->has('file'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('file') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
 
                                     <div class="padding-bottom-30">
@@ -147,20 +132,20 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        $("#time").on("focusout",function(e){
-            var currentTime = new Date();
-            var userTime = $("#time").val().split(":"); 
-            if(currentTime.getHours() < parseInt(userTime[0])){
-                alert("You can choose a time before current time.");
-                $(this).focus();                
-            }
-            if(currentTime.getHours() >= parseInt(userTime[0])){
-                if(currentTime.getMinutes() < parseInt(userTime[1])){
-                    alert("You can choose a time before current time.");
-                    $(this).focus();
-                }
-            }
-        });
+        // $("#time").on("focusout",function(e){
+        //     var currentTime = new Date();
+        //     var userTime = $("#time").val().split(":"); 
+        //     if(currentTime.getHours() < parseInt(userTime[0])){
+        //         alert("You can choose a time before current time.");
+        //         $(this).focus();                
+        //     }
+        //     if(currentTime.getHours() >= parseInt(userTime[0])){
+        //         if(currentTime.getMinutes() < parseInt(userTime[1])){
+        //             alert("You can choose a time before current time.");
+        //             $(this).focus();
+        //         }
+        //     }
+        // });
     });
 </script>
 @endsection
