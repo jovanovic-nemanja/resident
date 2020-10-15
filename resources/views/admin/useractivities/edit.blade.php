@@ -30,13 +30,6 @@
 
                         <h4 style="color: #fff;">{{ $result['user']->name }}</h4>
                     </a>
-                    <div class="row">
-                        @if($result['type'] == 1)
-                            <h4 style="color: #fff;">Primary ADL</h4>
-                        @else
-                            <h4 style="color: #fff;">Secondary ADL</h4>
-                        @endif
-                    </div>
                 </div>
             </div>
         </div>
@@ -44,7 +37,13 @@
             <div class="col-lg-10 col-lg-offset-1 col-lg-12">
                 <section class="box ">
                     <header class="panel_header">
-                        <h2 class="title pull-left">Basic Info</h2>
+                        <div class="row" style="text-align: center;">
+                            @if($result['type'] == 1)
+                                <h2 class="title">Primary ADL</h2>
+                            @else
+                                <h2 class="title">Secondary ADL</h2>
+                            @endif
+                        </div>
                         <div class="actions panel_actions pull-right">
                             <a class="box_toggle fa fa-chevron-down"></a>
                         </div>
@@ -59,10 +58,10 @@
                                     <div class="row">
                                         <input type="hidden" name="resident" value="{{ $result['user']->id }}">
 
-                                        <div class="col-lg-3 circle">
+                                        <div class="col-lg-3 circle first_circle">
                                             <div class="form-group {{ $errors->has('activities') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Activity</label>
-                                                <select class="form-control" name="activities" required>
+                                                <select class="form-control activities" name="activities" required>
                                                     <option value="">Choose Activity</option>
                                                     @foreach($result['activities'] as $ac)
                                                         <option <?php if($ac->id==$result["activity"]->id){echo 'selected';} ?> value="{{ $ac->id }}">{{ $ac->title }}</option>
@@ -116,10 +115,16 @@
 
                                     <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">
                                         <div class="">
-                                            <button type="submit" class="btn btn-primary gradient-blue">Submit</button>
+                                            <button style="display: none;" type="submit" class="btn btn-primary gradient-blue submit_btn">Submit</button>
                                         </div>
                                     </div>
                                 </form>
+
+                                <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">
+                                    <div class="">
+                                        <button class="btn btn-primary gradient-blue validate_btn">Submit</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -157,6 +162,22 @@
         //         }
         //     }
         // });
+
+        $('.validate_btn').click(function() {
+            var activity = $('.activities').val();
+            if (activity == '') {
+                $('.first_circle').css('background-color', '#ea6b6b');
+            }
+
+            $('.submit_btn').click();
+        });
+
+        $('.activities').change(function() {
+            var activity = $(this).val();
+            if (activity != '') {
+                $('.first_circle').css('background-color', '#1cc6d8');
+            }
+        });
     });
 
     $(document).ready(function(){
