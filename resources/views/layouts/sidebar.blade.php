@@ -54,7 +54,7 @@
                         <a class="" href="{{ route('incidences.index') }}">Incidences</a>
                     </li>
                     <li>
-                        <a class="" href="#">Medications</a>
+                        <a class="" href="{{ route('medications.index') }}">Medications</a>
                     </li>
                 </ul>
             </li>
