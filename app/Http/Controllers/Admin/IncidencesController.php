@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Incidences;
+use App\User;
 
 class IncidencesController extends Controller
 {
@@ -44,11 +45,14 @@ class IncidencesController extends Controller
             'type' => 'required'
         ]);
 
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
         $incidences = Incidences::create([
             'title' => $request->title,
             'content' => $request->content,
             'type' => $request->type,
-            'sign_date' => date('y-m-d h:i:s'),
+            'sign_date' => $date,
         ]);
 
         return redirect()->route('incidences.index')->with('flash', 'Incidence has been successfully created.');

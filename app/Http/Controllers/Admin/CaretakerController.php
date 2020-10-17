@@ -53,6 +53,9 @@ class CaretakerController extends Controller
             'phone_number' => 'string|max:20',
             'profile_logo'      => 'required',
         ]);
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
         
         DB::beginTransaction();
 
@@ -64,7 +67,7 @@ class CaretakerController extends Controller
                 'profile_logo' => $request['profile_logo'],
                 'password' => Hash::make($request['password']),
                 'phone_number' => $request['phone_number'],
-                'sign_date' => date('Y-m-d h:i:s'),
+                'sign_date' => $date,
             ]);
 
             User::upload_logo_img($user->id);

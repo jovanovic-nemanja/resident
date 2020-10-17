@@ -79,4 +79,17 @@ class User extends Authenticatable
             $user->update();
         }
     }
+
+    public static function getformattime()
+    {
+        $timeZone = 'America/Los_Angeles';
+        date_default_timezone_set($timeZone);
+        $date = date('Y-m-d H:i:s');
+        $time = date('H:i:s');
+        $arr = [];
+        $arr['date'] = $date;
+        $arr['time'] = $time;
+
+        return $arr;
+    }
 }

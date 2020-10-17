@@ -21,14 +21,17 @@
                 </ul>
             </li>
 
-            <li class="<?= ($menu == 'caretaker') ? "open" : "" ?>">
-                <a href="{{ route('caretaker.index') }}">
-                    <i class="img">
-                        <img src="{{ asset('newdesign/data/hos-dash/icons/2.png') }}" alt="" class="width-20">
-                    </i>
-                    <span class="title">Care Takers</span>
-                </a>
-            </li>
+            @if(auth()->user()->hasRole('admin'))
+                <li class="<?= ($menu == 'caretaker') ? "open" : "" ?>">
+                    <a href="{{ route('caretaker.index') }}">
+                        <i class="img">
+                            <img src="{{ asset('newdesign/data/hos-dash/icons/2.png') }}" alt="" class="width-20">
+                        </i>
+                        <span class="title">Care Takers</span>
+                    </a>
+                </li>
+            @endif
+                
             <li class="">
                 <a href="{{ route('home') }}">
                     <i class="img">

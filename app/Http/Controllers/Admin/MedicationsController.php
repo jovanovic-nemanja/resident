@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 class MedicationsController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin']);
+        // $this->middleware(['auth', 'admin']);
     }
 
     /**
@@ -53,11 +53,14 @@ class MedicationsController extends Controller
             'photo' => 'required'
         ]);
 
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
         $medications = Medications::create([
             'name' => $request->name,
             'dose' => $request->dose,
             'photo' => $request->photo,
-            'sign_date' => date('y-m-d h:i:s'),
+            'sign_date' => $date,
         ]);
 
         Medications::upload_file($medications->id);

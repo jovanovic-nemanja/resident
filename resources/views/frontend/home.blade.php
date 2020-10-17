@@ -37,6 +37,7 @@
                                     <div class="col-xs-12 mb-30">
                                         <div class="form-group no-mb">
                                             <a href="#" class="btn btn-primary btn-lg gradient-blue" style="width:100%; margin-bottom: 2%;"> Medications</a>
+                                            <!-- <a href="{{ route('usermedications.indexusermedication', $resident->id) }}" class="btn btn-primary btn-lg gradient-blue" style="width:100%; margin-bottom: 2%;"> Medications</a> -->
 
                                             <div class="ui-dropdowns" data-example-id="single-button-dropdown">
                                                 <div class="btn-group" style="width: 100%;">

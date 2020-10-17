@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
-use App\Activities;
-use App\Useractivities;
+use App\Medications;
+use App\Usermedications;
 
-class UseractivitiesController extends Controller
+class UsermedicationsController extends Controller
 {
     public function __construct(){
         // $this->middleware(['auth', 'admin']);
@@ -22,9 +22,9 @@ class UseractivitiesController extends Controller
      */
     public function index()
     {
-        $useractivities = Useractivities::all();
+        $usermedications = Usermedications::all();
 
-        return view('admin.useractivities.index', compact('useractivities'));
+        return view('admin.usermedications.index', compact('usermedications'));
     }
 
     /**
@@ -34,7 +34,7 @@ class UseractivitiesController extends Controller
      */
     public function create()
     {
-        return view('admin.useractivities.create');
+        return view('admin.usermedications.create');
     }
 
     /**
@@ -42,12 +42,12 @@ class UseractivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexuseractivity($id)
+    public function indexusermedication($id)
     {
-        $useractivities = Useractivities::where('resident', $id)->get();
+        $usermedications = Usermedications::where('resident', $id)->get();
         $user = User::where('id', $id)->first();
 
-        return view('admin.useractivities.index', compact('useractivities', 'user'));
+        return view('admin.usermedications.index', compact('usermedications', 'user'));
     }
 
     /**
@@ -55,19 +55,18 @@ class UseractivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createuseractivity($type, $resident)
+    public function createusermedication($resident)
     {
         $result = [];
 
-        $result['type'] = $type;
         $user = User::where('id', $resident)->first();
         if (@$user) {
             $result['user'] = $user;
         }
 
-        $result['activities'] = Activities::where('type', $type)->get();
+        $result['medications'] = Medications::all();
 
-        return view('admin.useractivities.create', compact('result'));
+        return view('admin.usermedications.create', compact('result'));
     }
 
     /**
@@ -79,18 +78,19 @@ class UseractivitiesController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'activities' => 'required',
-            'time' => 'required',
+            'medications' => 'required',
+            'daily_count' => 'required',
+            'duration' => 'required',
             'resident' => 'required'
         ]);
 
         $dates = User::getformattime();
         $date = $dates['date'];
-        $time = $dates['time'];
 
-        $useractivities = Useractivities::create([
-            'activities' => $request->activities,
-            'time' => $time,
+        $usermedications = Usermedications::create([
+            'medications' => $request->medications,
+            'daily_count' => $request->daily_count,
+            'duration' => $request->duration,
             'resident' => $request->resident,
             'comment' => $request->comment,
             'file' => $request->file,
@@ -98,9 +98,9 @@ class UseractivitiesController extends Controller
             'sign_date' => $date,
         ]);
 
-        Useractivities::upload_file($useractivities->id);
+        Usermedications::upload_file($usermedications->id);
 
-        return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully created.');
+        return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully created.');
     }
 
     /**
@@ -111,16 +111,15 @@ class UseractivitiesController extends Controller
      */
     public function show($id)
     {
-        $res = Useractivities::where('id', $id)->first();
+        $res = Usermedications::where('id', $id)->first();
         $result = [];
-        $result['useractivities'] = $res;
+        $result['usermedications'] = $res;
         $result['user'] = User::where('id', $res->resident)->first();
-        $result['activities'] = Activities::where('id', $res->activities)->get();
-        $type = Activities::where('id', $res->activities)->first();
-        $result['type'] = $type->type;
-        $result['activity'] = $type;
+        $result['medications'] = Medications::where('id', $res->medications)->get();
+        $result['medication'] = Medications::where('id', $res->medications)->first();
+        $result['allmedications'] = Medications::all();
 
-        return view('admin.useractivities.edit', compact('result'));
+        return view('admin.usermedications.edit', compact('result'));
     }
 
     /**
@@ -144,8 +143,9 @@ class UseractivitiesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'activities' => 'required',
-            'time' => 'required',
+            'medications' => 'required',
+            'daily_count' => 'required',
+            'duration' => 'required',
             'resident' => 'required'
         ]);
 
@@ -153,10 +153,11 @@ class UseractivitiesController extends Controller
         $date = $dates['date'];
         $time = $dates['time'];
 
-        $record = Useractivities::where('id', $id)->first();
+        $record = Usermedications::where('id', $id)->first();
         if (@$record) {
-            $record->activities = $request->activities;
-            $record->time = $time;
+            $record->medications = $request->medications;
+            $record->daily_count = $request->daily_count;
+            $record->duration = $request->duration;
             $record->resident = $request->resident;
             $record->comment = $request->comment;
             $record->file = $request->file;
@@ -164,9 +165,9 @@ class UseractivitiesController extends Controller
             $record->update();
         }
 
-        Useractivities::upload_file($record->id);
+        Usermedications::upload_file($record->id);
 
-        return redirect()->route('useractivities.indexuseractivity', $request->resident);
+        return redirect()->route('usermedications.indexusermedication', $request->resident);
     }
 
     /**
@@ -177,23 +178,23 @@ class UseractivitiesController extends Controller
      */
     public function destroy($id)
     {
-        $resident = Useractivities::where('id', $id)->first();
-        $record = Useractivities::where('id', $id)->delete();
+        $medication = Usermedications::where('id', $id)->first();
+        $record = Usermedications::where('id', $id)->delete();
         
-        return redirect()->route('useractivities.indexuseractivity', $resident->resident);
+        return redirect()->route('usermedications.indexusermedication', $medication->resident);
     }
 
     public function assign($id)
     {
         if (@$id) {
-            $record = Useractivities::where('id', $id)->first();
+            $record = Usermedications::where('id', $id)->first();
             if (@$record) {
                 $record->status = 2;
 
                 $record->update();
             }
 
-            return redirect()->route('useractivities.indexuseractivity', $record->resident);
+            return redirect()->route('usermedications.indexusermedication', $record->resident);
         }
     }
 }

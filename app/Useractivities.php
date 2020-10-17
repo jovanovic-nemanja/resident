@@ -89,4 +89,23 @@ class Useractivities extends Model
             $activities->update();
         }
     }
+
+    public static function getStatus($status)
+    {
+        $str = '';
+
+        switch ($status) {
+            case '1':
+                $str = "Assigning";
+                break;
+            case '2':
+                $str = "Assigned";
+                break;
+            default:
+                $str = "Assigning";
+                break;
+        }
+
+        return $str;
+    }
 }

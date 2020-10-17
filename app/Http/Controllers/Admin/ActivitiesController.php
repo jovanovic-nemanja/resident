@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\User;
 use App\Activities;
 use App\Useractivities;
 
 class ActivitiesController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin']);
+        // $this->middleware(['auth', 'admin']);
     }
     
     /**
@@ -49,10 +49,13 @@ class ActivitiesController extends Controller
             'type' => 'required'
         ]);
 
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
         $activities = Activities::create([
             'title' => $request->title,
             'type' => $request->type,
-            'sign_date' => date('y-m-d h:i:s'),
+            'sign_date' => $date,
         ]);
 
         return redirect()->route('activities.index')->with('flash', 'Activity has been successfully created.');

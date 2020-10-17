@@ -14,7 +14,7 @@ class ResidentController extends Controller
 {
     
     public function __construct(){
-        $this->middleware(['auth', 'admin']);
+        // $this->middleware(['auth', 'admin']);
     }
 
     /**
@@ -59,6 +59,9 @@ class ResidentController extends Controller
 
         DB::beginTransaction();
 
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
         try {
             $user = User::create([
                 'name' => $request['name'],
@@ -69,7 +72,7 @@ class ResidentController extends Controller
                 'address' => $request['address'],
                 'password' => '',
                 'phone_number' => $request['phone_number'],
-                'sign_date' => date('Y-m-d h:i:s'),
+                'sign_date' => $date,
             ]);
 
             User::upload_logo_img($user->id);
