@@ -54,8 +54,12 @@ Route::get('useractivities/assign/{id}', 'Admin\UseractivitiesController@assign'
 
 Route::resource('usermedications', 'Admin\UsermedicationsController');
 Route::get('usermedications/indexusermedication/{id}', 'Admin\UsermedicationsController@indexusermedication')->name('usermedications.indexusermedication');
-Route::get('usermedications/createusermedication/{resident}', 'Admin\UsermedicationsController@createusermedication')->name('usermedications.createusermedication');
+Route::get('usermedications/createusermedication/{resident}/{assign_id}/{medication_id}', 'Admin\UsermedicationsController@createusermedication')->name('usermedications.createusermedication');
 Route::get('usermedications/assign/{id}', 'Admin\UsermedicationsController@assign')->name('usermedications.assign');
+
+Route::get('usermedications/createassignmedication/{resident}', 'Admin\UsermedicationsController@createassignmedication')->name('usermedications.createassignmedication');
+Route::get('usermedications/showassign/{resident}', 'Admin\UsermedicationsController@showassign')->name('usermedications.showassign');
+Route::delete('usermedications/destroyassign/{resident}', 'Admin\UsermedicationsController@destroyassign')->name('usermedications.destroyassign');
 
 
 

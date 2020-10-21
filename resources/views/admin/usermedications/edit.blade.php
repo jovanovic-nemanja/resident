@@ -142,37 +142,22 @@
             </div>
         </div>
     </div>
-
-    <style type="text/css">
-        .circle {
-            text-align: center; 
-            border-radius: 50%; 
-            background-color: #1cc6d8;
-        }
-        .circle_form {
-            padding-top: 40%;
-        }
-    </style>
 @stop
+
+<style type="text/css">
+    .circle {
+        text-align: center; 
+        border-radius: 50%; 
+        background-color: #1cc6d8;
+    }
+    .circle_form {
+        padding-top: 40%;
+    }
+</style>
 
 @section('script')
 <script>
     $(document).ready(function(){
-        // $("#time").on("focusout",function(e){
-        //     var currentTime = new Date();
-        //     var userTime = $("#time").val().split(":"); 
-        //     if(currentTime.getHours() < parseInt(userTime[0])){
-        //         alert("You can choose a time before current time.");
-        //         $(this).focus();                
-        //     }
-        //     if(currentTime.getHours() >= parseInt(userTime[0])){
-        //         if(currentTime.getMinutes() < parseInt(userTime[1])){
-        //             alert("You can choose a time before current time.");
-        //             $(this).focus();
-        //         }
-        //     }
-        // });
-
         $('.validate_btn').click(function() {
             var activity = $('.medications').val();
             if (activity == '') {

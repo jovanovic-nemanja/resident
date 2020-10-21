@@ -12,7 +12,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Add Resident Medication </h1>
+                <h1 class="title">Edit Resident Medication </h1>
                 <!-- PAGE HEADING TAG - END -->
             </div>
 
@@ -47,33 +47,37 @@
                     <div class="content-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="{{ route('usermedications.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('usermedications.update', $result['usermedications']->id) }}" method="POST">
                                     @csrf
+                                    <input type="hidden" name="_method" value="put">
 
-                                    <input type="hidden" name="resident" value="{{ $result['user']->id }}">
-                                    <input type="hidden" name="assign_id" value="{{ $result['assign_id'] }}">
+                                    <input type="hidden" name="assign" value="1">
+                                    
+                                    <div class="row">
+                                        <input type="hidden" name="resident" value="{{ $result['user']->id }}">
 
-                                    <div class="row" >
                                         <div class="col-lg-3 circle first_circle">
                                             <div class="form-group {{ $errors->has('medications') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Medications</label>
-                                                <select class="form-control medications" name="medications" required disabled>
-                                                    @foreach($result['medications'] as $md)
-                                                        <option <?php if($md->id==$result["medication_id"]){echo 'selected';} ?> value="{{ $md->id }}">{{ $md->name }}</option>
+                                                <label class="form-label">Medication</label>
+                                                <select class="form-control medications" name="medications" required>
+                                                    <option value="">Choose Medication</option>
+                                                    @foreach($result['allmedications'] as $ac)
+                                                        <option <?php if($ac->id==$result["medication"]->id){echo 'selected';} ?> value="{{ $ac->id }}">{{ $ac->name }}</option>
                                                     @endforeach
                                                 </select>
-                                                @if ($errors->has('medications'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('medications') }}</strong>
-                                                    </span>
-                                                @endif
                                             </div>
+                                            
+                                            @if ($errors->has('medications'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('medications') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
 
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('dose') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Dose</label>
-                                                <input type="number" class="form-control" name='dose' placeholder="Dose" value="{{ $result['assigns']['dose'] }}" required id="dose" disabled>
+                                                <input type="number" class="form-control" name='dose' placeholder="Dose" value="{{ $result['usermedications']->dose }}" required id="dose">
                                                 
                                                 @if ($errors->has('dose'))
                                                     <span class="help-block">
@@ -82,10 +86,11 @@
                                                 @endif
                                             </div>
                                         </div>
+
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('duration') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Duration</label>
-                                                <input type="number" class="form-control" name='duration' placeholder="Duration" value="{{ $result['assigns']['duration'] }}" required id="duration" disabled>
+                                                <input type="number" class="form-control" name='duration' placeholder="Duration" value="{{ $result['usermedications']->duration }}" required id="duration">
 
                                                 @if ($errors->has('duration'))
                                                     <span class="help-block">
@@ -97,8 +102,8 @@
 
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Comment </label>
-                                                <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ old('comment') }}">
+                                                <label class="form-label">Comment</label>
+                                                <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ $result['usermedications']->comment }}">
                                                 @if ($errors->has('comment'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('comment') }}</strong>
@@ -143,9 +148,6 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        var cw = $('.circle').width();
-        $('.circle').css({'height':cw+parseInt(30)+'px'});
-
         $('.validate_btn').click(function() {
             var activity = $('.medications').val();
             if (activity == '') {
@@ -161,6 +163,11 @@
                 $('.first_circle').css('background-color', '#1cc6d8');
             }
         });
+    });
+
+    $(document).ready(function(){
+        var cw = $('.circle').width();
+        $('.circle').css({'height':cw+parseInt(30)+'px'});
     });
 
     $(window).resize(function(){

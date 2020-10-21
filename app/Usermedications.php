@@ -13,7 +13,7 @@ class Usermedications extends Model
 {
     public $table = "user_medications";
 
-    public $fillable = ['medications', 'daily_count', 'duration', 'resident', 'comment', 'file', 'status', 'sign_date'];
+    public $fillable = ['assign_id', 'user', 'resident', 'comment', 'sign_date'];
 
     /**
     * @param user_id
@@ -37,42 +37,6 @@ class Usermedications extends Model
             $medications->file = $file->hashName();
             $medications->update();
         }
-    }
-
-    public static function getStatus($status)
-    {
-        $str = '';
-
-        switch ($status) {
-            case '1':
-                $str = "Assigning";
-                break;
-            case '2':
-                $str = "Assigned";
-                break;
-            default:
-                $str = "Assigning";
-                break;
-        }
-
-        return $str;
-    }
-
-    public function getMedications($id) 
-    {
-    	if (@$id) {
-    		$user_medications = Usermedications::where('id', $id)->first();
-    		if (@$user_medications) {
-    			$user_medications_id = $user_medications->medications;
-    			$medications = Medications::where('id', $user_medications_id)->first();
-    		}else{
-    			$medications = "";	
-    		}
-    	}else{
-    		$medications = "";
-    	}
-
-    	return $medications;
     }
 
     public function getResident($id) 

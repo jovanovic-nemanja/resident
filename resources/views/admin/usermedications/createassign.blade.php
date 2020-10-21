@@ -12,7 +12,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Add Resident Medication </h1>
+                <h1 class="title">Assign Medication </h1>
                 <!-- PAGE HEADING TAG - END -->
             </div>
 
@@ -47,19 +47,20 @@
                     <div class="content-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="{{ route('usermedications.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('usermedications.store') }}" method="POST">
                                     @csrf
 
                                     <input type="hidden" name="resident" value="{{ $result['user']->id }}">
-                                    <input type="hidden" name="assign_id" value="{{ $result['assign_id'] }}">
+                                    <input type="hidden" name="assign" value="1">
 
                                     <div class="row" >
                                         <div class="col-lg-3 circle first_circle">
                                             <div class="form-group {{ $errors->has('medications') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Medications</label>
-                                                <select class="form-control medications" name="medications" required disabled>
+                                                <select class="form-control medications" name="medications" required>
+                                                    <option value="">Choose Medication</option>
                                                     @foreach($result['medications'] as $md)
-                                                        <option <?php if($md->id==$result["medication_id"]){echo 'selected';} ?> value="{{ $md->id }}">{{ $md->name }}</option>
+                                                        <option value="{{ $md->id }}">{{ $md->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @if ($errors->has('medications'))
@@ -69,11 +70,11 @@
                                                 @endif
                                             </div>
                                         </div>
-
+                                            
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('dose') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Dose</label>
-                                                <input type="number" class="form-control" name='dose' placeholder="Dose" value="{{ $result['assigns']['dose'] }}" required id="dose" disabled>
+                                                <input type="number" class="form-control" name='dose' placeholder="Dose" value="2" required id="dose">
                                                 
                                                 @if ($errors->has('dose'))
                                                     <span class="help-block">
@@ -82,10 +83,11 @@
                                                 @endif
                                             </div>
                                         </div>
+
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('duration') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Duration</label>
-                                                <input type="number" class="form-control" name='duration' placeholder="Duration" value="{{ $result['assigns']['duration'] }}" required id="duration" disabled>
+                                                <input type="number" class="form-control" name='duration' placeholder="Duration" value="2" required id="duration">
 
                                                 @if ($errors->has('duration'))
                                                     <span class="help-block">
@@ -126,7 +128,7 @@
                 </section>
             </div>
         </div>
-    </div>
+    </div>    
 @stop
 
 <style type="text/css">

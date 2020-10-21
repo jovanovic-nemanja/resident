@@ -1,37 +1,6 @@
 @extends('layouts.appsecond', ['menu' => 'caretaker'])
 
 @section('content')
-    <style>
-        .inputfile {
-            width: 0.1px;
-            height: 0.1px;
-            opacity: 0;
-            overflow: hidden;
-            position: absolute;
-            z-index: -1;
-        }
-
-        .inputfile + label {
-            font-size: 1.25em;
-            font-weight: 700;
-            color: white;
-            background-color: #E9ECEF;
-            padding: 50px;
-            display: inline-block;
-            cursor: pointer;
-            background-size: cover;
-        }
-
-        .inputfile:focus + label,
-        .inputfile + label:hover {
-            background-color: #38C172ed;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-    </style>
-
 	@if(session('flash'))
 		<div class="alert alert-primary">
 			{{ session('flash') }}
@@ -175,20 +144,51 @@
     </div>
 @stop
 
-@section('script')
-<script>
-    function loadPreview(input, id) {
-        id = "#" + id;
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                var path = "background-image: " + "url('" + e.target.result + "')";
-                $(id).attr('style', path);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
+<style>
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
     }
-</script>
+
+    .inputfile + label {
+        font-size: 1.25em;
+        font-weight: 700;
+        color: white;
+        background-color: #E9ECEF;
+        padding: 50px;
+        display: inline-block;
+        cursor: pointer;
+        background-size: cover;
+    }
+
+    .inputfile:focus + label,
+    .inputfile + label:hover {
+        background-color: #38C172ed;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+</style>
+
+@section('script')
+    <script>
+        function loadPreview(input, id) {
+            id = "#" + id;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var path = "background-image: " + "url('" + e.target.result + "')";
+                    $(id).attr('style', path);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

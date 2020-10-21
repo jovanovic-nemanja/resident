@@ -1,27 +1,6 @@
 @extends('layouts.appsecond', ['menu' => 'activities'])
 
 @section('content')
-	
-	<style type="text/css">
-		.table>caption+thead>tr:first-child>td, .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>td, .table>colgroup+thead>tr:first-child>th, .table>thead:first-child>tr:first-child>td, .table>thead:first-child>tr:first-child>th {
-		    /*border-top: 0;*/
-		    text-align: left;
-		}	
-
-		.table-bordered {
-		    border: 1px solid #ddd;
-		}
-
-		section.box .actions a {
-		    color: #fff; 
-		    font-size: 13px; 
-		    margin-left: 0px; 
-		    padding: 12px; 
-		    cursor: pointer; 
-		    text-decoration: none; 
-		}
-	</style>
-
 	@if(session('flash'))
 		<div class="alert alert-primary">
 			{{ session('flash') }}
@@ -47,7 +26,7 @@
             <header class="panel_header">
                 <h2 class="title pull-left">Incidences</h2>
                 <div class="actions panel_actions pull-right">
-                	<a href="{{ route('incidences.create') }}" class="btn btn-success">Add</a>
+                	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('incidences.create') }}" class="btn btn-success">Add</a>
                 </div>
             </header>
             <div class="content-body">

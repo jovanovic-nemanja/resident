@@ -16,19 +16,17 @@ class CreateUserMedicationsTable extends Migration
         Schema::create('user_medications', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('medications')->unsigned();
-            $table->foreign('medications')->references('id')->on('medications');
-            
-            $table->integer('daily_count');
-            $table->integer('duration');
+            $table->integer('assign_id')->unsigned();
+            $table->foreign('assign_id')->references('id')->on('assign_medications');
             
             $table->integer('resident')->unsigned();
             $table->foreign('resident')->references('id')->on('users');
 
-            $table->string('comment', '2048')->nullable();
-            $table->string('file', '2048')->nullable();
+            $table->integer('user')->unsigned();
+            $table->foreign('user')->references('id')->on('users');
 
-            $table->integer('status')->nullable();
+            $table->string('comment', '2048')->nullable();
+
             $table->datetime('sign_date');
 
             $table->timestamps();

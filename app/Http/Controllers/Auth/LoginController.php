@@ -36,10 +36,10 @@ class LoginController extends Controller
     public function redirectTo(){
         // User role
         if (auth()->user()->hasRole('admin')) {
-            return '/admin';
+            return '/home';
         }
         if (auth()->user()->hasRole('nurse')) {
-            return '/manager';
+            return '/home';
         }
     }
 
