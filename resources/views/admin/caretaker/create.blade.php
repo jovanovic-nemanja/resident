@@ -144,37 +144,6 @@
     </div>
 @stop
 
-<style>
-    .inputfile {
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-        overflow: hidden;
-        position: absolute;
-        z-index: -1;
-    }
-
-    .inputfile + label {
-        font-size: 1.25em;
-        font-weight: 700;
-        color: white;
-        background-color: #E9ECEF;
-        padding: 50px;
-        display: inline-block;
-        cursor: pointer;
-        background-size: cover;
-    }
-
-    .inputfile:focus + label,
-    .inputfile + label:hover {
-        background-color: #38C172ed;
-    }
-
-    .hidden {
-        display: none !important;
-    }
-</style>
-
 @section('script')
     <script>
         function loadPreview(input, id) {

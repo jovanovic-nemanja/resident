@@ -92,4 +92,14 @@ class User extends Authenticatable
 
         return $arr;
     }
+
+    public static function formattime($time)
+    {
+        $timeZone = 'America/Los_Angeles';
+        date_default_timezone_set($timeZone);
+        $date = date_create($time, timezone_open('America/Los_Angeles'));
+        $time = date_format($date, 'H:i:s');
+
+        return $time;
+    }
 }

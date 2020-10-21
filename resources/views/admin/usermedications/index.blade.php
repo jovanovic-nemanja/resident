@@ -1,17 +1,5 @@
 @extends('layouts.appsecond', ['menu' => 'residents'])
-<style type="text/css">
-	.dataTables_wrapper thead th {
-	    vertical-align: middle !important;
-	    font-size: 13px;
-	    color: #757575;
-	    text-align: left !important; 
-	    border-right: none !important;
-	    background: #fff !important; 
-	}
-	.table {
-		margin-bottom: 0px!important;
-	}
-</style>
+
 @section('content')
 	@if(session('flash'))
 		<div class="alert alert-primary">

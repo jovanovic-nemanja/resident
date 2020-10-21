@@ -64,6 +64,13 @@ Route::delete('usermedications/destroyassign/{resident}', 'Admin\Usermedications
 
 
 
+Route::resource('tfgs', 'Admin\TFGController');
+Route::get('tfgs/indextfg/{resident}', 'Admin\TFGController@indextfg')->name('tfgs.indextfg');
+Route::get('tfgs/createtfg/{resident}', 'Admin\TFGController@createtfg')->name('tfgs.createtfg');
+
+
+
+
 Route::get('/account', 'Frontend\AccountController@index')->name('account');
 Route::get('/changepass', 'Frontend\AccountController@changepass')->name('changepass');
 Route::put('/account/update', 'Frontend\AccountController@update')->name('account.update');

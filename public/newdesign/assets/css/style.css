@@ -11016,3 +11016,53 @@ table.dataTable tfoot th select, table.dataTable tfoot td select{
 table.dataTable.display tbody tr:first-child td {
     border-top: 1px solid #eeeeee;
 }
+
+.circle {
+    text-align: center; 
+    border-radius: 50%; 
+    background-color: #1cc6d8;
+}
+.circle_form {
+    padding-top: 40%;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: #E9ECEF;
+    padding: 50px;
+    display: inline-block;
+    cursor: pointer;
+    background-size: cover;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #38C172ed;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.dataTables_wrapper thead th {
+    vertical-align: middle !important;
+    font-size: 13px;
+    color: #757575;
+    text-align: left !important; 
+    border-right: none !important;
+    background: #fff !important; 
+}
+.table {
+    margin-bottom: 0px!important;
+}

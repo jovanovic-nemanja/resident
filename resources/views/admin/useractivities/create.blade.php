@@ -130,17 +130,6 @@
             </div>
         </div>
     </div>
-
-    <style type="text/css">
-        .circle {
-            text-align: center; 
-            border-radius: 50%; 
-            background-color: #1cc6d8;
-        }
-        .circle_form {
-            padding-top: 40%;
-        }
-    </style>
 @stop
 
 @section('script')

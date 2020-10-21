@@ -12,7 +12,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Edit Resident Activity </h1>
+                <h1 class="title">Add TFG </h1>
                 <!-- PAGE HEADING TAG - END -->
             </div>
 
@@ -37,13 +37,6 @@
             <div class="col-lg-10 col-lg-offset-1 col-lg-12">
                 <section class="box ">
                     <header class="panel_header">
-                        <div class="row" style="text-align: center;">
-                            @if($result['type'] == 1)
-                                <h2 class="title">Primary ADL</h2>
-                            @else
-                                <h2 class="title">Secondary ADL</h2>
-                            @endif
-                        </div>
                         <div class="actions panel_actions pull-right">
                             <a class="box_toggle fa fa-chevron-down"></a>
                         </div>
@@ -51,35 +44,33 @@
                     <div class="content-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="{{ route('useractivities.update', $result['useractivities']->id) }}" method="POST">
+                                <form action="{{ route('tfgs.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" name="_method" value="put">
 
-                                    <div class="row">
-                                        <input type="hidden" name="resident" value="{{ $result['user']->id }}">
+                                    <input type="hidden" name="resident" value="{{ $result['user']->id }}">
 
+                                    <div class="row" >
                                         <div class="col-lg-3 circle first_circle">
-                                            <div class="form-group {{ $errors->has('activities') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Activity</label>
-                                                <select class="form-control activities" name="activities" required>
-                                                    <option value="">Choose Activity</option>
-                                                    @foreach($result['activities'] as $ac)
-                                                        <option <?php if($ac->id==$result["activity"]->id){echo 'selected';} ?> value="{{ $ac->id }}">{{ $ac->title }}</option>
+                                            <div class="form-group {{ $errors->has('medications') ? 'has-error' : '' }} circle_form">
+                                                <label class="form-label">Medication</label>
+                                                <select class="form-control medications" name="medications" required>
+                                                    <option value="">Choose Medication</option>
+                                                    @foreach($result['medications'] as $ac)
+                                                        <option value="{{ $ac->id }}">{{ $ac->name }}</option>
                                                     @endforeach
                                                 </select>
+                                                @if ($errors->has('medications'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('medications') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
-                                            
-                                            @if ($errors->has('activities'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('activities') }}</strong>
-                                                </span>
-                                            @endif
                                         </div>
-
+                                            
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Time</label>
-                                                <input type="time" class="form-control" name='time' placeholder="Time" value="{{ $result['useractivities']->time }}" required id="time">
+                                                <input type="time" class="form-control" name='time' placeholder="Time" value="<?= date('H:i'); ?>" required id="time">
                                                 @if ($errors->has('time'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('time') }}</strong>
@@ -90,8 +81,8 @@
 
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Comment</label>
-                                                <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ $result['useractivities']->comment }}">
+                                                <label class="form-label">Comment </label>
+                                                <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ old('comment') }}">
                                                 @if ($errors->has('comment'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('comment') }}</strong>
@@ -99,11 +90,11 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('file') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Attached File</label>
-                                                <input type="file" name="file" class="form-control" id="file" placeholder="Attached File" value="{{ asset('uploads/').'/'.$result['useractivities']->file }}">
+                                                <label class="form-label">Attached File </label>
+                                                <input type="file" name="file" class="form-control" id="file" placeholder="Attached File">
                                                 @if ($errors->has('file'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('file') }}</strong>
@@ -137,23 +128,12 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        // $("#time").on("focusout",function(e){
-        //     var currentTime = new Date();
-        //     var userTime = $("#time").val().split(":"); 
-        //     if(currentTime.getHours() < parseInt(userTime[0])){
-        //         alert("You can choose a time before current time.");
-        //         $(this).focus();                
-        //     }
-        //     if(currentTime.getHours() >= parseInt(userTime[0])){
-        //         if(currentTime.getMinutes() < parseInt(userTime[1])){
-        //             alert("You can choose a time before current time.");
-        //             $(this).focus();
-        //         }
-        //     }
-        // });
+        var cw = $('.circle').width();
+        $('.circle').css({'height':cw+parseInt(30)+'px'});
+        // $('.circle').css({'line-height':cw+parseInt(30)+'px'});
 
         $('.validate_btn').click(function() {
-            var activity = $('.activities').val();
+            var activity = $('.medications').val();
             if (activity == '') {
                 $('.first_circle').css('background-color', '#ea6b6b');
             }
@@ -161,7 +141,7 @@
             $('.submit_btn').click();
         });
 
-        $('.activities').change(function() {
+        $('.medications').change(function() {
             var activity = $(this).val();
             if (activity != '') {
                 $('.first_circle').css('background-color', '#1cc6d8');
@@ -169,14 +149,10 @@
         });
     });
 
-    $(document).ready(function(){
-        var cw = $('.circle').width();
-        $('.circle').css({'height':cw+parseInt(30)+'px'});
-    });
-
     $(window).resize(function(){
         var cw = $('.circle').width();
         $('.circle').css({'height':cw+parseInt(30)+'px'});
+        // $('.circle').css({'line-height':cw+parseInt(30)+'px'});
     });
 </script>
 @endsection

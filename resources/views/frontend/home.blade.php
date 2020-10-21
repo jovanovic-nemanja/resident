@@ -36,7 +36,17 @@
                                     </div><!-- end row -->
                                     <div class="col-xs-12 mb-30">
                                         <div class="form-group no-mb">
-                                            <a href="{{ route('usermedications.indexusermedication', $resident->id) }}" class="btn btn-primary btn-lg gradient-blue" style="width:100%; margin-bottom: 2%;"> Medications</a>
+                                            <div class="ui-dropdowns" data-example-id="single-button-dropdown">
+                                                <div class="btn-group" style="width: 100%;">
+                                                    <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  style="width: 100%;">
+                                                        Medications <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="{{ route('usermedications.indexusermedication', $resident->id) }}">Prescribed</a></li>
+                                                        <li><a href="{{ route('tfgs.indextfg', $resident->id) }}">TFG</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
 
                                             <div class="ui-dropdowns" data-example-id="single-button-dropdown">
                                                 <div class="btn-group" style="width: 100%;">
