@@ -8,10 +8,13 @@
 <script src="{{ asset('newdesign/assets/plugins/viewport/viewportchecker.js') }}"></script>
 <!-- CORE JS FRAMEWORK - END -->
 
+<script src="{{ asset('newdesign/tags/jquery.tagsinput.min.js') }}"></script>
+
+
 <!-- CORE TEMPLATE JS - START -->
 <script src="{{ asset('newdesign/assets/js/scripts.js') }}"></script>
 <!-- END CORE TEMPLATE JS - END -->
-
+<script src="{{ asset('newdesign/tags/form-addons.js') }}"></script>
 <script src="{{ asset('newdesign/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('newdesign/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('newdesign/data-table.js') }}"></script>

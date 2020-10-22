@@ -30,5 +30,5 @@
 <link href="{{ asset('newdesign/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('newdesign/assets/css/responsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- CORE CSS TEMPLATE - END -->
-
+<link href="{{ asset('newdesign/tags/jquery.tagsinput.min.css') }}" rel="stylesheet">
 <link href="{{ asset('newdesign/dataTables.bootstrap4.css') }}" rel="stylesheet">

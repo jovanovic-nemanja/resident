@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Comments;
+
 class Activities extends Model
 {
     public $table = "activities";
 
-    public $fillable = ['title', 'type', 'sign_date'];
+    public $fillable = ['title', 'type', 'comments', 'sign_date'];
 
-    public function getTypeasstring($id) 
+    public static function getTypeasstring($id) 
     {
     	if (@$id) {
     		if ($id == 1) {
@@ -25,5 +27,10 @@ class Activities extends Model
     	}
 
     	return $result;
+    }
+
+    public static function getCommentsByID($id) 
+    {
+
     }
 }

@@ -65,10 +65,16 @@
                                         @endif
                                     </div>
 
+                                    <div class="form-group">
+                                        <label class="form-label">Comments</label>
+                                        <div class="controls">
+                                            <input type="text" name="comments" class="form-control" placeholder="Comments" id="tags">
+                                        </div>
+                                    </div>
+
                                     <div class="padding-bottom-30">
                                         <div class="text-left">
                                             <button type="submit" class="btn btn-primary gradient-blue">Save</button>
-                                            <button type="button" class="btn">Cancel</button>
                                         </div>
                                     </div>
                                 </form>
@@ -80,3 +86,9 @@
         </div>
     </div>
 @stop
+
+@section('script')
+<script>
+
+</script>
+@endsection

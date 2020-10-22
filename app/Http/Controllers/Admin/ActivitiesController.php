@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Comments;
 use App\Activities;
 use App\Useractivities;
 
@@ -55,8 +57,21 @@ class ActivitiesController extends Controller
         $activities = Activities::create([
             'title' => $request->title,
             'type' => $request->type,
+            'comments' => $request->comments,
             'sign_date' => $date,
         ]);
+
+        if (@$request->comments) {
+            $arrs = explode(',', $request->comments);
+            foreach ($arrs as $comm) {
+                $comments = Comments::create([
+                    'type' => 1,
+                    'sign_date' => $date,
+                    'name' => $comm,
+                    'ref_id' => $activities['id']
+                ]);
+            }
+        }
 
         return redirect()->route('activities.index')->with('flash', 'Activity has been successfully created.');
     }
@@ -103,8 +118,25 @@ class ActivitiesController extends Controller
         if (@$record) {
             $record->title = $request->title;
             $record->type = $request->type;
+            $record->comments = $request->comments;
 
             $record->update();
+        }
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        if (@$request->comments) {
+            $arrs = explode(',', $request->comments);
+            $del = Comments::where('type', 1)->where('ref_id', $record->id)->delete();
+            foreach ($arrs as $comm) {
+                $comments = Comments::create([
+                    'type' => 1,
+                    'name' => $comm,
+                    'sign_date' => $date,
+                    'ref_id' => $record->id
+                ]);
+            }
         }
 
         return redirect()->route('activities.index');
@@ -119,6 +151,7 @@ class ActivitiesController extends Controller
     public function destroy($id)
     {
         $useractivities = Useractivities::where('activities', $id)->delete();
+        $del = Comments::where('type', 1)->where('ref_id', $id)->delete();
         $record = Activities::where('id', $id)->delete();
         
         return redirect()->route('activities.index');

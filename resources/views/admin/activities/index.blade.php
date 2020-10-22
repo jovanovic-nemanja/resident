@@ -39,6 +39,7 @@
                                         <th>No</th>
                                         <th>Type</th>
                                         <th>Title</th>
+                                        <th>Comments</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -49,7 +50,7 @@
 		                                	foreach($activities as $activity) { ?>
 		                                		<tr>
 		                                			<td>{{ $i }}</td>
-		                                			<td>{{ $activity->getTypeasstring($activity->type) }}</td>
+		                                			<td>{{ App\Activities::getTypeasstring($activity->type) }}</td>
 			                                        <td>
 			                                            <!-- <div class="round">{{ $activity->title }}</div> -->
 			                                            <div class="designer-info">
@@ -57,6 +58,7 @@
 			                                                <!-- <small class="text-muted">Male, 34 Years</small> -->
 			                                            </div>
 			                                        </td>
+                                                    <td>{{ $activity->comments }}</td>
 			                                        <td>
 			                                        	<a href="{{ route('activities.show', $activity->id) }}" class="btn btn-success">Edit</a>
 			                                        	<a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$activity->id}}').submit();" class="btn btn-primary">Delete</a>
