@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Comments;
 use App\Activities;
 use App\Useractivities;
 
@@ -119,6 +120,9 @@ class UseractivitiesController extends Controller
         $type = Activities::where('id', $res->activities)->first();
         $result['type'] = $type->type;
         $result['activity'] = $type;
+
+        $activity = $res->activities;
+        $result['comments'] = Comments::where('type', 1)->where('ref_id', $activity)->get();
 
         return view('admin.useractivities.edit', compact('result'));
     }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 
 use App\User;
+use App\Comments;
 use App\Activities;
 use App\Useractivities;
 
@@ -107,5 +108,17 @@ class Useractivities extends Model
         }
 
         return $str;
+    }
+
+    public static function getCommentById($comment_id)
+    {
+        if (@$comment_id) {
+            $result = Comments::where('id', $comment_id)->first();
+        }
+        else{
+            $result = '';
+        }
+
+        return $result->name;
     }
 }

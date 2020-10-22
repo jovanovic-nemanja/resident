@@ -15,7 +15,7 @@ class SettingSeeder extends Seeder
     {
         GeneralSetting::create([
         	'id' => 1,
-        	'site_name' => 'Mambo Dubai',
+        	'site_name' => 'Blue Care Hub',
         	'site_title' => 'Mambo Dubai Multivendor Marketplace',
         	'site_subtitle' => 'Your Awesome Marketplace',
         	'site_desc' => 'Buy . Sell . Admin',

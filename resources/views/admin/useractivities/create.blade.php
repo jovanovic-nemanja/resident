@@ -89,7 +89,9 @@
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Comment </label>
-                                                <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ old('comment') }}">
+                                                <select class="form-control" id="comment" name="comment">
+                                                    
+                                                </select>
                                                 @if ($errors->has('comment'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('comment') }}</strong>
@@ -149,9 +151,26 @@
         });
 
         $('.activities').change(function() {
+            $('#comment').empty();
             var activity = $(this).val();
             if (activity != '') {
+                var url = $('#url').val();
                 $('.first_circle').css('background-color', '#1cc6d8');
+                $.ajax({
+                    url: '/getcommentsbyactivity',
+                    type: 'GET',
+                    data: { activity : activity },
+                    success: function(result, status) {
+                        if (status) {
+                            $('#comment').empty();
+                            var element = "";
+                            for (var i = 0; i < result.length; i++) {
+                                element += "<option value=" + result[i]['id'] + ">" + result[i]['name'] + "</option>";
+                            }
+                            $('#comment').append(element);
+                        }
+                    }
+                })
             }
         });
     });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -74,6 +75,16 @@ class ActivitiesController extends Controller
         }
 
         return redirect()->route('activities.index')->with('flash', 'Activity has been successfully created.');
+    }
+
+    public function getcommentsbyactivity(Request $request)
+    {
+        if (@$request->activity) {
+            $results = Comments::where('type', 1)->where('ref_id', $request->activity)->get();
+        }else
+            $results = [];
+
+        return response()->json($results);
     }
 
     /**

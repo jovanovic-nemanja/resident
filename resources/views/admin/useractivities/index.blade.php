@@ -87,7 +87,7 @@
 			                                        	<span class="badge round-primary" style="<?= $css; ?>">{{ App\Useractivities::getStatus($useractivity->status) }}</span>
 			                                        </td>
 			                                        <td>
-			                                        	{{ $useractivity->comment }}
+			                                        	{{ App\Useractivities::getCommentById($useractivity->comment) }}
 			                                        </td>
 			                                        <td>
 			                                        	<a href="{{ asset('uploads/').'/'.$useractivity->file }}">{{ $useractivity->file }}</a>
