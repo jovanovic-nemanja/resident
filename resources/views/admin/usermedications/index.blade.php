@@ -50,6 +50,10 @@
                                         <th>Name</th>
                                         <th>Dose</th>
                                         <th>Duration</th>
+                                        <th>Time 1</th>
+                                        <th>Time 2</th>
+                                        <th>Time 3</th>
+                                        <th>Time 4</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -72,6 +76,18 @@
 			                                        </td>
 			                                        <td>
 			                                        	<span class="badge round-primary">{{ $assignmedication->duration }}</span>
+			                                        </td>
+			                                        <td>
+			                                        	<span class="badge round-primary">{{ $assignmedication->time1 }}</span>
+			                                        </td>
+			                                        <td>
+			                                        	<span class="badge round-primary">{{ $assignmedication->time2 }}</span>
+			                                        </td>
+			                                        <td>
+			                                        	<span class="badge round-primary">{{ $assignmedication->time3 }}</span>
+			                                        </td>
+			                                        <td>
+			                                        	<span class="badge round-primary">{{ $assignmedication->time4 }}</span>
 			                                        </td>
 
 			                                        <td>

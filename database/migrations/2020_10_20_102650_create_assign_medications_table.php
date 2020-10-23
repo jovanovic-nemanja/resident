@@ -27,6 +27,10 @@ class CreateAssignMedicationsTable extends Migration
 
             $table->string('comment', '2048')->nullable();
             $table->datetime('sign_date');
+            $table->time('time1')->nullable();
+            $table->time('time2')->nullable();
+            $table->time('time3')->nullable();
+            $table->time('time4')->nullable();
 
             $table->timestamps();
         });

@@ -56,8 +56,8 @@
                                     <div class="row">
                                         <input type="hidden" name="resident" value="{{ $result['user']->id }}">
 
-                                        <div class="col-lg-3 circle first_circle">
-                                            <div class="form-group {{ $errors->has('medications') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('medications') ? 'has-error' : '' }}">
                                                 <label class="form-label">Medication</label>
                                                 <select class="form-control medications" name="medications" required>
                                                     <option value="">Choose Medication</option>
@@ -74,8 +74,8 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('dose') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('dose') ? 'has-error' : '' }}">
                                                 <label class="form-label">Dose</label>
                                                 <input type="number" class="form-control" name='dose' placeholder="Dose" value="{{ $result['usermedications']->dose }}" required id="dose">
                                                 
@@ -87,8 +87,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('duration') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('duration') ? 'has-error' : '' }}">
                                                 <label class="form-label">Duration</label>
                                                 <input type="number" class="form-control" name='duration' placeholder="Duration" value="{{ $result['usermedications']->duration }}" required id="duration">
 
@@ -100,13 +100,63 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
                                                 <label class="form-label">Comment</label>
                                                 <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ $result['usermedications']->comment }}">
                                                 @if ($errors->has('comment'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('comment') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 time1">
+                                            <div class="form-group {{ $errors->has('time1') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time 1 </label>
+                                                <input type="time" class="form-control" id="time1" name="time1" placeholder="Time 1" value="{{ $result['usermedications']->time1 }}">
+                                                @if ($errors->has('time1'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time1') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 time2">
+                                            <div class="form-group {{ $errors->has('time2') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time 2 </label>
+                                                <input type="time" class="form-control" id="time2" name="time2" placeholder="Time 2" value="{{ $result['usermedications']->time2 }}">
+                                                @if ($errors->has('time2'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time2') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 time3">
+                                            <div class="form-group {{ $errors->has('time3') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time 3 </label>
+                                                <input type="time" class="form-control" id="time3" name="time3" placeholder="Time 3" value="{{ $result['usermedications']->time3 }}">
+                                                @if ($errors->has('time3'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time3') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 time4">
+                                            <div class="form-group {{ $errors->has('time4') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time 4 </label>
+                                                <input type="time" class="form-control" id="time4" name="time4" placeholder="Time 4" value="{{ $result['usermedications']->time4 }}">
+                                                @if ($errors->has('time4'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time4') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>

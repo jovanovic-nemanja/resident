@@ -54,8 +54,8 @@
                                     <input type="hidden" name="assign" value="1">
 
                                     <div class="row" >
-                                        <div class="col-lg-3 circle first_circle">
-                                            <div class="form-group {{ $errors->has('medications') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('medications') ? 'has-error' : '' }}">
                                                 <label class="form-label">Medications</label>
                                                 <select class="form-control medications" name="medications" required>
                                                     <option value="">Choose Medication</option>
@@ -71,10 +71,10 @@
                                             </div>
                                         </div>
                                             
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('dose') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('dose') ? 'has-error' : '' }}">
                                                 <label class="form-label">Dose</label>
-                                                <input type="number" class="form-control" name='dose' placeholder="Dose" value="2" required id="dose">
+                                                <input type="number" class="form-control" name='dose' placeholder="Dose" value="2" required id="dose" max="4">
                                                 
                                                 @if ($errors->has('dose'))
                                                     <span class="help-block">
@@ -84,8 +84,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('duration') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('duration') ? 'has-error' : '' }}">
                                                 <label class="form-label">Duration</label>
                                                 <input type="number" class="form-control" name='duration' placeholder="Duration" value="2" required id="duration">
 
@@ -97,8 +97,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
                                                 <label class="form-label">Comment </label>
                                                 <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ old('comment') }}">
                                                 @if ($errors->has('comment'))
@@ -110,18 +110,62 @@
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-lg-3 time1">
+                                            <div class="form-group {{ $errors->has('time1') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time 1 </label>
+                                                <input type="time" class="form-control" id="time1" name="time1" placeholder="Time 1" value="{{ old('time1') }}">
+                                                @if ($errors->has('time1'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time1') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 time2">
+                                            <div class="form-group {{ $errors->has('time2') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time 2 </label>
+                                                <input type="time" class="form-control" id="time2" name="time2" placeholder="Time 2" value="{{ old('time2') }}">
+                                                @if ($errors->has('time2'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time2') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 time3">
+                                            <div class="form-group {{ $errors->has('time3') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time 3 </label>
+                                                <input type="time" class="form-control" id="time3" name="time3" placeholder="Time 3" value="{{ old('time3') }}">
+                                                @if ($errors->has('time3'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time3') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 time4">
+                                            <div class="form-group {{ $errors->has('time4') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time 4 </label>
+                                                <input type="time" class="form-control" id="time4" name="time4" placeholder="Time 4" value="{{ old('time4') }}">
+                                                @if ($errors->has('time4'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time4') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">
                                         <div class="">
-                                            <button style="display: none;" type="submit" class="btn btn-primary gradient-blue submit_btn">Submit</button>
+                                            <button type="submit" class="btn btn-primary gradient-blue">Submit</button>
                                         </div>
                                     </div>
                                 </form>
-
-                                <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">
-                                    <div class="">
-                                        <button class="btn btn-primary gradient-blue validate_btn">Submit</button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -134,29 +178,6 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        var cw = $('.circle').width();
-        $('.circle').css({'height':cw+parseInt(30)+'px'});
-
-        $('.validate_btn').click(function() {
-            var activity = $('.medications').val();
-            if (activity == '') {
-                $('.first_circle').css('background-color', '#ea6b6b');
-            }
-
-            $('.submit_btn').click();
-        });
-
-        $('.medications').change(function() {
-            var activity = $(this).val();
-            if (activity != '') {
-                $('.first_circle').css('background-color', '#1cc6d8');
-            }
-        });
-    });
-
-    $(window).resize(function(){
-        var cw = $('.circle').width();
-        $('.circle').css({'height':cw+parseInt(30)+'px'});
     });
 </script>
 @endsection

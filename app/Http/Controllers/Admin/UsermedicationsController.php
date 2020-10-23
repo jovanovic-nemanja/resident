@@ -121,6 +121,10 @@ class UsermedicationsController extends Controller
                 'resident' => $request->resident,
                 'comment' => $request->comment,
                 'sign_date' => $date,
+                'time1' => @$request->time1,
+                'time2' => @$request->time2,
+                'time3' => @$request->time3,
+                'time4' => @$request->time4,
             ]);
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully assigned.');
@@ -224,6 +228,10 @@ class UsermedicationsController extends Controller
                 $record->duration = $request->duration;
                 $record->resident = $request->resident;
                 $record->comment = $request->comment;
+                $record->time1 = @$request->time1;
+                $record->time2 = @$request->time2;
+                $record->time3 = @$request->time3;
+                $record->time4 = @$request->time4;
 
                 $record->update();
             }
