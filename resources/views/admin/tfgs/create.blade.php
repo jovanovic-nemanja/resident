@@ -12,7 +12,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Add TFG </h1>
+                <h1 class="title">Add PRN </h1>
                 <!-- PAGE HEADING TAG - END -->
             </div>
 

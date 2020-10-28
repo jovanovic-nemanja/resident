@@ -12,7 +12,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">TFG ({{ $user->name }}) </h1>
+                <h1 class="title">PRN ({{ $user->name }}) </h1>
                 <div class="doctors-head relative text-center">
 	                <div class="patient-img img-circle">
 	                    <a href="{{ route('resident.show', $user->id) }}">
@@ -31,7 +31,7 @@
     <div class="col-xs-12">
         <section class="box">
             <header class="panel_header">
-                <h2 class="title pull-left">TFGs</h2>
+                <h2 class="title pull-left">PRN</h2>
                 <div class="actions panel_actions pull-right">
                 	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('tfgs.createtfg', $user->id) }}" class="btn btn-success">Add</a>
                 </div>

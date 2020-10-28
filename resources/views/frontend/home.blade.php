@@ -42,8 +42,8 @@
                                                         Medications <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="{{ route('usermedications.indexusermedication', $resident->id) }}">Prescribed</a></li>
-                                                        <li><a href="{{ route('tfgs.indextfg', $resident->id) }}">TFG</a></li>
+                                                        <li><a href="{{ route('usermedications.indexusermedication', $resident->id) }}">Routine</a></li>
+                                                        <li><a href="{{ route('tfgs.indextfg', $resident->id) }}">PRN</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
