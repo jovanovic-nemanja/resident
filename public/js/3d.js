@@ -127,9 +127,48 @@ import * as THREE from '/3d/src/build/three.module.js';
 
 					if ( intersection.intersects ) shoot();
 
+					switch (event.which) {
+				        case 1:
+				            // alert('Left mouse button pressed');
+				            break;
+				        case 2:
+				            // alert('Middle mouse button pressed');
+				            break;
+				        case 3:
+				            // alert('Right mouse button pressed');
+				            ShowCommentModal();
+				            break;
+				        default:
+				            // alert('You have a strange mouse');
+				    }
+
 				}
 
 			} );
+
+			window.oncontextmenu = function ()
+			{
+			    return false;     // cancel default menu
+			}
+
+			function ShowCommentModal() {
+				jQuery('#commentsModal').modal('show', {
+                    backdrop: 'static'
+                });
+
+                jQuery.ajax({
+                    url: "/getbodyharmcomments",
+                    success: function(response) {
+                    	var element = "";
+                    	if (response) {
+                    		for (var i = 0; i < response.length; i++) {
+                    			element += "<option value=" + response[i]['id'] + ">" + response[i]['name'] + "</option>";
+                    		}
+                    	}
+                        jQuery('#commentsModal .comment').append(element);
+                    }
+                });
+			}
 
 			window.addEventListener( 'pointermove', onPointerMove );
 

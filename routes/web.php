@@ -71,6 +71,10 @@ Route::get('tfgs/createtfg/{resident}', 'Admin\TFGController@createtfg')->name('
 
 
 
+Route::resource('bodyharmcomments', 'Admin\BodyharmcommentsController');
+
+
+
 Route::get('/account', 'Frontend\AccountController@index')->name('account');
 Route::get('/changepass', 'Frontend\AccountController@changepass')->name('changepass');
 Route::put('/account/update', 'Frontend\AccountController@update')->name('account.update');
@@ -80,3 +84,4 @@ Route::put('/account/updatePassword', 'Frontend\AccountController@updatePassword
 //Ajax Request
 Route::get('/getcommentsbyactivity', 'Admin\ActivitiesController@getcommentsbyactivity');
 Route::get('/getCurrentTimeByAjax', 'Admin\UsermedicationsController@getCurrentTimeByAjax');
+Route::get('/getbodyharmcomments', 'Admin\BodyharmcommentsController@getbodyharmcomments');

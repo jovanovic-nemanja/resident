@@ -60,6 +60,9 @@
                         <li>
                             <a class="" href="{{ route('medications.index') }}">Medications</a>
                         </li>
+                        <li>
+                            <a class="" href="{{ route('bodyharmcomments.index') }}">Body harm Comments</a>
+                        </li>
                     </ul>
                 </li>
             @endif

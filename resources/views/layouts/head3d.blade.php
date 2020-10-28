@@ -7,6 +7,7 @@
 <!-- Favicon -->
 <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon" />
 <!-- For iPhone -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('newdesign/assets/images/apple-touch-icon-57-precomposed.png') }}">
 <!-- For iPhone 4 Retina display -->
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('newdesign/assets/images/apple-touch-icon-114-precomposed.png') }}">
