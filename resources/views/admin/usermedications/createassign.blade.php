@@ -74,7 +74,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group {{ $errors->has('dose') ? 'has-error' : '' }}">
                                                 <label class="form-label">Dose</label>
-                                                <input type="number" class="form-control" name='dose' placeholder="Dose" value="2" required id="dose" max="4">
+                                                <input type="number" class="form-control" name='dose' placeholder="Dose" value="2" required id="dose">
                                                 
                                                 @if ($errors->has('dose'))
                                                     <span class="help-block">

@@ -77,4 +77,6 @@ Route::put('/account/update', 'Frontend\AccountController@update')->name('accoun
 Route::put('/account/updatePassword', 'Frontend\AccountController@updatePassword')->name('account.updatePassword');
 
 
+//Ajax Request
 Route::get('/getcommentsbyactivity', 'Admin\ActivitiesController@getcommentsbyactivity');
+Route::get('/getCurrentTimeByAjax', 'Admin\UsermedicationsController@getCurrentTimeByAjax');

@@ -85,9 +85,11 @@ class User extends Authenticatable
         $timeZone = 'America/Los_Angeles';
         date_default_timezone_set($timeZone);
         $date = date('Y-m-d H:i:s');
+        $dates = date('Y-m-d');
         $time = date('H:i:s');
         $arr = [];
         $arr['date'] = $date;
+        $arr['dates'] = $dates;
         $arr['time'] = $time;
 
         return $arr;

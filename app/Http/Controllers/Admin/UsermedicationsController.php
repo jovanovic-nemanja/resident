@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
 use App\User;
@@ -72,8 +73,16 @@ class UsermedicationsController extends Controller
         $result['assigns'] = Assignmedications::where('id', $assign_id)->first();
         $result['assign_id'] = $assign_id;
         $result['medication_id'] = $medication_id;
+        $result['medication'] = Medications::where('id', $medication_id)->first();
 
         return view('admin.usermedications.create', compact('result'));
+    }
+
+    public function getCurrentTimeByAjax(Request $request)
+    {
+        $date = date('y-m-d h:i:s');
+        $current = User::formattime($date);
+        return response()->json($current);
     }
 
     /**

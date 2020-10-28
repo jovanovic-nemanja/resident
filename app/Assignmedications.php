@@ -47,4 +47,23 @@ class Assignmedications extends Model
 
     	return $user;
     }
+
+    public static function getRemainingDays($start)
+    {
+        if (@$start) {
+            $current = User::getformattime();
+            $cur_date = $current['dates'];
+
+            $startTimeStamp = strtotime($start);
+            $endTimeStamp = strtotime($cur_date);
+
+            $timeDiff = abs($endTimeStamp - $startTimeStamp);
+
+            $numberDays = $timeDiff/86400;  // 86400 seconds in one day
+
+            // and you might want to convert to integer
+            $numberDays = intval($numberDays);
+            return $numberDays;
+        }
+    }
 }

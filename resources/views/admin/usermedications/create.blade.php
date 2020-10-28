@@ -30,6 +30,7 @@
 
                         <h4 style="color: #fff;">{{ $result['user']->name }}</h4>
                     </a>
+                    <h4 style="color: #fff;">{{ $result['medication']->name }}</h4>
                 </div>
             </div>
         </div>
@@ -54,22 +55,6 @@
                                     <input type="hidden" name="assign_id" value="{{ $result['assign_id'] }}">
 
                                     <div class="row" >
-                                        <div class="col-lg-3 circle first_circle">
-                                            <div class="form-group {{ $errors->has('medications') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Medications</label>
-                                                <select class="form-control medications" name="medications" required disabled>
-                                                    @foreach($result['medications'] as $md)
-                                                        <option <?php if($md->id==$result["medication_id"]){echo 'selected';} ?> value="{{ $md->id }}">{{ $md->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @if ($errors->has('medications'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('medications') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('dose') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Dose</label>
@@ -96,14 +81,19 @@
                                         </div>
 
                                         <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Comment </label>
-                                                <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ old('comment') }}">
-                                                @if ($errors->has('comment'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('comment') }}</strong>
-                                                    </span>
-                                                @endif
+                                            <?php 
+                                                $cur_date = App\Assignmedications::getRemainingDays($result['assigns']['created_at'])
+                                            ?>
+                                            <div class="form-group circle_form">
+                                                <label class="form-label">Remaining day </label>
+                                                <input type="text" class="form-control" placeholder="Remaining day" disabled value="<?= $cur_date; ?>">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 circle">
+                                            <div class="form-group circle_form">
+                                                <label class="form-label">Current Time </label>
+                                                <input type="text" class="form-control" id="current_time" name="current_time" placeholder="Current Time" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -150,6 +140,24 @@
                 $('.first_circle').css('background-color', '#1cc6d8');
             }
         });
+
+        function livecurrenttime (){
+            setInterval(function()
+            { 
+                $.ajax({
+                    url: '/getCurrentTimeByAjax',
+                    data: {},
+                    type: 'GET',
+                    success: function(result, status) {
+                      if (status) {
+                        $('#current_time').val(result);
+                      }
+                    }
+                });
+            }, 1000);
+        }; 
+
+        livecurrenttime ();
     });
 
     $(window).resize(function(){
