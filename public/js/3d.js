@@ -159,6 +159,8 @@ import * as THREE from '/3d/src/build/three.module.js';
                 jQuery.ajax({
                     url: "/getbodyharmcomments",
                     success: function(response) {
+                    	$('.comment').empty();
+                    	
                     	var element = "";
                     	if (response) {
                     		for (var i = 0; i < response.length; i++) {
