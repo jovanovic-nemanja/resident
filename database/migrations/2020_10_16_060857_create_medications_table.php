@@ -19,6 +19,7 @@ class CreateMedicationsTable extends Migration
             $table->string('name', '256');
             $table->string('dose');
             $table->string('photo', '256');
+            $table->string('comments')->nullable();
             $table->datetime('sign_date');
 
             $table->timestamps();

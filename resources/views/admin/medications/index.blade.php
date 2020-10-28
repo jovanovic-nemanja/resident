@@ -40,6 +40,7 @@
                                         <th>Name</th>
                                         <th>Dose</th>
                                         <th>Photo</th>
+                                        <th>Comments</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -59,6 +60,7 @@
 			                                        <td>
 			                                        	<img class="rad-50 center-block" src="{{ asset('uploads/').'/'.$medication->photo }}" />
 			                                        </td>
+                                                    <td>{{ $medication->comments }}</td>
 			                                        <td>
 			                                        	<a href="{{ route('medications.show', $medication->id) }}" class="btn btn-success">Edit</a>
 			                                        	<a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$medication->id}}').submit();" class="btn btn-primary">Delete</a>

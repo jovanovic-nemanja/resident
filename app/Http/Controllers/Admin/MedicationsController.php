@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\User;
 use App\Role;
+use App\Comments;
 use App\RoleUser;
 use App\Medications;
 use Illuminate\Http\Request;
@@ -61,7 +62,20 @@ class MedicationsController extends Controller
             'dose' => $request->dose,
             'photo' => $request->photo,
             'sign_date' => $date,
+            'comments' => $request->comments
         ]);
+
+        if (@$request->comments) {
+            $arrs = explode(',', $request->comments);
+            foreach ($arrs as $comm) {
+                $comments = Comments::create([
+                    'type' => 2,
+                    'sign_date' => $date,
+                    'name' => $comm,
+                    'ref_id' => $medications['id']
+                ]);
+            }
+        }
 
         Medications::upload_file($medications->id);
 
@@ -112,8 +126,25 @@ class MedicationsController extends Controller
             $record->name = $request->name;
             $record->dose = $request->dose;
             $record->photo = $request->photo;
+            $record->comments = $request->comments;
 
             $record->update();
+        }
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        if (@$request->comments) {
+            $arrs = explode(',', $request->comments);
+            $del = Comments::where('type', 2)->where('ref_id', $record->id)->delete();
+            foreach ($arrs as $comm) {
+                $comments = Comments::create([
+                    'type' => 2,
+                    'name' => $comm,
+                    'sign_date' => $date,
+                    'ref_id' => $record->id
+                ]);
+            }
         }
 
         Medications::upload_file($record->id);
@@ -129,6 +160,7 @@ class MedicationsController extends Controller
      */
     public function destroy($id)
     {
+        $del = Comments::where('type', 2)->where('ref_id', $id)->delete();
         $record = Medications::where('id', $id)->delete();
         
         return redirect()->route('medications.index');
