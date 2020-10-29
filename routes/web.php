@@ -73,6 +73,12 @@ Route::get('tfgs/createtfg/{resident}', 'Admin\TFGController@createtfg')->name('
 
 Route::resource('bodyharmcomments', 'Admin\BodyharmcommentsController');
 
+Route::resource('bodyharm', 'Admin\BodyharmController');
+Route::get('bodyharm/indexbodyharm/{id}', 'Admin\BodyharmController@indexbodyharm')->name('bodyharm.indexbodyharm');
+Route::get('bodyharm/createbodyharm/{resident}', 'Admin\BodyharmController@createbodyharm')->name('bodyharm.createbodyharm');
+
+
+
 
 
 Route::get('/account', 'Frontend\AccountController@index')->name('account');

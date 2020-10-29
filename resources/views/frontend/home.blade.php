@@ -69,7 +69,7 @@
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li><a href="#">Family visit</a></li>
                                                         <li><a href="#">Mood Change</a></li>
-                                                        <li><a href="{{ route('resident.bodyharm') }}">Body harm</a></li>
+                                                        <li><a href="{{ route('bodyharm.indexbodyharm', $resident->id) }}">Body harm</a></li>
                                                     </ul>
                                                 </div>
                                             </div>

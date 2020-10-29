@@ -122,14 +122,12 @@ import * as THREE from '/3d/src/build/three.module.js';
 			window.addEventListener( 'pointerup', function ( event ) {
 
 				if ( moved === false ) {
-
-					checkIntersection( event.clientX, event.clientY );
-
-					if ( intersection.intersects ) shoot();
-
 					switch (event.which) {
 				        case 1:
-				            // alert('Left mouse button pressed');
+				        	checkIntersection( event.clientX, event.clientY );
+
+							if ( intersection.intersects ) shoot();
+
 				            break;
 				        case 2:
 				            // alert('Middle mouse button pressed');
@@ -141,7 +139,6 @@ import * as THREE from '/3d/src/build/three.module.js';
 				        default:
 				            // alert('You have a strange mouse');
 				    }
-
 				}
 
 			} );
@@ -171,6 +168,10 @@ import * as THREE from '/3d/src/build/three.module.js';
                     }
                 });
 			}
+
+			// add Screenshot listener
+    		document.getElementById("takeScreenshot").addEventListener('click', takeScreenshot);
+    		document.getElementById("shot").addEventListener('click', SubmitHarm);
 
 			window.addEventListener( 'pointermove', onPointerMove );
 
@@ -229,6 +230,26 @@ import * as THREE from '/3d/src/build/three.module.js';
 			animate();
 
 		}
+
+		function SubmitHarm() {
+			if (!$('.comment').val()) {
+				alert('Please choose a Comment!');
+				return;
+			}
+
+			$('.save_harm').click();
+		}
+
+		function takeScreenshot() {
+			// download file like this.
+		    var a = document.createElement('a');
+		    // Without 'preserveDrawingBuffer' set to true, we must render now
+		    renderer.render(scene, camera);
+		    a.href = renderer.domElement.toDataURL().replace("image/png", "image/octet-stream");
+		    a.download = 'canvas.jpeg'
+		    a.click();
+		}
+
 
 		function loadLeePerrySmith() {
 
