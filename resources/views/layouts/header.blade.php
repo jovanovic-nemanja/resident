@@ -6,9 +6,12 @@
 </div>
 
 <div class="page-topbar gradient-blue1">
-    <div class="logo-area crypto">
+    <a href="{{ route('home') }}">
+        <div class="logo-area crypto">
+            
+        </div>
+    </a>    
         
-    </div>
     <div class="quick-area">
         <div class="pull-left">
             <ul class="info-menu left-links list-inline list-unstyled">
