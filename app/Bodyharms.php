@@ -17,27 +17,34 @@ class Bodyharms extends Model
     public $fillable = ['resident', 'comment', 'sign_date', 'screenshot_3d'];
 
     /**
-    * @param user_id
+    * @return file name
     * This is a feature to upload a screen shot image
     */
-    public static function upload_file($id, $existings = null) {
-        if(!request()->hasFile('screenshot_3d')) {
-            return false;
+    public static function upload_file($file) 
+    {
+        $image = $file;
+
+        $location = "uploads/";
+
+        $image_parts = explode(";base64,", $image);
+
+        $image_base64 = base64_decode($image_parts[1]);
+
+        $filename = "screenshot_".uniqid().'.png';
+
+        $file = $location . $filename;
+
+        if (file_put_contents($file, $image_base64)) {
+            $result = $filename;
+        }else{
+            $result = "";
         }
 
-        Storage::disk('public_local')->put('uploads/', request()->file('screenshot_3d'));
-
-        self::save_file($id, request()->file('screenshot_3d'));
+        return $result;
     }
 
-    public static function save_file($id, $file) {
-        $bodyharm = Bodyharms::where('id', $id)->first();
-
-        if($bodyharm) {
-            Storage::disk('public_local')->delete('uploads/', $bodyharm->screenshot_3d);
-            $bodyharm->screenshot_3d = $file->hashName();
-            $bodyharm->update();
-        }
+    public static function deleteUploadedfile($image) {
+        Storage::disk('public_local')->delete('uploads/', $image);
     }
 
     public static function getCommentbystring($comment_id)

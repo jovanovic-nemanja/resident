@@ -6,6 +6,7 @@ use App\User;
 use App\Bodyharms;
 use App\Bodyharmcomments;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
 class BodyharmController extends Controller
@@ -67,26 +68,32 @@ class BodyharmController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'resident' => 'required',
-            'comment' => 'required',
-            'screenshot_3d' => 'required'
-        ]);
+        
+    }
 
+    /**
+     * Store a new saved ajax request in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeStorage(Request $request) 
+    {
         $dates = User::getformattime();
         $date = $dates['date'];
-        $time = $dates['time'];
+        $screnshot_3d = Bodyharms::upload_file($request->screenshot_3d);
+        if($screnshot_3d) {
+            $bodyharm = Bodyharms::create([
+                'resident' => $request->resident,
+                'comment' => $request->comment,
+                'screenshot_3d' => $screnshot_3d,
+                'sign_date' => $date,
+            ]);      
+        }
 
-        $bodyharm = Bodyharms::create([
-            'resident' => $request->resident,
-            'comment' => $request->comment,
-            'screenshot_3d' => $request->screenshot_3d,
-            'sign_date' => $date,
-        ]);
-
-        Bodyharms::upload_file($bodyharm->id);
-
-        return redirect()->route('bodyharm.indexbodyharm', $request->resident)->with('flash', 'Body harm has been successfully created.');
+        $result = route('bodyharm.indexbodyharm', $request->resident);
+        
+        return response()->json($result); 
     }
 
     /**
@@ -131,9 +138,10 @@ class BodyharmController extends Controller
      */
     public function destroy($id)
     {
-        $resident = Bodyharms::where('id', $id)->first();
+        $result = Bodyharms::where('id', $id)->first();
+        $res = Bodyharms::deleteUploadedfile($result->screenshot_3d);
         $record = Bodyharms::where('id', $id)->delete();
         
-        return redirect()->route('bodyharm.indexbodyharm', $resident->resident);
+        return redirect()->route('bodyharm.indexbodyharm', $result->resident);
     }
 }

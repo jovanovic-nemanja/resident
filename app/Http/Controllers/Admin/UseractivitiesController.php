@@ -87,11 +87,10 @@ class UseractivitiesController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
-        $time = $dates['time'];
 
         $useractivities = Useractivities::create([
             'activities' => $request->activities,
-            'time' => $time,
+            'time' => $request->time,
             'resident' => $request->resident,
             'comment' => $request->comment,
             'file' => $request->file,
@@ -160,7 +159,7 @@ class UseractivitiesController extends Controller
         $record = Useractivities::where('id', $id)->first();
         if (@$record) {
             $record->activities = $request->activities;
-            $record->time = $time;
+            $record->time = $request->time;
             $record->resident = $request->resident;
             $record->comment = $request->comment;
             $record->file = $request->file;

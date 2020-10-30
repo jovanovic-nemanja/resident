@@ -9,7 +9,7 @@
         <div class="modal fade col-xs-12" id="commentsModal">
             <div class="modal-dialog">
                 <div class="modal-content">
-                	<form action="{{ route('bodyharm.store') }}" method="POST" enctype="multipart/form-data">
+                	<form id="multipartform" enctype="multipart/form-data">
                 		@csrf
 
 	                    <div class="modal-header">
@@ -18,26 +18,13 @@
 	                    </div>
 
 	                    <div class="modal-body">
+                            <label class="form-label">Comment</label>
 	                    	<select name="comment" id="comment" class="form-control comment">
 	                    		
 	                    	</select>
 
-	                    	<br>
-
-	                    	<div class="form-group">
-                                <label for="name" class="form-label">{{ __('Screen Shot') }}</label>
-                                <div class="controls">
-                                    <span>
-                                        <input type="file" name="screenshot_3d" id="file" onchange="loadPreview(this, 'preview_img');" class="inputfile">
-                                        <label for="file" @click="onClick" inputId="1" style="" id='preview_img'><i class="fa fa-plus-circle"></i></label>
-                                    </span>
-                                </div>
-                            </div>
-
-	                    	<input type="hidden" name="resident" value="{{ $resident }}">
+	                    	<input type="hidden" name="resident" value="{{ $resident }}" id="resident" class="resident">
 	                    </div>
-
-                        <button type="submit" class="btn btn-info save_harm" style="display: none;">Submit</button>
                    	</form>
                    	<div class="modal-footer">
                    		<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -53,20 +40,4 @@
 
 @section('script')
 	<script type="module" src="{{ asset('js/3d.js') }}"></script>
-
-	<script>
-        function loadPreview(input, id) {
-            id = "#" + id;
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    var path = "background-image: " + "url('" + e.target.result + "')";
-                    $(id).attr('style', path);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 @endsection

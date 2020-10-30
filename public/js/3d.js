@@ -106,6 +106,8 @@ import * as THREE from '/3d/src/build/three.module.js';
 			window.addEventListener( 'resize', onWindowResize, false );
 
 			var moved = false;
+			var screenshot_3d = "";
+			var resident = $('.resident').val();
 
 			controls.addEventListener( 'change', function () {
 
@@ -134,7 +136,7 @@ import * as THREE from '/3d/src/build/three.module.js';
 				            break;
 				        case 3:
 				            // alert('Right mouse button pressed');
-				            ShowCommentModal();
+				            takeScreenshot();
 				            break;
 				        default:
 				            // alert('You have a strange mouse');
@@ -229,27 +231,46 @@ import * as THREE from '/3d/src/build/three.module.js';
 			onWindowResize();
 			animate();
 
-		}
+			function takeScreenshot() {
+				// download file like this.
+			    var a = document.createElement('a');
+			    // Without 'preserveDrawingBuffer' set to true, we must render now
+			    renderer.render(scene, camera);
+			    a.href = renderer.domElement.toDataURL().replace("image/png", "image/jpeg");
+			    screenshot_3d = a.href;
 
-		function SubmitHarm() {
-			if (!$('.comment').val()) {
-				alert('Please choose a Comment!');
-				return;
+			    ShowCommentModal();
+
+			    //download as image
+			    // a.download = 'canvas.jpeg';
+			    // a.click();
 			}
 
-			$('.save_harm').click();
-		}
+			function SubmitHarm() {
+				var formData = new FormData();
+				formData.append("resident", resident);
+				formData.append("comment", $('.comment').val());
+				formData.append("screenshot_3d", screenshot_3d);
 
-		function takeScreenshot() {
-			// download file like this.
-		    var a = document.createElement('a');
-		    // Without 'preserveDrawingBuffer' set to true, we must render now
-		    renderer.render(scene, camera);
-		    a.href = renderer.domElement.toDataURL().replace("image/png", "image/octet-stream");
-		    a.download = 'canvas.jpeg'
-		    a.click();
-		}
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
 
+				$.ajax({
+					url: "/storeStorage",
+					type: 'POST',
+					contentType: false,
+				    cache: false,
+				    processData: false,
+					data: formData,
+					success: function(result, status) {
+						window.location.href = result;
+					}
+				});
+			}
+		}
 
 		function loadLeePerrySmith() {
 
