@@ -53,13 +53,13 @@ class MedicationsCommand extends Command
         if (@$assign_medications) {
             foreach ($assign_medications as $assign_medication) {
                 $ass_date = Carbon::parse($assign_medication->assign_date);
-                $cur_date['dates'] = Carbon::parse($cur_date['dates']); 
+                $cur_date['dates'] = Carbon::parse($cur_date['date']); 
 
                 if ($ass_date->addDays($assign_medication->duration) >= $cur_date['dates']) {   
                     $assign_time1 = $assign_medication->time1;
                     if ($assign_time1) {
-                        $startTime = Carbon::parse($assign_time1);
-                        $finishTime = Carbon::parse($cur_date['time']);
+                        $startTime = Carbon::parse(User::formattime1($assign_time1));
+                        $finishTime = Carbon::parse(User::formattime1($cur_date['time']));
                         if ($startTime > $finishTime) {
                             $sym = "";
                         }else{
@@ -72,8 +72,8 @@ class MedicationsCommand extends Command
 
                     $assign_time2 = $assign_medication->time2;
                     if ($assign_time2) {
-                        $startTime = Carbon::parse($assign_time2);
-                        $finishTime = Carbon::parse($cur_date['time']);
+                        $startTime = Carbon::parse(User::formattime1($assign_time2));
+                        $finishTime = Carbon::parse(User::formattime1($cur_date['time']));
                         if ($startTime > $finishTime) {
                             $sym = "";
                         }else{
@@ -86,8 +86,8 @@ class MedicationsCommand extends Command
 
                     $assign_time3 = $assign_medication->time3;
                     if ($assign_time3) {
-                        $startTime = Carbon::parse($assign_time3);
-                        $finishTime = Carbon::parse($cur_date['time']);
+                        $startTime = Carbon::parse(User::formattime1($assign_time3));
+                        $finishTime = Carbon::parse(User::formattime1($cur_date['time']));
                         if ($startTime > $finishTime) {
                             $sym = "";
                         }else{
@@ -100,8 +100,8 @@ class MedicationsCommand extends Command
 
                     $assign_time4 = $assign_medication->time4;
                     if ($assign_time4) {
-                        $startTime = Carbon::parse($assign_time4);
-                        $finishTime = Carbon::parse($cur_date['time']);
+                        $startTime = Carbon::parse(User::formattime1($assign_time4));
+                        $finishTime = Carbon::parse(User::formattime1($cur_date['time']));
                         if ($startTime > $finishTime) {
                             $sym = "";
                         }else{
