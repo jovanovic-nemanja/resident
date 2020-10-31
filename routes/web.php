@@ -91,4 +91,6 @@ Route::put('/account/updatePassword', 'Frontend\AccountController@updatePassword
 Route::get('/getcommentsbyactivity', 'Admin\ActivitiesController@getcommentsbyactivity');
 Route::get('/getCurrentTimeByAjax', 'Admin\UsermedicationsController@getCurrentTimeByAjax');
 Route::get('/getbodyharmcomments', 'Admin\BodyharmcommentsController@getbodyharmcomments');
+Route::get('/getNotificationdata', 'Admin\NotificationsController@getNotificationdata');
+Route::get('/updateIsread', 'Admin\NotificationsController@updateIsread');
 Route::post('/storeStorage', 'Admin\BodyharmController@storeStorage')->name('bodyharm.storeStorage');

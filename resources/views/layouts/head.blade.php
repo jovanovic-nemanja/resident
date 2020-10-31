@@ -32,3 +32,6 @@
 <!-- CORE CSS TEMPLATE - END -->
 <link href="{{ asset('newdesign/tags/jquery.tagsinput.min.css') }}" rel="stylesheet">
 <link href="{{ asset('newdesign/dataTables.bootstrap4.css') }}" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ asset('newdesign/jquery-toast-plugin/jquery.toast.min.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

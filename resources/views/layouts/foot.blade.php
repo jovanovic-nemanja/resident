@@ -9,7 +9,8 @@
 <!-- CORE JS FRAMEWORK - END -->
 
 <script src="{{ asset('newdesign/tags/jquery.tagsinput.min.js') }}"></script>
-
+<script src="{{ asset('newdesign/jquery-toast-plugin/jquery.toast.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <!-- CORE TEMPLATE JS - START -->
 <script src="{{ asset('newdesign/assets/js/scripts.js') }}"></script>
@@ -18,3 +19,5 @@
 <script src="{{ asset('newdesign/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('newdesign/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('newdesign/data-table.js') }}"></script>
+
+<script src="{{ asset('js/notification.js') }}"></script>

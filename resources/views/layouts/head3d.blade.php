@@ -33,3 +33,5 @@
 
 <!-- Canbas WebGL Three.js -->
 <link type="text/css" rel="stylesheet" href="{{ asset('3d/src/main.css') }}">
+
+<link rel="stylesheet" href="{{ asset('newdesign/jquery-toast-plugin/jquery.toast.min.css') }}">
