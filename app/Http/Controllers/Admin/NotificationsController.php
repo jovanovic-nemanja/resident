@@ -25,6 +25,13 @@ class NotificationsController extends Controller
         //
     }
 
+    public function getNotificationconfirmdata(Request $request)
+    {
+        $results = Notifications::where('is_read', 1)->get();
+
+        return response()->json($results);
+    }
+
     public function getNotificationdata(Request $request)
     {
         $cur_date = User::getformattime();
@@ -108,7 +115,7 @@ class NotificationsController extends Controller
                 }
             }
         }
-        
+
         $results = Notifications::where('is_read', 1)->get();
 
         return response()->json($results);
