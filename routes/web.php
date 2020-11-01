@@ -80,6 +80,11 @@ Route::get('bodyharm/createbodyharm/{resident}', 'Admin\BodyharmController@creat
 
 
 
+Route::resource('reminderconfigs', 'Admin\ReminderConfigsController');
+Route::get('reminderconfigs/active/{id}', 'Admin\ReminderConfigsController@active')->name('reminderconfigs.active');
+
+
+
 
 Route::get('/account', 'Frontend\AccountController@index')->name('account');
 Route::get('/changepass', 'Frontend\AccountController@changepass')->name('changepass');

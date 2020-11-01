@@ -11,6 +11,7 @@ use App\User;
 use Carbon\Carbon;
 use App\Medications;
 use App\Notifications;
+use App\ReminderConfigs;
 use App\Assignmedications;
 
 class NotificationsController extends Controller
@@ -103,7 +104,10 @@ class NotificationsController extends Controller
                         $totalDuration4 = "";
                     }
 
-                    if ($totalDuration1 == 300 || $totalDuration2 == 300 || $totalDuration3 == 300 || $totalDuration4 == 300) {
+                    $reminders = ReminderConfigs::where('active', 1)->first();
+                    $reminder_minutes = $reminders->minutes * 60;
+
+                    if ($totalDuration1 == $reminder_minutes || $totalDuration2 == $reminder_minutes || $totalDuration3 == $reminder_minutes || $totalDuration4 == $reminder_minutes) {
                         $record = Notifications::create([
                             'user_name' => 'admin',
                             'resident_name' => $assign_medication->u_name,

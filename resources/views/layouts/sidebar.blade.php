@@ -63,6 +63,9 @@
                         <li>
                             <a class="" href="{{ route('bodyharmcomments.index') }}">Body harm Comments</a>
                         </li>
+                        <li>
+                            <a class="" href="{{ route('reminderconfigs.index') }}">Reminder Configs</a>
+                        </li>
                     </ul>
                 </li>
             @endif
