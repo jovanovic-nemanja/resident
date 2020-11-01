@@ -120,7 +120,7 @@ class MedicationsCommand extends Command
                         $record = Notifications::create([
                             'user_name' => 'admin',
                             'resident_name' => $assign_medication->u_name,
-                            'contents' => "Medication : " . $assign_medication->med_name . "Time : " . $assign_medication->time1,
+                            'contents' => "Medication : " . $assign_medication->med_name . " " . $assign_medication->time1,
                             'is_read' => 1,
                             'sign_date' => $cur_date['date'],
                         ]);
@@ -128,7 +128,7 @@ class MedicationsCommand extends Command
                         $record = Notifications::create([
                             'user_name' => 'admin',
                             'resident_name' => $assign_medication->u_name,
-                            'contents' => "Medication : " . $assign_medication->med_name . "Time : " . $assign_medication->time2,
+                            'contents' => "Medication : " . $assign_medication->med_name . " " . $assign_medication->time2,
                             'is_read' => 1,
                             'sign_date' => $cur_date['date'],
                         ]);
@@ -136,7 +136,7 @@ class MedicationsCommand extends Command
                         $record = Notifications::create([
                             'user_name' => 'admin',
                             'resident_name' => $assign_medication->u_name,
-                            'contents' => "Medication : " . $assign_medication->med_name . "Time : " . $assign_medication->time3,
+                            'contents' => "Medication : " . $assign_medication->med_name . " " . $assign_medication->time3,
                             'is_read' => 1,
                             'sign_date' => $cur_date['date'],
                         ]);
@@ -144,7 +144,7 @@ class MedicationsCommand extends Command
                         $record = Notifications::create([
                             'user_name' => 'admin',
                             'resident_name' => $assign_medication->u_name,
-                            'contents' => "Medication : " . $assign_medication->med_name . "Time : " . $assign_medication->time4,
+                            'contents' => "Medication : " . $assign_medication->med_name . " " . $assign_medication->time4,
                             'is_read' => 1,
                             'sign_date' => $cur_date['date'],
                         ]);
