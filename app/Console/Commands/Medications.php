@@ -6,6 +6,7 @@ use App\User;
 use Carbon\Carbon;
 use App\Medications;
 use App\Notifications;
+use App\ReminderConfigs;
 use App\Assignmedications;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -112,11 +113,38 @@ class MedicationsCommand extends Command
                         $totalDuration4 = "";
                     }
 
-                    if ($totalDuration1 == 300 || $totalDuration2 == 300 || $totalDuration3 == 300 || $totalDuration4 == 300) {
+                    $reminders = ReminderConfigs::where('active', 1)->first();
+                    $reminder_minutes = $reminders->minutes * 60;
+
+                    if ($totalDuration1 == $reminder_minutes) {
                         $record = Notifications::create([
                             'user_name' => 'admin',
                             'resident_name' => $assign_medication->u_name,
-                            'contents' => $assign_medication->med_name,
+                            'contents' => "Medication : " . $assign_medication->med_name . "Time : " . $assign_medication->time1,
+                            'is_read' => 1,
+                            'sign_date' => $cur_date['date'],
+                        ]);
+                    } if ($totalDuration2 == $reminder_minutes) {
+                        $record = Notifications::create([
+                            'user_name' => 'admin',
+                            'resident_name' => $assign_medication->u_name,
+                            'contents' => "Medication : " . $assign_medication->med_name . "Time : " . $assign_medication->time2,
+                            'is_read' => 1,
+                            'sign_date' => $cur_date['date'],
+                        ]);
+                    } if ($totalDuration3 == $reminder_minutes) {
+                        $record = Notifications::create([
+                            'user_name' => 'admin',
+                            'resident_name' => $assign_medication->u_name,
+                            'contents' => "Medication : " . $assign_medication->med_name . "Time : " . $assign_medication->time3,
+                            'is_read' => 1,
+                            'sign_date' => $cur_date['date'],
+                        ]);
+                    } if ($totalDuration4 == $reminder_minutes) {
+                        $record = Notifications::create([
+                            'user_name' => 'admin',
+                            'resident_name' => $assign_medication->u_name,
+                            'contents' => "Medication : " . $assign_medication->med_name . "Time : " . $assign_medication->time4,
                             'is_read' => 1,
                             'sign_date' => $cur_date['date'],
                         ]);

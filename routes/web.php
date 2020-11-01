@@ -97,6 +97,5 @@ Route::get('/getcommentsbyactivity', 'Admin\ActivitiesController@getcommentsbyac
 Route::get('/getCurrentTimeByAjax', 'Admin\UsermedicationsController@getCurrentTimeByAjax');
 Route::get('/getbodyharmcomments', 'Admin\BodyharmcommentsController@getbodyharmcomments');
 Route::get('/getNotificationdata', 'Admin\NotificationsController@getNotificationdata');
-Route::get('/getNotificationconfirmdata', 'Admin\NotificationsController@getNotificationconfirmdata');
 Route::get('/updateIsread', 'Admin\NotificationsController@updateIsread');
 Route::post('/storeStorage', 'Admin\BodyharmController@storeStorage')->name('bodyharm.storeStorage');
