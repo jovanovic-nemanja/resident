@@ -17,9 +17,11 @@
 	          		var leng = result.length;
 	          		$.each(result, function (i, val) {
 			            var mes = '<input type="hidden" id="notificationId" value="' + val.id + '"/>' + 
-			                'Resident:  ' + val.resident_name + '</br>' + 'Medication:  ' + val.contents + '</br>' +
+			                'Resident Name:  ' + val.resident_name + '</br>' + 'Medication:  ' + val.contents + '</br>' + '</br>' +
 			                '<button class="btn btn-success error" id="error">Confirm</button>';
+
 			            var title = val.contents;
+
 			            toastr.options = {
 						  	"closeButton": true,
 						  	"debug": false,
@@ -32,6 +34,7 @@
 						  	"timeOut": "59000",
 						  	"extendedTimeOut": "59000",
 						};
+			            
 			            toastr.error(mes, title); //info, success, warning, error
 			        });
 
@@ -56,7 +59,7 @@
 	          		var leng = result.length;
 	          		$.each(result, function (i, val) {
 			            var mes = '<input type="hidden" id="notificationId" value="' + val.id + '"/>' + 
-			                'Resident:  ' + val.resident_name + '</br>' + 'Medication:  ' + val.contents + '</br>' +
+			                'Resident Name:  ' + val.resident_name + '</br>' + 'Medication:  ' + val.contents + '</br>' + '</br>' +
 			                '<button class="btn btn-success error" id="error">Confirm</button>';
 			            var title = val.contents;
 			            toastr.options = {
