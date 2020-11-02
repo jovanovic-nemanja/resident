@@ -18,7 +18,6 @@
                             </div>
                             <h3 class="header w-text relative bold">{{ $user->name }}</h3>
                             <br>
-                            <!-- <p class="desc g-text relative">Lorem ipsum dolor sit amet, Earum nes ciunt fugiat enim. Sequi quos labore.</p> -->
                         </div>
                         <div class="row">
                             <div class="patients-info relative" >
@@ -78,6 +77,59 @@
 
                     </div>
                    
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-8">
+        <section class="box nohidden has-border-left-3">
+            <header class="panel_header">
+                <h2 class="title pull-left">Dashboard</h2>
+            </header>
+            <div class="content-body" style="padding-bottom:0 !important">    
+                <div class="row">
+                    <div class="col-lg-4 no-pl no-pr">
+                        <div class="tile-progress gradient-blue" style="margin-left:15px;margin-right:15px;cursor:pointer">
+                            <div class="content">
+                                <h4>Medication</h4>
+                                <p class="mt-10 text-center no-mb g-text">There are some features for Routine and PRN in here.</p>
+                                <br>
+                                <div class="flex-column" style="text-align: center;">
+                                    <a href="{{ route('usermedications.indexusermedication', $user->id) }}" class="btn btn-default dashboard">Routine</a>
+                                    <a href="{{ route('tfgs.indextfg', $user->id) }}" class="btn btn-default dashboard">PRN</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 no-pl no-pr">
+                        <div class="tile-progress gradient-green" style="margin-left:15px;margin-right:15px;cursor:pointer">
+                            <div class="content">
+                                <h4>Daily Activity</h4>
+                                <p class="mt-10 text-center no-mb g-text">There are some features for primary ADL and Secondary ADL.</p>
+                                <br>
+                                <div style="text-align: center;">
+                                    <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-default dashboard">Primary ADL</a>
+                                    <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-default dashboard">Secondary ADL</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 no-pl no-pr">
+                        <div class="tile-progress gradient-orange" style="margin-left:15px;margin-right:15px;cursor:pointer">
+                            <div class="content">
+                                <h4>Incidence</h4>
+                                <p class="mt-10 text-center no-mb g-text">There are some features for Family Visit and Mood Change and Body Harm.</p>
+                                <br>
+                                <div style="text-align: center;">
+                                    <a href="#" class="btn btn-default dashboard">Family Visit</a>
+                                    <a href="#" class="btn btn-default dashboard">Mood Change</a>
+                                    <a href="{{ route('bodyharm.indexbodyharm', $user->id) }}" class="btn btn-default dashboard">Body Harm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

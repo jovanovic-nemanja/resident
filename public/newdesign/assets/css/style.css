@@ -11066,3 +11066,8 @@ table.dataTable.display tbody tr:first-child td {
 .table {
     margin-bottom: 0px!important;
 }
+
+.dashboard {
+    display: block;
+    margin-bottom: 5%;
+}

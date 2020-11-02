@@ -27,7 +27,9 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        //
+        $notifications = Notifications::where('is_read', 1)->get();
+
+        return view('admin.notifications.index', compact('notifications'));
     }
 
     public function getNotificationdata(Request $request)
@@ -50,6 +52,26 @@ class NotificationsController extends Controller
         }
 
         return response()->json("status", 200);
+    }
+
+    /**
+     * Update is_read status in notifications table.
+     * @param $id notification row id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmIsread($id)
+    {
+        $dates = User::getformattime();
+        $date = $dates['date'];
+        $time = $dates['time'];
+
+        if (@$id) {
+            $record = Notifications::where('id', $id)->first();
+            $record->is_read = 2;
+            $record->update();
+        }
+
+        return redirect()->route('notifications.index');
     }
 
     /**

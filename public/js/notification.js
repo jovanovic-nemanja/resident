@@ -7,6 +7,7 @@
 
   	function getNotificationdata() {
   		window.toastr.clear();
+  		$('.reminder_badge').hide();
 
   		$.ajax({
 	        url: "/getNotificationdata",
@@ -15,6 +16,10 @@
 	        success: function(result, status) {
 	          	if (result) {
 	          		var leng = result.length;
+	          		if (leng > 0) {
+	          			$('.reminder_badge').show();	
+	          		}
+	          		
 	          		$.each(result, function (i, val) {
 			            var mes = '<input type="hidden" id="notificationId" value="' + val.id + '"/>' + 
 			                'Resident Name:  ' + val.resident_name + '</br>' + val.contents + '</br>' + '</br>' +

@@ -20,6 +20,11 @@
                         <i class="fa fa-bars"></i>
                     </a>
                 </li>
+                <li class="topnav-item item1">
+                    <a href="{{ route('notifications.index') }}" class="new-link w-text">Reminders
+                        <span class="badge badge-danger ml-5 reminder_badge">New</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="pull-right">
