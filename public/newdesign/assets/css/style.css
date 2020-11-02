@@ -2356,12 +2356,12 @@ input[type=checkbox], input[type=color], input[type=date], input[type=datetime-l
     background: transparent;
 }
 .btn-success:hover, .btn-success:active, .btn-success:focus {
-    background: #2E7D32;
-    color: #ffffff;
+    background: #ffffff;
+    color: #4CAF50;
 }
 .btn-warning:hover, .btn-warning:active, .btn-warning:focus {
-    background: #FF8F00;
-    color: #ffffff;
+    background: #ffffff;
+    color: #FFC107;
 }
 .btn-danger:hover, .btn-danger:active, .btn-danger:focus {
     background: #c62828;
@@ -2380,8 +2380,8 @@ input[type=checkbox], input[type=color], input[type=date], input[type=datetime-l
     color: #ffffff;
 }
 .btn-primary.active, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
-    background: #d14d1a;
-    color: #ffffff;
+    background: #fff;
+    color: #4d9cf8;
 }
 .btn-secondary:hover, .btn-secondary:active, .btn-secondary:focus {
     background: rgba(139,139,139, 1.0);
