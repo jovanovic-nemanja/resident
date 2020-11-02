@@ -89,43 +89,43 @@
             <div class="content-body" style="padding-bottom:0 !important">    
                 <div class="row">
                     <div class="col-lg-4 no-pl no-pr">
-                        <div class="tile-progress gradient-blue" style="margin-left:15px;margin-right:15px;cursor:pointer">
+                        <div class="tile-progress" style="border: 2px solid #4d9cf8; margin-left:15px;margin-right:15px;cursor:pointer">
                             <div class="content">
-                                <h4>Medication</h4>
+                                <h4 style="color: #000;">Medication</h4>
                                 <!-- <p class="mt-10 text-center no-mb g-text">There are some features for Routine and PRN in here.</p> -->
                                 <br>
                                 <div class="flex-column" style="text-align: center;">
-                                    <a href="{{ route('usermedications.indexusermedication', $user->id) }}" class="btn btn-default dashboard">Routine</a>
-                                    <a href="{{ route('tfgs.indextfg', $user->id) }}" class="btn btn-default dashboard">PRN</a>
+                                    <a href="{{ route('usermedications.indexusermedication', $user->id) }}" class="btn btn-primary dashboard">Routine</a>
+                                    <a href="{{ route('tfgs.indextfg', $user->id) }}" class="btn btn-primary dashboard">PRN</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-4 no-pl no-pr">
-                        <div class="tile-progress gradient-green" style="margin-left:15px;margin-right:15px;cursor:pointer">
+                        <div class="tile-progress" style="border: 2px solid #4CAF50; margin-left:15px;margin-right:15px;cursor:pointer">
                             <div class="content">
-                                <h4>Daily Activity</h4>
+                                <h4 style="color: #000;">Daily Activity</h4>
                                 <!-- <p class="mt-10 text-center no-mb g-text">There are some features for primary ADL and Secondary ADL.</p> -->
                                 <br>
                                 <div style="text-align: center;">
-                                    <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-default dashboard">Primary ADL</a>
-                                    <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-default dashboard">Secondary ADL</a>
+                                    <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-success dashboard">Primary ADL</a>
+                                    <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-success dashboard">Secondary ADL</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-4 no-pl no-pr">
-                        <div class="tile-progress gradient-orange" style="margin-left:15px;margin-right:15px;cursor:pointer">
+                        <div class="tile-progress" style="border: 2px solid #FFC107; margin-left:15px;margin-right:15px;cursor:pointer">
                             <div class="content">
-                                <h4>Incidence</h4>
+                                <h4 style="color: #000;">Incidence</h4>
                                 <!-- <p class="mt-10 text-center no-mb g-text">There are some features for Family Visit and Mood Change and Body Harm.</p> -->
                                 <br>
                                 <div style="text-align: center;">
-                                    <a href="#" class="btn btn-default dashboard">Family Visit</a>
-                                    <a href="#" class="btn btn-default dashboard">Mood Change</a>
-                                    <a href="{{ route('bodyharm.indexbodyharm', $user->id) }}" class="btn btn-default dashboard">Body Harm</a>
+                                    <a href="#" class="btn btn-warning dashboard">Family Visit</a>
+                                    <a href="#" class="btn btn-warning dashboard">Mood Change</a>
+                                    <a href="{{ route('bodyharm.indexbodyharm', $user->id) }}" class="btn btn-warning dashboard">Body Harm</a>
                                 </div>
                             </div>
                         </div>
