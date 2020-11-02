@@ -61,22 +61,7 @@
                                 </div>
                             </div>
                         </div><!-- end row -->
-                        
-                        <div class="col-xs-12 mb-30">
-                            <div class="reminder-wrapper has-shadow2">
-                               <div class="reminder-icon">
-                                   <img src="{{ asset('newdesign/data/hos-dash/clock.png') }}" width="60" alt="">
-                               </div>
-                               <div class="reminder-content">
-                                   <h4 class="w-text bold">Reminder Alarm</h4>
-                                   <h5 class="g-text">ask about medicine</h5>
-                               </div>
-                            </div>
-                        </div>
-                        
-
-                    </div>
-                   
+                    </div>                   
                 </div>
             </div>
         </section>
@@ -97,6 +82,7 @@
                                 <div class="flex-column" style="text-align: center;">
                                     <a href="{{ route('usermedications.indexusermedication', $user->id) }}" class="btn btn-primary dashboard">Routine</a>
                                     <a href="{{ route('tfgs.indextfg', $user->id) }}" class="btn btn-primary dashboard">PRN</a>
+                                    <a href="{{ route('notifications.index') }}" class="btn btn-primary dashboard">Reminders</a>
                                 </div>
                             </div>
                         </div>
@@ -111,6 +97,7 @@
                                 <div style="text-align: center;">
                                     <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-success dashboard">Primary ADL</a>
                                     <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-success dashboard">Secondary ADL</a>
+                                    <a href="{{ route('notifications.index') }}" class="btn btn-success dashboard">Reminders</a>
                                 </div>
                             </div>
                         </div>
