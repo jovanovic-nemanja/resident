@@ -84,7 +84,7 @@
     <div class="col-lg-8">
         <section class="box nohidden has-border-left-3">
             <header class="panel_header">
-                <h2 class="title pull-left">Dashboard</h2>
+                <h2 class="title pull-left">Quick Links</h2>
             </header>
             <div class="content-body" style="padding-bottom:0 !important">    
                 <div class="row">
@@ -92,7 +92,7 @@
                         <div class="tile-progress gradient-blue" style="margin-left:15px;margin-right:15px;cursor:pointer">
                             <div class="content">
                                 <h4>Medication</h4>
-                                <p class="mt-10 text-center no-mb g-text">There are some features for Routine and PRN in here.</p>
+                                <!-- <p class="mt-10 text-center no-mb g-text">There are some features for Routine and PRN in here.</p> -->
                                 <br>
                                 <div class="flex-column" style="text-align: center;">
                                     <a href="{{ route('usermedications.indexusermedication', $user->id) }}" class="btn btn-default dashboard">Routine</a>
@@ -106,7 +106,7 @@
                         <div class="tile-progress gradient-green" style="margin-left:15px;margin-right:15px;cursor:pointer">
                             <div class="content">
                                 <h4>Daily Activity</h4>
-                                <p class="mt-10 text-center no-mb g-text">There are some features for primary ADL and Secondary ADL.</p>
+                                <!-- <p class="mt-10 text-center no-mb g-text">There are some features for primary ADL and Secondary ADL.</p> -->
                                 <br>
                                 <div style="text-align: center;">
                                     <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-default dashboard">Primary ADL</a>
@@ -120,7 +120,7 @@
                         <div class="tile-progress gradient-orange" style="margin-left:15px;margin-right:15px;cursor:pointer">
                             <div class="content">
                                 <h4>Incidence</h4>
-                                <p class="mt-10 text-center no-mb g-text">There are some features for Family Visit and Mood Change and Body Harm.</p>
+                                <!-- <p class="mt-10 text-center no-mb g-text">There are some features for Family Visit and Mood Change and Body Harm.</p> -->
                                 <br>
                                 <div style="text-align: center;">
                                     <a href="#" class="btn btn-default dashboard">Family Visit</a>
