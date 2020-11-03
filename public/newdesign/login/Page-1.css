@@ -1,0 +1,154 @@
+.u-section-1 {
+  background-image: url("images/cbdcdba2c3d2a70b362554a6b4fd749a.jpeg");
+  background-position: 2.48% 50.35%;
+  background-size: 175%;
+}
+
+.u-section-1 .u-sheet-1 {
+  min-height: 788px;
+}
+
+.u-section-1 .u-group-1 {
+  width: 855px;
+  min-height: 448px;
+  height: auto;
+  margin: 190px auto 60px;
+}
+
+.u-section-1 .u-container-layout-1 {
+  padding-left: 16px;
+}
+
+.u-section-1 .u-text-1 {
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+  margin: 0 189px 0 238px;
+}
+
+.u-section-1 .u-form-1 {
+  height: 203px;
+  margin: 70px 110px 0 159px;
+}
+
+.u-section-1 .u-input-1 {
+  background-image: none;
+}
+
+.u-section-1 .u-input-2 {
+  background-image: none;
+}
+
+.u-section-1 .u-btn-1 {
+  border-style: none;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-image: none;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 400px;
+  }
+
+  .u-section-1 .u-group-1 {
+    width: 705px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-top: 113px;
+    margin-right: 127px;
+    margin-left: 0;
+  }
+
+  .u-section-1 .u-form-1 {
+    width: 570px;
+    margin-top: 193px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 797px;
+  }
+
+  .u-section-1 .u-group-1 {
+    width: 540px;
+  }
+
+  .u-section-1 .u-container-layout-1 {
+    padding-left: 10px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-right: 199px;
+    margin-left: 13px;
+  }
+
+  .u-section-1 .u-form-1 {
+    margin-top: 244px;
+    margin-left: 92px;
+    margin-right: 43px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-group-1 {
+    width: 506px;
+  }
+
+  .u-section-1 .u-container-layout-1 {
+    padding-left: 8px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-right: 149px;
+    margin-left: 9px;
+  }
+
+  .u-section-1 .u-form-1 {
+    width: 530px;
+    margin-top: 218px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 778px;
+  }
+
+  .u-section-1 .u-group-1 {
+    margin-right: initial;
+    margin-left: initial;
+    width: auto;
+  }
+
+  .u-section-1 .u-container-layout-1 {
+    padding-left: 11px;
+  }
+
+  .u-section-1 .u-text-1 {
+    position: relative;
+    margin-top: 68px;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .u-section-1 .u-form-1 {
+    width: 330px;
+    margin-top: 273px;
+  }
+
+  .u-section-1 .u-form-group-1 {
+    width: 100%;
+  }
+
+  .u-section-1 .u-form-group-2 {
+    width: 100%;
+  }
+
+  .u-section-1 .u-form-group-3 {
+    width: 100%;
+  }
+}

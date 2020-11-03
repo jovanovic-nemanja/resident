@@ -1,74 +1,46 @@
-@extends('layouts.app')
+@extends('layouts.applogin')
 
 @section('content')
-    
-    <img src="{{ asset('newdesign/assets/css/logo.png') }}" alt="login-icon" style="width: auto; position: absolute;">
 
-    <div id="login" class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">    
-        <div class="login-form-header">
-             <img src="{{ asset('newdesign/data/icons/padlock.png') }}" alt="login-icon" style="max-width:64px">
-             <div class="login-header">
-                 <h4 class="bold color-white">Login Now!</h4>
-                 <h4><small>Please enter your credentials to login.</small></h4>
-             </div>
-        </div>
-       
-        <div class="box login">
+    <div class="u-container-layout u-container-layout-1">
+        <h1 class="u-custom-font u-font-oswald u-text u-title u-text-1">BLUECARE HUB</h1>
+        <div class="u-form u-form-1">
+            <form action="{{ url(config('adminlte.login_url', 'login')) }}" method="POST" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="custom" name="form">
+                
+                {!! csrf_field() !!}
 
-            <div class="content-body" style="padding-top:30px">
-
-                <form id="msg_validate" action="{{ url(config('adminlte.login_url', 'login')) }}" class="no-mb no-mt" method="post">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {!! csrf_field() !!}
-
-                            <?php if(@$msg) { ?>
-                                <div class="alert alert-danger">
-                                    {{ $msg }}
-                                </div>
-                            <?php } ?>
-
-                            <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
-                                <label class="form-label">Username</label>
-                                <div class="controls">
-                                    <input required type="text" class="form-control" id="username" name="username" placeholder="Username" value="{{ old('username') }}">
-                                </div>
-
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-                            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                                <label class="form-label">Password</label>
-                                <div class="controls">
-                                    <input required type="password" class="form-control" id="password" name="password" placeholder="Password"> 
-                                </div>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-                            <div class="pull-left">
-                                <button type="submit" class="btn btn-primary mt-10 btn-corner right-15">Submit</button>
-                            </div>
-
-                        </div>
+                <?php if(@$msg) { ?>
+                    <div class="alert alert-danger">
+                        {{ $msg }}
                     </div>
-                </form>
+                <?php } ?>
 
-                <!-- <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}">{{ trans('adminlte::adminlte.i_forgot_my_password') }}</a> -->
-            </div>
+                <div class="u-form-group u-form-name u-form-group-1 {{ $errors->has('username') ? 'has-error' : '' }}">
+                    <label for="name-6797" class="u-form-control-hidden u-label">Name</label>
+                    <input type="text" placeholder="Username" id="name-6797" name="username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required>
+
+                    @if ($errors->has('username'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('username') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="u-form-group u-form-group-2 {{ $errors->has('password') ? 'has-error' : '' }}">
+                    <label for="email-6797" class="u-form-control-hidden u-label">Password</label>
+                    <input type="password" placeholder="Password" id="email-6797" name="password" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-2" required>
+
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="u-align-center u-form-group u-form-submit u-form-group-3">
+                    <button type="submit" class="u-btn u-btn-submit u-button-style u-hover-palette-1-dark-3 u-palette-1-dark-2 u-btn-1">Submit</button>
+                </div>
+            </form>
         </div>
-
-        <p id="nav">
-            <!-- <a class="pull-left" href="#" title="Password Lost and Found">Forgot password?</a> -->
-        </p>
-
     </div>
 @stop
