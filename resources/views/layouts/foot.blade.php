@@ -20,5 +20,9 @@
 <script src="{{ asset('newdesign/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('newdesign/data-table.js') }}"></script>
 
-<script src="{{ asset('js/notification.js') }}"></script>
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+@guest
+@else
+	<script src="{{ asset('js/notification.js') }}"></script>
+@endguest
+
+<script src="{{ asset('js/font-icon.js') }}"></script>
