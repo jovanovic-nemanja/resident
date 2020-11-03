@@ -138,7 +138,7 @@
                             <div class="pat-info-wrapper">
                                 <div class="pat-info text-left">
                                     <h5 class=''>Blood pressure</h5>
-                                    <span class="glyphicon glyphicon-wrench" aria-hidden="true" style="font-size: 70px; color: red;"></span>
+                                    <i class="fa fa-signal" aria-hidden="true" style="font-size: 70px; color: red;"></i>
                                 </div>
                                 <div class="pat-val relative">
                                     <h4 class="value p-text">120/89 <span>mmHG</span></h4>
