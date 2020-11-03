@@ -30,15 +30,12 @@
 			    </section>
 
 			    <section class="u-backlink u-clearfix u-grey-80">
-			      <a class="u-link" href="https://nicepage.com/html-templates" target="_blank">
-			        <span>HTML Template</span>
-			      </a>
-			      <p class="u-text">
-			        <span>created with</span>
-			      </p>
-			      <a class="u-link" href="https://nicepage.com/" target="_blank">
-			        <span>Website Builder Software</span>
+			      <a class="" href="https://nicepage.com/" target="_blank">
+			        <span>Copyright © <?= date('Y'); ?></span>
 			      </a>. 
+			      <a class="" href="https://nicepage.com/html-templates" target="_blank">
+			        <span>Powered by Solaris Dubai</span>
+			      </a>
 			    </section>
 			</div>
 		</div>
