@@ -118,6 +118,48 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <div class="r1_graph1 db_box db_box_large has-shadow2">
+                            <div class="pat-info-wrapper">
+                                <div class="pat-info text-left">
+                                    <h5 class=''>Temprature</h5>
+                                    <i class='fas fa-thermometer' style='font-size: 70px; color: red;'></i>
+                                </div>
+                                <div class="pat-val relative">
+                                    <h4 class="value green-text">36.5 <span>℃</span></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xs-12 ">
+                        <div class="r1_graph1 db_box db_box_large has-shadow2">
+                            <div class="pat-info-wrapper">
+                                <div class="pat-info text-left">
+                                    <h5 class=''>Blood pressure</h5>
+                                    <span class="glyphicon glyphicon-wrench" aria-hidden="true" style="font-size: 70px; color: red;"></span>
+                                </div>
+                                <div class="pat-val relative">
+                                    <h4 class="value p-text">120/89 <span>mmHG</span></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <div class="r1_graph1 db_box db_box_large has-shadow2">
+                            <div class="pat-info-wrapper">
+                                <div class="pat-info text-left">
+                                    <h5 class=''>Heart Rate</h5>
+                                    <span class="glyphicon glyphicon-heart" aria-hidden="true" style="font-size: 70px; color: red;"></span>
+                                </div>
+                                <div class="pat-val relative">
+                                    <h4 class="value red-text">107 <span>Per min</span></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
