@@ -22,7 +22,7 @@
 
 @guest
 @else
-	<script src="{{ asset('js/notification.js') }}"></script>
+	<!-- <script src="{{ asset('js/notification.js') }}"></script> -->
 @endguest
 
 <script src="{{ asset('js/font-icon.js') }}"></script>
