@@ -87,6 +87,23 @@
                                         </div>
 
                                         <div class="col-lg-3 circle">
+                                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }} circle_form">
+                                                <label class="form-label">Duration</label>
+                                                <select class="form-control" id="duration" name="type" required>
+                                                    <option value="">Choose</option>
+                                                    <option value="1">Daily</option>
+                                                    <option value="2">Weekly</option>
+                                                    <option value="3">Monthly</option>
+                                                </select>
+                                                @if ($errors->has('type'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('type') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Comment </label>
                                                 <select class="form-control" id="comment" name="comment">
@@ -100,7 +117,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 circle">
+                                        <!-- <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('file') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Attached File </label>
                                                 <input type="file" name="file" class="form-control" id="file" placeholder="Attached File">
@@ -110,7 +127,7 @@
                                                     </span>
                                                 @endif
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">

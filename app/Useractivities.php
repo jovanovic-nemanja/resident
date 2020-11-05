@@ -16,7 +16,7 @@ class Useractivities extends Model
 {
     public $table = "user_activities";
 
-    public $fillable = ['activities', 'time', 'resident', 'comment', 'file', 'status', 'sign_date'];
+    public $fillable = ['activities', 'time', 'resident', 'type', 'comment', 'file', 'status', 'sign_date'];
 
     public function getActivities($id) 
     {
@@ -120,5 +120,24 @@ class Useractivities extends Model
         }
 
         return $result->name;
+    }
+
+    public static function getTypename($id)
+    {
+        $str = '';
+
+        switch ($id) {
+            case '1':
+                $str = "Daily";
+                break;
+            case '2':
+                $str = "Weekly";
+                break;
+            default:
+                $str = "Monthly";
+                break;
+        }
+
+        return $str;
     }
 }

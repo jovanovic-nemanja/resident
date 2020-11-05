@@ -24,6 +24,8 @@ class CreateUserActivitiesTable extends Migration
             $table->integer('resident')->unsigned();
             $table->foreign('resident')->references('id')->on('users');
 
+            $table->integer('type');    //daily, weekly or monthly
+            
             $table->integer('comment')->nullable();
             $table->string('file', '2048')->nullable();
 

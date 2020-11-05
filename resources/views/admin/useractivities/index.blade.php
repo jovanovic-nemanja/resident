@@ -49,6 +49,7 @@
                                         <th>Type</th>
                                         <th>Title</th>
                                         <th>Time</th>
+                                        <th>Duration</th>
                                         <th>Status</th>
                                         <th>comment</th>
                                         <th>Attached File</th>
@@ -75,6 +76,9 @@
 			                                        </td>
 			                                        <td>
 			                                        	<span class="badge round-primary">{{ $useractivity->time }}</span>
+			                                        </td>
+			                                        <td>
+			                                        	<span class="badge round-primary">{{ App\Useractivities::getTypename($useractivity->type) }}</span>
 			                                        </td>
 			                                        <td>
 			                                        	<?php 

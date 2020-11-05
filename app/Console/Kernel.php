@@ -16,6 +16,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\MedicationsCommand::class,
+        Commands\DailyActivityCommand::class,
+        Commands\WeeklyActivityCommand::class,
+        Commands\MonthlyActivityCommand::class,
     ];
 
     /**
@@ -27,7 +30,18 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('medications:checkdata')
-                 ->everyMinute();
+                 ->everyMinute(); //Run the task every minute
+
+        $schedule->command('activitydaily:checkdata')
+                 ->everyMinute(); //Run the task every minute
+
+        $schedule->command('activityweekly:checkdata')
+                 ->timezone('America/Los_Angeles')
+                 ->weeklyOn(1, '9:00'); //Run the task every week on Monday at 9:00
+
+        $schedule->command('activitymonthly:checkdata')
+                 ->timezone('America/Los_Angeles')
+                 ->monthlyOn(1, '9:00'); //Run the task every month on the 1th at 9:00
     }
 
     /**

@@ -82,6 +82,7 @@ class UseractivitiesController extends Controller
         $this->validate(request(), [
             'activities' => 'required',
             'time' => 'required',
+            'type' => 'required',
             'resident' => 'required'
         ]);
 
@@ -91,6 +92,7 @@ class UseractivitiesController extends Controller
         $useractivities = Useractivities::create([
             'activities' => $request->activities,
             'time' => $request->time,
+            'type' => $request->type,
             'resident' => $request->resident,
             'comment' => $request->comment,
             'file' => $request->file,
@@ -149,6 +151,7 @@ class UseractivitiesController extends Controller
         $this->validate(request(), [
             'activities' => 'required',
             'time' => 'required',
+            'type' => 'required',
             'resident' => 'required'
         ]);
 
@@ -160,6 +163,7 @@ class UseractivitiesController extends Controller
         if (@$record) {
             $record->activities = $request->activities;
             $record->time = $request->time;
+            $record->type = $request->type;
             $record->resident = $request->resident;
             $record->comment = $request->comment;
             $record->file = $request->file;
