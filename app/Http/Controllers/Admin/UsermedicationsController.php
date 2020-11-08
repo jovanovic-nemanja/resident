@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Comments;
 use App\Medications;
 use App\Usermedications;
 use App\Assignmedications;
@@ -116,7 +117,6 @@ class UsermedicationsController extends Controller
             $this->validate(request(), [
                 'medications' => 'required',
                 'dose' => 'required',
-                'duration' => 'required',
                 'resident' => 'required'
             ]);
 
@@ -126,7 +126,6 @@ class UsermedicationsController extends Controller
             $assignmedications = Assignmedications::create([
                 'medications' => $request->medications,
                 'dose' => $request->dose,
-                'duration' => $request->duration,
                 'resident' => $request->resident,
                 'comment' => $request->comment,
                 'sign_date' => $date,
@@ -195,6 +194,9 @@ class UsermedicationsController extends Controller
         $result['medication'] = Medications::where('id', $res->medications)->first();
         $result['allmedications'] = Medications::all();
 
+        $comment = $res->medications;
+        $result['comments'] = Comments::where('type', 2)->where('ref_id', $comment)->get();
+
         return view('admin.usermedications.editassign', compact('result'));
     }
 
@@ -222,7 +224,6 @@ class UsermedicationsController extends Controller
             $this->validate(request(), [
                 'medications' => 'required',
                 'dose' => 'required',
-                'duration' => 'required',
                 'resident' => 'required'
             ]);
 
@@ -234,7 +235,6 @@ class UsermedicationsController extends Controller
             if (@$record) {
                 $record->medications = $request->medications;
                 $record->dose = $request->dose;
-                $record->duration = $request->duration;
                 $record->resident = $request->resident;
                 $record->comment = $request->comment;
                 $record->time1 = @$request->time1;
@@ -247,8 +247,7 @@ class UsermedicationsController extends Controller
         }else {
             $this->validate(request(), [
                 'medications' => 'required',
-                'daily_count' => 'required',
-                'duration' => 'required',
+                'dose' => 'required',
                 'resident' => 'required'
             ]);
 
@@ -259,8 +258,7 @@ class UsermedicationsController extends Controller
             $record = Usermedications::where('id', $id)->first();
             if (@$record) {
                 $record->medications = $request->medications;
-                $record->daily_count = $request->daily_count;
-                $record->duration = $request->duration;
+                $record->dose = $request->dose;
                 $record->resident = $request->resident;
                 $record->comment = $request->comment;
                 $record->file = $request->file;

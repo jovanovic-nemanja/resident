@@ -56,7 +56,7 @@ class MedicationsCommand extends Command
                 $ass_date = Carbon::parse($assign_medication->assign_date);
                 $cur_date['dates'] = Carbon::parse($cur_date['date']); 
 
-                if ($ass_date->addDays($assign_medication->duration) >= $cur_date['dates']) {   
+                // if ($ass_date->addDays($assign_medication->duration) >= $cur_date['dates']) {   
                     $assign_time1 = $assign_medication->time1;
                     if ($assign_time1) {
                         $startTime = Carbon::parse(User::formattime1($assign_time1));
@@ -149,7 +149,7 @@ class MedicationsCommand extends Command
                             'sign_date' => $cur_date['date'],
                         ]);
                     }
-                }
+                // }
             }
         }
     }

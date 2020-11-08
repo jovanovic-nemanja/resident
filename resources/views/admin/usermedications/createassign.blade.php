@@ -85,22 +85,11 @@
                                         </div>
 
                                         <div class="col-lg-3">
-                                            <div class="form-group {{ $errors->has('duration') ? 'has-error' : '' }}">
-                                                <label class="form-label">Duration</label>
-                                                <input type="number" class="form-control" name='duration' placeholder="Duration" value="2" required id="duration">
-
-                                                @if ($errors->has('duration'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('duration') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3">
                                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
-                                                <label class="form-label">Comment </label>
-                                                <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment" value="{{ old('comment') }}">
+                                                <label class="form-label">Route </label>
+                                                <select class="form-control" id="comment" name="comment">
+                                                    
+                                                </select>
                                                 @if ($errors->has('comment'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('comment') }}</strong>
@@ -178,6 +167,27 @@
 @section('script')
 <script>
     $(document).ready(function(){
+        $('.medications').change(function() {
+            $('#comment').empty();
+            var medication = $(this).val();
+            if (medication != '') {
+                $.ajax({
+                    url: '/getcommentsbyactivity',
+                    type: 'GET',
+                    data: { medication : medication },
+                    success: function(result, status) {
+                        if (status) {
+                            $('#comment').empty();
+                            var element = "";
+                            for (var i = 0; i < result.length; i++) {
+                                element += "<option value=" + result[i]['id'] + ">" + result[i]['name'] + "</option>";
+                            }
+                            $('#comment').append(element);
+                        }
+                    }
+                })
+            }
+        });
     });
 </script>
 @endsection

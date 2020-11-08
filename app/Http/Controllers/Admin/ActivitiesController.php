@@ -81,6 +81,8 @@ class ActivitiesController extends Controller
     {
         if (@$request->activity) {
             $results = Comments::where('type', 1)->where('ref_id', $request->activity)->get();
+        }else if (@$request->medication) {
+            $results = Comments::where('type', 2)->where('ref_id', $request->medication)->get();
         }else
             $results = [];
 

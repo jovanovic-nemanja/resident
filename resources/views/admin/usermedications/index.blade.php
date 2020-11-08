@@ -49,7 +49,7 @@
                                         <th>Date</th>
                                         <th>Name</th>
                                         <th>Dose</th>
-                                        <th>Duration</th>
+                                        <th>Route</th>
                                         <th>Time 1</th>
                                         <th>Time 2</th>
                                         <th>Time 3</th>
@@ -75,7 +75,7 @@
 			                                            </div>
 			                                        </td>
 			                                        <td>
-			                                        	<span class="badge round-primary">{{ $assignmedication->duration }}</span>
+			                                        	<span class="badge round-primary">{{ App\Comments::getCommentsname($assignmedication->comment) }}</span>
 			                                        </td>
 			                                        <td>
 			                                        	<span class="badge round-primary">{{ $assignmedication->time1 }}</span>

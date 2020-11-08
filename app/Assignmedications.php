@@ -12,7 +12,7 @@ class Assignmedications extends Model
 {
     public $table = "assign_medications";
 
-    public $fillable = ['medications', 'dose', 'duration', 'resident', 'comment', 'sign_date', 'time1', 'time2', 'time3', 'time4'];
+    public $fillable = ['medications', 'dose', 'resident', 'comment', 'sign_date', 'time1', 'time2', 'time3', 'time4'];
 
     public function getMedications($id) 
     {
