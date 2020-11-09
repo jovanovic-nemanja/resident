@@ -92,6 +92,14 @@ Route::get('notifications/confirmIsread/{id}', 'Admin\NotificationsController@co
 
 
 
+
+Route::resource('routes', 'Admin\RoutesController');
+
+
+
+
+
+
 Route::get('/account', 'Frontend\AccountController@index')->name('account');
 Route::get('/changepass', 'Frontend\AccountController@changepass')->name('changepass');
 Route::put('/account/update', 'Frontend\AccountController@update')->name('account.update');

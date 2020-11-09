@@ -61,6 +61,9 @@
                             <a class="" href="{{ route('medications.index') }}">Medications</a>
                         </li>
                         <li>
+                            <a class="" href="{{ route('routes.index') }}">Routes</a>
+                        </li>
+                        <li>
                             <a class="" href="{{ route('bodyharmcomments.index') }}">Body harm Comments</a>
                         </li>
                         <li>

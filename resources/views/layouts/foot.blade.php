@@ -22,7 +22,9 @@
 
 @guest
 @else
-	<script src="{{ asset('js/notification.js') }}"></script>
+	@if(auth()->user()->hasRole('admin'))
+		<script src="{{ asset('js/notification.js') }}"></script>
+	@endif
 @endguest
 
 <script src="{{ asset('js/font-icon.js') }}"></script>

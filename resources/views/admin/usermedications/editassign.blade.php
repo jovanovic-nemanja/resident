@@ -88,18 +88,18 @@
                                         </div>
 
                                         <div class="col-lg-3">
-                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
-                                                <label class="form-label">Comment</label>
-                                                <select class="form-control" id="comment" name="comment">
+                                            <div class="form-group {{ $errors->has('route') ? 'has-error' : '' }}">
+                                                <label class="form-label">Route</label>
+                                                <select class="form-control" id="route" name="route">
                                                     <?php 
-                                                        foreach ($result['comments'] as $com) { ?>
-                                                            <option <?php if($result['usermedications']->comment == $com['id']){echo 'selected';} ?> value="<?= $com['id'] ?>"><?= $com['name'] ?></option>
+                                                        foreach ($result['routes'] as $com) { ?>
+                                                            <option <?php if($result['usermedications']->route == $com['id']){echo 'selected';} ?> value="<?= $com['id'] ?>"><?= $com['name'] ?></option>
                                                     <?php } ?>
                                                 </select>
 
-                                                @if ($errors->has('comment'))
+                                                @if ($errors->has('route'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('comment') }}</strong>
+                                                        <strong>{{ $errors->first('route') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -180,28 +180,6 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        $('.medications').change(function() {
-            $('#comment').empty();
-            var medication = $(this).val();
-            if (medication != '') {
-                $.ajax({
-                    url: '/getcommentsbyactivity',
-                    type: 'GET',
-                    data: { medication : medication },
-                    success: function(result, status) {
-                        if (status) {
-                            $('#comment').empty();
-                            var element = "";
-                            for (var i = 0; i < result.length; i++) {
-                                element += "<option value=" + result[i]['id'] + ">" + result[i]['name'] + "</option>";
-                            }
-                            $('#comment').append(element);
-                        }
-                    }
-                })
-            }
-        });
-        
         $('.validate_btn').click(function() {
             var activity = $('.medications').val();
             if (activity == '') {

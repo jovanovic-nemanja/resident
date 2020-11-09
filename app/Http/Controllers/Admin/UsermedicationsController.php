@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Routes;
 use App\Comments;
 use App\Medications;
 use App\Usermedications;
@@ -59,7 +60,7 @@ class UsermedicationsController extends Controller
                         'id' => $assignmedication->id,
                         'sign_date' => $assignmedication->sign_date,
                         'dose' => $assignmedication->dose,
-                        'comment' => $assignmedication->comment,
+                        'route' => $assignmedication->route,
                         'time' => $assignmedication->time1,
                     );
                 } if (@$assignmedication->time2) {
@@ -67,7 +68,7 @@ class UsermedicationsController extends Controller
                         'id' => $assignmedication->id,
                         'sign_date' => $assignmedication->sign_date,
                         'dose' => $assignmedication->dose,
-                        'comment' => $assignmedication->comment,
+                        'route' => $assignmedication->route,
                         'time' => $assignmedication->time2,
                     );
                 } if (@$assignmedication->time3) {
@@ -75,7 +76,7 @@ class UsermedicationsController extends Controller
                         'id' => $assignmedication->id,
                         'sign_date' => $assignmedication->sign_date,
                         'dose' => $assignmedication->dose,
-                        'comment' => $assignmedication->comment,
+                        'route' => $assignmedication->route,
                         'time' => $assignmedication->time3,
                     );
                 } if (@$assignmedication->time4) {
@@ -83,7 +84,7 @@ class UsermedicationsController extends Controller
                         'id' => $assignmedication->id,
                         'sign_date' => $assignmedication->sign_date,
                         'dose' => $assignmedication->dose,
-                        'comment' => $assignmedication->comment,
+                        'route' => $assignmedication->route,
                         'time' => $assignmedication->time4,
                     );
                 }                  
@@ -96,7 +97,9 @@ class UsermedicationsController extends Controller
 
         $user = User::where('id', $id)->first();
 
-        return view('admin.usermedications.index', compact('usermedications', 'user', 'arrs'));
+        $comments = Comments::where('type', 2)->get();
+
+        return view('admin.usermedications.index', compact('usermedications', 'user', 'arrs', 'comments'));
     }
 
     /**
@@ -145,6 +148,8 @@ class UsermedicationsController extends Controller
 
         $result['medications'] = Medications::all();
 
+        $result['routes'] = Routes::all();
+
         return view('admin.usermedications.createassign', compact('result'));
     }
 
@@ -156,7 +161,7 @@ class UsermedicationsController extends Controller
      */
     public function store(Request $request)
     {
-        if (@$request->assign) {
+        if (@$request->assign) {    //assign medication for admin
             $this->validate(request(), [
                 'medications' => 'required',
                 'dose' => 'required',
@@ -170,7 +175,7 @@ class UsermedicationsController extends Controller
                 'medications' => $request->medications,
                 'dose' => $request->dose,
                 'resident' => $request->resident,
-                'comment' => $request->comment,
+                'route' => $request->route,
                 'sign_date' => $date,
                 'time1' => @$request->time1,
                 'time2' => @$request->time2,
@@ -179,7 +184,7 @@ class UsermedicationsController extends Controller
             ]);
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully assigned.');
-        }else{
+        }else{  //give medication for care taker
             $this->validate(request(), [
                 'assign_id' => 'required',
                 'resident' => 'required'
@@ -238,7 +243,7 @@ class UsermedicationsController extends Controller
         $result['allmedications'] = Medications::all();
 
         $comment = $res->medications;
-        $result['comments'] = Comments::where('type', 2)->where('ref_id', $comment)->get();
+        $result['routes'] = Routes::all();
 
         return view('admin.usermedications.editassign', compact('result'));
     }
@@ -279,7 +284,7 @@ class UsermedicationsController extends Controller
                 $record->medications = $request->medications;
                 $record->dose = $request->dose;
                 $record->resident = $request->resident;
-                $record->comment = $request->comment;
+                $record->route = $request->route;
                 $record->time1 = @$request->time1;
                 $record->time2 = @$request->time2;
                 $record->time3 = @$request->time3;

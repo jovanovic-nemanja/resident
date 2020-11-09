@@ -85,14 +85,19 @@
                                         </div>
 
                                         <div class="col-lg-3">
-                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
+                                            <div class="form-group {{ $errors->has('route') ? 'has-error' : '' }}">
                                                 <label class="form-label">Route </label>
-                                                <select class="form-control" id="comment" name="comment">
-                                                    
+                                                <select class="form-control" id="route" name="route">
+                                                    <option value="">Choose Route</option>
+                                                    <?php 
+                                                        foreach ($result['routes'] as $com) { ?>
+                                                            <option value="<?= $com['id'] ?>"><?= $com['name'] ?></option>
+                                                    <?php } ?>
                                                 </select>
-                                                @if ($errors->has('comment'))
+                                                
+                                                @if ($errors->has('route'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('comment') }}</strong>
+                                                        <strong>{{ $errors->first('route') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -167,27 +172,7 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        $('.medications').change(function() {
-            $('#comment').empty();
-            var medication = $(this).val();
-            if (medication != '') {
-                $.ajax({
-                    url: '/getcommentsbyactivity',
-                    type: 'GET',
-                    data: { medication : medication },
-                    success: function(result, status) {
-                        if (status) {
-                            $('#comment').empty();
-                            var element = "";
-                            for (var i = 0; i < result.length; i++) {
-                                element += "<option value=" + result[i]['id'] + ">" + result[i]['name'] + "</option>";
-                            }
-                            $('#comment').append(element);
-                        }
-                    }
-                })
-            }
-        });
+        
     });
 </script>
 @endsection

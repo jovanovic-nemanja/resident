@@ -25,7 +25,7 @@ class CreateAssignMedicationsTable extends Migration
             $table->integer('resident')->unsigned();
             $table->foreign('resident')->references('id')->on('users');
 
-            $table->string('comment', '2048')->nullable();
+            $table->string('route', '2048')->nullable();
             $table->datetime('sign_date');
             $table->time('time1')->nullable();
             $table->time('time2')->nullable();

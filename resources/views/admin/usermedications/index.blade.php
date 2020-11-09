@@ -49,8 +49,11 @@
                                         <th>Date</th>
                                         <th>Name</th>
                                         <th>Dose</th>
-                                        <th>Route</th>
                                         <th>Time</th>
+                                        <th>Route</th>
+                                        @if(auth()->user()->hasRole('care taker'))
+											<th>Comment</th>
+										@endif
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -72,11 +75,27 @@
 			                                            </div>
 			                                        </td>
 			                                        <td>
-			                                        	<span class="badge round-primary">{{ App\Comments::getCommentsname($assignmedication['comment']) }}</span>
-			                                        </td>
-			                                        <td>
 			                                        	<span class="badge round-primary">{{ $assignmedication['time'] }}</span>
 			                                        </td>
+			                                        <td>
+														<span class="badge round-primary">
+															<?php if($assignmedication['route'] != NULL) { ?>
+																{{ App\Routes::getRoutename($assignmedication['route']) }}
+															<?php } ?>
+														</span>
+			                                        </td>
+			                                        
+		                                        	@if(auth()->user()->hasRole('care taker'))
+			                                        	<td>
+															<select class="form-control" id="comment" name="comment">
+																<option value="">Choose Comment</option>
+			                                                    @foreach($comments as $comment)
+			                                                        <option value="{{ $comment->id }}">{{ $comment->name }}</option>
+			                                                    @endforeach
+															</select>
+														</td>
+													@endif
+													
 			                                        <td>
 				                                        @if(auth()->user()->hasRole('admin'))
 				                                        	<a href="{{ route('usermedications.showassign', $assignmedication['id']) }}" class="btn btn-success">Edit</a>
@@ -95,6 +114,7 @@
 												                  	@csrf
 
 												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
+												                  	<input type="hidden" name="comment" class="comm_val" />
                                     								<input type="hidden" name="assign_id" value="{{ $assignmedication['id'] }}">
 												            </form>
 														@endif
@@ -113,3 +133,14 @@
         </section>
     </div>
 @stop
+
+@section('script')
+<script>
+    $(document).ready(function(){
+        $('#comment').change(function() {
+        	var com_val = $(this).val();
+        	$('.comm_val').val(com_val);
+        });
+    });
+</script>
+@endsection

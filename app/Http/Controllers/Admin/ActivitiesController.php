@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Routes;
 use App\Comments;
 use App\Activities;
 use App\Useractivities;
@@ -81,8 +82,8 @@ class ActivitiesController extends Controller
     {
         if (@$request->activity) {
             $results = Comments::where('type', 1)->where('ref_id', $request->activity)->get();
-        }else if (@$request->medication) {
-            $results = Comments::where('type', 2)->where('ref_id', $request->medication)->get();
+        }else if (@$request->route) {
+            $results = Routes::all();
         }else
             $results = [];
 
