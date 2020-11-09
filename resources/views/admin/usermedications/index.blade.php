@@ -101,7 +101,15 @@
 												            </form>
 					                                    @endif
 					                                    @if(auth()->user()->hasRole('care taker'))
-															<a href="{{ route('usermedications.createusermedication', ['resident' => $user->id, 'assign_id' => $assignmedication->id, 'medication_id' => $medications->id]) }}" class="btn btn-primary">Give Medication</a>
+															<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication->id}}').submit();">Give Medication</a>
+
+															<form id="give-medication-form-{{$assignmedication->id}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
+												                  	<input type="hidden" name="_method" value="POST">
+												                  	@csrf
+
+												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
+                                    								<input type="hidden" name="assign_id" value="{{ $assignmedication->id }}">
+												            </form>
 														@endif
 													</td>
 			                                    </tr>
@@ -130,10 +138,9 @@
 														                          	<tr>
 																						<td>{{ $usermedication->sign_date }}</td>
 																						<td>{{ $medications->name }}</td>
-																						<td>3</td>
+																						<td>{{ $assignmedication->dose }}</td>
 																						@if(auth()->user()->hasRole('care taker'))
 													                                        <td>
-													                                        	<!-- <a href="{{ route('usermedications.show', $usermedication->id) }}" class="btn btn-success">Edit</a> -->
 													                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$usermedication->id}}').submit();">Delete</a>
 
 													                                        	<form id="delete-form-{{$usermedication->id}}" action="{{ route('usermedications.destroy', $usermedication->id) }}" method="POST" style="display: none;">

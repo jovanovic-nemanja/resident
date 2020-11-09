@@ -155,7 +155,7 @@ class UsermedicationsController extends Controller
 
             // Usermedications::upload_file($usermedications->id);
 
-            return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully created.');
+            return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully gived.');
         }
     }
 
