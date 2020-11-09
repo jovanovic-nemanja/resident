@@ -116,6 +116,7 @@
 												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
 												                  	<input type="hidden" name="comment" class="comm_val" />
                                     								<input type="hidden" name="assign_id" value="{{ $assignmedication['id'] }}">
+                                    								<input type="hidden" name="type" value="{{ $assignmedication['type'] }}">
 												            </form>
 														@endif
 													</td>

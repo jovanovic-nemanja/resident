@@ -62,6 +62,7 @@ class UsermedicationsController extends Controller
                         'dose' => $assignmedication->dose,
                         'route' => $assignmedication->route,
                         'time' => $assignmedication->time1,
+                        'type' => 1
                     );
                 } if (@$assignmedication->time2) {
                     $arrs[] = array(
@@ -70,6 +71,7 @@ class UsermedicationsController extends Controller
                         'dose' => $assignmedication->dose,
                         'route' => $assignmedication->route,
                         'time' => $assignmedication->time2,
+                        'type' => 2
                     );
                 } if (@$assignmedication->time3) {
                     $arrs[] = array(
@@ -78,6 +80,7 @@ class UsermedicationsController extends Controller
                         'dose' => $assignmedication->dose,
                         'route' => $assignmedication->route,
                         'time' => $assignmedication->time3,
+                        'type' => 3
                     );
                 } if (@$assignmedication->time4) {
                     $arrs[] = array(
@@ -86,6 +89,7 @@ class UsermedicationsController extends Controller
                         'dose' => $assignmedication->dose,
                         'route' => $assignmedication->route,
                         'time' => $assignmedication->time4,
+                        'type' => 4
                     );
                 }                  
             }
@@ -192,6 +196,19 @@ class UsermedicationsController extends Controller
 
             $dates = User::getformattime();
             $date = $dates['date'];
+
+            $assigned = Assignmedications::where('id', $request->assign_id)->first();
+            if ($request->type == 1) {
+                $assigned->time1 = NULL;    
+            }if ($request->type == 2) {
+                $assigned->time2 = NULL;    
+            }if ($request->type == 3) {
+                $assigned->time3 = NULL;    
+            }if ($request->type == 4) {
+                $assigned->time4 = NULL;    
+            }
+            
+            $assigned->update();
 
             $usermedications = Usermedications::create([
                 'assign_id' => $request->assign_id,
