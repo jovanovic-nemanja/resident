@@ -343,6 +343,7 @@ class UsermedicationsController extends Controller
     public function destroyassign($id)
     {
         $medication = Assignmedications::where('id', $id)->first();
+        $assigned = Usermedications::where('assign_id', $id)->delete();
         $record = Assignmedications::where('id', $id)->delete();
         
         return redirect()->route('usermedications.indexusermedication', $medication->resident);
