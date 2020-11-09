@@ -50,10 +50,53 @@ class UsermedicationsController extends Controller
     {
         $usermedications = Usermedications::where('resident', $id)->orderBy('sign_date', 'asc')->get();
         $assignmedications = Assignmedications::where('resident', $id)->orderBy('sign_date', 'desc')->get();
+        $arrs = [];
+
+        if (@$assignmedications) {
+            foreach ($assignmedications as $assignmedication) {
+                if (@$assignmedication->time1) {
+                    $arrs[] = array(
+                        'id' => $assignmedication->id,
+                        'sign_date' => $assignmedication->sign_date,
+                        'dose' => $assignmedication->dose,
+                        'comment' => $assignmedication->comment,
+                        'time' => $assignmedication->time1,
+                    );
+                } if (@$assignmedication->time2) {
+                    $arrs[] = array(
+                        'id' => $assignmedication->id,
+                        'sign_date' => $assignmedication->sign_date,
+                        'dose' => $assignmedication->dose,
+                        'comment' => $assignmedication->comment,
+                        'time' => $assignmedication->time2,
+                    );
+                } if (@$assignmedication->time3) {
+                    $arrs[] = array(
+                        'id' => $assignmedication->id,
+                        'sign_date' => $assignmedication->sign_date,
+                        'dose' => $assignmedication->dose,
+                        'comment' => $assignmedication->comment,
+                        'time' => $assignmedication->time3,
+                    );
+                } if (@$assignmedication->time4) {
+                    $arrs[] = array(
+                        'id' => $assignmedication->id,
+                        'sign_date' => $assignmedication->sign_date,
+                        'dose' => $assignmedication->dose,
+                        'comment' => $assignmedication->comment,
+                        'time' => $assignmedication->time4,
+                    );
+                }                  
+            }
+        }
+
+        usort($arrs, function($a, $b) {
+            return strtotime($a['time']) - strtotime($b['time']);
+        });
 
         $user = User::where('id', $id)->first();
 
-        return view('admin.usermedications.index', compact('usermedications', 'user', 'assignmedications'));
+        return view('admin.usermedications.index', compact('usermedications', 'user', 'arrs'));
     }
 
     /**

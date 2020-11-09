@@ -14,7 +14,7 @@ class Assignmedications extends Model
 
     public $fillable = ['medications', 'dose', 'resident', 'comment', 'sign_date', 'time1', 'time2', 'time3', 'time4'];
 
-    public function getMedications($id) 
+    public static function getMedications($id) 
     {
     	if (@$id) {
     		$user_medications = Assignmedications::where('id', $id)->first();

@@ -50,116 +50,56 @@
                                         <th>Name</th>
                                         <th>Dose</th>
                                         <th>Route</th>
-                                        <th>Time 1</th>
-                                        <th>Time 2</th>
-                                        <th>Time 3</th>
-                                        <th>Time 4</th>
+                                        <th>Time</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 	<?php 
-                                		if(@$assignmedications) {
+                                		if(@$arrs) {
 	                                		$i = 1;
-		                                	foreach($assignmedications as $assignmedication) { ?>
-		                                		<tr role='row' data-toggle="collapse" data-target="#demo<?= $assignmedication->id ?>" class="odd accordion-toggle">
+		                                	foreach($arrs as $assignmedication) { ?>
+		                                		<tr role='row' data-toggle="collapse" data-target="#demo<?= $assignmedication['id'] ?>" class="odd accordion-toggle">
 		                                			<?php 
-	                                                	$medications = $assignmedication->getMedications($assignmedication->id);
+	                                                	$medications = App\Assignmedications::getMedications($assignmedication['id']);
 	                                                ?>
 
 		                                			<td>{{ $i }}</td>
-		                                			<td><?= date_format(date_create($assignmedication->sign_date), 'Y-m-d'); ?></td>
+		                                			<td><?= date_format(date_create($assignmedication['sign_date']), 'Y-m-d'); ?></td>
 		                                			<td>{{ $medications->name }}</td>
 			                                        <td>
 			                                            <div class="">
-			                                                <h6>{{ $assignmedication->dose }}</h6>
+			                                                <h6>{{ $assignmedication['dose'] }}</h6>
 			                                            </div>
 			                                        </td>
 			                                        <td>
-			                                        	<span class="badge round-primary">{{ App\Comments::getCommentsname($assignmedication->comment) }}</span>
+			                                        	<span class="badge round-primary">{{ App\Comments::getCommentsname($assignmedication['comment']) }}</span>
 			                                        </td>
 			                                        <td>
-			                                        	<span class="badge round-primary">{{ $assignmedication->time1 }}</span>
+			                                        	<span class="badge round-primary">{{ $assignmedication['time'] }}</span>
 			                                        </td>
-			                                        <td>
-			                                        	<span class="badge round-primary">{{ $assignmedication->time2 }}</span>
-			                                        </td>
-			                                        <td>
-			                                        	<span class="badge round-primary">{{ $assignmedication->time3 }}</span>
-			                                        </td>
-			                                        <td>
-			                                        	<span class="badge round-primary">{{ $assignmedication->time4 }}</span>
-			                                        </td>
-
 			                                        <td>
 				                                        @if(auth()->user()->hasRole('admin'))
-				                                        	<a href="{{ route('usermedications.showassign', $assignmedication->id) }}" class="btn btn-success">Edit</a>
-				                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$assignmedication->id}}').submit();">Delete</a>
+				                                        	<a href="{{ route('usermedications.showassign', $assignmedication['id']) }}" class="btn btn-success">Edit</a>
+				                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$assignmedication['id']}}').submit();">Delete</a>
 
-				                                        	<form id="delete-form-{{$assignmedication->id}}" action="{{ route('usermedications.destroyassign', $assignmedication->id) }}" method="POST" style="display: none;">
+				                                        	<form id="delete-form-{{$assignmedication['id']}}" action="{{ route('usermedications.destroyassign', $assignmedication['id']) }}" method="POST" style="display: none;">
 												                  <input type="hidden" name="_method" value="delete">
 												                  @csrf
 												            </form>
 					                                    @endif
 					                                    @if(auth()->user()->hasRole('care taker'))
-															<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication->id}}').submit();">Give Medication</a>
+															<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
 
-															<form id="give-medication-form-{{$assignmedication->id}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
+															<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
 												                  	<input type="hidden" name="_method" value="POST">
 												                  	@csrf
 
 												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
-                                    								<input type="hidden" name="assign_id" value="{{ $assignmedication->id }}">
+                                    								<input type="hidden" name="assign_id" value="{{ $assignmedication['id'] }}">
 												            </form>
 														@endif
 													</td>
 			                                    </tr>
-			                                    <tbody>
-				                                    <?php 
-				                                    	foreach ($usermedications as $usermedication) { 
-				                                    		if ($usermedication->assign_id == $assignmedication->id) { ?>
-					                                    		<tr>
-				                                    				<td colspan="4" class="hiddenRow" style="border-top: none; padding: 0!important;">
-													                    <div class="accordian-body collapse" id="demo<?= $assignmedication->id ?>"> 
-													                      	<table class="table table-striped">
-														                        <thead>
-														                          	<tr>
-																						<th>Date</th>
-																						<th>Name</th>
-																						<th>Dose</th>
-																						@if(auth()->user()->hasRole('care taker'))
-																							<th>Actions</th>
-																						@endif
-																						@if(auth()->user()->hasRole('admin'))
-																							<th></th>
-																						@endif
-														                          	</tr>
-														                        </thead>
-														                        <tbody>
-														                          	<tr>
-																						<td>{{ $usermedication->sign_date }}</td>
-																						<td>{{ $medications->name }}</td>
-																						<td>{{ $assignmedication->dose }}</td>
-																						@if(auth()->user()->hasRole('care taker'))
-													                                        <td>
-													                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$usermedication->id}}').submit();">Delete</a>
-
-													                                        	<form id="delete-form-{{$usermedication->id}}" action="{{ route('usermedications.destroy', $usermedication->id) }}" method="POST" style="display: none;">
-																					                  <input type="hidden" name="_method" value="delete">
-																					                  @csrf
-																					            </form>
-													                                        </td>
-													                                    @endif
-
-													                                    @if(auth()->user()->hasRole('admin'))
-																							<td></td>
-																						@endif
-														                          	</tr>
-														                        </tbody>
-													                      	</table>
-													                    </div>
-												                  	</td>
-												                </tr>
-				                                    <?php } } ?>
                                     <?php $i++; } }else{ ?>
 
                                     <?php } ?>
