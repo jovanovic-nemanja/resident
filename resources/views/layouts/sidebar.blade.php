@@ -69,6 +69,9 @@
                         <li>
                             <a class="" href="{{ route('reminderconfigs.index') }}">Reminder Configs</a>
                         </li>
+                        <li>
+                            <a class="" href="{{ route('adminlogs.index') }}">Admin Logs</a>
+                        </li>
                     </ul>
                 </li>
             @endif

@@ -94,6 +94,7 @@ Route::get('notifications/confirmIsread/{id}', 'Admin\NotificationsController@co
 
 
 Route::resource('routes', 'Admin\RoutesController');
+Route::resource('adminlogs', 'Admin\AdminlogsController');
 
 
 

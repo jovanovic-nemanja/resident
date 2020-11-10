@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Adminlogs;
 use App\Comments;
 use App\Activities;
 use App\Useractivities;
@@ -101,6 +102,15 @@ class UseractivitiesController extends Controller
         ]);
 
         Useractivities::upload_file($useractivities->id);
+
+        $actis = Activities::where('id', $request->activities)->first();
+        $activName = $actis->title;
+        $activType = Activities::getTypeasstring($actis->type);
+
+        $data = [];
+        $data['caretakerId'] = auth()->id();
+        $data['content'] = User::getUsernameById($data['caretakerId']) . " added " . $activType . " : " . $activName . "(" . $request->time . ")" . " to " . User::getUsernameById($request->resident);
+        Adminlogs::Addlogs($data);
 
         return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully created.');
     }

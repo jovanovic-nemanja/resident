@@ -47,6 +47,12 @@ class User extends Authenticatable
         return false;
     }
 
+    /**
+    * @param user id
+    * @return user name
+    * @since 2020-10-16
+    * @author Nemanja
+    */
     public function getUsername($id) {
         if (@$id) {
             $user = User::where('id', $id)->first();
@@ -58,7 +64,7 @@ class User extends Authenticatable
 
     /**
     * @param user_id
-    * This is a feature to upload a company logo
+    * This is a feature to upload a profile logo
     */
     public static function upload_logo_img($user_id, $existings = null) {
         if(!request()->hasFile('profile_logo')) {
@@ -70,6 +76,13 @@ class User extends Authenticatable
         self::save_logo_img($user_id, request()->file('profile_logo'));
     }
 
+    /**
+    * file upload
+    * @param userid and photo file
+    * @return boolean true or false
+    * @since 2020-10-16
+    * @author Nemanja
+    */
     public static function save_logo_img($user_id, $image) {
         $user = User::where('id', $user_id)->first();
 
@@ -80,6 +93,11 @@ class User extends Authenticatable
         }
     }
 
+    /**
+    * @return date, datetime, time
+    * @since 2020-10-16
+    * @author Nemanja
+    */
     public static function getformattime()
     {
         $timeZone = 'America/Los_Angeles';
@@ -95,6 +113,12 @@ class User extends Authenticatable
         return $arr;
     }
 
+    /**
+    * @param time
+    * @return time
+    * @since 2020-10-16
+    * @author Nemanja
+    */
     public static function formattime($time)
     {
         $timeZone = 'America/Los_Angeles';
@@ -105,6 +129,12 @@ class User extends Authenticatable
         return $time;
     }
 
+    /**
+    * @param time
+    * @return time
+    * @since 2020-10-16
+    * @author Nemanja
+    */
     public static function formattime1($time)
     {
         $timeZone = 'America/Los_Angeles';
@@ -113,5 +143,20 @@ class User extends Authenticatable
         $time = date_format($date, 'H:i');
 
         return $time;
+    }
+
+    /**
+    * @param id is user table id
+    * @return user name
+    * @since 2020-11-10
+    * @author Nemanja
+    */
+    public static function getUsernameById($id) {
+        if (@$id) {
+            $user = User::where('id', $id)->first();
+            $name = $user->name;
+        }
+
+        return $name;
     }
 }

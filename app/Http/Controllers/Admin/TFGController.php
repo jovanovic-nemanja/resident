@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\TFG;
+use App\Adminlogs;
 use App\Medications;
 
 class TFGController extends Controller
@@ -96,6 +97,14 @@ class TFGController extends Controller
         ]);
 
         TFG::upload_file($tfg->id);
+
+        $medicationss = Medications::where('id', $request->medications)->first();
+        $medicName = $medicationss->name;
+
+        $data = [];
+        $data['caretakerId'] = auth()->id();
+        $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $medicName . "(" . $request->time . ")" . " to " . User::getUsernameById($request->resident);
+        Adminlogs::Addlogs($data);
 
         return redirect()->route('tfgs.indextfg', $request->resident)->with('flash', 'TFG has been successfully created.');
     }

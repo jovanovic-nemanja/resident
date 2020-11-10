@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Routes;
+use App\Adminlogs;
 use App\Comments;
 use App\Medications;
 use App\Usermedications;
@@ -199,12 +200,16 @@ class UsermedicationsController extends Controller
 
             $assigned = Assignmedications::where('id', $request->assign_id)->first();
             if ($request->type == 1) {
+                $time = $assigned->time1;
                 $assigned->time1 = NULL;    
             }if ($request->type == 2) {
+                $time = $assigned->time2;
                 $assigned->time2 = NULL;    
             }if ($request->type == 3) {
+                $time = $assigned->time3;
                 $assigned->time3 = NULL;    
             }if ($request->type == 4) {
+                $time = $assigned->time4;
                 $assigned->time4 = NULL;    
             }
             
@@ -218,7 +223,13 @@ class UsermedicationsController extends Controller
                 'sign_date' => $date,
             ]);
 
-            // Usermedications::upload_file($usermedications->id);
+            $medicationss = Medications::where('id', $assigned->medications)->first();
+            $medicName = $medicationss->name;
+
+            $data = [];
+            $data['caretakerId'] = auth()->id();
+            $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $medicName . "(" . $time . ")" . " to " . User::getUsernameById($request->resident);
+            Adminlogs::Addlogs($data);
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully gived.');
         }
