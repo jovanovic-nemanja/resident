@@ -46,7 +46,7 @@ class UseractivitiesController extends Controller
      */
     public function indexuseractivity($id)
     {
-        $useractivities = Useractivities::where('resident', $id)->get();
+        $useractivities = Useractivities::where('resident', $id)->orderBy('time')->get();
         $user = User::where('id', $id)->first();
 
         return view('admin.useractivities.index', compact('useractivities', 'user'));
