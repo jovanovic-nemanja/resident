@@ -80,17 +80,40 @@
 			                                        <td>
 			                                        	<span class="badge round-primary">{{ App\Useractivities::getTypename($useractivity->type) }}</span>
 			                                        </td>
+				                                        
 			                                        <td>
-			                                        	{{ App\Useractivities::getCommentById($useractivity->id) }}
+			                                        	@if(auth()->user()->hasRole('admin'))
+			                                        		{{ App\Useractivities::getCommentById($useractivity->id) }}
+			                                        	@else
+															<select class="form-control" id="comment" name="comment">
+																<option value="">Choose Comment</option>
+			                                                    @foreach($comments as $comment)
+			                                                        <option value="{{ $comment->id }}">{{ $comment->name }}</option>
+			                                                    @endforeach
+															</select>
+														@endif
 			                                        </td>
 			                                        <td>
-			                                        	<a href="{{ route('useractivities.show', $useractivity->id) }}" class="btn btn-success">Edit</a>
-			                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$useractivity->id}}').submit();">Delete</a>
+			                                        	@if(auth()->user()->hasRole('admin'))
+			                                        		<a href="{{ route('useractivities.show', $useractivity->id) }}" class="btn btn-success">Edit</a>
+				                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$useractivity->id}}').submit();">Delete</a>
 
-			                                        	<form id="delete-form-{{$useractivity->id}}" action="{{ route('useractivities.destroy', $useractivity->id) }}" method="POST" style="display: none;">
-											                  <input type="hidden" name="_method" value="delete">
-											                  @csrf
-											            </form>
+				                                        	<form id="delete-form-{{$useractivity->id}}" action="{{ route('useractivities.destroy', $useractivity->id) }}" method="POST" style="display: none;">
+												                  <input type="hidden" name="_method" value="delete">
+												                  @csrf
+												            </form>
+														@else
+															<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-activity-form-{{$useractivity->id}}').submit();">Give Activity</a>
+
+															<form id="give-activity-form-{{$useractivity->id}}" action="{{ route('useractivities.store') }}" method="POST" style="display: none;">
+												                  	<input type="hidden" name="_method" value="POST">
+												                  	@csrf
+
+												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
+												                  	<input type="hidden" name="comment" class="comm_val" />
+                                    								<input type="hidden" name="assign_id" value="{{ $useractivity->id }}">
+												            </form>
+														@endif
 			                                        </td>
 			                                    </tr>
                                     <?php $i++; } }else{ ?>

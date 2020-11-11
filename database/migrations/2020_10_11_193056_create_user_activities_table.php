@@ -19,7 +19,7 @@ class CreateUserActivitiesTable extends Migration
             $table->integer('activities')->unsigned();
             $table->foreign('activities')->references('id')->on('activities');
             
-            $table->time('time');
+            $table->time('time')->nullable();
             
             $table->integer('resident')->unsigned();
             $table->foreign('resident')->references('id')->on('users');

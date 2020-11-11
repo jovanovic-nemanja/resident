@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
-use App\Adminlogs;
 use App\Comments;
+use App\Adminlogs;
 use App\Activities;
 use App\Useractivities;
+use App\Useractivityreports;
 
 class UseractivitiesController extends Controller
 {
@@ -46,10 +47,11 @@ class UseractivitiesController extends Controller
      */
     public function indexuseractivity($id)
     {
-        $useractivities = Useractivities::where('resident', $id)->orderBy('time')->get();
+        $useractivities = Useractivities::where('resident', $id)->whereNotNull('time')->orderBy('time')->get();
         $user = User::where('id', $id)->first();
+        $comments = Comments::where('type', 1)->get();
 
-        return view('admin.useractivities.index', compact('useractivities', 'user'));
+        return view('admin.useractivities.index', compact('useractivities', 'user', 'comments'));
     }
 
     /**
@@ -80,68 +82,101 @@ class UseractivitiesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'activities' => 'required',
-            'type' => 'required',
-            'resident' => 'required'
-        ]);
+        if (@$request->assign_id) {   //give activity as care taker
+            $this->validate(request(), [
+                'assign_id' => 'required',
+                'resident' => 'required'
+            ]);
 
-        $dates = User::getformattime();
-        $date = $dates['date'];
+            $dates = User::getformattime();
+            $date = $dates['date'];
 
-        if (@$request->time1) {
-            $useractivities = Useractivities::create([
-                'activities' => $request->activities,
-                'time' => $request->time1,
-                'type' => $request->type,
+            $assigned = Useractivities::where('id', $request->assign_id)->first();
+            $time = $assigned->time;
+            $assigned->time = NULL;
+            $assigned->update();
+
+            $reports = Useractivityreports::create([
+                'assign_id' => $request->assign_id,
                 'resident' => $request->resident,
                 'comment' => $request->comment,
-                'other_comment' => @$request->other_comment,
-                'file' => $request->file,
-                'status' => 1,
+                'user' => auth()->id(),
                 'sign_date' => $date,
             ]);
-        }if (@$request->time2) {
-            $useractivities = Useractivities::create([
-                'activities' => $request->activities,
-                'time' => $request->time2,
-                'type' => $request->type,
-                'resident' => $request->resident,
-                'comment' => $request->comment,
-                'other_comment' => @$request->other_comment,
-                'file' => $request->file,
-                'status' => 1,
-                'sign_date' => $date,
+
+            $activities = Activities::where('id', $assigned->activities)->first();
+            $actName = $activities->title;
+
+            $data = [];
+            $data['caretakerId'] = auth()->id();
+            $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $actName . "(" . $time . ")" . " to " . User::getUsernameById($request->resident);
+            Adminlogs::Addlogs($data);
+
+            return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully gived.');
+        }else{  //assign activity as admin
+            $this->validate(request(), [
+                'activities' => 'required',
+                'type' => 'required',
+                'resident' => 'required'
             ]);
-        }if (@$request->time3) {
-            $useractivities = Useractivities::create([
-                'activities' => $request->activities,
-                'time' => $request->time3,
-                'type' => $request->type,
-                'resident' => $request->resident,
-                'comment' => $request->comment,
-                'other_comment' => @$request->other_comment,
-                'file' => $request->file,
-                'status' => 1,
-                'sign_date' => $date,
-            ]);
-        }if (@$request->time4) {
-            $useractivities = Useractivities::create([
-                'activities' => $request->activities,
-                'time' => $request->time4,
-                'type' => $request->type,
-                'resident' => $request->resident,
-                'comment' => $request->comment,
-                'other_comment' => @$request->other_comment,
-                'file' => $request->file,
-                'status' => 1,
-                'sign_date' => $date,
-            ]);
+
+            $dates = User::getformattime();
+            $date = $dates['date'];
+
+            if (@$request->time1) {
+                $useractivities = Useractivities::create([
+                    'activities' => $request->activities,
+                    'time' => $request->time1,
+                    'type' => $request->type,
+                    'resident' => $request->resident,
+                    'comment' => $request->comment,
+                    'other_comment' => @$request->other_comment,
+                    'file' => $request->file,
+                    'status' => 1,
+                    'sign_date' => $date,
+                ]);
+            }if (@$request->time2) {
+                $useractivities = Useractivities::create([
+                    'activities' => $request->activities,
+                    'time' => $request->time2,
+                    'type' => $request->type,
+                    'resident' => $request->resident,
+                    'comment' => $request->comment,
+                    'other_comment' => @$request->other_comment,
+                    'file' => $request->file,
+                    'status' => 1,
+                    'sign_date' => $date,
+                ]);
+            }if (@$request->time3) {
+                $useractivities = Useractivities::create([
+                    'activities' => $request->activities,
+                    'time' => $request->time3,
+                    'type' => $request->type,
+                    'resident' => $request->resident,
+                    'comment' => $request->comment,
+                    'other_comment' => @$request->other_comment,
+                    'file' => $request->file,
+                    'status' => 1,
+                    'sign_date' => $date,
+                ]);
+            }if (@$request->time4) {
+                $useractivities = Useractivities::create([
+                    'activities' => $request->activities,
+                    'time' => $request->time4,
+                    'type' => $request->type,
+                    'resident' => $request->resident,
+                    'comment' => $request->comment,
+                    'other_comment' => @$request->other_comment,
+                    'file' => $request->file,
+                    'status' => 1,
+                    'sign_date' => $date,
+                ]);
+            }
+
+            // Useractivities::upload_file($useractivities->id);
+
+            return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully created.');
         }
-
-        // Useractivities::upload_file($useractivities->id);
-
-        return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully created.');
     }
 
     /**
