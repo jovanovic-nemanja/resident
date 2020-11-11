@@ -26,7 +26,8 @@ class CreateUserActivitiesTable extends Migration
 
             $table->integer('type');    //daily, weekly or monthly
             
-            $table->integer('comment')->nullable();
+            $table->string('comment')->nullable();
+            $table->string('other_comment')->nullable();
             $table->string('file', '2048')->nullable();
 
             $table->integer('status')->nullable();

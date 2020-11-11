@@ -12,7 +12,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Edit Resident Activity </h1>
+                <h1 class="title">Edit Activity </h1>
                 <!-- PAGE HEADING TAG - END -->
             </div>
 
@@ -58,8 +58,8 @@
                                     <div class="row">
                                         <input type="hidden" name="resident" value="{{ $result['user']->id }}">
 
-                                        <div class="col-lg-3 circle first_circle">
-                                            <div class="form-group {{ $errors->has('activities') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('activities') ? 'has-error' : '' }}">
                                                 <label class="form-label">Activity</label>
                                                 <select class="form-control activities" name="activities" required>
                                                     <option value="">Choose Activity</option>
@@ -76,8 +76,8 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
                                                 <label class="form-label">Time</label>
                                                 <input type="time" class="form-control" name='time' placeholder="Time" value="{{ $result['useractivities']->time }}" required id="time">
                                                 @if ($errors->has('time'))
@@ -88,9 +88,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Time</label>
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
+                                                <label class="form-label">Duration</label>
                                                 <select class="form-control" id="duration" name="type" required>
                                                     <option value="">Choose</option>
                                                     <option value="1" <?php if($result["useractivities"]->type == 1){echo 'selected';} ?>>Daily</option>
@@ -105,15 +105,30 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
                                                 <label class="form-label">Comment</label>
                                                 <select class="form-control" id="comment" name="comment">
                                                     <?php 
-                                                        foreach ($result['comments'] as $com) { ?>
-                                                            <option <?php if($result['useractivities']->comment == $com['id']){echo 'selected';} ?> value="<?= $com['id'] ?>"><?= $com['name'] ?></option>
+                                                        if ($result['useractivities']->comment == -1) { ?>
+                                                            <option value>Choose Comment</option>
+                                                            <option value='-1' selected>Other</option>
+                                                            <?php foreach ($result['comments'] as $com) { ?>
+                                                                <option value="<?= $com['id'] ?>"><?= $com['name'] ?></option>
                                                     <?php } ?>
+                                                    <?php }else{ ?>
+                                                            <option value>Choose Comment</option>
+                                                            <option value='-1'>Other</option>
+                                                            <?php foreach ($result['comments'] as $com) { ?>
+                                                                <option <?php if($result['useractivities']->comment == $com['id']){echo 'selected';} ?> value="<?= $com['id'] ?>"><?= $com['name'] ?></option>
+                                                    <?php } } ?>
                                                 </select>
+
+                                                <?php 
+                                                    if ($result['useractivities']->comment == -1) { ?>
+                                                        <input type="text" name="other_comment" id="other_comment" class="form-control" value="{{ $result['useractivities']->other_comment }}" />
+                                                <?php } ?>
+                                                
                                                 @if ($errors->has('comment'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('comment') }}</strong>
@@ -121,32 +136,14 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        
-                                        <!-- <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('file') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Attached File</label>
-                                                <input type="file" name="file" class="form-control" id="file" placeholder="Attached File" value="{{ asset('uploads/').'/'.$result['useractivities']->file }}">
-                                                @if ($errors->has('file'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('file') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div> -->
                                     </div>
 
                                     <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">
                                         <div class="">
-                                            <button style="display: none;" type="submit" class="btn btn-primary gradient-blue submit_btn">Submit</button>
+                                            <button type="submit" class="btn btn-primary gradient-blue submit_btn">Submit</button>
                                         </div>
                                     </div>
                                 </form>
-
-                                <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">
-                                    <div class="">
-                                        <button class="btn btn-primary gradient-blue validate_btn">Submit</button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -159,36 +156,11 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        // $("#time").on("focusout",function(e){
-        //     var currentTime = new Date();
-        //     var userTime = $("#time").val().split(":"); 
-        //     if(currentTime.getHours() < parseInt(userTime[0])){
-        //         alert("You can choose a time before current time.");
-        //         $(this).focus();                
-        //     }
-        //     if(currentTime.getHours() >= parseInt(userTime[0])){
-        //         if(currentTime.getMinutes() < parseInt(userTime[1])){
-        //             alert("You can choose a time before current time.");
-        //             $(this).focus();
-        //         }
-        //     }
-        // });
-
-        $('.validate_btn').click(function() {
-            var activity = $('.activities').val();
-            if (activity == '') {
-                $('.first_circle').css('background-color', '#ea6b6b');
-            }
-
-            $('.submit_btn').click();
-        });
-
         $('.activities').change(function() {
             $('#comment').empty();
             var activity = $(this).val();
             if (activity != '') {
                 var url = $('#url').val();
-                $('.first_circle').css('background-color', '#1cc6d8');
                 $.ajax({
                     url: '/getcommentsbyactivity',
                     type: 'GET',
@@ -196,7 +168,7 @@
                     success: function(result, status) {
                         if (status) {
                             $('#comment').empty();
-                            var element = "";
+                            var element = "<option value>Choose Comment</option><option value='-1'>Other</option>";
                             for (var i = 0; i < result.length; i++) {
                                 element += "<option value=" + result[i]['id'] + ">" + result[i]['name'] + "</option>";
                             }
@@ -206,6 +178,15 @@
                 })
             }
         });
+
+        $('#comment').change(function() {
+            var cur_val = $(this).val();
+            if (cur_val == -1) {
+                $('#comment').parent().append("<input type='text' class='form-control' name='other_comment' id='other_comment' />");
+            }else{
+                $('#other_comment').remove();
+            }
+        })
     });
 
     $(document).ready(function(){

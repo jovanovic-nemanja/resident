@@ -16,7 +16,7 @@ class Useractivities extends Model
 {
     public $table = "user_activities";
 
-    public $fillable = ['activities', 'time', 'resident', 'type', 'comment', 'file', 'status', 'sign_date'];
+    public $fillable = ['activities', 'time', 'resident', 'type', 'comment', 'other_comment', 'file', 'status', 'sign_date'];
 
     public function getActivities($id) 
     {
@@ -110,16 +110,22 @@ class Useractivities extends Model
         return $str;
     }
 
-    public static function getCommentById($comment_id)
+    public static function getCommentById($id)
     {
-        if (@$comment_id) {
-            $result = Comments::where('id', $comment_id)->first();
+        if (@$id) {
+            $res = Useractivities::where('id', $id)->first();
+            if ($res->comment == -1) {
+                $name = "Other : ".$res->other_comment;
+            }else {
+                $result = Comments::where('id', $res->comment)->first();
+                $name = $result->name;
+            }
         }
         else{
-            $result = '';
+            $name = '';
         }
 
-        return $result->name;
+        return $name;
     }
 
     public static function getTypename($id)

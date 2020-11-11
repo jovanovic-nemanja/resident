@@ -82,7 +82,6 @@ class UseractivitiesController extends Controller
     {
         $this->validate(request(), [
             'activities' => 'required',
-            'time' => 'required',
             'type' => 'required',
             'resident' => 'required'
         ]);
@@ -90,27 +89,57 @@ class UseractivitiesController extends Controller
         $dates = User::getformattime();
         $date = $dates['date'];
 
-        $useractivities = Useractivities::create([
-            'activities' => $request->activities,
-            'time' => $request->time,
-            'type' => $request->type,
-            'resident' => $request->resident,
-            'comment' => $request->comment,
-            'file' => $request->file,
-            'status' => 1,
-            'sign_date' => $date,
-        ]);
+        if (@$request->time1) {
+            $useractivities = Useractivities::create([
+                'activities' => $request->activities,
+                'time' => $request->time1,
+                'type' => $request->type,
+                'resident' => $request->resident,
+                'comment' => $request->comment,
+                'other_comment' => @$request->other_comment,
+                'file' => $request->file,
+                'status' => 1,
+                'sign_date' => $date,
+            ]);
+        }if (@$request->time2) {
+            $useractivities = Useractivities::create([
+                'activities' => $request->activities,
+                'time' => $request->time2,
+                'type' => $request->type,
+                'resident' => $request->resident,
+                'comment' => $request->comment,
+                'other_comment' => @$request->other_comment,
+                'file' => $request->file,
+                'status' => 1,
+                'sign_date' => $date,
+            ]);
+        }if (@$request->time3) {
+            $useractivities = Useractivities::create([
+                'activities' => $request->activities,
+                'time' => $request->time3,
+                'type' => $request->type,
+                'resident' => $request->resident,
+                'comment' => $request->comment,
+                'other_comment' => @$request->other_comment,
+                'file' => $request->file,
+                'status' => 1,
+                'sign_date' => $date,
+            ]);
+        }if (@$request->time4) {
+            $useractivities = Useractivities::create([
+                'activities' => $request->activities,
+                'time' => $request->time4,
+                'type' => $request->type,
+                'resident' => $request->resident,
+                'comment' => $request->comment,
+                'other_comment' => @$request->other_comment,
+                'file' => $request->file,
+                'status' => 1,
+                'sign_date' => $date,
+            ]);
+        }
 
-        Useractivities::upload_file($useractivities->id);
-
-        $actis = Activities::where('id', $request->activities)->first();
-        $activName = $actis->title;
-        $activType = Activities::getTypeasstring($actis->type);
-
-        $data = [];
-        $data['caretakerId'] = auth()->id();
-        $data['content'] = User::getUsernameById($data['caretakerId']) . " added " . $activType . " : " . $activName . "(" . $request->time . ")" . " to " . User::getUsernameById($request->resident);
-        Adminlogs::Addlogs($data);
+        // Useractivities::upload_file($useractivities->id);
 
         return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully created.');
     }
@@ -176,6 +205,7 @@ class UseractivitiesController extends Controller
             $record->type = $request->type;
             $record->resident = $request->resident;
             $record->comment = $request->comment;
+            $record->other_comment = @$request->other_comment;
             $record->file = $request->file;
 
             $record->update();
@@ -198,19 +228,5 @@ class UseractivitiesController extends Controller
         $record = Useractivities::where('id', $id)->delete();
         
         return redirect()->route('useractivities.indexuseractivity', $resident->resident);
-    }
-
-    public function assign($id)
-    {
-        if (@$id) {
-            $record = Useractivities::where('id', $id)->first();
-            if (@$record) {
-                $record->status = 2;
-
-                $record->update();
-            }
-
-            return redirect()->route('useractivities.indexuseractivity', $record->resident);
-        }
     }
 }

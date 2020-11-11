@@ -12,7 +12,7 @@
 
             <div class="pull-left">
                 <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Add Resident Activity </h1>
+                <h1 class="title">Assign Activity </h1>
                 <!-- PAGE HEADING TAG - END -->
             </div>
 
@@ -57,8 +57,8 @@
                                     <input type="hidden" name="resident" value="{{ $result['user']->id }}">
 
                                     <div class="row" >
-                                        <div class="col-lg-3 circle first_circle">
-                                            <div class="form-group {{ $errors->has('activities') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('activities') ? 'has-error' : '' }}">
                                                 <label class="form-label">Activity</label>
                                                 <select class="form-control activities" name="activities" required>
                                                     <option value="">Choose Activity</option>
@@ -73,21 +73,9 @@
                                                 @endif
                                             </div>
                                         </div>
-                                            
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Time</label>
-                                                <input type="time" class="form-control" name='time' placeholder="Time" value="<?= date('H:i'); ?>" required id="time">
-                                                @if ($errors->has('time'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('time') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
 
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
                                                 <label class="form-label">Duration</label>
                                                 <select class="form-control" id="duration" name="type" required>
                                                     <option value="">Choose</option>
@@ -103,8 +91,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }} circle_form">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
                                                 <label class="form-label">Comment </label>
                                                 <select class="form-control" id="comment" name="comment">
                                                     
@@ -117,31 +105,76 @@
                                             </div>
                                         </div>
 
-                                        <!-- <div class="col-lg-3 circle">
-                                            <div class="form-group {{ $errors->has('file') ? 'has-error' : '' }} circle_form">
-                                                <label class="form-label">Attached File </label>
-                                                <input type="file" name="file" class="form-control" id="file" placeholder="Attached File">
-                                                @if ($errors->has('file'))
+                                        <div class="col-lg-3 other_comment">
+                                            <div class="form-group {{ $errors->has('other_comment') ? 'has-error' : '' }}">
+                                                <label class="form-label">Other Comment </label>
+                                                <input type='text' class='form-control' name='other_comment' id='other_comment' />
+                                                
+                                                @if ($errors->has('other_comment'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('file') }}</strong>
+                                                        <strong>{{ $errors->first('other_comment') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
-                                        </div> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('time1') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time1</label>
+                                                <input type="time" class="form-control" name='time1' placeholder="Time1" required id="time1">
+                                                @if ($errors->has('time1'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time1') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('time2') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time2</label>
+                                                <input type="time" class="form-control" name='time2' placeholder="Time2" required id="time2">
+                                                @if ($errors->has('time2'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time2') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('time3') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time3</label>
+                                                <input type="time" class="form-control" name='time3' placeholder="Time3" required id="time3">
+                                                @if ($errors->has('time3'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time3') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('time4') ? 'has-error' : '' }}">
+                                                <label class="form-label">Time4</label>
+                                                <input type="time" class="form-control" name='time4' placeholder="Time4" required id="time4">
+                                                @if ($errors->has('time4'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('time4') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">
                                         <div class="">
-                                            <button style="display: none;" type="submit" class="btn btn-primary gradient-blue submit_btn">Submit</button>
+                                            <button type="submit" class="btn btn-primary gradient-blue submit_btn">Submit</button>
                                         </div>
                                     </div>
                                 </form>
-
-                                <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">
-                                    <div class="">
-                                        <button class="btn btn-primary gradient-blue validate_btn">Submit</button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -154,25 +187,13 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        var cw = $('.circle').width();
-        $('.circle').css({'height':cw+parseInt(30)+'px'});
-        // $('.circle').css({'line-height':cw+parseInt(30)+'px'});
-
-        $('.validate_btn').click(function() {
-            var activity = $('.activities').val();
-            if (activity == '') {
-                $('.first_circle').css('background-color', '#ea6b6b');
-            }
-
-            $('.submit_btn').click();
-        });
+        $('.other_comment').hide();
 
         $('.activities').change(function() {
             $('#comment').empty();
             var activity = $(this).val();
             if (activity != '') {
                 var url = $('#url').val();
-                $('.first_circle').css('background-color', '#1cc6d8');
                 $.ajax({
                     url: '/getcommentsbyactivity',
                     type: 'GET',
@@ -180,7 +201,7 @@
                     success: function(result, status) {
                         if (status) {
                             $('#comment').empty();
-                            var element = "";
+                            var element = "<option value>Choose Comment</option><option value='-1'>Other</option>";
                             for (var i = 0; i < result.length; i++) {
                                 element += "<option value=" + result[i]['id'] + ">" + result[i]['name'] + "</option>";
                             }
@@ -190,12 +211,15 @@
                 })
             }
         });
-    });
 
-    $(window).resize(function(){
-        var cw = $('.circle').width();
-        $('.circle').css({'height':cw+parseInt(30)+'px'});
-        // $('.circle').css({'line-height':cw+parseInt(30)+'px'});
+        $('#comment').change(function() {
+            var cur_val = $(this).val();
+            if (cur_val == -1) {
+                $('.other_comment').show();
+            }else{
+                $('.other_comment').hide();
+            }
+        })
     });
 </script>
 @endsection

@@ -33,8 +33,8 @@
             <header class="panel_header">
                 <h2 class="title pull-left">Activities</h2>
                 <div class="actions panel_actions pull-right">
-                	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('useractivities.createuseractivity', ['type' => 1, 'resident' => $user->id]) }}" class="btn btn-success">Add Primary ADL</a>
-                	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('useractivities.createuseractivity', ['type' => 2, 'resident' => $user->id]) }}" class="btn btn-primary">Add Secondary ADL</a>
+                	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('useractivities.createuseractivity', ['type' => 1, 'resident' => $user->id]) }}" class="btn btn-success">Assign Primary ADL</a>
+                	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('useractivities.createuseractivity', ['type' => 2, 'resident' => $user->id]) }}" class="btn btn-primary">Assign Secondary ADL</a>
                 </div>
             </header>
             <div class="content-body">
@@ -50,9 +50,7 @@
                                         <th>Title</th>
                                         <th>Time</th>
                                         <th>Duration</th>
-                                        <th>Status</th>
-                                        <th>comment</th>
-                                        <th>Attached File</th>
+                                        <th>Comment</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -75,32 +73,15 @@
 			                                            </div>
 			                                        </td>
 			                                        <td>
-			                                        	<span class="badge round-primary">{{ $useractivity->time }}</span>
+			                                        	<span class="badge round-primary" style="background-color: #d86060;">{{ $useractivity->time }}</span>
 			                                        </td>
 			                                        <td>
 			                                        	<span class="badge round-primary">{{ App\Useractivities::getTypename($useractivity->type) }}</span>
 			                                        </td>
 			                                        <td>
-			                                        	<?php 
-			                                        		if ($useractivity->status == 1) {
-			                                        			$css = "background-color: #de8383;";
-			                                        		}else{
-			                                        			$css = "background-color: #4d9cf8;";
-			                                        		}
-			                                        	?>
-			                                        	<span class="badge round-primary" style="<?= $css; ?>">{{ App\Useractivities::getStatus($useractivity->status) }}</span>
+			                                        	{{ App\Useractivities::getCommentById($useractivity->id) }}
 			                                        </td>
 			                                        <td>
-			                                        	{{ App\Useractivities::getCommentById($useractivity->comment) }}
-			                                        </td>
-			                                        <td>
-			                                        	<a href="{{ asset('uploads/').'/'.$useractivity->file }}">{{ $useractivity->file }}</a>
-			                                        </td>
-			                                        <td>
-			                                        	@if(auth()->user()->hasRole('admin'))
-					                                        <a href="{{ route('useractivities.assign', $useractivity->id) }}" class="btn btn-default">Assign</a>
-					                                    @endif
-			                                        	
 			                                        	<a href="{{ route('useractivities.show', $useractivity->id) }}" class="btn btn-success">Edit</a>
 			                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$useractivity->id}}').submit();">Delete</a>
 
