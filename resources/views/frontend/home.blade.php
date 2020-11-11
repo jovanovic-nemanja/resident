@@ -54,9 +54,19 @@
                                                         Daily Activities <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="{{ route('useractivities.indexuseractivity', $resident->id) }}">View ADL</a></li>
-                                                        <li><a href="{{ route('useractivities.createuseractivity', ['type' => 1, 'resident' => $resident->id]) }}">Primary ADL</a></li>
-                                                        <li><a href="{{ route('useractivities.createuseractivity', ['type' => 2, 'resident' => $resident->id]) }}">Secondary ADL</a></li>
+                                                        @if(auth()->user()->hasRole('admin'))
+                                                            <li>
+                                                                <a href="{{ route('useractivities.indexuseractivity', $resident->id) }}">View ADL</a>
+                                                            </li>
+                                                            <li><a href="{{ route('useractivities.createuseractivity', ['type' => 1, 'resident' => $resident->id]) }}">Primary ADL</a></li>
+                                                            <li><a href="{{ route('useractivities.createuseractivity', ['type' => 2, 'resident' => $resident->id]) }}">Secondary ADL</a></li>
+                                                        @else
+                                                            <li>
+                                                                <a href="{{ route('useractivities.indexuseractivity', $resident->id) }}">View ADL</a>
+                                                            </li>
+                                                            <li><a href="{{ route('useractivities.indexuseractivity', $resident->id) }}">Primary ADL</a></li>
+                                                            <li><a href="{{ route('useractivities.indexuseractivity', $resident->id) }}">Secondary ADL</a></li>
+                                                        @endif
                                                     </ul>
                                                 </div>
                                             </div>

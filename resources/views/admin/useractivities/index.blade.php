@@ -33,8 +33,10 @@
             <header class="panel_header">
                 <h2 class="title pull-left">Activities</h2>
                 <div class="actions panel_actions pull-right">
-                	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('useractivities.createuseractivity', ['type' => 1, 'resident' => $user->id]) }}" class="btn btn-success">Assign Primary ADL</a>
-                	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('useractivities.createuseractivity', ['type' => 2, 'resident' => $user->id]) }}" class="btn btn-primary">Assign Secondary ADL</a>
+                	@if(auth()->user()->hasRole('admin'))
+                		<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('useractivities.createuseractivity', ['type' => 1, 'resident' => $user->id]) }}" class="btn btn-success">Assign Primary ADL</a>
+	                	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('useractivities.createuseractivity', ['type' => 2, 'resident' => $user->id]) }}" class="btn btn-primary">Assign Secondary ADL</a>
+					@endif
                 </div>
             </header>
             <div class="content-body">
