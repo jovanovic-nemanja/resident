@@ -47,7 +47,7 @@ class UseractivitiesController extends Controller
      */
     public function indexuseractivity($id)
     {
-        $useractivities = Useractivities::where('resident', $id)->whereNotNull('time')->orderBy('time')->get();
+        $useractivities = Useractivities::where('resident', $id)->orderBy('time')->get();
         $user = User::where('id', $id)->first();
         $comments = Comments::where('type', 1)->get();
 
@@ -93,8 +93,8 @@ class UseractivitiesController extends Controller
 
             $assigned = Useractivities::where('id', $request->assign_id)->first();
             $time = $assigned->time;
-            $assigned->time = NULL;
-            $assigned->update();
+            // $assigned->time = NULL;
+            // $assigned->update();
 
             $reports = Useractivityreports::create([
                 'assign_id' => $request->assign_id,

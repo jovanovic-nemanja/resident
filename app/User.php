@@ -114,6 +114,22 @@ class User extends Authenticatable
     }
 
     /**
+    * @param datetime
+    * @return date
+    * @since 2020-11-12
+    * @author Nemanja
+    */
+    public static function formatdate($date)
+    {
+        $timeZone = 'America/Los_Angeles';
+        date_default_timezone_set($timeZone);
+        $dates = date_create($date, timezone_open('America/Los_Angeles'));
+        $cur_date = date_format($dates, 'Y-m-d');
+
+        return $cur_date;
+    }
+
+    /**
     * @param time
     * @return time
     * @since 2020-10-16

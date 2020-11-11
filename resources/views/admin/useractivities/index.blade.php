@@ -39,6 +39,7 @@
 					@endif
                 </div>
             </header>
+            
             <div class="content-body">
                 <div class="row">
                     <div class="col-xs-12">
@@ -103,16 +104,22 @@
 												                  @csrf
 												            </form>
 														@else
-															<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-activity-form-{{$useractivity->id}}').submit();">Give Activity</a>
+															<?php 
+																$boolean = App\Useractivities::getCalculateDaysById($useractivity->id);
+																if ($boolean == 1) { ?>
+																	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-activity-form-{{$useractivity->id}}').submit();">Give Activity</a>
 
-															<form id="give-activity-form-{{$useractivity->id}}" action="{{ route('useractivities.store') }}" method="POST" style="display: none;">
-												                  	<input type="hidden" name="_method" value="POST">
-												                  	@csrf
+																	<form id="give-activity-form-{{$useractivity->id}}" action="{{ route('useractivities.store') }}" method="POST" style="display: none;">
+														                  	<input type="hidden" name="_method" value="POST">
+														                  	@csrf
 
-												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
-												                  	<input type="hidden" name="comment" class="comm_val" />
-                                    								<input type="hidden" name="assign_id" value="{{ $useractivity->id }}">
-												            </form>
+														                  	<input type="hidden" name="resident" value="{{ $user->id }}">
+														                  	<input type="hidden" name="comment" class="comm_val" />
+		                                    								<input type="hidden" name="assign_id" value="{{ $useractivity->id }}">
+														            </form>
+															<?php }else{ ?>
+																<a id="{{ $useractivity->id }}" class="btn btn-default" style="cursor: not-allowed;">Gave Activity</a>
+															<?php } ?>
 														@endif
 			                                        </td>
 			                                    </tr>

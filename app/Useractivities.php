@@ -11,6 +11,7 @@ use App\User;
 use App\Comments;
 use App\Activities;
 use App\Useractivities;
+use App\Useractivityreports;
 
 class Useractivities extends Model
 {
@@ -145,5 +146,58 @@ class Useractivities extends Model
         }
 
         return $str;
+    }
+
+    /**
+    * get counts of between days as type
+    * @param user_activities table id
+    * @return boolean true or false
+    * @since 2020-11-12
+    * @author Nemanja
+    */
+    public static function getCalculateDaysById($id)
+    {
+        if (@$id) {
+            $record = Useractivities::where('id', $id)->first();
+            if (@$record) {
+                $report = Useractivityreports::where('assign_id', $id)->latest()->first();
+                if (@$report) {
+                    $report_date = User::formatdate($report['sign_date']);
+                    $type = $record->type;
+                    
+                    $dates = User::getformattime();
+                    $current_date = $dates['dates'];
+
+                    $diff_days = date_diff(date_create($report_date), date_create($current_date));
+                    $diff_counts = $diff_days->format('%a');
+
+                    switch ($type) {
+                        case '1':   //daily case
+                            $dd = 1;
+                            break;
+
+                        case '2':   //weekly case
+                            $dd = 7;
+                            break;
+
+                        case '3':   //monthly case
+                            $dd = 31;
+                            break;
+                        
+                        default:
+                            # code...
+                            break;
+                    }
+
+                    if ($diff_counts >= $dd) {
+                        return 1;
+                    }else{
+                        return -1;
+                    }
+                }else{
+                    return 1;
+                }
+            }
+        }
     }
 }
