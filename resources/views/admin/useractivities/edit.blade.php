@@ -188,15 +188,5 @@
             }
         })
     });
-
-    $(document).ready(function(){
-        var cw = $('.circle').width();
-        $('.circle').css({'height':cw+parseInt(30)+'px'});
-    });
-
-    $(window).resize(function(){
-        var cw = $('.circle').width();
-        $('.circle').css({'height':cw+parseInt(30)+'px'});
-    });
 </script>
 @endsection

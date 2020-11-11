@@ -123,7 +123,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group {{ $errors->has('time1') ? 'has-error' : '' }}">
                                                 <label class="form-label">Time1</label>
-                                                <input type="time" class="form-control" name='time1' placeholder="Time1" required id="time1">
+                                                <input type="time" class="form-control" name='time1' placeholder="Time1" id="time1">
                                                 @if ($errors->has('time1'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('time1') }}</strong>
@@ -135,7 +135,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group {{ $errors->has('time2') ? 'has-error' : '' }}">
                                                 <label class="form-label">Time2</label>
-                                                <input type="time" class="form-control" name='time2' placeholder="Time2" required id="time2">
+                                                <input type="time" class="form-control" name='time2' placeholder="Time2" id="time2">
                                                 @if ($errors->has('time2'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('time2') }}</strong>
@@ -147,7 +147,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group {{ $errors->has('time3') ? 'has-error' : '' }}">
                                                 <label class="form-label">Time3</label>
-                                                <input type="time" class="form-control" name='time3' placeholder="Time3" required id="time3">
+                                                <input type="time" class="form-control" name='time3' placeholder="Time3" id="time3">
                                                 @if ($errors->has('time3'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('time3') }}</strong>
@@ -159,7 +159,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group {{ $errors->has('time4') ? 'has-error' : '' }}">
                                                 <label class="form-label">Time4</label>
-                                                <input type="time" class="form-control" name='time4' placeholder="Time4" required id="time4">
+                                                <input type="time" class="form-control" name='time4' placeholder="Time4" id="time4">
                                                 @if ($errors->has('time4'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('time4') }}</strong>
