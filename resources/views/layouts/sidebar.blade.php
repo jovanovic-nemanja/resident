@@ -3,7 +3,7 @@
     <div class="page-sidebar-wrapper ps-container" id="main-menu-wrapper" style="height: 860px;">
         <ul class="wraplist" style="height: auto;">
             <li class="menusection">Main</li>
-            <li class="<?= ($menu == 'residents') ? "open" : "" ?>">
+            <li class="<?= ($menu == 'residents' || $menu == 'addresident') ? "open" : "" ?>">
                 <a href="javascript:;">
                     <i class="img">
                         <img src="{{ asset('newdesign/assets/images/5.png') }}" alt="" class="width-20">
@@ -13,11 +13,11 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a class="" href="{{ route('home') }}">All Residents</a>
+                        <a class="<?= ($menu == "residents") ? "active" : "" ?>" href="{{ route('home') }}">All Residents</a>
                     </li>
                     @if(auth()->user()->hasRole('admin'))
                         <li>
-                            <a class="" href="{{ route('resident.add') }}">Add Resident</a>
+                            <a class="<?= ($menu == "addresident") ? "active" : "" ?>" href="{{ route('resident.add') }}">Add Resident</a>
                         </li>
                     @endif
                 </ul>
@@ -42,7 +42,7 @@
                     </a>
                 </li>
 
-                <li class="<?= ($menu == 'activities') ? "open" : "" ?>">
+                <li class="<?= ($menu == 'activities' || $menu == 'incidences' || $menu == 'medications' || $menu == 'routes' || $menu == 'bodyharmcomments' || $menu == 'reminderconfigs' || $menu == 'adminlogs') ? "open" : "" ?>">
                     <a href="javascript:;">
                         <i class="img">
                             <img src="{{ asset('newdesign/data/crypto-dash/icons/13.png') }}" alt="" class="width-20">
@@ -52,25 +52,25 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a class="" href="{{ route('activities.index') }}">Activities</a>
+                            <a class="<?= ($menu == "activities") ? "active" : "" ?>" href="{{ route('activities.index') }}">Activities</a>
                         </li>
                         <li>
-                            <a class="" href="{{ route('incidences.index') }}">Incidences</a>
+                            <a class="<?= ($menu == "incidences") ? "active" : "" ?>" href="{{ route('incidences.index') }}">Incidences</a>
                         </li>
                         <li>
-                            <a class="" href="{{ route('medications.index') }}">Medications</a>
+                            <a class="<?= ($menu == "medications") ? "active" : "" ?>" href="{{ route('medications.index') }}">Medications</a>
                         </li>
                         <li>
-                            <a class="" href="{{ route('routes.index') }}">Routes</a>
+                            <a class="<?= ($menu == "routes") ? "active" : "" ?>" href="{{ route('routes.index') }}">Routes</a>
                         </li>
                         <li>
-                            <a class="" href="{{ route('bodyharmcomments.index') }}">Body harm Comments</a>
+                            <a class="<?= ($menu == "bodyharmcomments") ? "active" : "" ?>" href="{{ route('bodyharmcomments.index') }}">Body harm Comments</a>
                         </li>
                         <li>
-                            <a class="" href="{{ route('reminderconfigs.index') }}">Reminder Configs</a>
+                            <a class="<?= ($menu == "reminderconfigs") ? "active" : "" ?>" href="{{ route('reminderconfigs.index') }}">Reminder Configs</a>
                         </li>
                         <li>
-                            <a class="" href="{{ route('adminlogs.index') }}">Admin Logs</a>
+                            <a class="<?= ($menu == "adminlogs") ? "active" : "" ?>" href="{{ route('adminlogs.index') }}">Admin Logs</a>
                         </li>
                     </ul>
                 </li>

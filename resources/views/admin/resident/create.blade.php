@@ -1,4 +1,4 @@
-@extends('layouts.appsecond', ['menu' => 'residents'])
+@extends('layouts.appsecond', ['menu' => 'addresident'])
 
 @section('content')
 	@if(session('flash'))
@@ -103,7 +103,7 @@
                                         <label for="name" class="form-label">{{ __('Profile Image') }}</label>
                                         <div class="controls">
                                             <span>
-                                                <input type="file" name="profile_logo" id="file" onchange="loadPreview(this, 'preview_img');" class="inputfile">
+                                                <input required type="file" name="profile_logo" id="file" onchange="loadPreview(this, 'preview_img');" class="inputfile">
                                                 <label for="file" @click="onClick" inputId="1" style="" id='preview_img'><i class="fa fa-plus-circle"></i></label>
                                             </span>
                                         </div>
@@ -130,7 +130,8 @@
 
                                     <div class="padding-bottom-30">
                                         <div class="text-left">
-                                            <button type="submit" class="btn btn-primary gradient-blue">Save</button>
+                                            <button type="submit" style="display: none;" class="btn btn-primary gradient-blue real_save_btn">Save</button>
+                                            <button type="button" class="btn btn-primary gradient-blue save_btn">Save</button>
                                             <button type="button" class="btn">Cancel</button>
                                         </div>
                                     </div>
@@ -146,6 +147,18 @@
 
 @section('script')
 <script>
+    $('document').ready(function() {
+        $('.save_btn').click(function() {
+            var profile_logo = $('.inputfile');    
+            if (profile_logo[0].files.length) {
+                $('.real_save_btn').click();    
+            }else{
+                alert('Please choose profie photo.');
+                return;
+            }
+        });        
+    });
+
     function loadPreview(input, id) {
         id = "#" + id;
         if (input.files && input.files[0]) {

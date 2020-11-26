@@ -15,11 +15,11 @@
     <div class="quick-area">
         <div class="pull-left">
             <ul class="info-menu left-links list-inline list-unstyled">
-                <li class="sidebar-toggle-wrap">
+                <!-- <li class="sidebar-toggle-wrap">
                     <a href="#" data-toggle="sidebar" class="sidebar_toggle">
                         <i class="fa fa-bars"></i>
                     </a>
-                </li>
+                </li> -->
                 <li class="topnav-item item1">
                     <a href="{{ route('notifications.index') }}" class="new-link w-text">Reminders
                         <span class="badge badge-danger ml-5 reminder_badge">New</span>
