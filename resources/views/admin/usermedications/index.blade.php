@@ -34,7 +34,7 @@
                 <h2 class="title pull-left">Assigned Medications</h2>
                 <div class="actions panel_actions pull-right">
                 	@if(auth()->user()->hasRole('admin'))
-                		<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('usermedications.createassignmedication', $user->id) }}" class="btn btn-success">Assign</a>
+                		<a style="padding: 7px 18px; font-size: initial;" href="{{ route('usermedications.createassignmedication', $user->id) }}" class="btn btn-success">Assign</a>
 					@endif
                 </div>
             </header>

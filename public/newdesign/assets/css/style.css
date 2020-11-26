@@ -1281,7 +1281,7 @@ section.box .actions {
     top:0px;
 }
 section.box .actions a {
-    color: #bcbcbc;
+    /*color: #bcbcbc;*/
     font-size: 12px;
     margin-left: 0px;
     padding: 5px;
@@ -1290,7 +1290,7 @@ section.box .actions a {
     text-decoration: none;
 }
 section.box .actions a:hover {
-    color: #999999;
+    color: #4CAF50;
     text-decoration: none;
 }
 section .content-body.collapsed {
