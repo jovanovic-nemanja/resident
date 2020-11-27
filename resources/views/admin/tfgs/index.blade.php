@@ -33,7 +33,7 @@
             <header class="panel_header">
                 <h2 class="title pull-left">PRN</h2>
                 <div class="actions panel_actions pull-right">
-                	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('tfgs.createtfg', $user->id) }}" class="btn btn-success">Add</a>
+                	<a style="padding: 7px 18px; font-size: initial;" href="{{ route('tfgs.createtfg', $user->id) }}" class="btn btn-success">Give</a>
                 </div>
             </header>
             <div class="content-body">
@@ -74,14 +74,16 @@
 			                                        <td>
 			                                        	{{ $tfg->comment }}
 			                                        </td>
-			                                        <td>			                                        	
-			                                        	<a href="{{ route('tfgs.show', $tfg->id) }}" class="btn btn-success">Edit</a>
-			                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$tfg->id}}').submit();">Delete</a>
+			                                        <td>	
+                                                        @if(auth()->user()->hasRole('admin'))		    
+                                                            <a href="{{ route('tfgs.show', $tfg->id) }}" class="btn btn-success">Edit</a>
+                                                            <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$tfg->id}}').submit();">Delete</a>
 
-			                                        	<form id="delete-form-{{$tfg->id}}" action="{{ route('tfgs.destroy', $tfg->id) }}" method="POST" style="display: none;">
-											                  <input type="hidden" name="_method" value="delete">
-											                  @csrf
-											            </form>
+                                                            <form id="delete-form-{{$tfg->id}}" action="{{ route('tfgs.destroy', $tfg->id) }}" method="POST" style="display: none;">
+                                                                  <input type="hidden" name="_method" value="delete">
+                                                                  @csrf
+                                                            </form>                                     
+                                                        @endif   	
 			                                        </td>
 			                                    </tr>
                                     <?php $i++; } }else{ ?>
