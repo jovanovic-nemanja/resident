@@ -138,7 +138,9 @@ class CaretakerController extends Controller
             $record->update();
         }
         
-        User::upload_logo_img($record->id);
+        if (@$request->profile_logo) {
+            User::upload_logo_img($record->id);
+        }
 
         return redirect()->route('caretaker.index');
     }

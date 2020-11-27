@@ -93,8 +93,6 @@ class UseractivitiesController extends Controller
 
             $assigned = Useractivities::where('id', $request->assign_id)->first();
             $time = $assigned->time;
-            // $assigned->time = NULL;
-            // $assigned->update();
 
             $reports = Useractivityreports::create([
                 'assign_id' => $request->assign_id,

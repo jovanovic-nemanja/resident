@@ -51,54 +51,8 @@ class UsermedicationsController extends Controller
     public function indexusermedication($id)
     {
         $usermedications = Usermedications::where('resident', $id)->orderBy('sign_date', 'asc')->get();
-        $assignmedications = Assignmedications::where('resident', $id)->orderBy('sign_date', 'desc')->get();
-        $arrs = [];
-
-        if (@$assignmedications) {
-            foreach ($assignmedications as $assignmedication) {
-                if (@$assignmedication->time1) {
-                    $arrs[] = array(
-                        'id' => $assignmedication->id,
-                        'sign_date' => $assignmedication->sign_date,
-                        'dose' => $assignmedication->dose,
-                        'route' => $assignmedication->route,
-                        'time' => $assignmedication->time1,
-                        'type' => 1
-                    );
-                } if (@$assignmedication->time2) {
-                    $arrs[] = array(
-                        'id' => $assignmedication->id,
-                        'sign_date' => $assignmedication->sign_date,
-                        'dose' => $assignmedication->dose,
-                        'route' => $assignmedication->route,
-                        'time' => $assignmedication->time2,
-                        'type' => 2
-                    );
-                } if (@$assignmedication->time3) {
-                    $arrs[] = array(
-                        'id' => $assignmedication->id,
-                        'sign_date' => $assignmedication->sign_date,
-                        'dose' => $assignmedication->dose,
-                        'route' => $assignmedication->route,
-                        'time' => $assignmedication->time3,
-                        'type' => 3
-                    );
-                } if (@$assignmedication->time4) {
-                    $arrs[] = array(
-                        'id' => $assignmedication->id,
-                        'sign_date' => $assignmedication->sign_date,
-                        'dose' => $assignmedication->dose,
-                        'route' => $assignmedication->route,
-                        'time' => $assignmedication->time4,
-                        'type' => 4
-                    );
-                }                  
-            }
-        }
-
-        usort($arrs, function($a, $b) {
-            return strtotime($a['time']) - strtotime($b['time']);
-        });
+        $assignmedications = Assignmedications::where('resident', $id)->orderBy('time')->get();
+        $arrs = $assignmedications;
 
         $user = User::where('id', $id)->first();
 
@@ -176,17 +130,43 @@ class UsermedicationsController extends Controller
             $dates = User::getformattime();
             $date = $dates['date'];
 
-            $assignmedications = Assignmedications::create([
-                'medications' => $request->medications,
-                'dose' => $request->dose,
-                'resident' => $request->resident,
-                'route' => $request->route,
-                'sign_date' => $date,
-                'time1' => @$request->time1,
-                'time2' => @$request->time2,
-                'time3' => @$request->time3,
-                'time4' => @$request->time4,
-            ]);
+            if (@$request->time1) {
+                $assignmedications = Assignmedications::create([
+                    'medications' => $request->medications,
+                    'dose' => $request->dose,
+                    'resident' => $request->resident,
+                    'route' => $request->route,
+                    'sign_date' => $date,
+                    'time' => @$request->time1,
+                ]);
+            } if (@$request->time2) {
+                $assignmedications = Assignmedications::create([
+                    'medications' => $request->medications,
+                    'dose' => $request->dose,
+                    'resident' => $request->resident,
+                    'route' => $request->route,
+                    'sign_date' => $date,
+                    'time' => @$request->time2,
+                ]);
+            } if (@$request->time3) {
+                $assignmedications = Assignmedications::create([
+                    'medications' => $request->medications,
+                    'dose' => $request->dose,
+                    'resident' => $request->resident,
+                    'route' => $request->route,
+                    'sign_date' => $date,
+                    'time' => @$request->time3,
+                ]);
+            } if (@$request->time4) {
+                $assignmedications = Assignmedications::create([
+                    'medications' => $request->medications,
+                    'dose' => $request->dose,
+                    'resident' => $request->resident,
+                    'route' => $request->route,
+                    'sign_date' => $date,
+                    'time' => @$request->time4,
+                ]);
+            }
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully assigned.');
         }else{  //give medication for care taker
@@ -199,21 +179,7 @@ class UsermedicationsController extends Controller
             $date = $dates['date'];
 
             $assigned = Assignmedications::where('id', $request->assign_id)->first();
-            if ($request->type == 1) {
-                $time = $assigned->time1;
-                $assigned->time1 = NULL;    
-            }if ($request->type == 2) {
-                $time = $assigned->time2;
-                $assigned->time2 = NULL;    
-            }if ($request->type == 3) {
-                $time = $assigned->time3;
-                $assigned->time3 = NULL;    
-            }if ($request->type == 4) {
-                $time = $assigned->time4;
-                $assigned->time4 = NULL;    
-            }
-            
-            $assigned->update();
+            $time = $assigned->time;
 
             $usermedications = Usermedications::create([
                 'assign_id' => $request->assign_id,
@@ -313,10 +279,7 @@ class UsermedicationsController extends Controller
                 $record->dose = $request->dose;
                 $record->resident = $request->resident;
                 $record->route = $request->route;
-                $record->time1 = @$request->time1;
-                $record->time2 = @$request->time2;
-                $record->time3 = @$request->time3;
-                $record->time4 = @$request->time4;
+                $record->time = @$request->time;
 
                 $record->update();
             }

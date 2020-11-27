@@ -104,52 +104,14 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-lg-3 time1">
-                                            <div class="form-group {{ $errors->has('time1') ? 'has-error' : '' }}">
+                                        <div class="col-lg-3 time">
+                                            <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
                                                 <label class="form-label">Time 1 </label>
-                                                <input type="time" class="form-control" id="time1" name="time1" placeholder="Time 1" value="{{ $result['usermedications']->time1 }}">
-                                                @if ($errors->has('time1'))
+                                                <input type="time" class="form-control" id="time" name="time" placeholder="Time" value="{{ $result['usermedications']->time }}">
+                                                @if ($errors->has('time'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('time1') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 time2">
-                                            <div class="form-group {{ $errors->has('time2') ? 'has-error' : '' }}">
-                                                <label class="form-label">Time 2 </label>
-                                                <input type="time" class="form-control" id="time2" name="time2" placeholder="Time 2" value="{{ $result['usermedications']->time2 }}">
-                                                @if ($errors->has('time2'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('time2') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 time3">
-                                            <div class="form-group {{ $errors->has('time3') ? 'has-error' : '' }}">
-                                                <label class="form-label">Time 3 </label>
-                                                <input type="time" class="form-control" id="time3" name="time3" placeholder="Time 3" value="{{ $result['usermedications']->time3 }}">
-                                                @if ($errors->has('time3'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('time3') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 time4">
-                                            <div class="form-group {{ $errors->has('time4') ? 'has-error' : '' }}">
-                                                <label class="form-label">Time 4 </label>
-                                                <input type="time" class="form-control" id="time4" name="time4" placeholder="Time 4" value="{{ $result['usermedications']->time4 }}">
-                                                @if ($errors->has('time4'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('time4') }}</strong>
+                                                        <strong>{{ $errors->first('time') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
