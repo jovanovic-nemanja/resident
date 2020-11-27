@@ -26,7 +26,7 @@
             <header class="panel_header">
                 <h2 class="title pull-left">Comments</h2>
                 <div class="actions panel_actions pull-right">
-                	<a style="color: #fff; padding: 7px 18px; font-size: initial;" href="{{ route('bodyharmcomments.create') }}" class="btn btn-success">Add</a>
+                	<a style="padding: 7px 18px; font-size: initial;" href="{{ route('bodyharmcomments.create') }}" class="btn btn-success">Add</a>
                 </div>
             </header>
             <div class="content-body">

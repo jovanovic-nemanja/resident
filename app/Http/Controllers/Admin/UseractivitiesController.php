@@ -112,7 +112,7 @@ class UseractivitiesController extends Controller
             $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $actName . "(" . $time . ")" . " to " . User::getUsernameById($request->resident);
             Adminlogs::Addlogs($data);
 
-            return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully gived.');
+            return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully given.');
         }else{  //assign activity as admin
             $this->validate(request(), [
                 'activities' => 'required',
