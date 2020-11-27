@@ -231,7 +231,7 @@ class UsermedicationsController extends Controller
             $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $medicName . "(" . $time . ")" . " to " . User::getUsernameById($request->resident);
             Adminlogs::Addlogs($data);
 
-            return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully gived.');
+            return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully given.');
         }
     }
 

@@ -115,11 +115,15 @@ class Useractivities extends Model
     {
         if (@$id) {
             $res = Useractivities::where('id', $id)->first();
-            if ($res->comment == -1) {
-                $name = "Other : ".$res->other_comment;
-            }else {
-                $result = Comments::where('id', $res->comment)->first();
-                $name = $result->name;
+            if (@$res->comment) {
+                if ($res->comment == -1) {
+                    $name = "Other : ".$res->other_comment;
+                }else {
+                    $result = Comments::where('id', $res->comment)->first();
+                    $name = $result->name;
+                }
+            }else{
+                $name = '';
             }
         }
         else{
