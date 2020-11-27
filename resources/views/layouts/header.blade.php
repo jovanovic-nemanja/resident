@@ -36,10 +36,17 @@
                             <span>Login <i class="fa fa-angle-down"></i></span>
                         </a>
                     @else
-                        <a href="#" data-toggle="dropdown" class="toggle">
-                            <img src="{{ asset('newdesign/data/profile/nurse.jpg') }}" alt="user-image" class="img-circle img-inline">
-                            <span>{{ Auth::user()->name }} <i class="fa fa-angle-down"></i></span>
-                        </a>
+                        @if(auth()->user()->hasRole('admin'))
+                            <a href="#" data-toggle="dropdown" class="toggle">
+                                <img src="{{ asset('newdesign/data/profile/nurse.jpg') }}" alt="user-image" class="img-circle img-inline">
+                                <span>{{ Auth::user()->name }} <i class="fa fa-angle-down"></i></span>
+                            </a>
+                        @else
+                            <a href="#" data-toggle="dropdown" class="toggle">
+                                <img src="{{ asset('uploads/').'/'.Auth::user()->profile_logo }}" alt="user-image" class="img-circle img-inline">
+                                <span>{{ Auth::user()->name }} <i class="fa fa-angle-down"></i></span>
+                            </a>
+                        @endif
                     @endguest
                     
                     <ul class="dropdown-menu profile animated fadeIn">
