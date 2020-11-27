@@ -47,6 +47,7 @@ Route::resource('medications', 'Admin\MedicationsController');
 
 Route::resource('useractivities', 'Admin\UseractivitiesController');
 Route::get('useractivities/indexuseractivity/{type}', 'Admin\UseractivitiesController@indexuseractivity')->name('useractivities.indexuseractivity');
+Route::get('useractivities/indexuseractivitygiven/{type}', 'Admin\UseractivitiesController@indexuseractivitygiven')->name('useractivities.indexuseractivitygiven');
 Route::get('useractivities/createuseractivity/{type}/{resident}', 'Admin\UseractivitiesController@createuseractivity')->name('useractivities.createuseractivity');
 Route::get('useractivities/assign/{id}', 'Admin\UseractivitiesController@assign')->name('useractivities.assign');
 
@@ -55,6 +56,7 @@ Route::get('useractivities/assign/{id}', 'Admin\UseractivitiesController@assign'
 
 Route::resource('usermedications', 'Admin\UsermedicationsController');
 Route::get('usermedications/indexusermedication/{id}', 'Admin\UsermedicationsController@indexusermedication')->name('usermedications.indexusermedication');
+Route::get('usermedications/indexusermedicationgiven/{id}', 'Admin\UsermedicationsController@indexusermedicationgiven')->name('usermedications.indexusermedicationgiven');
 Route::get('usermedications/createusermedication/{resident}/{assign_id}/{medication_id}', 'Admin\UsermedicationsController@createusermedication')->name('usermedications.createusermedication');
 Route::get('usermedications/assign/{id}', 'Admin\UsermedicationsController@assign')->name('usermedications.assign');
 

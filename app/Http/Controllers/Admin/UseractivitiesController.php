@@ -51,7 +51,27 @@ class UseractivitiesController extends Controller
         $user = User::where('id', $id)->first();
         $comments = Comments::where('type', 1)->get();
 
-        return view('admin.useractivities.index', compact('useractivities', 'user', 'comments'));
+        $arrs = [];
+        $arrs = $useractivities;
+
+        return view('admin.useractivities.index', compact('arrs', 'user', 'comments'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexuseractivitygiven($id)
+    {
+        $useractivities = Useractivities::where('resident', $id)->orderBy('time')->get();
+        $user = User::where('id', $id)->first();
+        $comments = Comments::where('type', 1)->get();
+
+        $arrs = [];
+        $arrs = $useractivities;
+
+        return view('admin.useractivities.indexgiven', compact('arrs', 'user', 'comments'));
     }
 
     /**

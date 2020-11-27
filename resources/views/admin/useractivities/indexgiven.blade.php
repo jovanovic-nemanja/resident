@@ -32,10 +32,10 @@
         <section class="box">
             <header class="panel_header">
             	<a href="{{ route('useractivities.indexuseractivity', $user->id) }}">
-            		<h2 class="title pull-left assigned_adl" style="cursor: pointer; color: #4d9cf8; font-weight: bold;">Assigned Activities</h2>
+            		<h2 class="title pull-left assigned_adl" style="cursor: pointer;">Assigned Activities</h2>
             	</a>
                 <a href="{{ route('useractivities.indexuseractivitygiven', $user->id) }}">
-                	<h2 class="title pull-left given_adl" style="cursor: pointer;" style="color: #000;">Given Activities</h2>
+                	<h2 class="title pull-left given_adl" style="cursor: pointer; color: #4d9cf8; font-weight: bold;">Given Activities</h2>
                 </a>
 
                 <div class="actions panel_actions pull-right">
@@ -67,32 +67,32 @@
                                 	<?php 
                                 		if(@$arrs) {
 	                                		$i = 1;
-		                                	foreach($arrs as $useractivity) {
-		                                		$boolean = App\Useractivities::getCalculateDaysById($useractivity->id);
-		                                		if($boolean == 1) { ?>
+		                                	foreach($arrs as $useractivity1) { 
+		                                		$boolean = App\Useractivities::getCalculateDaysById($useractivity1->id);
+		                                		if($boolean == -1) { ?>
 			                                		<tr>
 			                                			<?php 
-		                                                	$useractivities = $useractivity->getActivities($useractivity->id);
+		                                                	$useractivities1 = $useractivity1->getActivities($useractivity1->id);
 		                                                ?>
 
 			                                			<td>{{ $i }}</td>
-			                                			<td>{{ $useractivity->sign_date }}</td>
-			                                			<td>{{ $useractivity->getTypeasstring($useractivities->type) }}</td>
+			                                			<td>{{ $useractivity1->sign_date }}</td>
+			                                			<td>{{ $useractivity1->getTypeasstring($useractivities1->type) }}</td>
 				                                        <td>
 				                                            <div class="">
-				                                                <h6><?= $useractivities->title; ?></h6>
+				                                                <h6><?= $useractivities1->title; ?></h6>
 				                                            </div>
 				                                        </td>
 				                                        <td>
-				                                        	<span class="badge round-primary" style="background-color: #d86060;">{{ $useractivity->time }}</span>
+				                                        	<span class="badge round-primary" style="background-color: #d86060;">{{ $useractivity1->time }}</span>
 				                                        </td>
 				                                        <td>
-				                                        	<span class="badge round-primary">{{ App\Useractivities::getTypename($useractivity->type) }}</span>
+				                                        	<span class="badge round-primary">{{ App\Useractivities::getTypename($useractivity1->type) }}</span>
 				                                        </td>
 					                                        
 				                                        <td>
 				                                        	@if(auth()->user()->hasRole('admin'))
-				                                        		{{ App\Useractivities::getCommentById($useractivity->id) }}
+				                                        		{{ App\Useractivities::getCommentById($useractivity1->id) }}
 				                                        	@else
 																<select class="form-control" id="comment" name="comment">
 																	<option value="">Choose Comment</option>
@@ -104,28 +104,19 @@
 				                                        </td>
 				                                        <td>
 				                                        	@if(auth()->user()->hasRole('admin'))
-				                                        		<a href="{{ route('useractivities.show', $useractivity->id) }}" class="btn btn-success">Edit</a>
-					                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$useractivity->id}}').submit();">Delete</a>
+				                                        		<a href="{{ route('useractivities.show', $useractivity1->id) }}" class="btn btn-success">Edit</a>
+					                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$useractivity1->id}}').submit();">Delete</a>
 
-					                                        	<form id="delete-form-{{$useractivity->id}}" action="{{ route('useractivities.destroy', $useractivity->id) }}" method="POST" style="display: none;">
+					                                        	<form id="delete-form-{{$useractivity1->id}}" action="{{ route('useractivities.destroy', $useractivity1->id) }}" method="POST" style="display: none;">
 													                  <input type="hidden" name="_method" value="delete">
 													                  @csrf
 													            </form>
 															@else
-																<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-activity-form-{{$useractivity->id}}').submit();">Give Activity</a>
-
-																<form id="give-activity-form-{{$useractivity->id}}" action="{{ route('useractivities.store') }}" method="POST" style="display: none;">
-												                  	<input type="hidden" name="_method" value="POST">
-												                  	@csrf
-
-												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
-												                  	<input type="hidden" name="comment" class="comm_val" />
-                                    								<input type="hidden" name="assign_id" value="{{ $useractivity->id }}">
-													            </form>
+																<a id="{{ $useractivity->id }}" class="btn btn-default" style="cursor: not-allowed;">Gave Activity</a>
 															@endif
 				                                        </td>
 				                                    </tr>
-                                    <?php $i++; } } } else{ ?>
+                                    <?php $i++; } } }else{ ?>
 
                                     <?php } ?>
                                 </tbody>

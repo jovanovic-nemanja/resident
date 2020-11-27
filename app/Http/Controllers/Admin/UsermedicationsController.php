@@ -62,6 +62,24 @@ class UsermedicationsController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexusermedicationgiven($id)
+    {
+        $usermedications = Usermedications::where('resident', $id)->orderBy('sign_date', 'asc')->get();
+        $assignmedications = Assignmedications::where('resident', $id)->orderBy('time')->get();
+        $arrs = $assignmedications;
+
+        $user = User::where('id', $id)->first();
+
+        $comments = Comments::where('type', 2)->get();
+
+        return view('admin.usermedications.indexgiven', compact('usermedications', 'user', 'arrs', 'comments'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
