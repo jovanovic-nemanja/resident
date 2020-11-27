@@ -121,7 +121,6 @@ class CaretakerController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|max:255',
             'username' => 'required|string',
-            // 'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'phone_number' => 'string|max:20',
         ]);
@@ -130,11 +129,11 @@ class CaretakerController extends Controller
         if (@$record) {
             $record->name = $request->name;
             $record->username = $request->username;
-            // $record->email = $request->email;
             $record->password = Hash::make($request['password']);
             $record->phone_number = $request->phone_number;
-            $record->profile_logo = @$request->profile_logo;
-
+            if (@$request->profile_logo) {
+                $record->profile_logo = $request->profile_logo;
+            }
             $record->update();
         }
         

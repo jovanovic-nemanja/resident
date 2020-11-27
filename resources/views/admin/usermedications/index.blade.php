@@ -31,7 +31,8 @@
     <div class="col-xs-12">
         <section class="box">
             <header class="panel_header">
-                <h2 class="title pull-left">Assigned Medications</h2>
+                <h2 class="title pull-left assigned_medication" style="cursor: pointer;" style="color: #000;">Assigned Medications</h2>
+                <h2 class="title pull-left given_medication" style="cursor: pointer;" style="color: #000;">Given Medications</h2>
                 <div class="actions panel_actions pull-right">
                 	@if(auth()->user()->hasRole('admin'))
                 		<a style="padding: 7px 18px; font-size: initial;" href="{{ route('usermedications.createassignmedication', $user->id) }}" class="btn btn-success">Assign</a>
@@ -57,71 +58,135 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
+                                <tbody id="assigned_medication">
                                 	<?php 
                                 		if(@$arrs) {
 	                                		$i = 1;
-		                                	foreach($arrs as $assignmedication) { ?>
-		                                		<tr role='row' data-toggle="collapse" data-target="#demo<?= $assignmedication['id'] ?>" class="odd accordion-toggle">
-		                                			<?php 
-	                                                	$medications = App\Assignmedications::getMedications($assignmedication['id']);
-	                                                ?>
+		                                	foreach($arrs as $assignmedication) { 
+		                                		$flag = App\Usermedications::getassignedMedication($assignmedication['id']);
+		                                		if ($flag == 1) { ?>
+			                                		<tr role='row' data-toggle="collapse" data-target="#demo<?= $assignmedication['id'] ?>" class="odd accordion-toggle">
+			                                			<?php 
+		                                                	$medications = App\Assignmedications::getMedications($assignmedication['id']);
+		                                                ?>
 
-		                                			<td>{{ $i }}</td>
-		                                			<td><?= date_format(date_create($assignmedication['sign_date']), 'Y-m-d'); ?></td>
-		                                			<td>{{ $medications->name }}</td>
-			                                        <td>
-			                                            <div class="">
-			                                                <h6>{{ $assignmedication['dose'] }}</h6>
-			                                            </div>
-			                                        </td>
-			                                        <td>
-			                                        	<span class="badge round-primary">{{ $assignmedication['time'] }}</span>
-			                                        </td>
-			                                        <td>
-														<span class="badge round-primary">
-															<?php if($assignmedication['route'] != NULL) { ?>
-																{{ App\Routes::getRoutename($assignmedication['route']) }}
-															<?php } ?>
-														</span>
-			                                        </td>
-			                                        
-		                                        	@if(auth()->user()->hasRole('care taker'))
-			                                        	<td>
-															<select class="form-control" id="comment" name="comment">
-																<option value="">Choose Comment</option>
-			                                                    @foreach($comments as $comment)
-			                                                        <option value="{{ $comment->id }}">{{ $comment->name }}</option>
-			                                                    @endforeach
-															</select>
-														</td>
-													@endif
-													
-			                                        <td>
-				                                        @if(auth()->user()->hasRole('admin'))
-				                                        	<a href="{{ route('usermedications.showassign', $assignmedication['id']) }}" class="btn btn-success">Edit</a>
-				                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$assignmedication['id']}}').submit();">Delete</a>
+			                                			<td>{{ $i }}</td>
+			                                			<td><?= date_format(date_create($assignmedication['sign_date']), 'Y-m-d'); ?></td>
+			                                			<td>{{ $medications->name }}</td>
+				                                        <td>
+				                                            <div class="">
+				                                                <h6>{{ $assignmedication['dose'] }}</h6>
+				                                            </div>
+				                                        </td>
+				                                        <td>
+				                                        	<span class="badge round-primary">{{ $assignmedication['time'] }}</span>
+				                                        </td>
+				                                        <td>
+															<span class="badge round-primary">
+																<?php if($assignmedication['route'] != NULL) { ?>
+																	{{ App\Routes::getRoutename($assignmedication['route']) }}
+																<?php } ?>
+															</span>
+				                                        </td>
+				                                        
+			                                        	@if(auth()->user()->hasRole('care taker'))
+				                                        	<td>
+																<select class="form-control" id="comment" name="comment">
+																	<option value="">Choose Comment</option>
+				                                                    @foreach($comments as $comment)
+				                                                        <option value="{{ $comment->id }}">{{ $comment->name }}</option>
+				                                                    @endforeach
+																</select>
+															</td>
+														@endif
+														
+				                                        <td>
+					                                        @if(auth()->user()->hasRole('admin'))
+					                                        	<a href="{{ route('usermedications.showassign', $assignmedication['id']) }}" class="btn btn-success">Edit</a>
+					                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$assignmedication['id']}}').submit();">Delete</a>
 
-				                                        	<form id="delete-form-{{$assignmedication['id']}}" action="{{ route('usermedications.destroyassign', $assignmedication['id']) }}" method="POST" style="display: none;">
-												                  <input type="hidden" name="_method" value="delete">
-												                  @csrf
-												            </form>
-					                                    @endif
-					                                    @if(auth()->user()->hasRole('care taker'))
-															<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
+					                                        	<form id="delete-form-{{$assignmedication['id']}}" action="{{ route('usermedications.destroyassign', $assignmedication['id']) }}" method="POST" style="display: none;">
+												                  	<input type="hidden" name="_method" value="delete">
+												                  	@csrf
+													            </form>
+						                                    @endif
+						                                    @if(auth()->user()->hasRole('care taker'))
+																<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
 
-															<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
+																<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
 												                  	<input type="hidden" name="_method" value="POST">
 												                  	@csrf
 
 												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
 												                  	<input type="hidden" name="comment" class="comm_val" />
-                                    								<input type="hidden" name="assign_id" value="{{ $assignmedication['id'] }}">
-                                    								<input type="hidden" name="type" value="{{ $assignmedication['type'] }}">
-												            </form>
+	                                								<input type="hidden" name="assign_id" value="{{ $assignmedication['id'] }}">
+	                                								<input type="hidden" name="type" value="{{ $assignmedication['type'] }}">
+													            </form>
+															@endif
+														</td>
+				                                    </tr>
+                                    <?php $i++; } } }else{ ?>
+
+                                    <?php } ?>
+                                </tbody>
+
+                                <tbody id="given_medication">
+                                	<?php 
+                                		if(@$arrs) {
+	                                		$i = 1;
+		                                	foreach($arrs as $assignmedication1) { 
+		                                		$flag1 = App\Usermedications::getassignedMedication($assignmedication1['id']);
+		                                		if($flag1 == 2) { ?>
+			                                		<tr role='row' data-toggle="collapse" data-target="#demo<?= $assignmedication1['id'] ?>" class="odd accordion-toggle">
+			                                			<?php 
+		                                                	$medications1 = App\Assignmedications::getMedications($assignmedication1['id']);
+		                                                ?>
+
+			                                			<td>{{ $i }}</td>
+			                                			<td><?= date_format(date_create($assignmedication1['sign_date']), 'Y-m-d'); ?></td>
+			                                			<td>{{ $medications1->name }}</td>
+				                                        <td>
+				                                            <div class="">
+				                                                <h6>{{ $assignmedication1['dose'] }}</h6>
+				                                            </div>
+				                                        </td>
+				                                        <td>
+				                                        	<span class="badge round-primary">{{ $assignmedication1['time'] }}</span>
+				                                        </td>
+				                                        <td>
+															<span class="badge round-primary">
+																<?php if($assignmedication1['route'] != NULL) { ?>
+																	{{ App\Routes::getRoutename($assignmedication1['route']) }}
+																<?php } ?>
+															</span>
+				                                        </td>
+				                                        
+			                                        	@if(auth()->user()->hasRole('care taker'))
+				                                        	<td>
+																<select class="form-control" id="comment" name="comment">
+																	<option value="">Choose Comment</option>
+				                                                    @foreach($comments as $comment)
+				                                                        <option value="{{ $comment->id }}">{{ $comment->name }}</option>
+				                                                    @endforeach
+																</select>
+															</td>
 														@endif
-													</td>
-			                                    </tr>
-                                    <?php $i++; } }else{ ?>
+														
+				                                        <td>
+					                                        @if(auth()->user()->hasRole('admin'))
+					                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$assignmedication1['id']}}').submit();">Delete</a>
+
+					                                        	<form id="delete-form-{{$assignmedication1['id']}}" action="{{ route('usermedications.destroyassign', $assignmedication1['id']) }}" method="POST" style="display: none;">
+												                  	<input type="hidden" name="_method" value="delete">
+												                  	@csrf
+													            </form>
+						                                    @endif
+						                                    @if(auth()->user()->hasRole('care taker'))
+																<a class="btn btn-primary" style="cursor: not-allowed;">Given Medication</a>
+															@endif
+														</td>
+				                                    </tr>
+                                    <?php $i++; } } }else{ ?>
 
                                     <?php } ?>
                                 </tbody>
@@ -138,10 +203,22 @@
 @section('script')
 <script>
     $(document).ready(function(){
+    	$('#given_medication').hide();
+    	$('#assigned_medication').show();
+
         $('#comment').change(function() {
         	var com_val = $(this).val();
         	$('.comm_val').val(com_val);
         });
+
+        $('.assigned_medication').click(function() {
+        	$('#given_medication').hide();
+        	$('#assigned_medication').show();
+        });
+        $('.given_medication').click(function() {
+        	$('#given_medication').show();
+        	$('#assigned_medication').hide();
+        })
     });
 </script>
 @endsection

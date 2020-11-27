@@ -88,7 +88,8 @@
                                     <div class="padding-bottom-30">
                                         <div class="text-left">
                                             <button type="submit" class="btn btn-primary gradient-blue">Save</button>
-                                            <button type="button" class="btn">Cancel</button>
+                                            <!-- <button type="button" class="btn">Cancel</button> -->
+                                            <a href="{{ route('admin.general.redirectBack') }}" class="btn">Cancel</a>
                                         </div>
                                     </div>
                                 </form>

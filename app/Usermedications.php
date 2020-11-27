@@ -55,4 +55,18 @@ class Usermedications extends Model
 
     	return $user;
     }
+
+    public static function getassignedMedication($id)
+    {
+        if (@$id) {
+            $result = Usermedications::where('assign_id', $id)->first();
+            if (@$result) {
+                return 2;
+            }else{
+                return 1;
+            }
+        }else{
+            return 1;
+        }
+    }
 }

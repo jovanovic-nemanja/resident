@@ -132,7 +132,7 @@
                                         <div class="text-left">
                                             <button type="submit" style="display: none;" class="btn btn-primary gradient-blue real_save_btn">Save</button>
                                             <button type="button" class="btn btn-primary gradient-blue save_btn">Save</button>
-                                            <button type="button" class="btn">Cancel</button>
+                                            <a href="{{ route('admin.general.redirectBack') }}" class="btn">Cancel</a>
                                         </div>
                                     </div>
                                 </form>

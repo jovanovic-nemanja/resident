@@ -35,4 +35,9 @@ class GeneralSettingsController extends Controller
 
     	return back()->with('flash', 'Setting has been successfully updated');
     }
+
+    public function redirectBack()
+    {
+        return back();
+    }
 }

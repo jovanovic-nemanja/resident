@@ -118,14 +118,16 @@ class MedicationsController extends Controller
         $this->validate(request(), [
             'name' => 'required',
             'dose' => 'required',
-            'photo' => 'required'
+            // 'photo' => 'required'
         ]);
 
         $record = Medications::where('id', $id)->first();
         if (@$record) {
             $record->name = $request->name;
             $record->dose = $request->dose;
-            $record->photo = $request->photo;
+            if (@$request->photo) {
+                $record->photo = $request->photo;
+            }
             $record->comments = $request->comments;
 
             $record->update();
@@ -147,7 +149,9 @@ class MedicationsController extends Controller
             }
         }
 
-        Medications::upload_file($record->id);
+        if (@$request->photo) {
+            Medications::upload_file($record->id);
+        }
 
         return redirect()->route('medications.index');
     }

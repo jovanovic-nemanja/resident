@@ -18,6 +18,7 @@ Route::get('/home', 'Frontend\HomeController@index')->name('home');
 
 Route::get('/admin/general', 'Admin\GeneralSettingsController@index')->name('admin.generalsetting');
 Route::put('/admin/general/update/{generalsetting}', 'Admin\GeneralSettingsController@update')->name('admin.generalsetting.update');
+Route::get('/admin/general/redirectBack', 'Admin\GeneralSettingsController@redirectBack')->name('admin.general.redirectBack');
 
 Route::get('/admin/localization', 'Admin\LocalizationSettingsController@index')->name('admin.localizationsetting');
 Route::put('/admin/localization/update/{localizationsetting}', 'Admin\LocalizationSettingsController@update')->name('admin.localizationsetting.update');
