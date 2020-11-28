@@ -47,7 +47,7 @@
                     <div class="content-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="{{ route('tfgs.update', $result['tfgs']->id) }}" method="POST">
+                                <form action="{{ route('tfgs.update', $result['tfgs']->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="_method" value="put">
 
@@ -99,7 +99,11 @@
                                         <div class="col-lg-3 circle">
                                             <div class="form-group {{ $errors->has('file') ? 'has-error' : '' }} circle_form">
                                                 <label class="form-label">Attached File</label>
-                                                <input type="file" name="file" class="form-control" id="file" placeholder="Attached File" value="{{ asset('uploads/').'/'.$result['tfgs']->file }}">
+                                                @if($result['tfgs']->file)
+                                                    <br>
+                                                    <a href="{{ asset('uploads/').'/'.$result['tfgs']->file }}" style="color: black;" target="_blank">file</a>
+                                                @endif
+                                                <input type="file" name="file" class="form-control" id="file" placeholder="Attached File">
                                                 @if ($errors->has('file'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('file') }}</strong>

@@ -163,12 +163,16 @@ class TFGController extends Controller
             $record->time = $request->time;
             $record->resident = $request->resident;
             $record->comment = $request->comment;
-            $record->file = $request->file;
+            if (@$request->file) {
+                $record->file = $request->file;
+            }
 
             $record->update();
-        }
 
-        TFG::upload_file($record->id);
+            if (@$request->file) {
+                TFG::upload_file($record->id);
+            }
+        }
 
         return redirect()->route('tfgs.indextfg', $request->resident);
     }

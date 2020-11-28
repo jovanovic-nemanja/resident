@@ -48,7 +48,9 @@
                                         <th>Medication</th>
                                         <th>Time</th>
                                         <th>comment</th>
-                                        <th>Actions</th>
+                                        @if(auth()->user()->hasRole('admin'))
+                                            <th>Actions</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,8 +76,9 @@
 			                                        <td>
 			                                        	{{ $tfg->comment }}
 			                                        </td>
-			                                        <td>	
-                                                        @if(auth()->user()->hasRole('admin'))		    
+
+                                                    @if(auth()->user()->hasRole('admin'))
+		                                                <td>	
                                                             <a href="{{ route('tfgs.show', $tfg->id) }}" class="btn btn-success">Edit</a>
                                                             <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$tfg->id}}').submit();">Delete</a>
 
@@ -83,8 +86,8 @@
                                                                   <input type="hidden" name="_method" value="delete">
                                                                   @csrf
                                                             </form>                                     
-                                                        @endif   	
-			                                        </td>
+			                                            </td>
+                                                    @endif      
 			                                    </tr>
                                     <?php $i++; } }else{ ?>
 
