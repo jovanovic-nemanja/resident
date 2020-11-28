@@ -91,16 +91,7 @@
 				                                        </td>
 					                                        
 				                                        <td>
-				                                        	@if(auth()->user()->hasRole('admin'))
-				                                        		{{ App\Useractivities::getCommentById($useractivity1->id) }}
-				                                        	@else
-																<select class="form-control" id="comment" name="comment">
-																	<option value="">Choose Comment</option>
-				                                                    @foreach($comments as $comment)
-				                                                        <option value="{{ $comment->id }}">{{ $comment->name }}</option>
-				                                                    @endforeach
-																</select>
-															@endif
+				                                        	{{ App\Comments::getCommentById($useractivity1->id) }}
 				                                        </td>
 				                                        <td>
 				                                        	@if(auth()->user()->hasRole('admin'))
@@ -112,7 +103,7 @@
 													                  @csrf
 													            </form>
 															@else
-																<a id="{{ $useractivity->id }}" class="btn btn-default" style="cursor: not-allowed;">Gave Activity</a>
+																<a id="{{ $useractivity1->id }}" class="btn btn-default" style="cursor: not-allowed;">Given Activity</a>
 															@endif
 				                                        </td>
 				                                    </tr>

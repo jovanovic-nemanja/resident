@@ -138,3 +138,14 @@
         </section>
     </div>
 @stop
+
+@section('script')
+<script>
+    $(document).ready(function(){
+        $('#comment').change(function() {
+            var cur_val = $(this).val();
+            $('.comm_val').val(cur_val);
+        })
+    });
+</script>
+@endsection

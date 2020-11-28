@@ -111,6 +111,12 @@ class Useractivities extends Model
         return $str;
     }
 
+    /**
+    * Get comment data by ID
+    * @param user_activities table id
+    * @return comment name as string
+    * @since 2020-11-02
+    */
     public static function getCommentById($id)
     {
         if (@$id) {
@@ -133,6 +139,12 @@ class Useractivities extends Model
         return $name;
     }
 
+    /**
+    * Get type name by ID
+    * @param user_activities table id
+    * @return comment name as string
+    * @since 2020-11-02
+    */
     public static function getTypename($id)
     {
         $str = '';
