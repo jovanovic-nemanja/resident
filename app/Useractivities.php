@@ -126,7 +126,11 @@ class Useractivities extends Model
                     $name = "Other : ".$res->other_comment;
                 }else {
                     $result = Comments::where('id', $res->comment)->first();
-                    $name = $result->name;
+                    if (@$result) {
+                        $name = $result->name;
+                    }else{
+                        $name = '';
+                    }
                 }
             }else{
                 $name = '';
