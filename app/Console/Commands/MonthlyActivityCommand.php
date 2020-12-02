@@ -54,15 +54,37 @@ class MonthlyActivityCommand extends Command
 
         if (@$user_activities) {
             foreach ($user_activities as $user_activity) {
-                $activity_type_name = Activities::getTypeasstring($user_activity->act_type);
+                $dt = Carbon::parse($cur_date['date']); 
+                if ($user_activity->day == $dt->day) { //validate month day
+                    $activity_time = $user_activity->time;
 
-                $record = Notifications::create([
-                    'user_name' => 'admin',
-                    'resident_name' => $user_activity->u_name,
-                    'contents' => "Monthly " . $activity_type_name  . " : " . $user_activity->title,
-                    'is_read' => 1,
-                    'sign_date' => $cur_date['date'],
-                ]);
+                    if (@$activity_time) {
+                        $startTime = Carbon::parse(User::formattime1($activity_time));
+                        $finishTime = Carbon::parse(User::formattime1($cur_date['time']));
+                        if ($startTime > $finishTime) {
+                            $sym = "";
+                        }else{
+                            $sym = "-";
+                        }
+                        $totalDuration = $sym.$finishTime->diffInSeconds($startTime);
+                    }else {
+                        $totalDuration = "";
+                    }
+
+                    $reminders = ReminderConfigs::where('active', 1)->first();
+                    $reminder_minutes = $reminders->minutes * 60;
+                    $activity_type_name = Activities::getTypeasstring($user_activity->act_type);
+
+                    if ($totalDuration == $reminder_minutes) {
+                        $record = Notifications::create([
+                            'user_name' => 'admin',
+                            'resident_name' => $user_activity->u_name,
+                            'contents' => "Monthly " . $activity_type_name  . " : " . $user_activity->title,
+                            'is_read' => 1,
+                            'sign_date' => $cur_date['date'],
+                        ]);
+                    }
+                } 
             }
         }
     }

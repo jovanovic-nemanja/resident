@@ -36,12 +36,10 @@ class Kernel extends ConsoleKernel
                  ->everyMinute(); //Run the task every minute
 
         $schedule->command('activityweekly:checkdata')
-                 ->timezone('America/Los_Angeles')
-                 ->weeklyOn(1, '9:00'); //Run the task every week on Monday at 9:00
+                 ->everyMinute(); //Run the task every minute
 
         $schedule->command('activitymonthly:checkdata')
-                 ->timezone('America/Los_Angeles')
-                 ->monthlyOn(1, '9:00'); //Run the task every month on the 1th at 9:00
+                 ->everyMinute(); //Run the task every minute
     }
 
     /**

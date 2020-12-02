@@ -77,35 +77,6 @@
                                         </div>
 
                                         <div class="col-lg-3">
-                                            <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
-                                                <label class="form-label">Time</label>
-                                                <input type="time" class="form-control" name='time' placeholder="Time" value="{{ $result['useractivities']->time }}" required id="time">
-                                                @if ($errors->has('time'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('time') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3">
-                                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                                                <label class="form-label">Duration</label>
-                                                <select class="form-control" id="duration" name="type" required>
-                                                    <option value="">Choose</option>
-                                                    <option value="1" <?php if($result["useractivities"]->type == 1){echo 'selected';} ?>>Daily</option>
-                                                    <option value="2" <?php if($result["useractivities"]->type == 2){echo 'selected';} ?>>Weekly</option>
-                                                    <option value="3" <?php if($result["useractivities"]->type == 3){echo 'selected';} ?>>Monthly</option>
-                                                </select>
-                                                @if ($errors->has('type'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('type') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3">
                                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
                                                 <label class="form-label">Comment</label>
                                                 <select class="form-control" id="comment" name="comment">
@@ -134,6 +105,81 @@
                                                         <strong>{{ $errors->first('comment') }}</strong>
                                                     </span>
                                                 @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
+                                                <label class="form-label">Duration</label>
+                                                <select class="form-control" id="duration" name="type" required>
+                                                    <option value="">Choose</option>
+                                                    <option value="1" <?php if($result["useractivities"]->type == 1){echo 'selected';} ?>>Daily</option>
+                                                    <option value="2" <?php if($result["useractivities"]->type == 2){echo 'selected';} ?>>Weekly</option>
+                                                    <option value="3" <?php if($result["useractivities"]->type == 3){echo 'selected';} ?>>Monthly</option>
+                                                </select>
+                                                @if ($errors->has('type'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('type') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-9">
+                                            <div id="Daily_area">
+                                                <div class="col-lg-3">
+                                                    <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
+                                                        <label class="form-label">Time</label>
+                                                        <input required type="time" class="form-control" name='time' placeholder="Time" id="time" value="{{ $result['useractivities']->time }}">
+                                                        @if ($errors->has('time'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('time') }}</strong>
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="Weekly_area">
+                                                <div class="col-lg-3">
+                                                    <div><label>Week</label></div>
+                                                    <select class="form-control" id="weeks" name="day">
+                                                        <option value="1" <?php if($result["useractivities"]->day == 1){echo 'selected';} ?>>Monday</option>
+                                                        <option value="2" <?php if($result["useractivities"]->day == 2){echo 'selected';} ?>>Tuesday</option>
+                                                        <option value="3" <?php if($result["useractivities"]->day == 3){echo 'selected';} ?>>Wednesday</option>
+                                                        <option value="4" <?php if($result["useractivities"]->day == 4){echo 'selected';} ?>>Thursday</option>
+                                                        <option value="5" <?php if($result["useractivities"]->day == 5){echo 'selected';} ?>>Friday</option>
+                                                        <option value="6" <?php if($result["useractivities"]->day == 6){echo 'selected';} ?>>Saturday</option>
+                                                        <option value="7" <?php if($result["useractivities"]->day == 7){echo 'selected';} ?>>Sunday</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Time</label>
+                                                        <input required type="time" class="form-control" name='time' placeholder="Time" id="time" value="{{ $result['useractivities']->time }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="Monthly_area">
+                                                <div class="col-lg-3">
+                                                    <div><label>Month(days)</label></div>
+                                                    <select class="form-control" id="months" name="day">
+                                                        @for($i = 1; $i < 31; $i++)
+                                                            <option value="{{ $i }}" <?php if($result["useractivities"]->day == $i){echo 'selected';} ?>>{{ $i }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Time</label>
+                                                        <input required type="time" class="form-control" name='time' placeholder="Time" id="time" value="{{ $result['useractivities']->time }}">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -186,7 +232,22 @@
             }else{
                 $('#other_comment').remove();
             }
-        })
+        });
+
+        var type = "<?= $result["useractivities"]->type ?>";
+        if (type == 1) {    //daily
+            $('#Daily_area').show();
+            $('#Weekly_area').hide();
+            $('#Monthly_area').hide();
+        }if (type == 2) {    //weekly
+            $('#Daily_area').hide();
+            $('#Weekly_area').show();
+            $('#Monthly_area').hide();
+        }if (type == 3) {    //monthly
+            $('#Daily_area').hide();
+            $('#Weekly_area').hide();
+            $('#Monthly_area').show();
+        }            
     });
 </script>
 @endsection

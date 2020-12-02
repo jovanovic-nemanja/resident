@@ -171,89 +171,92 @@
                                             </div>
 
                                             <div id="Weekly_area">
-                                                <div class="col-lg-3">
-                                                    <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
-                                                        <label class="form-label">Time</label>
-                                                        <input type="time" class="form-control" name='time' placeholder="Time" id="time">
-                                                        @if ($errors->has('time'))
-                                                            <span class="help-block">
-                                                                <strong>{{ $errors->first('time') }}</strong>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-9">
+                                                <div class="col-lg-12">
                                                     <div><label>Week</label></div>
                                                     <div class="col-lg-3">
                                                         <label class="form-label">Monday</label>
-                                                        <input type="checkbox" class="Monday" name='day' id="Monday" value="1">
+                                                        <input type="checkbox" class="Monday" name='weeks[]' id="Monday" value="1">
                                                     </div>
 
                                                     <div class="col-lg-3">
                                                         <label class="form-label">Tuesday</label>
-                                                        <input type="checkbox" class="Tuesday" name='day' id="Tuesday" value="2">
+                                                        <input type="checkbox" class="Tuesday" name='weeks[]' id="Tuesday" value="2">
                                                     </div>
 
                                                     <div class="col-lg-3">
                                                         <label class="form-label">Wednesday</label>
-                                                        <input type="checkbox" class="Wednesday" name='day' id="Wednesday" value="3">
+                                                        <input type="checkbox" class="Wednesday" name='weeks[]' id="Wednesday" value="3">
                                                     </div>
 
                                                     <div class="col-lg-3">
                                                         <label class="form-label">Thursday</label>
-                                                        <input type="checkbox" class="Thursday" name='day' id="Thursday" value="4">
+                                                        <input type="checkbox" class="Thursday" name='weeks[]' id="Thursday" value="4">
                                                     </div>
                                                     <br><br>
 
                                                     <div class="col-lg-3">
                                                         <label class="form-label">Friday</label>
-                                                        <input type="checkbox" class="Friday" name='day' id="Friday" value="5">
+                                                        <input type="checkbox" class="Friday" name='weeks[]' id="Friday" value="5">
                                                     </div>
 
                                                     <div class="col-lg-3">
                                                         <label class="form-label">Saturday</label>
-                                                        <input type="checkbox" class="Saturday" name='day' id="Saturday" value="6">
+                                                        <input type="checkbox" class="Saturday" name='weeks[]' id="Saturday" value="6">
                                                     </div>
 
                                                     <div class="col-lg-3">
                                                         <label class="form-label">Sunday</label>
-                                                        <input type="checkbox" class="Sunday" name='day' id="Sunday" value="7">
+                                                        <input type="checkbox" class="Sunday" name='weeks[]' id="Sunday" value="7">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-lg-3">
+                                                    <br>
+                                                    <div class="form-group">
+                                                        <label class="form-label">Time</label>
+                                                        <input type="time" class="form-control" name='weekly_time' placeholder="Time" id="time">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div id="Monthly_area">
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label class="form-label">Day1</label>
-                                                        <input type="number" class="form-control" name='day1' placeholder="Day1" id="day1">
+                                                <div class="col-lg-12">
+                                                    <div><label>Month(days)</label></div>
+                                                    <div class="row">
+                                                        @for($i = 1; $i < 11; $i++)
+                                                            <div class="col-lg-1">
+                                                                <label class="form-label">{{ $i }}</label>
+                                                                <input type="checkbox" class="date" name='months[]' id="date" value="{{ $i }}">
+                                                            </div>
+                                                        @endfor
+                                                    </div>
+                                                    <br>
+                                                    
+                                                    <div class="row">
+                                                        @for($i = 11; $i < 21; $i++)
+                                                            <div class="col-lg-1">
+                                                                <label class="form-label">{{ $i }}</label>
+                                                                <input type="checkbox" class="date" name='months[]' id="date" value="{{ $i }}">
+                                                            </div>
+                                                        @endfor
+                                                    </div>
+                                                    <br>
+
+                                                    <div class="row">
+                                                        @for($i = 21; $i < 31; $i++)
+                                                            <div class="col-lg-1">
+                                                                <label class="form-label">{{ $i }}</label>
+                                                                <input type="checkbox" class="date" name='months[]' id="date" value="{{ $i }}">
+                                                            </div>
+                                                        @endfor
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-4">
+                                                    <br>
                                                     <div class="form-group">
-                                                        <label class="form-label">Day2</label>
-                                                        <input type="number" class="form-control" name='day2' placeholder="Day2" id="day2">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label class="form-label">Day3</label>
-                                                        <input type="number" class="form-control" name='day3' placeholder="Day3" id="day3">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4">
-                                                    <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
                                                         <label class="form-label">Time</label>
-                                                        <input type="time" class="form-control" name='time' placeholder="Time" id="time">
-                                                        @if ($errors->has('time'))
-                                                            <span class="help-block">
-                                                                <strong>{{ $errors->first('time') }}</strong>
-                                                            </span>
-                                                        @endif
+                                                        <input type="time" class="form-control" name='monthly_time' placeholder="Time" id="time">
                                                     </div>
                                                 </div>
                                             </div>
@@ -315,24 +318,6 @@
                 $('.other_comment').hide();
             }
         });
-
-        $('#duration').change(function() {
-            var sel_val = $(this).val();
-
-            if (sel_val == 1) {
-                $('#Daily_area').show();
-                $('#Weekly_area').hide();
-                $('#Monthly_area').hide();
-            }if (sel_val == 2) {
-                $('#Daily_area').hide();
-                $('#Weekly_area').show();
-                $('#Monthly_area').hide();
-            }if (sel_val == 3) {
-                $('#Daily_area').hide();
-                $('#Weekly_area').hide();
-                $('#Monthly_area').show();
-            }
-        })
     });
 </script>
 @endsection

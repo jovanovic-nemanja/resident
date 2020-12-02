@@ -102,6 +102,8 @@ class UseractivitiesController extends Controller
      */
     public function store(Request $request)
     {
+        // print_r($request->weeks);print_r($request->months); exit();
+
         if (@$request->assign_id) {   //give activity as care taker
             $this->validate(request(), [
                 'assign_id' => 'required',
@@ -141,54 +143,102 @@ class UseractivitiesController extends Controller
             $dates = User::getformattime();
             $date = $dates['date'];
 
-            if (@$request->time1) {
-                $useractivities = Useractivities::create([
-                    'activities' => $request->activities,
-                    'time' => $request->time1,
-                    'type' => $request->type,
-                    'resident' => $request->resident,
-                    'comment' => $request->comment,
-                    'other_comment' => @$request->other_comment,
-                    'file' => $request->file,
-                    'status' => 1,
-                    'sign_date' => $date,
-                ]);
-            }if (@$request->time2) {
-                $useractivities = Useractivities::create([
-                    'activities' => $request->activities,
-                    'time' => $request->time2,
-                    'type' => $request->type,
-                    'resident' => $request->resident,
-                    'comment' => $request->comment,
-                    'other_comment' => @$request->other_comment,
-                    'file' => $request->file,
-                    'status' => 1,
-                    'sign_date' => $date,
-                ]);
-            }if (@$request->time3) {
-                $useractivities = Useractivities::create([
-                    'activities' => $request->activities,
-                    'time' => $request->time3,
-                    'type' => $request->type,
-                    'resident' => $request->resident,
-                    'comment' => $request->comment,
-                    'other_comment' => @$request->other_comment,
-                    'file' => $request->file,
-                    'status' => 1,
-                    'sign_date' => $date,
-                ]);
-            }if (@$request->time4) {
-                $useractivities = Useractivities::create([
-                    'activities' => $request->activities,
-                    'time' => $request->time4,
-                    'type' => $request->type,
-                    'resident' => $request->resident,
-                    'comment' => $request->comment,
-                    'other_comment' => @$request->other_comment,
-                    'file' => $request->file,
-                    'status' => 1,
-                    'sign_date' => $date,
-                ]);
+            switch ($request->type) {
+                case '1':   //daily
+                    if (@$request->time1) {
+                        $useractivities = Useractivities::create([
+                            'activities' => $request->activities,
+                            'time' => $request->time1,
+                            'type' => $request->type,
+                            'resident' => $request->resident,
+                            'comment' => $request->comment,
+                            'other_comment' => @$request->other_comment,
+                            'file' => $request->file,
+                            'status' => 1,
+                            'sign_date' => $date,
+                        ]);
+                    }if (@$request->time2) {
+                        $useractivities = Useractivities::create([
+                            'activities' => $request->activities,
+                            'time' => $request->time2,
+                            'type' => $request->type,
+                            'resident' => $request->resident,
+                            'comment' => $request->comment,
+                            'other_comment' => @$request->other_comment,
+                            'file' => $request->file,
+                            'status' => 1,
+                            'sign_date' => $date,
+                        ]);
+                    }if (@$request->time3) {
+                        $useractivities = Useractivities::create([
+                            'activities' => $request->activities,
+                            'time' => $request->time3,
+                            'type' => $request->type,
+                            'resident' => $request->resident,
+                            'comment' => $request->comment,
+                            'other_comment' => @$request->other_comment,
+                            'file' => $request->file,
+                            'status' => 1,
+                            'sign_date' => $date,
+                        ]);
+                    }if (@$request->time4) {
+                        $useractivities = Useractivities::create([
+                            'activities' => $request->activities,
+                            'time' => $request->time4,
+                            'type' => $request->type,
+                            'resident' => $request->resident,
+                            'comment' => $request->comment,
+                            'other_comment' => @$request->other_comment,
+                            'file' => $request->file,
+                            'status' => 1,
+                            'sign_date' => $date,
+                        ]);
+                    }
+
+                    break;
+                case '2':   //weekly
+                    if (@$request->weeks) {
+                        $weeks = $request->weeks;
+                        foreach ($weeks as $week) {
+                            $useractivities = Useractivities::create([
+                                'activities' => $request->activities,
+                                'time' => $request->weekly_time,
+                                'day' => $week,
+                                'type' => $request->type,
+                                'resident' => $request->resident,
+                                'comment' => $request->comment,
+                                'other_comment' => @$request->other_comment,
+                                'file' => $request->file,
+                                'status' => 1,
+                                'sign_date' => $date,
+                            ]);
+                        }
+                    }
+
+                    break;
+                case '3':   //monthly
+                    if (@$request->months) {
+                        $months = $request->months;
+                        foreach ($months as $month) {
+                            $useractivities = Useractivities::create([
+                                'activities' => $request->activities,
+                                'time' => $request->monthly_time,
+                                'day' => $month,
+                                'type' => $request->type,
+                                'resident' => $request->resident,
+                                'comment' => $request->comment,
+                                'other_comment' => @$request->other_comment,
+                                'file' => $request->file,
+                                'status' => 1,
+                                'sign_date' => $date,
+                            ]);
+                        }
+                    }
+
+                    break;                    
+                default:
+                    # code...
+                    break;
             }
 
             // Useractivities::upload_file($useractivities->id);
@@ -256,6 +306,7 @@ class UseractivitiesController extends Controller
             $record->activities = $request->activities;
             $record->time = $request->time;
             $record->type = $request->type;
+            $record->day = $request->day;
             $record->resident = $request->resident;
             $record->comment = $request->comment;
             $record->other_comment = @$request->other_comment;
@@ -277,9 +328,10 @@ class UseractivitiesController extends Controller
      */
     public function destroy($id)
     {
-        $resident = Useractivities::where('id', $id)->first();
+        $activity = Useractivities::where('id', $id)->first();
+        $reports = Useractivityreports::where('assign_id', $id)->delete();
         $record = Useractivities::where('id', $id)->delete();
         
-        return redirect()->route('useractivities.indexuseractivity', $resident->resident);
+        return redirect()->route('useractivities.indexuseractivity', $activity->resident);
     }
 }

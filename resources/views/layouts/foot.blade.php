@@ -28,3 +28,5 @@
 @endguest
 
 <script src="{{ asset('js/font-icon.js') }}"></script>
+
+<script src="{{ asset('js/custom.js') }}"></script>
