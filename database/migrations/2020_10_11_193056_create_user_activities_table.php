@@ -19,12 +19,15 @@ class CreateUserActivitiesTable extends Migration
             $table->integer('activities')->unsigned();
             $table->foreign('activities')->references('id')->on('activities');
             
+            $table->integer('type');    //daily, weekly and monthly(1, 2, 3
             $table->time('time')->nullable();
-            
+            $table->integer('day')->nullable(); 
+            //type = 1 =====> day is null
+            //type = 2 =====> day is 1 and 3....(Monday: 1, Sunday: 7)
+            // type = 3 =====>day is 1 and 16th.....
+
             $table->integer('resident')->unsigned();
             $table->foreign('resident')->references('id')->on('users');
-
-            $table->integer('type');    //daily, weekly or monthly
             
             $table->string('comment')->nullable();
             $table->string('other_comment')->nullable();

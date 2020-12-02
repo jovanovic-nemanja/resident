@@ -17,7 +17,7 @@ class Useractivities extends Model
 {
     public $table = "user_activities";
 
-    public $fillable = ['activities', 'time', 'resident', 'type', 'comment', 'other_comment', 'file', 'status', 'sign_date'];
+    public $fillable = ['activities', 'day', 'time', 'resident', 'type', 'comment', 'other_comment', 'file', 'status', 'sign_date'];
 
     public function getActivities($id) 
     {
