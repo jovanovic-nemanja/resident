@@ -132,7 +132,7 @@
                                                 <div class="col-lg-3">
                                                     <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
                                                         <label class="form-label">Time</label>
-                                                        <input required type="time" class="form-control" name='time' placeholder="Time" id="time" value="{{ $result['useractivities']->time }}">
+                                                        <input type="time" class="form-control" name='daily_time' placeholder="Time" id="daily_time" value="{{ $result['useractivities']->time }}">
                                                         @if ($errors->has('time'))
                                                             <span class="help-block">
                                                                 <strong>{{ $errors->first('time') }}</strong>
@@ -145,7 +145,7 @@
                                             <div id="Weekly_area">
                                                 <div class="col-lg-3">
                                                     <div><label>Week</label></div>
-                                                    <select class="form-control" id="weeks" name="day">
+                                                    <select class="form-control" id="weeks" name="weeks">
                                                         <option value="1" <?php if($result["useractivities"]->day == 1){echo 'selected';} ?>>Monday</option>
                                                         <option value="2" <?php if($result["useractivities"]->day == 2){echo 'selected';} ?>>Tuesday</option>
                                                         <option value="3" <?php if($result["useractivities"]->day == 3){echo 'selected';} ?>>Wednesday</option>
@@ -159,7 +159,7 @@
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                         <label class="form-label">Time</label>
-                                                        <input required type="time" class="form-control" name='time' placeholder="Time" id="time" value="{{ $result['useractivities']->time }}">
+                                                        <input type="time" class="form-control" name='weekly_time' placeholder="Time" id="weekly_time" value="{{ $result['useractivities']->time }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -167,7 +167,7 @@
                                             <div id="Monthly_area">
                                                 <div class="col-lg-3">
                                                     <div><label>Month(days)</label></div>
-                                                    <select class="form-control" id="months" name="day">
+                                                    <select class="form-control" id="months" name="months">
                                                         @for($i = 1; $i < 31; $i++)
                                                             <option value="{{ $i }}" <?php if($result["useractivities"]->day == $i){echo 'selected';} ?>>{{ $i }}</option>
                                                         @endfor
@@ -177,7 +177,7 @@
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
                                                         <label class="form-label">Time</label>
-                                                        <input required type="time" class="form-control" name='time' placeholder="Time" id="time" value="{{ $result['useractivities']->time }}">
+                                                        <input type="time" class="form-control" name='monthly_time' placeholder="Time" id="monthly_time" value="{{ $result['useractivities']->time }}">
                                                     </div>
                                                 </div>
                                             </div>

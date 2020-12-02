@@ -292,7 +292,6 @@ class UseractivitiesController extends Controller
     {
         $this->validate(request(), [
             'activities' => 'required',
-            'time' => 'required',
             'type' => 'required',
             'resident' => 'required'
         ]);
@@ -304,9 +303,17 @@ class UseractivitiesController extends Controller
         $record = Useractivities::where('id', $id)->first();
         if (@$record) {
             $record->activities = $request->activities;
-            $record->time = $request->time;
             $record->type = $request->type;
-            $record->day = $request->day;
+            if ($request->type == 1) {  //daily
+                $record->time = $request->daily_time;
+            }if ($request->type == 2) {  //weekly
+                $record->time = $request->weekly_time;
+                $record->day = $request->weeks;
+            }if ($request->type == 3) {  //monthly
+                $record->time = $request->monthly_time;
+                $record->day = $request->months;
+            }
+            
             $record->resident = $request->resident;
             $record->comment = $request->comment;
             $record->other_comment = @$request->other_comment;
@@ -315,7 +322,7 @@ class UseractivitiesController extends Controller
             $record->update();
         }
 
-        Useractivities::upload_file($record->id);
+        // Useractivities::upload_file($record->id);
 
         return redirect()->route('useractivities.indexuseractivity', $request->resident);
     }
