@@ -61,9 +61,9 @@ class MedicationsCommand extends Command
                 $cur_date['dates'] = Carbon::parse($cur_date['date']); 
 
                 // if ($ass_date->addDays($assign_medication->duration) >= $cur_date['dates']) {   
-                    $assign_time1 = $assign_medication->time1;
-                    if ($assign_time1) {
-                        $startTime = Carbon::parse(User::formattime1($assign_time1));
+                    $assign_time = $assign_medication->time;
+                    if ($assign_time) {
+                        $startTime = Carbon::parse(User::formattime1($assign_time));
                         $finishTime = Carbon::parse(User::formattime1($cur_date['time']));
                         if ($startTime > $finishTime) {
                             $sym = "";
@@ -75,48 +75,6 @@ class MedicationsCommand extends Command
                         $totalDuration1 = "";
                     }
 
-                    $assign_time2 = $assign_medication->time2;
-                    if ($assign_time2) {
-                        $startTime = Carbon::parse(User::formattime1($assign_time2));
-                        $finishTime = Carbon::parse(User::formattime1($cur_date['time']));
-                        if ($startTime > $finishTime) {
-                            $sym = "";
-                        }else{
-                            $sym = "-";
-                        }
-                        $totalDuration2 = $sym.$finishTime->diffInSeconds($startTime);
-                    }else {
-                        $totalDuration2 = "";
-                    }
-
-                    $assign_time3 = $assign_medication->time3;
-                    if ($assign_time3) {
-                        $startTime = Carbon::parse(User::formattime1($assign_time3));
-                        $finishTime = Carbon::parse(User::formattime1($cur_date['time']));
-                        if ($startTime > $finishTime) {
-                            $sym = "";
-                        }else{
-                            $sym = "-";
-                        }
-                        $totalDuration3 = $sym.$finishTime->diffInSeconds($startTime);
-                    }else {
-                        $totalDuration3 = "";
-                    }
-
-                    $assign_time4 = $assign_medication->time4;
-                    if ($assign_time4) {
-                        $startTime = Carbon::parse(User::formattime1($assign_time4));
-                        $finishTime = Carbon::parse(User::formattime1($cur_date['time']));
-                        if ($startTime > $finishTime) {
-                            $sym = "";
-                        }else{
-                            $sym = "-";
-                        }
-                        $totalDuration4 = $sym.$finishTime->diffInSeconds($startTime);
-                    }else {
-                        $totalDuration4 = "";
-                    }
-
                     $reminders = ReminderConfigs::where('active', 1)->first();
                     $reminder_minutes = $reminders->minutes * 60;
 
@@ -124,31 +82,7 @@ class MedicationsCommand extends Command
                         $record = Notifications::create([
                             'user_name' => 'admin',
                             'resident_name' => $assign_medication->u_name,
-                            'contents' => "Medication : " . $assign_medication->med_name . " " . $assign_medication->time1,
-                            'is_read' => 1,
-                            'sign_date' => $cur_date['date'],
-                        ]);
-                    } if ($totalDuration2 == $reminder_minutes) {
-                        $record = Notifications::create([
-                            'user_name' => 'admin',
-                            'resident_name' => $assign_medication->u_name,
-                            'contents' => "Medication : " . $assign_medication->med_name . " " . $assign_medication->time2,
-                            'is_read' => 1,
-                            'sign_date' => $cur_date['date'],
-                        ]);
-                    } if ($totalDuration3 == $reminder_minutes) {
-                        $record = Notifications::create([
-                            'user_name' => 'admin',
-                            'resident_name' => $assign_medication->u_name,
-                            'contents' => "Medication : " . $assign_medication->med_name . " " . $assign_medication->time3,
-                            'is_read' => 1,
-                            'sign_date' => $cur_date['date'],
-                        ]);
-                    } if ($totalDuration4 == $reminder_minutes) {
-                        $record = Notifications::create([
-                            'user_name' => 'admin',
-                            'resident_name' => $assign_medication->u_name,
-                            'contents' => "Medication : " . $assign_medication->med_name . " " . $assign_medication->time4,
+                            'contents' => "Medication : " . $assign_medication->med_name . " " . $assign_medication->time,
                             'is_read' => 1,
                             'sign_date' => $cur_date['date'],
                         ]);
