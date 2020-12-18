@@ -29,6 +29,9 @@ class CreateAssignMedicationsTable extends Migration
             $table->datetime('sign_date');
             $table->time('time')->nullable();
 
+            $table->date('start_day');
+            $table->date('end_day');
+            
             $table->timestamps();
         });
     }

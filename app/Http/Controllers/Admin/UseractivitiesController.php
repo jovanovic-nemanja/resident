@@ -102,8 +102,6 @@ class UseractivitiesController extends Controller
      */
     public function store(Request $request)
     {
-        // print_r($request->weeks);print_r($request->months); exit();
-
         if (@$request->assign_id) {   //give activity as care taker or admin
             $this->validate(request(), [
                 'assign_id' => 'required',

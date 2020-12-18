@@ -142,6 +142,8 @@ class UsermedicationsController extends Controller
             $this->validate(request(), [
                 'medications' => 'required',
                 'dose' => 'required',
+                'start_day' => 'required',
+                'end_day' => 'required',
                 'resident' => 'required'
             ]);
 
@@ -156,6 +158,8 @@ class UsermedicationsController extends Controller
                     'route' => $request->route,
                     'sign_date' => $date,
                     'time' => @$request->time1,
+                    'start_day' => $request->start_day,
+                    'end_day' => $request->end_day
                 ]);
             } if (@$request->time2) {
                 $assignmedications = Assignmedications::create([
@@ -165,6 +169,8 @@ class UsermedicationsController extends Controller
                     'route' => $request->route,
                     'sign_date' => $date,
                     'time' => @$request->time2,
+                    'start_day' => $request->start_day,
+                    'end_day' => $request->end_day
                 ]);
             } if (@$request->time3) {
                 $assignmedications = Assignmedications::create([
@@ -174,6 +180,8 @@ class UsermedicationsController extends Controller
                     'route' => $request->route,
                     'sign_date' => $date,
                     'time' => @$request->time3,
+                    'start_day' => $request->start_day,
+                    'end_day' => $request->end_day
                 ]);
             } if (@$request->time4) {
                 $assignmedications = Assignmedications::create([
@@ -183,11 +191,13 @@ class UsermedicationsController extends Controller
                     'route' => $request->route,
                     'sign_date' => $date,
                     'time' => @$request->time4,
+                    'start_day' => $request->start_day,
+                    'end_day' => $request->end_day
                 ]);
             }
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully assigned.');
-        }else{  //give medication for care taker
+        }else{  //give medication for care taker or admin
             $this->validate(request(), [
                 'assign_id' => 'required',
                 'resident' => 'required'
@@ -284,6 +294,8 @@ class UsermedicationsController extends Controller
             $this->validate(request(), [
                 'medications' => 'required',
                 'dose' => 'required',
+                'start_day' => 'required',
+                'end_day' => 'required',
                 'resident' => 'required'
             ]);
 
