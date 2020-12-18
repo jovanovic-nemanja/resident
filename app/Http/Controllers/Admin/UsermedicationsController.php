@@ -8,11 +8,14 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Routes;
+use Carbon\Carbon;
 use App\Adminlogs;
 use App\Comments;
 use App\Medications;
 use App\Usermedications;
 use App\Assignmedications;
+use Illuminate\Support\Facades\DB;
+
 
 class UsermedicationsController extends Controller
 {
@@ -294,8 +297,6 @@ class UsermedicationsController extends Controller
             $this->validate(request(), [
                 'medications' => 'required',
                 'dose' => 'required',
-                'start_day' => 'required',
-                'end_day' => 'required',
                 'resident' => 'required'
             ]);
 
