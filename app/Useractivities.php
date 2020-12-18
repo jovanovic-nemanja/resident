@@ -17,7 +17,7 @@ class Useractivities extends Model
 {
     public $table = "user_activities";
 
-    public $fillable = ['activities', 'day', 'time', 'resident', 'type', 'comment', 'other_comment', 'file', 'status', 'sign_date'];
+    public $fillable = ['activities', 'day', 'time', 'resident', 'type', 'comment', 'other_comment', 'file', 'status', 'sign_date', 'start_day', 'end_day'];
 
     public function getActivities($id) 
     {
@@ -92,6 +92,12 @@ class Useractivities extends Model
         }
     }
 
+    /**
+    * Get status
+    * @param id
+    * @return status name as string
+    * @since 2020-11-02
+    */
     public static function getStatus($status)
     {
         $str = '';

@@ -50,6 +50,7 @@ Route::get('useractivities/indexuseractivity/{type}', 'Admin\UseractivitiesContr
 Route::get('useractivities/indexuseractivitygiven/{type}', 'Admin\UseractivitiesController@indexuseractivitygiven')->name('useractivities.indexuseractivitygiven');
 Route::get('useractivities/createuseractivity/{type}/{resident}', 'Admin\UseractivitiesController@createuseractivity')->name('useractivities.createuseractivity');
 Route::get('useractivities/assign/{id}', 'Admin\UseractivitiesController@assign')->name('useractivities.assign');
+Route::post('useractivities/stop', 'Admin\UseractivitiesController@stop')->name('useractivities.stop');
 
 
 

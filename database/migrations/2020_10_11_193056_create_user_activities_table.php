@@ -36,6 +36,9 @@ class CreateUserActivitiesTable extends Migration
             $table->integer('status')->nullable();
             $table->datetime('sign_date');
 
+            $table->date('start_day');
+            $table->date('end_day');
+
             $table->timestamps();
         });
     }

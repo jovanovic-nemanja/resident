@@ -104,7 +104,7 @@ class UseractivitiesController extends Controller
     {
         // print_r($request->weeks);print_r($request->months); exit();
 
-        if (@$request->assign_id) {   //give activity as care taker
+        if (@$request->assign_id) {   //give activity as care taker or admin
             $this->validate(request(), [
                 'assign_id' => 'required',
                 'resident' => 'required'
@@ -136,6 +136,8 @@ class UseractivitiesController extends Controller
         }else{  //assign activity as admin
             $this->validate(request(), [
                 'activities' => 'required',
+                'start_day' => 'required',
+                'end_day' => 'required',
                 'type' => 'required',
                 'resident' => 'required'
             ]);
@@ -156,6 +158,8 @@ class UseractivitiesController extends Controller
                             'file' => $request->file,
                             'status' => 1,
                             'sign_date' => $date,
+                            'start_day' => $request->start_day,
+                            'end_day' => $request->end_day
                         ]);
                     }if (@$request->time2) {
                         $useractivities = Useractivities::create([
@@ -168,6 +172,8 @@ class UseractivitiesController extends Controller
                             'file' => $request->file,
                             'status' => 1,
                             'sign_date' => $date,
+                            'start_day' => $request->start_day,
+                            'end_day' => $request->end_day
                         ]);
                     }if (@$request->time3) {
                         $useractivities = Useractivities::create([
@@ -180,6 +186,8 @@ class UseractivitiesController extends Controller
                             'file' => $request->file,
                             'status' => 1,
                             'sign_date' => $date,
+                            'start_day' => $request->start_day,
+                            'end_day' => $request->end_day
                         ]);
                     }if (@$request->time4) {
                         $useractivities = Useractivities::create([
@@ -192,6 +200,8 @@ class UseractivitiesController extends Controller
                             'file' => $request->file,
                             'status' => 1,
                             'sign_date' => $date,
+                            'start_day' => $request->start_day,
+                            'end_day' => $request->end_day
                         ]);
                     }
 
@@ -211,6 +221,8 @@ class UseractivitiesController extends Controller
                                 'file' => $request->file,
                                 'status' => 1,
                                 'sign_date' => $date,
+                                'start_day' => $request->start_day,
+                                'end_day' => $request->end_day
                             ]);
                         }
                     }
@@ -231,6 +243,8 @@ class UseractivitiesController extends Controller
                                 'file' => $request->file,
                                 'status' => 1,
                                 'sign_date' => $date,
+                                'start_day' => $request->start_day,
+                                'end_day' => $request->end_day
                             ]);
                         }
                     }
@@ -245,6 +259,27 @@ class UseractivitiesController extends Controller
 
             return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully created.');
         }
+    }
+
+    /**
+    * put start day and end day as 0000-00-00
+    * @param activity ID
+    * @return bool true or false
+    * @author Nemanja
+    * @since 2020-12-18
+    */
+    public function stop(Request $request)
+    {
+        $this->validate(request(), [
+            'activity_id' => 'required'
+        ]);
+
+        $activity = Useractivities::where('id', $request->activity_id)->first();
+        $activity->start_day = '0000-00-00';
+        $activity->end_day = '0000-00-00';
+        $activity->update();
+
+        return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully given.');
     }
 
     /**
@@ -292,6 +327,8 @@ class UseractivitiesController extends Controller
     {
         $this->validate(request(), [
             'activities' => 'required',
+            'start_day' => 'required',
+            'end_day' => 'required',
             'type' => 'required',
             'resident' => 'required'
         ]);
@@ -318,6 +355,8 @@ class UseractivitiesController extends Controller
             $record->comment = $request->comment;
             $record->other_comment = @$request->other_comment;
             $record->file = $request->file;
+            $record->start_day = $request->start_day;
+            $record->end_day = $request->end_day;
 
             $record->update();
         }

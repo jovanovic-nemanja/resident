@@ -76,7 +76,7 @@
 		                                                ?>
 
 			                                			<td>{{ $i }}</td>
-			                                			<td>{{ $useractivity->sign_date }}</td>
+			                                			<td>{{ $useractivity->start_day }} ~ {{ $useractivity->end_day }}</td>
 			                                			<td>{{ $useractivity->getTypeasstring($useractivities->type) }}</td>
 				                                        <td>
 				                                            <div class="">
@@ -110,6 +110,29 @@
 					                                        	<form id="delete-form-{{$useractivity->id}}" action="{{ route('useractivities.destroy', $useractivity->id) }}" method="POST" style="display: none;">
 													                  <input type="hidden" name="_method" value="delete">
 													                  @csrf
+													            </form>
+
+
+													            <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-activity-form-{{$useractivity->id}}').submit();">Give Activity</a>
+
+																<form id="give-activity-form-{{$useractivity->id}}" action="{{ route('useractivities.store') }}" method="POST" style="display: none;">
+												                  	<input type="hidden" name="_method" value="POST">
+												                  	@csrf
+
+												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
+												                  	<input type="hidden" name="comment" class="comm_val" />
+                                    								<input type="hidden" name="assign_id" value="{{ $useractivity->id }}">
+													            </form>
+
+
+													            <a href="" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('stop-activity-form-{{$useractivity->id}}').submit();">Stop</a>
+
+																<form id="stop-activity-form-{{$useractivity->id}}" action="{{ route('useractivities.stop') }}" method="POST" style="display: none;">
+												                  	<input type="hidden" name="_method" value="POST">
+												                  	@csrf
+
+												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
+                                    								<input type="hidden" name="activity_id" value="{{ $useractivity->id }}">
 													            </form>
 															@else
 																<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-activity-form-{{$useractivity->id}}').submit();">Give Activity</a>

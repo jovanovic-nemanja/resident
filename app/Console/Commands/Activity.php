@@ -45,11 +45,15 @@ class DailyActivityCommand extends Command
     public function handle()
     {
         $cur_date = User::getformattime();
+        $cur_day = Carbon::parse($cur_date['dates']);
+
         $user_activities = DB::table('user_activities')
                             ->select('user_activities.*', 'activities.*', 'users.*', 'users.name as u_name', 'activities.type as act_type')
                             ->Join('activities', 'activities.id', '=', 'user_activities.activities')
                             ->Join('users', 'users.id', '=', 'user_activities.resident')
                             ->where('user_activities.type', 1)
+                            ->where('user_activities.start_day', '>=', $cur_day)
+                            ->where('user_activities.end_day', '<=', $cur_day)
                             ->get();
 
         if (@$user_activities) {
