@@ -104,6 +104,34 @@
                                         </div>
                                     </div>
 
+                                    <div class="row" >
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('start_day') ? 'has-error' : '' }}">
+                                                <label class="form-label">Start day</label>
+                                                <input type="date" name="start_day" id="start_day" class="form-control start_day" required>
+
+                                                @if ($errors->has('start_day'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('start_day') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group {{ $errors->has('end_day') ? 'has-error' : '' }}">
+                                                <label class="form-label">End day</label>
+                                                <input type="date" name="end_day" id="end_day" class="form-control end_day" required>
+                                                
+                                                @if ($errors->has('end_day'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('end_day') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-lg-3 time1">
                                             <div class="form-group {{ $errors->has('time1') ? 'has-error' : '' }}">

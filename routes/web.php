@@ -60,6 +60,8 @@ Route::get('usermedications/indexusermedication/{id}', 'Admin\UsermedicationsCon
 Route::get('usermedications/indexusermedicationgiven/{id}', 'Admin\UsermedicationsController@indexusermedicationgiven')->name('usermedications.indexusermedicationgiven');
 Route::get('usermedications/createusermedication/{resident}/{assign_id}/{medication_id}', 'Admin\UsermedicationsController@createusermedication')->name('usermedications.createusermedication');
 Route::get('usermedications/assign/{id}', 'Admin\UsermedicationsController@assign')->name('usermedications.assign');
+Route::post('usermedications/stop', 'Admin\UsermedicationsController@stop')->name('usermedications.stop');
+
 
 Route::get('usermedications/createassignmedication/{resident}', 'Admin\UsermedicationsController@createassignmedication')->name('usermedications.createassignmedication');
 Route::get('usermedications/showassign/{resident}', 'Admin\UsermedicationsController@showassign')->name('usermedications.showassign');

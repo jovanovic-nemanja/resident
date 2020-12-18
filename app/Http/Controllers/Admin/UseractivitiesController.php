@@ -277,7 +277,7 @@ class UseractivitiesController extends Controller
         $activity->end_day = '0000-00-00';
         $activity->update();
 
-        return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully given.');
+        return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully stopped.');
     }
 
     /**

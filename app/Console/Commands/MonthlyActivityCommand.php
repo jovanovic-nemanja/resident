@@ -61,8 +61,8 @@ class MonthlyActivityCommand extends Command
                             ->Join('activities', 'activities.id', '=', 'user_activities.activities')
                             ->Join('users', 'users.id', '=', 'user_activities.resident')
                             ->where('user_activities.type', 3)
-                            ->where('user_activities.start_day', '<=', '"'.$cur_day.'"')
-                            ->where('user_activities.end_day', '>=', '"'.$cur_day.'"')
+                            ->whereDate('user_activities.start_day', '<=', $cur_day)
+                            ->whereDate('user_activities.end_day', '>=', $cur_day)
                             ->get();
 
         if (@$user_activities) {

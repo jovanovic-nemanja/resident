@@ -76,7 +76,7 @@
 		                                                ?>
 
 			                                			<td>{{ $i }}</td>
-			                                			<td><?= date_format(date_create($assignmedication['sign_date']), 'Y-m-d'); ?></td>
+			                                			<td>{{ $assignmedication->start_day }} ~ {{ $assignmedication->end_day }}</td>
 			                                			<td>{{ $medications->name }}</td>
 				                                        <td>
 				                                            <div class="">
@@ -113,6 +113,30 @@
 					                                        	<form id="delete-form-{{$assignmedication['id']}}" action="{{ route('usermedications.destroyassign', $assignmedication['id']) }}" method="POST" style="display: none;">
 												                  	<input type="hidden" name="_method" value="delete">
 												                  	@csrf
+													            </form>
+
+
+													            <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
+
+																<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
+												                  	<input type="hidden" name="_method" value="POST">
+												                  	@csrf
+
+												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
+												                  	<input type="hidden" name="comment" class="comm_val" />
+	                                								<input type="hidden" name="assign_id" value="{{ $assignmedication['id'] }}">
+	                                								<input type="hidden" name="type" value="{{ $assignmedication['type'] }}">
+													            </form>
+
+
+													            <a href="" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('stop-activity-form-{{$assignmedication->id}}').submit();">Stop</a>
+
+																<form id="stop-activity-form-{{$assignmedication->id}}" action="{{ route('usermedications.stop') }}" method="POST" style="display: none;">
+												                  	<input type="hidden" name="_method" value="POST">
+												                  	@csrf
+
+												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
+                                    								<input type="hidden" name="medication_id" value="{{ $assignmedication->id }}">
 													            </form>
 						                                    @endif
 						                                    @if(auth()->user()->hasRole('care taker'))

@@ -51,8 +51,8 @@ class MedicationsCommand extends Command
                             ->select('assign_medications.*', 'medications.*', 'assign_medications.sign_date as assign_date', 'users.*', 'medications.name as med_name', 'users.name as u_name')
                             ->Join('medications', 'medications.id', '=', 'assign_medications.medications')
                             ->Join('users', 'users.id', '=', 'assign_medications.resident')
-                            ->where('assign_medications.start_day', '<=', '"'.$cur_day.'"')
-                            ->where('assign_medications.end_day', '>=', '"'.$cur_day.'"')
+                            ->whereDate('user_activities.start_day', '<=', $cur_day)
+                            ->whereDate('user_activities.end_day', '>=', $cur_day)
                             ->get();
 
         if (@$assign_medications) {

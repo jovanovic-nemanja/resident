@@ -297,6 +297,8 @@ class UsermedicationsController extends Controller
             $this->validate(request(), [
                 'medications' => 'required',
                 'dose' => 'required',
+                'start_day' => 'required',
+                'end_day' => 'required',
                 'resident' => 'required'
             ]);
 
@@ -311,6 +313,8 @@ class UsermedicationsController extends Controller
                 $record->resident = $request->resident;
                 $record->route = $request->route;
                 $record->time = @$request->time;
+                $record->start_day = $request->start_day;
+                $record->end_day = $request->end_day;
 
                 $record->update();
             }
@@ -340,6 +344,27 @@ class UsermedicationsController extends Controller
         }
 
         return redirect()->route('usermedications.indexusermedication', $request->resident);
+    }
+
+    /**
+    * put start day and end day as 0000-00-00
+    * @param activity ID
+    * @return bool true or false
+    * @author Nemanja
+    * @since 2020-12-18
+    */
+    public function stop(Request $request)
+    {
+        $this->validate(request(), [
+            'medication_id' => 'required'
+        ]);
+
+        $medication = Assignmedications::where('id', $request->medication_id)->first();
+        $medication->start_day = '0000-00-00';
+        $medication->end_day = '0000-00-00';
+        $medication->update();
+
+        return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully stopped.');
     }
 
     /**
