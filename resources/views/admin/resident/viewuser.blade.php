@@ -14,7 +14,9 @@
                     <div class="doctors-list patient relative">
                         <div class="doctors-head relative text-center" style="background-color: #5da6f9;">
                             <div class="patient-img img-circle">
-                                <img src="{{ asset('uploads/').'/'.$user->profile_logo }}" class="rad-50 center-block" alt="">
+                                @if($user->profile_logo)
+                                    <img src="{{ asset('uploads/').'/'.$user->profile_logo }}" class="rad-50 center-block" alt="">
+                                @endif
                             </div>
                             <h3 class="header w-text relative bold">{{ $user->name }}</h3>
                             <br>

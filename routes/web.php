@@ -26,7 +26,10 @@ Route::put('/admin/localization/update/{localizationsetting}', 'Admin\Localizati
 
 Route::get('/resident/add', 'Admin\ResidentController@index')->name('resident.add');
 Route::get('/resident/bodyharm', 'Admin\ResidentController@bodyharm')->name('resident.bodyharm');
+Route::get('/resident/management', 'Admin\ResidentController@management')->name('resident.management');
 Route::resource('resident', 'Admin\ResidentController');
+
+
 
 
 Route::resource('activities', 'Admin\ActivitiesController');
@@ -101,6 +104,7 @@ Route::get('notifications/confirmIsread/{id}', 'Admin\NotificationsController@co
 
 Route::resource('routes', 'Admin\RoutesController');
 Route::resource('adminlogs', 'Admin\AdminlogsController');
+Route::resource('switchreminder', 'Admin\SwitchreminderController');
 
 
 

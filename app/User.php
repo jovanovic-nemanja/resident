@@ -175,4 +175,28 @@ class User extends Authenticatable
 
         return $name;
     }
+
+    /**
+    * @param gender integer ID
+    * @return gender as string
+    * @since 2020-12-21
+    * @author Nemanja
+    */
+    public static function getGender($genderId) {
+        switch ($genderId) {
+            case '0':
+                $gender = "Male";
+                break;
+
+            case '1':
+                $gender = "Female";
+                break;
+            
+            default:
+                $gender = "";
+                break;
+        }
+
+        return $gender;
+    }
 }

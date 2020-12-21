@@ -3,7 +3,7 @@
     <div class="page-sidebar-wrapper ps-container" id="main-menu-wrapper" style="height: 860px;">
         <ul class="wraplist" style="height: auto;">
             <li class="menusection">Main</li>
-            <li class="<?= ($menu == 'residents' || $menu == 'addresident') ? "open" : "" ?>">
+            <li class="<?= ($menu == 'residents' || $menu == 'addresident' || $menu == 'manageresident') ? "open" : "" ?>">
                 <a href="javascript:;">
                     <i class="img">
                         <img src="{{ asset('newdesign/assets/images/5.png') }}" alt="" class="width-20">
@@ -18,6 +18,10 @@
                     @if(auth()->user()->hasRole('admin'))
                         <li>
                             <a class="<?= ($menu == "addresident") ? "active" : "" ?>" href="{{ route('resident.add') }}">Add Resident</a>
+                        </li>
+
+                        <li>
+                            <a class="<?= ($menu == "manageresident") ? "active" : "" ?>" href="{{ route('resident.management') }}">Manage Resident</a>
                         </li>
                     @endif
                 </ul>
@@ -42,7 +46,7 @@
                     </a>
                 </li>
 
-                <li class="<?= ($menu == 'activities' || $menu == 'incidences' || $menu == 'medications' || $menu == 'routes' || $menu == 'bodyharmcomments' || $menu == 'reminderconfigs' || $menu == 'adminlogs') ? "open" : "" ?>">
+                <li class="<?= ($menu == 'activities' || $menu == 'incidences' || $menu == 'medications' || $menu == 'routes' || $menu == 'bodyharmcomments' || $menu == 'reminderconfigs' || $menu == 'adminlogs' || $menu == 'switchreminder') ? "open" : "" ?>">
                     <a href="javascript:;">
                         <i class="img">
                             <img src="{{ asset('newdesign/data/crypto-dash/icons/13.png') }}" alt="" class="width-20">
@@ -68,6 +72,9 @@
                         </li>
                         <li>
                             <a class="<?= ($menu == "reminderconfigs") ? "active" : "" ?>" href="{{ route('reminderconfigs.index') }}">Reminder Configs</a>
+                        </li>
+                        <li>
+                            <a class="<?= ($menu == "switchreminder") ? "active" : "" ?>" href="{{ route('switchreminder.index') }}">Reminder Disable</a>
                         </li>
                         <li>
                             <a class="<?= ($menu == "adminlogs") ? "active" : "" ?>" href="{{ route('adminlogs.index') }}">Admin Logs</a>

@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Role;
+use App\Assignmedications;
+use App\Usermedications;
+use App\Useractivities;
+use App\Useractivityreports;
+use App\TFG;
+use App\Bodyharms;
 use App\RoleUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +31,18 @@ class ResidentController extends Controller
     public function index()
     {
         return view('admin.resident.create');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function management()
+    {
+        $residents = User::all();
+
+        return view('admin.resident.index', compact('residents'));
     }
 
     /**
@@ -122,7 +140,9 @@ class ResidentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $resident = User::where('id', $id)->first();
+
+        return view('admin.resident.edit', compact('resident'));
     }
 
     /**
@@ -134,7 +154,35 @@ class ResidentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'gender' => 'required',
+            'birthday' => 'required|date',
+            'address' => 'required|string',
+            'phone_number' => 'string|max:20',
+            'profile_logo'      => 'required',
+        ]);
+
+        $record = User::where('id', $id)->first();
+        if (@$record) {
+            $record->name = $request->name;
+            $record->email = $request->email;
+            $record->gender = $request->gender;
+            $record->address = $request->address;
+            $record->birthday = $request->birthday;
+            $record->phone_number = $request->phone_number;
+            if (@$request->profile_logo) {
+                $record->profile_logo = $request->profile_logo;
+            }
+            $record->update();
+        }
+        
+        if (@$request->profile_logo) {
+            User::upload_logo_img($record->id);
+        }
+
+        return redirect()->route('resident.management');
     }
 
     /**
@@ -145,6 +193,26 @@ class ResidentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // delete resident activity reports
+        $activityreports = Useractivityreports::where('resident', $id)->delete();
+        
+        // delete resident activities
+        $activityreports = Useractivities::where('resident', $id)->delete();
+
+        // delete resident medications reports
+        $activityreports = Usermedications::where('resident', $id)->delete();
+
+        // delete resident medication 
+        $activityreports = Assignmedications::where('resident', $id)->delete();
+
+        // delete resident tfgs 
+        $activityreports = TFG::where('resident', $id)->delete();
+
+        // delete resident body harms 
+        $activityreports = Bodyharms::where('resident', $id)->delete();
+
+        $record = User::where('id', $id)->delete();
+        
+        return redirect()->route('resident.management');
     }
 }
