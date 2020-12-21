@@ -11,6 +11,7 @@ use App\User;
 use Carbon\Carbon;
 use App\Medications;
 use App\Notifications;
+use App\Switchreminder;
 use App\ReminderConfigs;
 use App\Assignmedications;
 
@@ -34,7 +35,12 @@ class NotificationsController extends Controller
 
     public function getNotificationdata(Request $request)
     {
-        $results = Notifications::where('is_read', 1)->get();
+        $enable = Switchreminder::first();
+        if (@$enable) { //disabled case
+            $results = [];
+        }else{  //enabled case
+            $results = Notifications::where('is_read', 1)->get();
+        }
 
         return response()->json($results);
     }
