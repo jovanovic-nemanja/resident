@@ -29,6 +29,7 @@
                                         <div class="patient-img img-circle">
                                             <a href="{{ route('resident.show', $resident->id) }}">
                                                 <img src="{{ asset('uploads/').'/'.$resident->profile_logo }}" class="rad-50 center-block" alt="">
+                                                {{ $resident->name }}
                                             </a>
                                         </div>
                                     </div>
@@ -83,6 +84,13 @@
                                                     </ul>
                                                 </div>
                                             </div>
+
+                                            <div class="ui-dropdowns" data-example-id="single-button-dropdown">
+                                                <div class="btn-group" style="width: 100%;">
+                                                    <a href="{{ route('vitalsign.indexresidentvitalsign', $resident->id) }}" class="btn btn-danger btn-lg dropdown-toggle" style="width: 100%;">Vital Sign</a>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>                               
@@ -92,5 +100,9 @@
                 </div>
             @endif
         @endforeach
+    @else
+        <div class="card">
+            <h4><strong>There is no resident at this moment</strong></h4>
+        </div>
     @endif
 @stop

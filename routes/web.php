@@ -58,6 +58,16 @@ Route::post('useractivities/stop', 'Admin\UseractivitiesController@stop')->name(
 
 
 
+
+Route::resource('vitalsign', 'Admin\VitalsignController');
+Route::get('vitalsign/indexresidentvitalsign/{resident}', 'Admin\VitalsignController@indexresidentvitalsign')->name('vitalsign.indexresidentvitalsign');
+Route::get('vitalsign/createvitalsign/{resident}', 'Admin\VitalsignController@createvitalsign')->name('vitalsign.createvitalsign');
+
+
+
+
+
+
 Route::resource('usermedications', 'Admin\UsermedicationsController');
 Route::get('usermedications/indexusermedication/{id}', 'Admin\UsermedicationsController@indexusermedication')->name('usermedications.indexusermedication');
 Route::get('usermedications/indexusermedicationgiven/{id}', 'Admin\UsermedicationsController@indexusermedicationgiven')->name('usermedications.indexusermedicationgiven');

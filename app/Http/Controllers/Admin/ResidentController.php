@@ -11,6 +11,7 @@ use App\Useractivityreports;
 use App\TFG;
 use App\Bodyharms;
 use App\RoleUser;
+use App\Vitalsign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -128,8 +129,9 @@ class ResidentController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->first();
+        $vitalsign = Vitalsign::where('resident_id', $id)->latest()->first();
 
-        return view('admin.resident.viewuser', compact('user'));
+        return view('admin.resident.viewuser', compact('user', 'vitalsign'));
     }
 
     /**
