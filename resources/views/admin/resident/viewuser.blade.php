@@ -129,7 +129,9 @@
                                     <i class='fas fa-thermometer' style='font-size: 70px; color: red;'></i>
                                 </div>
                                 <div class="pat-val relative">
-                                    <h4 class="value green-text">{{ $vitalsign->temperature }} <span>°F</span></h4>
+                                    @if($vitalsign)
+                                        <h4 class="value green-text">{{ $vitalsign->temperature }} <span>°F</span></h4>
+                                    @endif
                                 </div>
                             </div>
                             <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
@@ -144,7 +146,9 @@
                                     <i class="fa fa-signal" aria-hidden="true" style="font-size: 70px; color: red;"></i>
                                 </div>
                                 <div class="pat-val relative">
-                                    <h4 class="value p-text">{{ $vitalsign->blood_pressure }} <span>mmHG</span></h4>
+                                    @if($vitalsign)
+                                        <h4 class="value p-text">{{ $vitalsign->blood_pressure }} <span>mmHG</span></h4>
+                                    @endif
                                 </div>
                             </div>
                             <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
@@ -158,7 +162,9 @@
                                     <i class="fa fa-heart" aria-hidden="true" style="font-size: 70px; color: red;"></i>
                                 </div>
                                 <div class="pat-val relative">
-                                    <h4 class="value red-text">{{ $vitalsign->heart_rate }} <span>Per min</span></h4>
+                                    @if($vitalsign)
+                                        <h4 class="value red-text">{{ $vitalsign->heart_rate }} <span>Per min</span></h4>
+                                    @endif
                                 </div>
                             </div>
                             <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
