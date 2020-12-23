@@ -217,6 +217,8 @@ class ResidentController extends Controller
         $activityreports = Vitalsign::where('resident_id', $id)->delete();
 
         $record = User::where('id', $id)->delete();
+
+        $roleuser = RoleUser::where('user_id', $id)->delete();
         
         return redirect()->route('resident.management');
     }

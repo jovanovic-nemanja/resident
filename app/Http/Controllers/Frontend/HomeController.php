@@ -21,7 +21,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $residents =  User::all();
+        $residents = DB::table('users')
+                            ->select('users.*')
+                            ->Join('role_user', 'role_user.user_id', '=', 'users.id')
+                            ->where('role_user.role_id', 3)
+                            ->get();
 
         return view('frontend.home', compact('residents'));
     }
