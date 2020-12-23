@@ -213,6 +213,9 @@ class ResidentController extends Controller
         // delete resident body harms 
         $activityreports = Bodyharms::where('resident', $id)->delete();
 
+        // delete resident vital sign 
+        $activityreports = Vitalsign::where('resident_id', $id)->delete();
+
         $record = User::where('id', $id)->delete();
         
         return redirect()->route('resident.management');
