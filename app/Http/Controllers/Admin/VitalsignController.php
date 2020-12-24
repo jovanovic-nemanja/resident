@@ -35,7 +35,7 @@ class VitalsignController extends Controller
     public function indexresidentvitalsign($id)
     {
         $user = User::where('id', $id)->first();
-        $vitalsigns = Vitalsign::where('resident_id', $id)->get();
+        $vitalsigns = Vitalsign::where('resident_id', $id)->orderby('sign_date', 'DESC')->get();
 
         return view('admin.vitalsign.index', compact('user', 'vitalsigns'));
     }
