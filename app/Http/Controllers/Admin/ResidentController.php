@@ -129,7 +129,11 @@ class ResidentController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->first();
-        $vitalsign = Vitalsign::where('resident_id', $id)->latest()->first();
+        
+        $vitalsign = [];
+        $vitalsign['temperature'] = Vitalsign::where('resident_id', $id)->where('type', 1)->latest()->first();
+        $vitalsign['blood_pressure'] = Vitalsign::where('resident_id', $id)->where('type', 2)->latest()->first();
+        $vitalsign['heart_rate'] = Vitalsign::where('resident_id', $id)->where('type', 3)->latest()->first();
 
         return view('admin.resident.viewuser', compact('user', 'vitalsign'));
     }

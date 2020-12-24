@@ -130,7 +130,7 @@
                                 </div>
                                 <div class="pat-val relative">
                                     @if($vitalsign)
-                                        <h4 class="value green-text">{{ $vitalsign->temperature }} <span>°F</span></h4>
+                                        <h4 class="value green-text">{{ $vitalsign['temperature']['data'] }} <span>°F</span></h4>
                                     @endif
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="pat-val relative">
                                     @if($vitalsign)
-                                        <h4 class="value p-text">{{ $vitalsign->blood_pressure }} <span>mmHG</span></h4>
+                                        <h4 class="value p-text">{{ $vitalsign['blood_pressure']['data'] }} <span>mmHG</span></h4>
                                     @endif
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="pat-val relative">
                                     @if($vitalsign)
-                                        <h4 class="value red-text">{{ $vitalsign->heart_rate }} <span>Per min</span></h4>
+                                        <h4 class="value red-text">{{ $vitalsign['heart_rate']['data'] }} <span>Per min</span></h4>
                                     @endif
                                 </div>
                             </div>

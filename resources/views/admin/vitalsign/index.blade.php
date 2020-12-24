@@ -45,9 +45,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Date</th>
-                                        <th>Temperature</th>
-                                        <th>Heart Rate</th>
-                                        <th>Blood Pressure</th>
+                                        <th>Type</th>
+                                        <th>Value</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -59,14 +58,11 @@
 		                                		<tr>
 		                                			<td>{{ $i }}</td>
 		                                			<td>{{ $vitalsign->sign_date }}</td>
-		                                			<td>{{ $vitalsign->temperature }}</td>
+		                                			<td>{{ App\Vitalsign::getType($vitalsign->type) }}</td>
 			                                        <td>
 			                                            <div class="">
-			                                                <h6><?= $vitalsign->heart_rate; ?></h6>
+			                                                <h6><?= $vitalsign->data; ?></h6>
 			                                            </div>
-			                                        </td>
-			                                        <td>
-			                                        	<span class="badge round-primary" style="background-color: #d86060;">{{ $vitalsign->blood_pressure }}</span>
 			                                        </td>
 			                                        <td>
 		                                        		<a href="{{ route('vitalsign.show', $vitalsign->id) }}" class="btn btn-success">Edit</a>

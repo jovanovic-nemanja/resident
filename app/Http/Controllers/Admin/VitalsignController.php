@@ -71,25 +71,33 @@ class VitalsignController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'resident_id' => 'required',
-            'temperature' => 'required',
-            'blood_pressure' => 'required',
-            'heart_rate' => 'required'
-        ]);
-
         $dates = User::getformattime();
         $date = $dates['date'];
 
-        $vitalsign = Vitalsign::create([
-            'resident_id' => $request->resident_id,
-            'temperature' => $request->temperature,
-            'blood_pressure' => $request->blood_pressure,
-            'heart_rate' => $request->heart_rate,
-            'sign_date' => $date,
-        ]);
+        if (@$request->temperature) {
+            $vitalsign = Vitalsign::create([
+                'resident_id' => $request->resident_id,
+                'data' => $request->temperature,
+                'type' => 1,
+                'sign_date' => $date,
+            ]);
+        }if (@$request->blood_pressure) {
+            $vitalsign = Vitalsign::create([
+                'resident_id' => $request->resident_id,
+                'data' => $request->blood_pressure,
+                'type' => 2,
+                'sign_date' => $date,
+            ]);
+        }if (@$request->heart_rate) {
+            $vitalsign = Vitalsign::create([
+                'resident_id' => $request->resident_id,
+                'data' => $request->heart_rate,
+                'type' => 3,
+                'sign_date' => $date,
+            ]);
+        }
 
-        return redirect()->route('vitalsign.indexresidentvitalsign', $request->resident_id)->with('flash', 'Vital Sign has been successfully added.');
+        return redirect()->route('vitalsign.indexresidentvitalsign', $request->resident_id);
     }
 
     /**
@@ -129,18 +137,9 @@ class VitalsignController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate(request(), [
-            'resident_id' => 'required',
-            'temperature' => 'required',
-            'blood_pressure' => 'required',
-            'heart_rate' => 'required'
-        ]);
-
         $vitalsign = Vitalsign::where('id', $id)->first();
         if (@$vitalsign) {
-            $vitalsign->temperature = $request->temperature;
-            $vitalsign->blood_pressure = $request->blood_pressure;
-            $vitalsign->heart_rate = $request->heart_rate;
+            $vitalsign->data = @$request->data;
 
             $vitalsign->update();
         }

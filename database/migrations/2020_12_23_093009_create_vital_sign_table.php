@@ -16,9 +16,8 @@ class CreateVitalSignTable extends Migration
         Schema::create('vital_sign', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('blood_pressure');
-            $table->string('temperature');
-            $table->string('heart_rate');
+            $table->string('data')->nullable();
+            $table->integer('type');    //1: temperature, 2: blood_pressure, 3: heart rate
             $table->integer('resident_id')->unsigned();
             $table->foreign('resident_id')->references('id')->on('users');
             $table->datetime('sign_date');

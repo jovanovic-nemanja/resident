@@ -12,5 +12,33 @@ class Vitalsign extends Model
 {
     public $table = "vital_sign";
 
-    public $fillable = ['blood_pressure', 'temperature', 'heart_rate', 'resident_id', 'sign_date'];
+    public $fillable = ['data', 'resident_id', 'type', 'sign_date'];
+
+    /**
+    * get type as string
+    * @param type as integer
+    * @author Nemanja
+    * @since 202-12-24
+    */
+    public static function getType($type) {
+    	switch ($type) {
+    		case '1':
+    			$result = "Temperature";
+    			break;
+
+    		case '2':
+    			$result = "Blood Pressure";
+    			break;
+
+    		case '3':
+    			$result = "Heart Rate";
+    			break;
+    		
+    		default:
+    			$result = "Temperature";
+    			break;
+    	}
+
+    	return $result;
+    }
 }

@@ -56,45 +56,43 @@
 
                                     <div class="row" >
                                         <div class="col-lg-4">
-                                            <div class="form-group {{ $errors->has('temperature') ? 'has-error' : '' }}">
-                                                <label class="form-label">Temperature <span>(°F)</span></label>
-                                                <i class='fas fa-thermometer' style='font-size: 70px; color: red;'></i>
-                                                <input type="text" name="temperature" class="form-control temperature" id="temperature" required value="{{ $result['data']->temperature }}" />
+                                            @if($result['data']->type == 1)
+                                                <div class="form-group {{ $errors->has('data') ? 'has-error' : '' }}">
+                                                    <label class="form-label">Temperature <span>(°F)</span></label>
+                                                    <i class='fas fa-thermometer' style='font-size: 70px; color: red;'></i>
+                                                    <input type="text" name="data" class="form-control" id="temperature" required value="{{ $result['data']->data }}" />
 
-                                                @if ($errors->has('temperature'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('temperature') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
+                                                    @if ($errors->has('data'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('data') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            @elseif($result['data']->type == 2)
+                                                <div class="form-group {{ $errors->has('data') ? 'has-error' : '' }}">
+                                                    <label class="form-label">Blood Pressure <span>(mmHG)</span></label>
+                                                    <i class="fa fa-signal" aria-hidden="true" style="font-size: 70px; color: red;"></i>
+                                                    <input type="text" name="data" class="form-control" id="blood_pressure" required value="{{ $result['data']->data }}" />
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group {{ $errors->has('blood_pressure') ? 'has-error' : '' }}">
-                                                <label class="form-label">Blood Pressure <span>(mmHG)</span></label>
-                                                <i class="fa fa-signal" aria-hidden="true" style="font-size: 70px; color: red;"></i>
-                                                <input type="text" name="blood_pressure" class="form-control blood_pressure" id="blood_pressure" required value="{{ $result['data']->blood_pressure }}" />
-
-                                                @if ($errors->has('blood_pressure'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('blood_pressure') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <div class="form-group {{ $errors->has('heart_rate') ? 'has-error' : '' }}">
-                                                <label class="form-label">Heart Rate <span>(Per min)</span></label>
-                                                <i class="fa fa-heart" aria-hidden="true" style="font-size: 70px; color: red;"></i>
-                                                <input type='text' required class='form-control heart_rate' name='heart_rate' id='heart_rate' value="{{ $result['data']->heart_rate }}" />
-                                                
-                                                @if ($errors->has('heart_rate'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('heart_rate') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
+                                                    @if ($errors->has('data'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('data') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            @elseif($result['data']->type == 3)
+                                                <div class="form-group {{ $errors->has('data') ? 'has-error' : '' }}">
+                                                    <label class="form-label">Heart Rate <span>(Per min)</span></label>
+                                                    <i class="fa fa-heart" aria-hidden="true" style="font-size: 70px; color: red;"></i>
+                                                    <input type='text' required class='form-control' name='data' id='heart_rate' value="{{ $result['data']->data }}" />
+                                                    
+                                                    @if ($errors->has('data'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('data') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
 

@@ -6,6 +6,10 @@
 <script src="{{ asset('newdesign/assets/plugins/pace/pace.min.js') }}"></script>
 <script src="{{ asset('newdesign/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('newdesign/assets/plugins/viewport/viewportchecker.js') }}"></script>
+
+<script src="{{ asset('newdesign/assets/plugins/jquery-validation/js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('newdesign/assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
+<script src="{{ asset('newdesign/assets/js/form-validation.js') }}"></script>
 <!-- CORE JS FRAMEWORK - END -->
 
 <script src="{{ asset('newdesign/tags/jquery.tagsinput.min.js') }}"></script>

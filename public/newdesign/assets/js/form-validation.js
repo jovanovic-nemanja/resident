@@ -271,20 +271,8 @@ $(document).ready(function() {
             }
         });
 
-        $('#pills .finish').click(function() {
-            alert('Finished!, Starting over!');
-            $('#pills').find("a[href*='tab1']").trigger('click');
+        $('#pills .skip').click(function() {
+            $('#pills .next').click();
         });
-
-
-
-
-
-
-
     }
-
-
-
-
 });
