@@ -30,3 +30,15 @@
 .wave.wave-custom {
 	background-color: rgb(170 216 172)!important;
 }
+.circle {
+	text-align: center;
+    border-radius: 50%;
+    background-color: #1cc6d8;
+}
+.circle_form {
+    padding-top: 40%;
+}
+.padding-bottom-30 {
+	text-align: center;
+    padding-top: 5%;
+}
