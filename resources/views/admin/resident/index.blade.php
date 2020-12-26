@@ -64,63 +64,13 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 my-2 my-md-0">
-                                            <div class="d-flex align-items-center">
-                                                <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                                <select class="form-control" id="kt_datatable_search_status">
-                                                    <option value="">All</option>
-                                                    <option value="1">Pending</option>
-                                                    <option value="2">Delivered</option>
-                                                    <option value="3">Canceled</option>
-                                                    <option value="4">Success</option>
-                                                    <option value="5">Info</option>
-                                                    <option value="6">Danger</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 my-2 my-md-0">
-                                            <div class="d-flex align-items-center">
-                                                <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
-                                                <select class="form-control" id="kt_datatable_search_type">
-                                                    <option value="">All</option>
-                                                    <option value="1">Online</option>
-                                                    <option value="2">Retail</option>
-                                                    <option value="3">Direct</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                        <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
                                     </div>
-                                </div>
-                                <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                                    <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
                                 </div>
                             </div>
                         </div>
                         <!--end::Search Form-->
-                        <!--end: Search Form-->
-                        <div class="row py-5">
-                            <div class="col-lg-2">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">ID:</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="kt_datatable_check_input" value="1" />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary font-weight-bold" type="button" id="kt_datatable_check">Select row</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-10">
-                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_reload">Reload</button>
-                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_check_all">Select all rows</button>
-                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_uncheck_all">Unselect all rows</button>
-                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_hide_column">Hide Date</button>
-                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_show_column">Show Date</button>
-                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_remove_row">Remove active row</button>
-                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_sort_asc">Sort Status [asc]</button>
-                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_sort_desc">Sort Status [desc]</button>
-                            </div>
-                        </div>
+                        
                         <!--begin: Datatable-->
                         <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
                         <!--end: Datatable-->
