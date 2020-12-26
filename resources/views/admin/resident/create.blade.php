@@ -7,6 +7,8 @@
 		</div>
 	@endif
 
+    
+
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Subheader-->
@@ -107,7 +109,7 @@
                                                             <!--end::Group-->
 
                                                             <!--begin::Group-->
-                                                            <div class="form-group row {{ $errors->has('name') ? 'has-error' : '' }}">
+                                                            <div class="form-group row {{ $errors->has('email') ? 'has-error' : '' }}">
                                                                 <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <div class="input-group input-group-solid input-group-lg">
@@ -208,7 +210,7 @@
                                                         
                                                         <!--begin::Wizard Actions-->
                                                         <div class="d-flex justify-content-between border-top pt-10 mt-15">
-                                                            <div style="text-align: center;">
+                                                            <div>
                                                                 <button type="button" class="btn btn-success" data-wizard-type="action-submit" style="display: initial!important;">Submit</button>
 
                                                                 <a href="{{ route('admin.general.redirectBack') }}" class="btn btn-danger">Cancel</a>
@@ -239,6 +241,5 @@
 @stop
 
 @section('script')
-<script>
-</script>
+    <script src="{{ asset('finaldesign/assets/js/pages/custom/user/add-user.js') }}"></script>
 @endsection

@@ -162,7 +162,7 @@ class ResidentController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'gender' => 'required',
             'birthday' => 'required|date',
             'address' => 'required|string',

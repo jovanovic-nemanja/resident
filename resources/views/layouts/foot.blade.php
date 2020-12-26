@@ -10,9 +10,8 @@
 
 <script src="{{ asset('finaldesign/assets/js/pages/widgets.js') }}"></script>
 <script src="{{ asset('finaldesign/assets/js/pages/custom/profile/profile.js') }}"></script>
-<script src="{{ asset('finaldesign/assets/js/pages/custom/user/add-user.js') }}"></script>
-<script src="{{ asset('finaldesign/assets/js/pages/custom/user/list-datatable.js') }}"></script>
-<script src="{{ asset('finaldesign/assets/js/pages/crud/ktdatatable/api/methods.js') }}"></script>
+<script src="{{ asset('finaldesign/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+<script src="{{ asset('finaldesign/assets/js/pages/crud/datatables/data-sources/html.js') }}"></script>
 
 <script src="{{ asset('finaldesign/jquery-toast-plugin/jquery.toast.min.js') }}"></script>
 <script src="{{ asset('finaldesign/jquery-toast-plugin/toastr.min.js') }}"></script>
