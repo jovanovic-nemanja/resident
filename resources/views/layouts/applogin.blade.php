@@ -11,36 +11,30 @@
 	<link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon" />
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{ asset('newdesign/login/nicepage.css') }}" media="screen">
-    <link rel="stylesheet" href="{{ asset('newdesign/login/Page-1.css') }}" media="screen">
-    <script class="u-script" type="text/javascript" src="{{ asset('newdesign/login/jquery.js') }}" defer=""></script>
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
+    <!--begin::Fonts-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+	<!--end::Fonts-->
+	<!--begin::Page Custom Styles(used by this page)-->
+	<link href="{{ asset('finaldesign/assets/css/pages/login/login-1.css') }}" rel="stylesheet" type="text/css" />
+	<!--end::Page Custom Styles-->
+	<!--begin::Global Theme Styles(used by all pages)-->
+	<link href="{{ asset('finaldesign/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('finaldesign/assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('finaldesign/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+	<!--end::Global Theme Styles-->
+
 </head>
-<body class=" login_page">
-	<div class id='app'>
-		<div class="container-fluid">
-	        <div class="login-wrapper row">
-			    <section class="u-clearfix u-image u-section-1" id="carousel_35ff" data-image-width="1529" data-image-height="972">
-			      	<div class="u-clearfix u-sheet u-sheet-1">
-			        	<div class="u-container-style u-expanded-width-xs u-group u-group-1">
-				            @yield('content')
-				        </div>
-			      	</div>
-			    </section>
-
-			    <section class="u-backlink u-clearfix u-grey-80">
-			      <a class="" href="https://nicepage.com/" target="_blank">
-			        <span>Copyright © <?= date('Y'); ?></span>
-			      </a>. 
-			      <a class="" href="https://nicepage.com/html-templates" target="_blank">
-			        <span>Powered by Solaris Dubai</span>
-			      </a>
-			    </section>
-			</div>
+<body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-static page-loading">
+	<!--begin::Main-->
+	<div class="d-flex flex-column flex-root">
+		<!--begin::Login-->
+		<div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
+			@yield('content')
 		</div>
+		<!--end::Login-->
 	</div>
-
+	<!--end::Main-->
+	
     @include('layouts.foot')
 
     @yield('script')

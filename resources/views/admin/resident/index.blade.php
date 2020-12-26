@@ -8,6 +8,131 @@
 		</div>
 	@endif
 
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Subheader-->
+        <div class="subheader py-3 py-lg-8 subheader-transparent" id="kt_subheader">
+            <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                <!--begin::Info-->
+                <div class="d-flex align-items-center mr-1">
+                    <!--begin::Page Heading-->
+                    <div class="d-flex align-items-baseline flex-wrap mr-5">
+                        <!--begin::Page Title-->
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Residents</h2>
+                        <!--end::Page Title-->
+                        <!--begin::Breadcrumb-->
+                        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('home') }}" class="text-muted">Home &nbsp;</a>
+                            </li>
+                        </ul>
+                        <!--end::Breadcrumb-->
+                    </div>
+                    <!--end::Page Heading-->
+                </div>
+                <!--end::Info-->
+            </div>
+        </div>
+        <!--end::Subheader-->
+        <!--begin::Entry-->
+        <div class="d-flex flex-column-fluid">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Card-->
+                <div class="card card-custom">
+                    <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                        <div class="card-title">
+                            <h3 class="card-label">Manage Residents
+                        </div>
+                        <div class="card-toolbar">
+                            <!--begin::Button-->
+                            <a href="{{ route('resident.add') }}" class="btn btn-primary font-weight-bolder">Add User</a>
+                            <!--end::Button-->
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!--begin: Search Form-->
+                        <!--begin::Search Form-->
+                        <div class="mb-7">
+                            <div class="row align-items-center">
+                                <div class="col-lg-9 col-xl-8">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 my-2 my-md-0">
+                                            <div class="input-icon">
+                                                <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
+                                                <span>
+                                                    <i class="flaticon2-search-1 text-muted"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 my-2 my-md-0">
+                                            <div class="d-flex align-items-center">
+                                                <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
+                                                <select class="form-control" id="kt_datatable_search_status">
+                                                    <option value="">All</option>
+                                                    <option value="1">Pending</option>
+                                                    <option value="2">Delivered</option>
+                                                    <option value="3">Canceled</option>
+                                                    <option value="4">Success</option>
+                                                    <option value="5">Info</option>
+                                                    <option value="6">Danger</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 my-2 my-md-0">
+                                            <div class="d-flex align-items-center">
+                                                <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
+                                                <select class="form-control" id="kt_datatable_search_type">
+                                                    <option value="">All</option>
+                                                    <option value="1">Online</option>
+                                                    <option value="2">Retail</option>
+                                                    <option value="3">Direct</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
+                                    <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Search Form-->
+                        <!--end: Search Form-->
+                        <div class="row py-5">
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">ID:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="kt_datatable_check_input" value="1" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary font-weight-bold" type="button" id="kt_datatable_check">Select row</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-10">
+                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_reload">Reload</button>
+                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_check_all">Select all rows</button>
+                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_uncheck_all">Unselect all rows</button>
+                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_hide_column">Hide Date</button>
+                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_show_column">Show Date</button>
+                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_remove_row">Remove active row</button>
+                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_sort_asc">Sort Status [asc]</button>
+                                <button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_sort_desc">Sort Status [desc]</button>
+                            </div>
+                        </div>
+                        <!--begin: Datatable-->
+                        <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
+                        <!--end: Datatable-->
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::Entry-->
+    </div>
+
 	<div class="col-xs-12">
         <div class="page-title">
 

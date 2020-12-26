@@ -7,171 +7,229 @@
 		</div>
 	@endif
 
-	<div class="col-lg-4">
-        <section class="box ">
-            <div class="content-body p">
-                <div class="row">
-                    <div class="doctors-list patient relative">
-                        <div class="doctors-head relative text-center" style="background-color: #5da6f9;">
-                            <div class="patient-img img-circle">
-                                @if($user->profile_logo)
-                                    <img src="{{ asset('uploads/').'/'.$user->profile_logo }}" class="rad-50 center-block" alt="">
-                                @endif
-                            </div>
-                            <h3 class="header w-text relative bold">{{ $user->name }}</h3>
-                            <br>
-                        </div>
-                        <div class="row">
-                            <div class="patients-info relative" >
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="patient-card has-shadow2">
-                                        <div class="doc-info-wrap">
-                                            <div class="patient-info">
-                                                <?php ($user->gender == 1) ? $gender = "Female" : $gender = "Male"; ?>
-                                                <h5 class="bold"><?= $gender; ?></h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="patient-card has-shadow2">
-                                        <div class="doc-info-wrap">
-                                            <div class="patient-info">
-                                                <?php $years = date('Y') - date_format(date_create($user->birthday), 'Y'); ?>
-                                                <h5 class="bold"><?= $years; ?> years </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="patient-card has-shadow2">
-                                        <div class="doc-info-wrap">
-                                            <div class="patient-info">
-                                                <h5 class="bold">{{ $user->address }}</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="patient-card has-shadow2">
-                                        <div class="doc-info-wrap">
-                                            <div class="patient-info">
-                                                <h5 class="bold">{{ $user->phone_number }}</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- end row -->
-                    </div>                   
+    <!--begin::Content-->
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Subheader-->
+        <div class="subheader py-3 py-lg-8 subheader-transparent" id="kt_subheader">
+            <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                <!--begin::Info-->
+                <div class="d-flex align-items-center mr-1">
+                    <!--begin::Mobile Toggle-->
+                    <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none" id="kt_subheader_mobile_toggle">
+                        <span></span>
+                    </button>
+                    <!--end::Mobile Toggle-->
+                    <!--begin::Page Heading-->
+                    <div class="d-flex align-items-baseline flex-wrap mr-5">
+                        <!--begin::Page Title-->
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Profile </h2>
+                        <!--end::Page Title-->
+                        <!--begin::Breadcrumb-->
+                        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('home') }}" class="text-muted">Home</a>
+                            </li>
+                        </ul>
+                        <!--end::Breadcrumb-->
+                    </div>
+                    <!--end::Page Heading-->
                 </div>
+                <!--end::Info-->
             </div>
-        </section>
-    </div>
-    <div class="col-lg-8">
-        <section class="box nohidden has-border-left-3">
-            <header class="panel_header">
-                <h2 class="title pull-left">Quick Links</h2>
-            </header>
-            <div class="content-body" style="padding-bottom:0 !important">    
-                <div class="row">
-                    <div class="col-lg-4 no-pl no-pr">
-                        <div class="tile-progress" style="border: 2px solid #4d9cf8; margin-left:15px;margin-right:15px;cursor:pointer">
-                            <div class="content">
-                                <h4 style="color: #000;">Medication</h4>
-                                <!-- <p class="mt-10 text-center no-mb g-text">There are some features for Routine and PRN in here.</p> -->
-                                <br>
-                                <div class="flex-column" style="text-align: center;">
-                                    <a href="{{ route('usermedications.indexusermedication', $user->id) }}" class="btn btn-primary dashboard">Routine</a>
-                                    <a href="{{ route('tfgs.indextfg', $user->id) }}" class="btn btn-primary dashboard">PRN</a>
-                                    <a href="{{ route('notifications.index') }}" class="btn btn-primary dashboard">Reminders</a>
+        </div>
+        <!--end::Subheader-->
+        <!--begin::Entry-->
+        <div class="d-flex flex-column-fluid">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Profile 4-->
+                <div class="d-flex flex-row">
+                    <!--begin::Aside-->
+                    <div class="flex-row-auto offcanvas-mobile w-300px w-xl-350px" id="kt_profile_aside">
+                        <!--begin::Card-->
+                        <div class="card card-custom gutter-b">
+                            <!--begin::Body-->
+                            <div class="card-body pt-4">
+                                <!--begin::Toolbar-->
+                                <div class="d-flex justify-content-end">
+                                    <div class="dropdown dropdown-inline">
+                                        <br>
+                                    </div>
                                 </div>
+                                <!--end::Toolbar-->
+                                <!--begin::User-->
+                                <div class="d-flex align-items-center">
+                                    <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
+                                        @if($user->profile_logo)
+                                            <div class="symbol-label" style="background-image:url('{{ asset('uploads/').'/'.$user->profile_logo }}')"></div>
+                                            <i class="symbol-badge bg-success"></i>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <a class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ $user->name }}</a>
+                                        <div class="text-muted">Resident</div>
+                                        <div class="mt-2">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::User-->
+                                <!--begin::Contact-->
+                                <div class="pt-8 pb-6">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <span class="font-weight-bold mr-2">Email:</span>
+                                        <a class="text-muted text-hover-primary custom_a_tag">{{ $user->email }}</a>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <span class="font-weight-bold mr-2">Phone:</span>
+                                        <span class="text-muted">{{ $user->phone_number }}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span class="font-weight-bold mr-2">Location:</span>
+                                        <span class="text-muted">{{ $user->address }}</span>
+                                    </div>
+                                </div>
+                                <!--end::Contact-->
+                                <!--begin::Contact-->
+                                <?php ($user->gender == 1) ? $gender = "Female" : $gender = "Male"; ?>
+                                <div class="pb-6"><?= $gender ?> / {{ $user->birthday }}</div>
+                                <!--end::Contact-->
                             </div>
+                            <!--end::Body-->
                         </div>
+                        <!--end::Card-->
                     </div>
+                    <!--end::Aside-->
+                    <!--begin::Content-->
+                    <div class="flex-row-fluid ml-lg-8">
+                        <!--begin::Advance Table Widget 8-->
+                        <div class="card card-custom gutter-b">
+                            <!--begin::Header-->
+                            <div class="card-header border-0 py-5">
+                                <h3 class="card-title align-items-start flex-column">
+                                    <span class="card-label font-weight-bolder text-dark">Quick Links</span>
+                                    <span class="text-muted mt-3 font-weight-bold font-size-sm">Medication, Activity and Incidence</span>
+                                </h3>
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Body-->
+                            <div class="card-body pt-0 pb-3 row">
+                                <div class="col-lg-6 col-xl-4 mb-5">
+                                    <!--begin::Iconbox-->
+                                    <div class="card card-custom wave wave-animate-slow wave-success mb-8 mb-lg-0">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column">
+                                                <a href="{{ route('usermedications.indexusermedication', $user->id) }}" class="text-dark text-hover-primary font-weight-bold font-size-h4 mb-3">Medication</a>
 
-                    <div class="col-lg-4 no-pl no-pr">
-                        <div class="tile-progress" style="border: 2px solid #4CAF50; margin-left:15px;margin-right:15px;cursor:pointer">
-                            <div class="content">
-                                <h4 style="color: #000;">Daily Activity</h4>
-                                <!-- <p class="mt-10 text-center no-mb g-text">There are some features for primary ADL and Secondary ADL.</p> -->
-                                <br>
-                                <div style="text-align: center;">
-                                    <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-success dashboard">Primary ADL</a>
-                                    <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-success dashboard">Secondary ADL</a>
-                                    <a href="{{ route('notifications.index') }}" class="btn btn-success dashboard">Reminders</a>
+                                                <a href="{{ route('usermedications.indexusermedication', $user->id) }}" class="btn btn-success custom_div_tag dashboard custom_drop_down">Routine</a>
+                                                <a href="{{ route('tfgs.indextfg', $user->id) }}" class="btn btn-success dashboard custom_drop_down">PRN</a>
+                                                <a href="{{ route('notifications.index') }}" class="btn btn-success dashboard custom_drop_down">Reminders</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Iconbox-->
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="col-lg-6 col-xl-4 mb-5">
+                                    <!--begin::Iconbox-->
+                                    <div class="card card-custom wave wave-animate wave-custom mb-8 mb-lg-0">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column">
+                                                <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="text-dark text-hover-primary font-weight-bold font-size-h4 mb-3">Activity</a>
 
-                    <div class="col-lg-4 no-pl no-pr">
-                        <div class="tile-progress" style="border: 2px solid #FFC107; margin-left:15px;margin-right:15px;cursor:pointer">
-                            <div class="content">
-                                <h4 style="color: #000;">Incidence</h4>
-                                <!-- <p class="mt-10 text-center no-mb g-text">There are some features for Family Visit and Mood Change and Body Harm.</p> -->
-                                <br>
-                                <div style="text-align: center;">
-                                    <a href="#" class="btn btn-warning dashboard">Family Visit</a>
-                                    <a href="#" class="btn btn-warning dashboard">Mood Change</a>
-                                    <a href="{{ route('bodyharm.indexbodyharm', $user->id) }}" class="btn btn-warning dashboard">Body Harm</a>
+                                                <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-custom custom_div_tag dashboard custom_drop_down">Primary ADL</a>
+                                                <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-custom dashboard custom_drop_down">Secondary ADL</a>
+                                                <a href="{{ route('notifications.index') }}" class="btn btn-custom dashboard custom_drop_down">Reminders</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Iconbox-->
+                                </div>
+                                <div class="col-lg-6 col-xl-4">
+                                    <!--begin::Iconbox-->
+                                    <div class="card card-custom wave wave-animate-fast wave-warning">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column">
+                                                <a href="{{ route('bodyharm.indexbodyharm', $user->id) }}" class="text-dark text-hover-primary font-weight-bold font-size-h4 mb-3">Incidence</a>
+
+                                                <a href="#" class="btn btn-warning custom_div_tag dashboard custom_drop_down">Family Visit</a>
+                                                <a href="#" class="btn btn-warning dashboard custom_drop_down">Mood Change</a>
+                                                <a href="{{ route('bodyharm.indexbodyharm', $user->id) }}" class="btn btn-warning dashboard custom_drop_down">Body Harm</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Iconbox-->
                                 </div>
                             </div>
+
+                            <div class="card-body pt-0 pb-3 row">
+                                <div class="col-lg-12">
+                                    <!--begin::Callout-->
+                                    <div class="card card-custom mb-2 bg-light-warning">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center justify-content-between p-4 flex-lg-wrap flex-xl-nowrap">
+                                                <div class="d-flex flex-column mr-5">
+                                                    <a class="h4 text-dark text-hover-primary mb-5">Temprature</a>
+                                                    <i class='fas fa-thermometer' style='font-size: 70px; color: red;'></i>
+                                                </div>
+                                                <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
+                                                    <a class="btn font-weight-bolder text-uppercase py-4 px-6">{{ $vitalsign['temperature']['data'] }} <span>°F</span></a>
+                                                </div>
+                                            </div>
+                                            <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
+                                        </div>
+                                    </div>
+                                    <!--end::Callout-->
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <!--begin::Callout-->
+                                    <div class="card card-custom mb-2 bg-light-primary">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center justify-content-between p-4 flex-lg-wrap flex-xl-nowrap">
+                                                <div class="d-flex flex-column mr-5">
+                                                    <a class="h4 text-dark text-hover-primary mb-5">Blood pressure</a>
+                                                    <i class='fas fa-signal' style='font-size: 70px; color: red;'></i>
+                                                </div>
+                                                <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
+                                                    <a class="btn font-weight-bolder text-uppercase py-4 px-6">{{ $vitalsign['blood_pressure']['data'] }} <span>mmHG</span></a>
+                                                </div>
+                                            </div>
+                                            <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
+                                        </div>
+                                    </div>
+                                    <!--end::Callout-->
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <!--begin::Callout-->
+                                    <div class="card card-custom mb-2 bg-light-success">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center justify-content-between p-4 flex-lg-wrap flex-xl-nowrap">
+                                                <div class="d-flex flex-column mr-5">
+                                                    <a class="h4 text-dark text-hover-primary mb-5">Heart Rate</a>
+                                                    <i class='fa fa-heart' style='font-size: 70px; color: red;'></i>
+                                                </div>
+                                                <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
+                                                    <a class="btn font-weight-bolder text-uppercase py-4 px-6">{{ $vitalsign['heart_rate']['data'] }} <span>Per min</span></a>
+                                                </div>
+                                            </div>
+                                            <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
+                                        </div>
+                                    </div>
+                                    <!--end::Callout-->
+                                </div>
+                            </div>
+                            <!--end::Body-->
                         </div>
+                        <!--end::Advance Table Widget 8-->
                     </div>
+                    <!--end::Content-->
                 </div>
-                <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <div class="r1_graph1 db_box db_box_large has-shadow2">
-                            <div class="pat-info-wrapper">
-                                <div class="pat-info text-left">
-                                    <h5 class=''>Temprature</h5>
-                                    <i class='fas fa-thermometer' style='font-size: 70px; color: red;'></i>
-                                </div>
-                                <div class="pat-val relative">
-                                    @if($vitalsign)
-                                        <h4 class="value green-text">{{ $vitalsign['temperature']['data'] }} <span>°F</span></h4>
-                                    @endif
-                                </div>
-                            </div>
-                            <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-xs-12 ">
-                        <div class="r1_graph1 db_box db_box_large has-shadow2">
-                            <div class="pat-info-wrapper">
-                                <div class="pat-info text-left">
-                                    <h5 class=''>Blood pressure</h5>
-                                    <i class="fa fa-signal" aria-hidden="true" style="font-size: 70px; color: red;"></i>
-                                </div>
-                                <div class="pat-val relative">
-                                    @if($vitalsign)
-                                        <h4 class="value p-text">{{ $vitalsign['blood_pressure']['data'] }} <span>mmHG</span></h4>
-                                    @endif
-                                </div>
-                            </div>
-                            <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <div class="r1_graph1 db_box db_box_large has-shadow2">
-                            <div class="pat-info-wrapper">
-                                <div class="pat-info text-left">
-                                    <h5 class=''>Heart Rate</h5>
-                                    <i class="fa fa-heart" aria-hidden="true" style="font-size: 70px; color: red;"></i>
-                                </div>
-                                <div class="pat-val relative">
-                                    @if($vitalsign)
-                                        <h4 class="value red-text">{{ $vitalsign['heart_rate']['data'] }} <span>Per min</span></h4>
-                                    @endif
-                                </div>
-                            </div>
-                            <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
-                        </div>
-                    </div>
-                </div>
+                <!--end::Profile 4-->
             </div>
-        </section>
+            <!--end::Container-->
+        </div>
+        <!--end::Entry-->
     </div>
+    <!--end::Content-->
 @stop

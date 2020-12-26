@@ -1,46 +1,117 @@
 @extends('layouts.applogin')
 
 @section('content')
-
-    <div class="u-container-layout u-container-layout-1">
-        <h1 class="u-custom-font u-font-oswald u-text u-title u-text-1">BLUECARE HUB</h1>
-        <div class="u-form u-form-1">
-            <form action="{{ url(config('adminlte.login_url', 'login')) }}" method="POST" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="custom" name="form">
-                
-                {!! csrf_field() !!}
-
-                <?php if(@$msg) { ?>
-                    <div class="alert alert-danger">
-                        {{ $msg }}
-                    </div>
-                <?php } ?>
-
-                <div class="u-form-group u-form-name u-form-group-1 {{ $errors->has('username') ? 'has-error' : '' }}">
-                    <label for="name-6797" class="u-form-control-hidden u-label">Name</label>
-                    <input type="text" placeholder="Username" id="name-6797" name="username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required>
-
-                    @if ($errors->has('username'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('username') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                <div class="u-form-group u-form-group-2 {{ $errors->has('password') ? 'has-error' : '' }}">
-                    <label for="email-6797" class="u-form-control-hidden u-label">Password</label>
-                    <input type="password" placeholder="Password" id="email-6797" name="password" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-2" required>
-
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                <div class="u-align-center u-form-group u-form-submit u-form-group-3">
-                    <button type="submit" class="u-btn u-btn-submit u-button-style u-hover-palette-1-dark-3 u-palette-1-dark-2 u-btn-1">Submit</button>
-                </div>
-            </form>
+    
+    <!--begin::Aside-->
+    <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
+        <!--begin::Aside Top-->
+        <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
+            <!--begin::Aside header-->
+            <a href="{{ route('home') }}" class="text-center mb-10">
+                <img src="{{ asset('finaldesign/assets/media/logos/logo-letter-1.png') }}" class="max-h-70px" alt="" />
+            </a>
+            <!--end::Aside header-->
+            <!--begin::Aside title-->
+            <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">Discover Amazing Metronic
+            <br />with great build tools</h3>
+            <!--end::Aside title-->
         </div>
+        <!--end::Aside Top-->
+        <!--begin::Aside Bottom-->
+        <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{ asset('finaldesign/assets/media/svg/illustrations/login-visual-1.svg') }})"></div>
+        <!--end::Aside Bottom-->
     </div>
+    <!--begin::Aside-->
+    <!--begin::Content-->
+    <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
+        <!--begin::Content body-->
+        <div class="d-flex flex-column-fluid flex-center">
+            <!--begin::Signin-->
+            <div class="login-form login-signin">
+                <!--begin::Form-->
+                <form class="form" novalidate="novalidate" id="kt_login_signin_form" action="{{ url(config('adminlte.login_url', 'login')) }}" method="POST">
+                    {!! csrf_field() !!}
+
+                    <!--begin::Title-->
+                    <div class="pb-13 pt-lg-0 pt-5">
+                        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Welcome to Bluecarehub</h3>
+                    </div>
+                    <!--begin::Title-->
+                    <!--begin::Form group-->
+                    <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                        <label class="font-size-h6 font-weight-bolder text-dark">Name</label>
+                        <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="username" autocomplete="off" />
+
+                        @if ($errors->has('username'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('username') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <!--end::Form group-->
+                    <!--begin::Form group-->
+                    <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                        <div class="d-flex justify-content-between mt-n5">
+                            <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
+                            <!-- <a href="javascript:;" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5" id="kt_login_forgot">Forgot Password ?</a> -->
+                        </div>
+                        <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="password" name="password" autocomplete="off" />
+
+                        @if ($errors->has('password'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <!--end::Form group-->
+                    <!--begin::Action-->
+                    <div class="pb-lg-0 pb-5">
+                        <button type="submit" id="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
+                    </div>
+                    <!--end::Action-->
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Signin-->
+            
+            <!--begin::Forgot-->
+            <div class="login-form login-forgot">
+                <!--begin::Form-->
+                <form class="form" novalidate="novalidate" id="kt_login_forgot_form">
+                    <!--begin::Title-->
+                    <div class="pb-13 pt-lg-0 pt-5">
+                        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Forgotten Password ?</h3>
+                        <p class="text-muted font-weight-bold font-size-h4">Enter your email to reset your password</p>
+                    </div>
+                    <!--end::Title-->
+                    <!--begin::Form group-->
+                    <div class="form-group">
+                        <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="email" placeholder="Email" name="email" autocomplete="off" />
+                    </div>
+                    <!--end::Form group-->
+                    <!--begin::Form group-->
+                    <div class="form-group d-flex flex-wrap pb-lg-0">
+                        <button type="button" id="kt_login_forgot_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">Submit</button>
+                        <button type="button" id="kt_login_forgot_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">Cancel</button>
+                    </div>
+                    <!--end::Form group-->
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Forgot-->
+        </div>
+        <!--end::Content body-->
+        <!--begin::Content footer-->
+        <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
+            <div class="text-dark-50 font-size-lg font-weight-bolder mr-10">
+                <span class="mr-1"><?= date('Y'); ?>©</span>
+                <a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">Powered by Solaris Dubai</a>
+            </div>
+            <!-- <a href="#" class="text-primary font-weight-bolder font-size-lg">Terms</a>
+            <a href="#" class="text-primary ml-5 font-weight-bolder font-size-lg">Plans</a>
+            <a href="#" class="text-primary ml-5 font-weight-bolder font-size-lg">Contact Us</a> -->
+        </div>
+        <!--end::Content footer-->
+    </div>
+    <!--end::Content-->
 @stop

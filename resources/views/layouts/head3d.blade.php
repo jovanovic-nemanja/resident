@@ -8,30 +8,18 @@
 <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon" />
 <!-- For iPhone -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<link rel="apple-touch-icon-precomposed" href="{{ asset('newdesign/assets/images/apple-touch-icon-57-precomposed.png') }}">
-<!-- For iPhone 4 Retina display -->
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('newdesign/assets/images/apple-touch-icon-114-precomposed.png') }}">
-<!-- For iPad -->
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('newdesign/assets/images/apple-touch-icon-72-precomposed.png') }}">
-<!-- For iPad Retina display -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('newdesign/assets/images/apple-touch-icon-144-precomposed.png') }}">
-
-<!-- CORE CSS FRAMEWORK - START -->
-<link href="{{ asset('newdesign/assets/plugins/pace/pace-theme-flash.css') }}" rel="stylesheet" type="text/css" media="screen" />
-<link href="{{ asset('newdesign/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('newdesign/assets/plugins/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('newdesign/assets/fonts/font-awesome/css/font-awesome.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('newdesign/assets/fonts/webfont/cryptocoins.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('newdesign/assets/css/animate.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('newdesign/assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" type="text/css" />
-<!-- CORE CSS FRAMEWORK - END -->
-
-<!-- CORE CSS TEMPLATE - START -->
-<link href="{{ asset('newdesign/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('newdesign/assets/css/responsive.css') }}" rel="stylesheet" type="text/css" />
-<!-- CORE CSS TEMPLATE - END -->
 
 <!-- Canbas WebGL Three.js -->
 <link type="text/css" rel="stylesheet" href="{{ asset('3d/src/main.css') }}">
 
-<link rel="stylesheet" href="{{ asset('newdesign/jquery-toast-plugin/jquery.toast.min.css') }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+<!--end::Fonts-->
+<!--begin::Global Theme Styles(used by all pages)-->
+<link href="{{ asset('finaldesign/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('finaldesign/assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('finaldesign/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+<!--end::Global Theme Styles-->
+
+<link rel="stylesheet" href="{{ asset('finaldesign/jquery-toast-plugin/jquery.toast.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
