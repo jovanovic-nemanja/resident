@@ -8,6 +8,7 @@ import * as THREE from '/3d/src/build/three.module.js';
 		import { DecalGeometry } from '/3d/src/jsm/geometries/DecalGeometry.js';
 
 		var container = document.getElementById( 'container' );
+		var area = document.getElementsByClassName('3d');
 
 		var renderer, scene, camera, stats;
 		var mesh;
@@ -63,7 +64,8 @@ import * as THREE from '/3d/src/build/three.module.js';
 
 			renderer = new THREE.WebGLRenderer( { antialias: true } );
 			renderer.setPixelRatio( window.devicePixelRatio );
-			renderer.setSize( window.innerWidth, window.innerHeight );
+
+			renderer.setSize( $('.3d').width(), $('.3d').height() );
 			container.appendChild( renderer.domElement );
 
 			stats = new Stats();
@@ -71,7 +73,7 @@ import * as THREE from '/3d/src/build/three.module.js';
 
 			scene = new THREE.Scene();
 
-			camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
+			camera = new THREE.PerspectiveCamera( 45, $('.3d').width() / $('.3d').height(), 1, 1000 );
 			camera.position.z = 80;
 			camera.target = new THREE.Vector3();
 
@@ -319,10 +321,10 @@ import * as THREE from '/3d/src/build/three.module.js';
 
 		function onWindowResize() {
 
-			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.aspect = $('.3d').width() / $('.3d').height();
 			camera.updateProjectionMatrix();
 
-			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.setSize( $('.3d').width(), $('.3d').height() );
 
 		}
 
