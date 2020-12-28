@@ -21,5 +21,6 @@
 <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
+<link href="{{ asset('finaldesign/assets/css/pages/wizard/wizard-1.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('finaldesign/assets/css/pages/wizard/wizard-4.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('finaldesign/assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
