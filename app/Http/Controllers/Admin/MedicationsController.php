@@ -7,6 +7,8 @@ use App\Role;
 use App\Comments;
 use App\RoleUser;
 use App\Medications;
+use App\Usermedications;
+use App\AssignMedications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -164,6 +166,12 @@ class MedicationsController extends Controller
      */
     public function destroy($id)
     {
+        $assignMeds = AssignMedications::where('medications', $id)->get();
+        foreach ($assignMeds as $val) {
+            $recc = Usermedications::where('assign_id', $val->id)->delete();
+        }
+        
+        $assignMed = AssignMedications::where('medications', $id)->delete();
         $del = Comments::where('type', 2)->where('ref_id', $id)->delete();
         $record = Medications::where('id', $id)->delete();
         

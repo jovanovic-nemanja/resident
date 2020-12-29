@@ -3,93 +3,115 @@
 @section('content')
 	
 	@if(session('flash'))
-		<div class="alert alert-primary">
+		<div class="alert alert-success">
 			{{ session('flash') }}
 		</div>
 	@endif
 
-	<div class="col-xs-12">
-        <div class="page-title">
-
-            <div class="pull-left">
-                <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Care takers </h1>
-                <div class="doctors-head relative text-center">
-	            </div>
-                <!-- PAGE HEADING TAG - END -->
-            </div>
-
-        </div>
-    </div>
-
-    <div class="clearfix"></div>
-
-    <div class="col-xs-12">
-        <section class="box">
-            <header class="panel_header">
-                <h2 class="title pull-left">Care takers</h2>
-                <div class="actions panel_actions pull-right">
-                	<a style="padding: 7px 18px; font-size: initial;" href="{{ route('caretaker.create') }}" class="btn btn-success">Add</a>
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Subheader-->
+        <div class="subheader py-3 py-lg-8 subheader-transparent" id="kt_subheader">
+            <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                <!--begin::Info-->
+                <div class="d-flex align-items-center mr-1">
+                    <!--begin::Page Heading-->
+                    <div class="d-flex align-items-baseline flex-wrap mr-5">
+                        <!--begin::Page Title-->
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Care takers</h2>
+                        <!--end::Page Title-->
+                        <!--begin::Breadcrumb-->
+                        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('home') }}" class="text-muted">Home &nbsp;</a>
+                            </li>
+                        </ul>
+                        <!--end::Breadcrumb-->
+                    </div>
+                    <!--end::Page Heading-->
                 </div>
-            </header>
-            <div class="content-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="table-responsive" data-pattern="priority-columns">
-                            <table id="example-1" class="table vm table-small-font no-mb table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Username</th>
-                                        <th>Email Address</th>
-                                        <th>Phone Number</th>
-                                        <th>Profile_photo</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<?php 
-                                		if(@$caretakers) {
-	                                		$i = 1;
-		                                	foreach($caretakers as $caretaker) { ?>
-		                                		@if($caretaker->hasRole('care taker'))
-			                                		<tr>
-			                                			<td>{{ $i }}</td>
-			                                			<td>{{ $caretaker->name }}</td>
-			                                			<td>{{ $caretaker->username }}</td>
-				                                        <td>
-				                                            <div class="">
-				                                                <h6><?= $caretaker->email; ?></h6>
-				                                            </div>
-				                                        </td>
-				                                        <td>
-				                                        	<span class="badge round-primary">{{ $caretaker->phone_number }}</span>
-				                                        </td>
-				                                        <td>
-				                                        	<img src="{{ asset('uploads/').'/'.$caretaker->profile_logo }}" class="rad-50 center-block" alt="">
-				                                        </td>
-				                                        <td>
-				                                        	<a href="{{ route('caretaker.show', $caretaker->id) }}" class="btn btn-success">Edit</a>
-				                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$caretaker->id}}').submit();">Delete</a>
-
-				                                        	<form id="delete-form-{{$caretaker->id}}" action="{{ route('caretaker.destroy', $caretaker->id) }}" method="POST" style="display: none;">
-												                  <input type="hidden" name="_method" value="delete">
-												                  @csrf
-												            </form>
-				                                        </td>
-				                                    </tr>
-				                                @endif
-                                    <?php $i++; } }else{ ?>
-
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                <!--end::Info-->
+            </div>
+        </div>
+        <!--end::Subheader-->
+        <!--begin::Entry-->
+        <div class="d-flex flex-column-fluid">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Card-->
+                <div class="card card-custom">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="card-label">Manage Care takers
                         </div>
+                        <div class="card-toolbar">
+                            <!--begin::Button-->
+                            <a href="{{ route('caretaker.create') }}" class="btn btn-primary font-weight-bolder">Add</a>
+                            <!--end::Button-->
+                        </div>
+                    </div>
+                        
+                    <div class="card-body">
+                        <!--begin: Datatable-->
+                        <table class="table table-bordered table-hover table-checkable" id="kt_datatable" style="margin-top: 13px !important">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Email Address</th>
+                                    <th>Phone Number</th>
+                                    <th>Profile_photo</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    if(@$caretakers) {
+                                        $i = 1;
+                                        foreach($caretakers as $caretaker) { ?>
+                                            @if($caretaker->hasRole('care taker'))
+                                                <tr>
+                                                    <td>{{ $i }}</td>
+                                                    <td>{{ $caretaker->name }}</td>
+                                                    <td>{{ $caretaker->username }}</td>
+                                                    <td>
+                                                        <div class="">
+                                                            <h6><?= $caretaker->email; ?></h6>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge round-primary">{{ $caretaker->phone_number }}</span>
+                                                    </td>
+                                                    <td>
+                                                        @if($caretaker->profile_logo)
+                                                            <div class="symbol symbol-circle symbol-lg-75">
+                                                                <img src="{{ asset('uploads/').'/'.$caretaker->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="">
+                                                            </div>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('caretaker.show', $caretaker->id) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$caretaker->id}}').submit();">Delete</a>
 
+                                                        <form id="delete-form-{{$caretaker->id}}" action="{{ route('caretaker.destroy', $caretaker->id) }}" method="POST" style="display: none;">
+                                                              <input type="hidden" name="_method" value="delete">
+                                                              @csrf
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                <?php $i++; } }else{ ?>
+
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        <!--end: Datatable-->
                     </div>
                 </div>
+                <!--end::Card-->
             </div>
-        </section>
+            <!--end::Container-->
+        </div>
+        <!--end::Entry-->
     </div>
 @stop

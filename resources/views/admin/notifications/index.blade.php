@@ -7,67 +7,84 @@
 		</div>
 	@endif
 
-	<div class="col-xs-12">
-        <div class="page-title">
-
-            <div class="pull-left">
-                <!-- PAGE HEADING TAG - START -->
-                <h1 class="title">Reminders </h1>
-                <!-- PAGE HEADING TAG - END -->
-            </div>
-
-        </div>
-    </div>
-
-    <div class="clearfix"></div>
-
-    <div class="col-xs-12">
-        <section class="box">
-            <header class="panel_header">
-                <h2 class="title pull-left">Reminders</h2>
-                <div class="actions panel_actions pull-right">
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Subheader-->
+        <div class="subheader py-3 py-lg-8 subheader-transparent" id="kt_subheader">
+            <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                <!--begin::Info-->
+                <div class="d-flex align-items-center mr-1">
+                    <!--begin::Page Heading-->
+                    <div class="d-flex align-items-baseline flex-wrap mr-5">
+                        <!--begin::Page Title-->
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Reminders</h2>
+                        <!--end::Page Title-->
+                        <!--begin::Breadcrumb-->
+                        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('home') }}" class="text-muted">Home &nbsp;</a>
+                            </li>
+                        </ul>
+                        <!--end::Breadcrumb-->
+                    </div>
+                    <!--end::Page Heading-->
                 </div>
-            </header>
-            <div class="content-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="table-responsive" data-pattern="priority-columns">
-                            <table id="example-1" class="table vm table-small-font no-mb table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Resident Name</th>
-                                        <th>Contents</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<?php 
-                                		if($notifications) {
-	                                		$i = 1;
-		                                	foreach($notifications as $notification) { ?>
-		                                		<tr>
-		                                			<td>{{ $i }}</td>
-		                                			<td>{{ $notification->resident_name }}</td>
-			                                        <td>
-			                                            <div>
-			                                                <h6>{{ $notification->contents }}</h6>
-			                                            </div>
-			                                        </td>
-			                                        <td>
-			                                        	<a href="{{ route('notifications.confirmIsread', $notification->id) }}" class="btn btn-success">Confirm</a>
-			                                        </td>
-			                                    </tr>
-                                    <?php $i++; } }else{ ?>
+                <!--end::Info-->
+            </div>
+        </div>
+        <!--end::Subheader-->
 
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+        <!--begin::Entry-->
+        <div class="d-flex flex-column-fluid">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Card-->
+                <div class="card card-custom">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="card-label">Reminders</h3>
                         </div>
+                    </div>
+                        
+                    <div class="card-body">
+                        <!--begin: Datatable-->
+                        <table class="table table-bordered table-hover table-checkable" id="kt_datatable" style="margin-top: 13px !important">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Resident Name</th>
+                                    <th>Contents</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    if($notifications) {
+                                        $i = 1;
+                                        foreach($notifications as $notification) { ?>
+                                            <tr>
+                                                <td>{{ $i }}</td>
+                                                <td>{{ $notification->resident_name }}</td>
+                                                <td>
+                                                    <div>
+                                                        <h6>{{ $notification->contents }}</h6>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('notifications.confirmIsread', $notification->id) }}" class="btn btn-success">Confirm</a>
+                                                </td>
+                                            </tr>
+                                <?php $i++; } }else{ ?>
 
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        <!--end: Datatable-->
                     </div>
                 </div>
+                <!--end::Card-->
             </div>
-        </section>
+            <!--end::Container-->
+        </div>
+        <!--end::Entry-->
     </div>
 @stop
