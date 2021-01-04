@@ -3,7 +3,7 @@
 @section('content')
     
     <!--begin::Aside-->
-    <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
+    <div class="login-aside d-flex flex-column flex-row-auto">
         <!--begin::Aside Top-->
         <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
             <!--begin::Aside header-->
