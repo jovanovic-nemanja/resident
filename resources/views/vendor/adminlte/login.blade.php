@@ -4,19 +4,6 @@
     
     <!--begin::Aside-->
     <div class="login-aside d-flex flex-column flex-row-auto">
-        <!--begin::Aside Top-->
-        <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
-            <!--begin::Aside header-->
-            <a href="{{ route('home') }}" class="text-center mb-10">
-                <img src="{{ asset('images/logo.png') }}" class="max-h-70px" alt="" />
-            </a>
-            <!--end::Aside header-->
-            <!--begin::Aside title-->
-            <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">Discover Amazing Metronic
-            <br />with great build tools</h3>
-            <!--end::Aside title-->
-        </div>
-        <!--end::Aside Top-->
         <!--begin::Aside Bottom-->
         <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{ asset('images/login_bg.jpeg') }})"></div>
         <!--end::Aside Bottom-->
@@ -24,6 +11,16 @@
     <!--begin::Aside-->
     <!--begin::Content-->
     <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
+        <!--begin::Aside Top-->
+        <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15" style="padding-top: 0px !important;">
+            <!--begin::Aside header-->
+            <a href="{{ route('home') }}" class="text-center mb-10">
+                <img src="{{ asset('images/logo.png') }}" class="" alt="" style="width: 100%; height: 100%;" />
+            </a>
+            <!--end::Aside header-->
+        </div>
+        <!--end::Aside Top-->
+
         <!--begin::Content body-->
         <div class="d-flex flex-column-fluid flex-center">
             <!--begin::Signin-->
