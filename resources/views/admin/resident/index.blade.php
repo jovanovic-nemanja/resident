@@ -45,7 +45,7 @@
                         </div>
                         <div class="card-toolbar">
                             <!--begin::Button-->
-                            <a href="{{ route('resident.add') }}" class="btn btn-primary font-weight-bolder">Add User</a>
+                            <a href="{{ route('resident.add') }}" class="btn btn-primary font-weight-bolder">Add Resident</a>
                             <!--end::Button-->
                         </div>
                     </div>

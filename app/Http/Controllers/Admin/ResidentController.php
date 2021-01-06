@@ -7,6 +7,7 @@ use App\Role;
 use App\Assignmedications;
 use App\Usermedications;
 use App\Useractivities;
+use App\Resident_information;
 use App\Useractivityreports;
 use App\TFG;
 use App\Bodyharms;
@@ -100,6 +101,37 @@ class ResidentController extends Controller
                 'user_id' => $user->id,
                 'role_id' => 3,
             ]);
+
+            $resident_information = Resident_information::create([
+                'date_admitted' => @$request['date_admitted'],
+                'ssn' => @$request['ssn'],
+                'primary_language' => @$request['primary_language'],
+                'representing_party_name' => @$request['representing_party_name'],
+                'representing_party_address' => @$request['representing_party_address'],
+                'representing_party_home_phone' => @$request['representing_party_home_phone'],
+                'representing_party_cell_phone' => @$request['representing_party_cell_phone'],
+                'secondary_representative_name' => @$request['secondary_representative_name'],
+                'secondary_representative_address' => @$request['secondary_representative_address'],
+                'secondary_representative_home_phone' => @$request['secondary_representative_home_phone'],
+                'secondary_representative_cell_phone' => @$request['secondary_representative_cell_phone'],
+                'physician_or_medical_group_name' => @$request['physician_or_medical_group_name'],
+                'physician_or_medical_group_address' => @$request['physician_or_medical_group_address'],
+                'physician_or_medical_group_phone' => @$request['physician_or_medical_group_phone'],
+                'physician_or_medical_group_fax' => @$request['physician_or_medical_group_fax'],
+                'pharmacy_name' => @$request['pharmacy_name'],
+                'pharmacy_address' => @$request['pharmacy_address'],
+                'pharmacy_home_phone' => @$request['pharmacy_home_phone'],
+                'pharmacy_fax' => @$request['pharmacy_fax'],
+                'dentist_name' => @$request['dentist_name'],
+                'dentist_address' => @$request['dentist_address'],
+                'dentist_home_phone' => @$request['dentist_home_phone'],
+                'dentist_fax' => @$request['dentist_fax'],
+                'advance_directive' => @$request['advance_directive'],
+                'polst' => @$request['polst'],
+                'alergies' => @$request['alergies'],
+                'signDate' => $date
+            ]);
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

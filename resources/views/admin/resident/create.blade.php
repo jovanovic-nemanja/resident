@@ -62,14 +62,14 @@
                                                     <div class="col-xl-9">
                                                         <!--begin::Wizard Step 1-->
                                                         <div class="my-5 step" data-wizard-type="step-content" data-type-status="current">
-                                                            <h5 class="text-dark font-weight-bold mb-10">User's Profile Details:</h5>
+                                                            <h5 class="text-dark font-weight-bold mb-10">Resident's Profile Details:</h5>
                                                             <!--begin::Group-->
                                                             <div class="form-group row {{ $errors->has('profile_logo') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label text-left">Avatar</label>
+                                                                <label class="col-xl-3 col-lg-3 col-form-label text-left">Avatar<span style="color: red;">*</span></label>
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <div class="image-input image-input-outline" id="kt_user_add_avatar">
                                                                         <div class="image-input-wrapper"></div>
-                                                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Add avatar">
                                                                             <i class="fa fa-pen icon-sm text-muted"></i>
                                                                             <input type="file" name="profile_logo" accept=".png, .jpg, .jpeg" />
                                                                             <input type="hidden" name="profile_avatar_remove" />
@@ -91,7 +91,7 @@
                                                             <!--end::Group-->
                                                             <!--begin::Group-->
                                                             <div class="form-group row {{ $errors->has('name') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Name</label>
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Name<span style="color: red;">*</span></label>
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <input class="form-control form-control-solid form-control-lg" name="name" type="text" />
                                                                 </div>
@@ -108,7 +108,7 @@
 
                                                             <!--begin::Group-->
                                                             <div class="form-group row {{ $errors->has('email') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Email Address<span style="color: red;">*</span></label>
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <div class="input-group input-group-solid input-group-lg">
                                                                         <div class="input-group-prepend">
@@ -132,7 +132,7 @@
                                                             
                                                             <!--begin::Group-->
                                                             <div class="form-group row {{ $errors->has('birthday') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Date of birthday</label>
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Date of birthday<span style="color: red;">*</span></label>
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <input class="form-control form-control-solid form-control-lg" name="birthday" type="date" data-format="mm/dd/yyyy" />
                                                                 </div>
@@ -146,9 +146,10 @@
                                                                 @endif
                                                             </div>
                                                             <!--end::Group-->
+
                                                             <!--begin::Group-->
                                                             <div class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Gender</label>
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Gender<span style="color: red;">*</span></label>
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <select class="form-control form-control-solid form-control-lg" name="gender">
                                                                         <option value="male">Male</option>
@@ -168,7 +169,7 @@
                                                             
                                                             <!--begin::Group-->
                                                             <div class="form-group row {{ $errors->has('phone_number') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Phone Number</label>
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Phone Number<span style="color: red;">*</span></label>
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <div class="input-group input-group-solid input-group-lg">
                                                                         <input type="text" class="form-control form-control-solid form-control-lg" name="phone_number" placeholder="Phone Number" />
@@ -187,7 +188,7 @@
 
                                                             <!--begin::Group-->
                                                             <div class="form-group row {{ $errors->has('address') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Address</label>
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Address<span style="color: red;">*</span></label>
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <div class="input-group input-group-solid input-group-lg">
                                                                         <textarea class="form-control form-control-solid form-control-lg" name="address" placeholder="Address" rows="8"></textarea>
@@ -201,6 +202,315 @@
                                                                         <strong>{{ $errors->first('address') }}</strong>
                                                                     </span>
                                                                 @endif
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Date Admitted</label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="date_admitted" type="date" data-format="mm/dd/yyyy" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">SSN</label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="ssn" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">PRIMARY LANGUAGE</label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="primary_language" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <br>
+                                                            <hr>
+                                                            <br>
+                                                            <h5 class="text-dark font-weight-bold mb-10">REPRESENTING PARTY:</h5>
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">NAME </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="representing_party_name" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">ADDRESS </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="representing_party_address" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">HOME PHONE </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="representing_party_home_phone" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">CELL PHONE </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="representing_party_cell_phone" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <br>
+                                                            <hr>
+                                                            <br>
+                                                            <h5 class="text-dark font-weight-bold mb-10">SECONDARY REPRESENTATIVE:</h5>
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">NAME </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="secondary_representative_name" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">ADDRESS </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="secondary_representative_address" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">HOME PHONE </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="secondary_representative_home_phone" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">CELL PHONE </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="secondary_representative_cell_phone" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <br>
+                                                            <hr>
+                                                            <br>
+                                                            <h5 class="text-dark font-weight-bold mb-10">PHYSICIAN OR MEDICAL GROUP:</h5>
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">NAME </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_name" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">ADDRESS </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_address" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">PHONE </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_phone" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">FAX </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_fax" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <br>
+                                                            <hr>
+                                                            <br>
+                                                            <h5 class="text-dark font-weight-bold mb-10">PHARMACY:</h5>
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">NAME </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="pharmacy_name" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">ADDRESS </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="pharmacy_address" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">HOME PHONE </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="pharmacy_home_phone" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">FAX </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="pharmacy_fax" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <br>
+                                                            <hr>
+                                                            <br>
+                                                            <h5 class="text-dark font-weight-bold mb-10">DENTIST:</h5>
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">NAME </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="dentist_name" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">ADDRESS </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="dentist_address" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">HOME PHONE </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="dentist_home_phone" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">FAX </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="dentist_fax" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <br>
+                                                            <hr>
+                                                            <br>
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">ADVANCE DIRECTIVE </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="advance_directive" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">POLST </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="polst" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">ALERGIES </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input class="form-control form-control-solid form-control-lg" name="alergies" type="text" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
                                                             </div>
                                                             <!--end::Group-->
                                                         </div>
