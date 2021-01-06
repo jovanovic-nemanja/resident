@@ -28,7 +28,7 @@
                     <a href="#" class=""></a>
                     <!--end::Button-->
                     <!--begin::Button-->
-                    <a href="{{ route('resident.add') }}" class="btn btn-light-primary font-weight-bold ml-2">Add User</a>
+                    <a href="{{ route('resident.add') }}" class="btn btn-light-primary font-weight-bold ml-2">Add Resident</a>
                     <!--end::Button-->
                 </div>
                 <!--end::Toolbar-->
