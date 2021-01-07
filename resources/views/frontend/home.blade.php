@@ -40,9 +40,10 @@
             <!--begin::Container-->
             <div class="container">
                 <!--begin::Row-->
-                <div class="row">
-                    <?php if(count($residents) > 0) { ?>
-                        @foreach($residents as $resident)
+                
+                <?php if(count($residents) > 0) { ?>
+                    @foreach($residents as $resident)
+                        <div class="row">
                             <!--begin::Col-->
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                                 <!--begin::Card-->
@@ -148,13 +149,15 @@
                                 <!--end::Card-->
                             </div>
                             <!--end::Col-->
-                        @endforeach
-                    <?php } else { ?>
-                        <div class="card">
-                            <h4><strong>There is no resident at this moment</strong></h4>
                         </div>
-                    <?php } ?>        
-                </div>
+                    @endforeach
+                <?php } else { ?>
+                    <div style="text-align: center;">
+                        <br><br>
+                        <h6>There is no resident at this moment</h6>
+                    </div>
+                <?php } ?>        
+
                 <!--end::Row-->
             </div>
             <!--end::Container-->
