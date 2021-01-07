@@ -42,8 +42,8 @@
                 <!--begin::Row-->
                 
                 <?php if(count($residents) > 0) { ?>
-                    @foreach($residents as $resident)
-                        <div class="row">
+                    <div class="row">
+                        @foreach($residents as $resident)
                             <!--begin::Col-->
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                                 <!--begin::Card-->
@@ -149,8 +149,8 @@
                                 <!--end::Card-->
                             </div>
                             <!--end::Col-->
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 <?php } else { ?>
                     <div style="text-align: center;">
                         <br><br>
