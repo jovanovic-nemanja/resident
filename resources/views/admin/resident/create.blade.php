@@ -579,6 +579,12 @@
         <!--end::Entry-->
     </div>
     <!--end::Content-->
+
+    <style type="text/css">
+        .help-block {
+            color: red;
+        }
+    </style>
 @stop
 
 @section('script')
