@@ -21,7 +21,7 @@
             <!--end::Aside Toggle-->
             <!--begin::Logo-->
             <a href="{{ route('home') }}">
-                <img alt="Logo" src="{{ asset('images/logo.png') }}" class="logo-sticky max-h-100px" />
+                <img alt="Logo" src="{{ asset('images/logo1.jpeg') }}" class="logo-sticky max-h-100px" />
             </a>
             <!--end::Logo-->
         </div>
