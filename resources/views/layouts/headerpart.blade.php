@@ -86,9 +86,11 @@
             </div>
             <!--end::Tablet & Mobile Search-->
             <div class="topbar-item mr-4">
-                <a href="{{ route('notifications.index') }}" class="new-link w-text btn btn-sm btn-light-success">Reminders
-                    <span class="badge badge-danger ml-5 reminder_badge">New</span>
-                </a>
+                @if(auth()->user()->hasRole('admin'))
+                    <a href="{{ route('notifications.index') }}" class="new-link w-text btn btn-sm btn-light-success">Reminders
+                        <span class="badge badge-danger ml-5 reminder_badge">New</span>
+                    </a>
+                @endif
             </div>
 
             <!--begin::User-->
