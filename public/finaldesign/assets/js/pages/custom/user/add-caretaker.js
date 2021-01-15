@@ -123,10 +123,17 @@ var KTAddUser = function () {
 							}
 						}
 					},
-					name: {
+					firstname: {
 						validators: {
 							notEmpty: {
-								message: 'Name is required'
+								message: 'First Name is required'
+							}
+						}
+					},
+					lastname: {
+						validators: {
+							notEmpty: {
+								message: 'Last Name is required'
 							}
 						}
 					},

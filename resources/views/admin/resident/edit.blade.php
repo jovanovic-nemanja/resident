@@ -94,17 +94,17 @@
                                             </div>
                                             <!--end::Group-->
                                             <!--begin::Group-->
-                                            <div class="form-group row {{ $errors->has('name') ? 'has-error' : '' }}">
+                                            <div class="form-group row {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Name</label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="name" value="{{ $resident->name }}" type="text" />
+                                                    <input class="form-control form-control-solid form-control-lg" name="firstname" value="{{ $resident->firstname }}" type="text" />
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
 
-                                                @if ($errors->has('name'))
+                                                @if ($errors->has('firstname'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('name') }}</strong>
+                                                        <strong>{{ $errors->first('firstname') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -190,19 +190,19 @@
                                             <!--end::Group-->
 
                                             <!--begin::Group-->
-                                            <div class="form-group row {{ $errors->has('address') ? 'has-error' : '' }}">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Address</label>
+                                            <div class="form-group row {{ $errors->has('street1') ? 'has-error' : '' }}">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Street</label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <div class="input-group input-group-solid input-group-lg">
-                                                        <textarea class="form-control form-control-solid form-control-lg" name="address" placeholder="Address" rows="8">{{ $resident->address }}</textarea>
+                                                        <textarea class="form-control form-control-solid form-control-lg" name="street1" placeholder="Street" rows="8">{{ $resident->street1 }}</textarea>
                                                     </div>
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
 
-                                                @if ($errors->has('address'))
+                                                @if ($errors->has('street1'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('address') }}</strong>
+                                                        <strong>{{ $errors->first('street1') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>

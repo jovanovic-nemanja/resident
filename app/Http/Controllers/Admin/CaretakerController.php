@@ -46,7 +46,8 @@ class CaretakerController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'name' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'username' => 'required|string',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -61,7 +62,8 @@ class CaretakerController extends Controller
 
         try {
             $user = User::create([
-                'name' => $request['name'],
+                'firstname' => $request['firstname'],
+                'lastname' => $request['lastname'],
                 'username' => $request['username'],
                 'email' => $request['email'],
                 'profile_logo' => $request['profile_logo'],
@@ -119,7 +121,8 @@ class CaretakerController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'name' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'username' => 'required|string',
             'password' => 'required|string|min:6|confirmed',
             'phone_number' => 'string|max:20',
@@ -127,7 +130,8 @@ class CaretakerController extends Controller
 
         $record = User::where('id', $id)->first();
         if (@$record) {
-            $record->name = $request->name;
+            $record->firstname = $request->firstname;
+            $record->lastname = $request->lastname;
             $record->username = $request->username;
             $record->password = Hash::make($request['password']);
             $record->phone_number = $request->phone_number;

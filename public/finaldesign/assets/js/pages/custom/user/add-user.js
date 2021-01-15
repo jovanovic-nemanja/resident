@@ -123,10 +123,24 @@ var KTAddUser = function () {
 							}
 						}
 					},
-					name: {
+					firstname: {
 						validators: {
 							notEmpty: {
-								message: 'Name is required'
+								message: 'First Name is required'
+							}
+						}
+					},
+					middlename: {
+						validators: {
+							notEmpty: {
+								message: 'Middle Name is required'
+							}
+						}
+					},
+					lastname: {
+						validators: {
+							notEmpty: {
+								message: 'Last Name is required'
 							}
 						}
 					},
@@ -155,10 +169,34 @@ var KTAddUser = function () {
 						}
 					},
 					
-					address: {
+					street1: {
 						validators: {
 							notEmpty: {
-								message: 'Address is required'
+								message: 'Street is required'
+							}
+						}
+					},
+
+					city: {
+						validators: {
+							notEmpty: {
+								message: 'City is required'
+							}
+						}
+					},
+
+					zip_code: {
+						validators: {
+							notEmpty: {
+								message: 'Zip Code is required'
+							}
+						}
+					},
+
+					state: {
+						validators: {
+							notEmpty: {
+								message: 'State is required'
 							}
 						}
 					}

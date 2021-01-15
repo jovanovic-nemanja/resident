@@ -74,7 +74,7 @@
                                                 <!--end::Pic-->
                                                 <!--begin::Title-->
                                                 <div class="d-flex flex-column">
-                                                    <a href="{{ route('resident.show', $resident->id) }}" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0 custom_a_tag">{{ $resident->name }}</a>
+                                                    <a href="{{ route('resident.show', $resident->id) }}" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0 custom_a_tag">{{ $resident->firstname }}</a>
                                                     <span class="text-muted font-weight-bold">Resident</span>
                                                 </div>
                                                 <!--end::Title-->
@@ -97,7 +97,7 @@
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                <span class="text-muted font-weight-bold">{{ $resident->address }}</span>
+                                                <span class="text-muted font-weight-bold">{{ $resident->street1 }}</span>
                                             </div>
                                         </div>
                                         <!--end::Info-->

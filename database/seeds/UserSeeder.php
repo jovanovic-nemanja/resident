@@ -16,7 +16,9 @@ class UserSeeder extends Seeder
     {
 		User::create([
 			'id'   => 1,
-	        'name' => 'Admin',
+	        'firstname' => 'Admin',
+            'middlename' => 'Admin',
+            'lastname' => 'Admin',
             'username' => 'admin',
 	        'email' => 'admin@gmail.com',
             'email_verified_at' => 1,
@@ -25,7 +27,11 @@ class UserSeeder extends Seeder
             'phone_number' => '029292162',
             'gender' => 0,
             'birthday' => '1999-10-29',
-            'address' => 'Serbia Beograd',
+            'street1' => 'Serbia',
+            'street2' => 'Beograd',
+            'city' => 'Beograd',
+            'zip_code' => '11042',
+            'state' => 'Beograd',
             'remember_token' => str_random(10),
             'sign_date' => date('y-m-d h:m:s'),
 		]);

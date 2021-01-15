@@ -66,7 +66,7 @@
                                         @endif
                                     </div>
                                     <div>
-                                        <a class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ $user->name }}</a>
+                                        <a class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ $user->firstname." ".$user->lastname }}</a>
                                         <div class="text-muted">Resident</div>
                                         <div class="mt-2">
                                             
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <span class="font-weight-bold mr-2">Location:</span>
-                                        <span class="text-muted">{{ $user->address }}</span>
+                                        <span class="text-muted">{{ $user->street1 }}<br>{{ $user->street2 }}<br>{{ $user->city }}<br>{{ $user->zip_code }}<br>{{ $user->state }}</span>
                                     </div>
                                 </div>
                                 <!--end::Contact-->

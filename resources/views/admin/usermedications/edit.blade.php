@@ -28,7 +28,7 @@
                     <a href="{{ route('resident.show', $result['user']->id) }}">
                         <img src="{{ asset('uploads/').'/'.$result['user']->profile_logo }}" class="rad-50 center-block">
 
-                        <h4 style="color: #fff;">{{ $result['user']->name }}</h4>
+                        <h4 style="color: #fff;">{{ $result['user']->firstname }}</h4>
                     </a>
                 </div>
             </div>

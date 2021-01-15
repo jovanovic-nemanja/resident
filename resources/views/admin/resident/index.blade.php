@@ -74,7 +74,7 @@
                                             @if($resident->hasRole('resident'))
                                                 <tr>
                                                     <td>{{ $i }}</td>
-                                                    <td>{{ $resident->name }}</td>
+                                                    <td>{{ $resident->firstname }}</td>
                                                     <td>{{ App\User::getGender($resident->gender) }}</td>
                                                     <td>
                                                         <div class="">
@@ -82,7 +82,7 @@
                                                         </div>
                                                     </td>
                                                     <td>{{ $resident->birthday }}</td>
-                                                    <td>{{ $resident->address }}</td>
+                                                    <td>{{ $resident->street1 }}</td>
                                                     <td>
                                                         <span class="badge round-primary">{{ $resident->phone_number }}</span>
                                                     </td>

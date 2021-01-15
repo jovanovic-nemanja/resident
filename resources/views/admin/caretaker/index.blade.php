@@ -72,7 +72,7 @@
                                             @if($caretaker->hasRole('care taker'))
                                                 <tr>
                                                     <td>{{ $i }}</td>
-                                                    <td>{{ $caretaker->name }}</td>
+                                                    <td>{{ $caretaker->firstname }}</td>
                                                     <td>{{ $caretaker->username }}</td>
                                                     <td>
                                                         <div class="">

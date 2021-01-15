@@ -57,7 +57,7 @@
                                 <!--begin::Title-->
                                 <div class="d-flex justify-content-between flex-wrap mt-1">
                                     <div class="d-flex mr-3">
-                                        <a href="{{ route('resident.show', $resident) }}" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">{{ $user->name }}</a>
+                                        <a href="{{ route('resident.show', $resident) }}" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">{{ $user->firstname }}</a>
                                         <a href="{{ route('resident.show', $resident) }}">
                                             <i class="flaticon2-correct text-success font-size-h5"></i>
                                         </a>

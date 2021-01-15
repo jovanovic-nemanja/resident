@@ -123,17 +123,51 @@
                                             </div>
                                             <!--end::Group-->
                                             <!--begin::Group-->
-                                            <div class="form-group row {{ $errors->has('name') ? 'has-error' : '' }}">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Name<span style="color: red;">*</span></label>
+                                            <div class="form-group row {{ $errors->has('firstname') ? 'has-error' : '' }}">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">First Name<span style="color: red;">*</span></label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="name" type="text" />
+                                                    <input class="form-control form-control-solid form-control-lg" name="firstname" type="text" />
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
 
-                                                @if ($errors->has('name'))
+                                                @if ($errors->has('firstname'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('name') }}</strong>
+                                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row {{ $errors->has('middlename') ? 'has-error' : '' }}">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Middle Name<span style="color: red;">*</span></label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <input class="form-control form-control-solid form-control-lg" name="middlename" type="text" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+
+                                                @if ($errors->has('middlename'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('middlename') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row {{ $errors->has('lastname') ? 'has-error' : '' }}">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Last Name<span style="color: red;">*</span></label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <input class="form-control form-control-solid form-control-lg" name="lastname" type="text" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+
+                                                @if ($errors->has('lastname'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('lastname') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -220,19 +254,95 @@
                                             <!--end::Group-->
 
                                             <!--begin::Group-->
-                                            <div class="form-group row {{ $errors->has('address') ? 'has-error' : '' }}">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Address<span style="color: red;">*</span></label>
+                                            <div class="form-group row {{ $errors->has('street1') ? 'has-error' : '' }}">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Street<span style="color: red;">*</span></label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <div class="input-group input-group-solid input-group-lg">
-                                                        <textarea class="form-control form-control-solid form-control-lg" name="address" placeholder="Address" rows="8"></textarea>
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="street1" placeholder="Street" />
                                                     </div>
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
 
-                                                @if ($errors->has('address'))
+                                                @if ($errors->has('street1'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('address') }}</strong>
+                                                        <strong>{{ $errors->first('street1') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row {{ $errors->has('street2') ? 'has-error' : '' }}">
+                                                <div class="col-lg-3 col-xl-3"></div>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="street2" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+
+                                                @if ($errors->has('street2'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('street2') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row {{ $errors->has('city') ? 'has-error' : '' }}">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">City<span style="color: red;">*</span></label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="city" placeholder="City" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+
+                                                @if ($errors->has('city'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('city') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row {{ $errors->has('zip_code') ? 'has-error' : '' }}">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Zip Code<span style="color: red;">*</span></label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="zip_code" placeholder="Zip Code" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+
+                                                @if ($errors->has('zip_code'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('zip_code') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row {{ $errors->has('state') ? 'has-error' : '' }}">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">State<span style="color: red;">*</span></label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="state" placeholder="State" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+
+                                                @if ($errors->has('state'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('state') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -278,9 +388,9 @@
 
                                             <!--begin::Group-->
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">NAME </label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">First Name </label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="representing_party_name" type="text" />
+                                                    <input class="form-control form-control-solid form-control-lg" name="representing_party_firstname" type="text" />
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
@@ -289,9 +399,74 @@
 
                                             <!--begin::Group-->
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">ADDRESS </label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Last Name </label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="representing_party_address" type="text" />
+                                                    <input class="form-control form-control-solid form-control-lg" name="representing_party_lastname" type="text" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Street</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="representing_party_street1" placeholder="Street" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <div class="col-xl-3 col-lg-3"></div>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="representing_party_street2" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">City</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="representing_party_city" placeholder="City" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Zip Code</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="representing_party_zip_code" placeholder="Zip Code" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">State</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="representing_party_state" placeholder="State" />
+                                                    </div>
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
@@ -327,9 +502,9 @@
 
                                             <!--begin::Group-->
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">NAME </label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">First Name </label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="secondary_representative_name" type="text" />
+                                                    <input class="form-control form-control-solid form-control-lg" name="secondary_representative_firstname" type="text" />
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
@@ -338,9 +513,74 @@
 
                                             <!--begin::Group-->
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">ADDRESS </label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Last Name </label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="secondary_representative_address" type="text" />
+                                                    <input class="form-control form-control-solid form-control-lg" name="secondary_representative_lastname" type="text" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Street</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="secondary_representative_street1" placeholder="Street" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <div class="col-xl-3 col-lg-3"></div>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="secondary_representative_street2" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">City</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="secondary_representative_city" placeholder="City" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Zip Code</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="secondary_representative_zip_code" placeholder="Zip Code" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">State</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="secondary_representative_state" placeholder="State" />
+                                                    </div>
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
@@ -376,9 +616,9 @@
 
                                             <!--begin::Group-->
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">NAME </label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">First Name </label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_name" type="text" />
+                                                    <input class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_firstname" type="text" />
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
@@ -387,9 +627,74 @@
 
                                             <!--begin::Group-->
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">ADDRESS </label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Last Name </label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_address" type="text" />
+                                                    <input class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_lastname" type="text" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Street</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_street1" placeholder="Street" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <div class="col-xl-3 col-lg-3"></div>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_street2" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">City</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_city" placeholder="City" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Zip Code</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_zip_code" placeholder="Zip Code" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">State</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_state" placeholder="State" />
+                                                    </div>
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
@@ -425,9 +730,9 @@
 
                                             <!--begin::Group-->
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">NAME </label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">First Name </label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="pharmacy_name" type="text" />
+                                                    <input class="form-control form-control-solid form-control-lg" name="pharmacy_firstname" type="text" />
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
@@ -436,9 +741,74 @@
 
                                             <!--begin::Group-->
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">ADDRESS </label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Last Name </label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="pharmacy_address" type="text" />
+                                                    <input class="form-control form-control-solid form-control-lg" name="pharmacy_lastname" type="text" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Street</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="pharmacy_street1" placeholder="Street" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <div class="col-xl-3 col-lg-3"></div>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="pharmacy_street2" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">City</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="pharmacy_city" placeholder="City" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Zip Code</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="pharmacy_zip_code" placeholder="Zip Code" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">State</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="pharmacy_state" placeholder="State" />
+                                                    </div>
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>
@@ -485,9 +855,63 @@
 
                                             <!--begin::Group-->
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">ADDRESS </label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Street</label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="dentist_address" type="text" />
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="dentist_street1" placeholder="Street" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <div class="col-xl-3 col-lg-3"></div>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="dentist_street2" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">City</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="dentist_city" placeholder="City" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Zip Code</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="dentist_zip_code" placeholder="Zip Code" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">State</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="dentist_state" placeholder="State" />
+                                                    </div>
                                                 </div>
 
                                                 <div class="fv-plugins-message-container"></div>

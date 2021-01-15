@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'birthday', 'address', 'password', 'phone_number', 'sign_date', 'gender', 'email_verified_at', 'profile_logo'
+        'firstname', 'middlename', 'lastname', 'username', 'email', 'birthday', 'street1', 'street2', 'city', 'zip_code', 'state', 'password', 'phone_number', 'sign_date', 'gender', 'email_verified_at', 'profile_logo'
     ];
 
     /**
@@ -56,7 +56,7 @@ class User extends Authenticatable
     public function getUsername($id) {
         if (@$id) {
             $user = User::where('id', $id)->first();
-            $name = $user->name;
+            $name = $user->firstname;
         }
 
         return $name;
@@ -170,7 +170,7 @@ class User extends Authenticatable
     public static function getUsernameById($id) {
         if (@$id) {
             $user = User::where('id', $id)->first();
-            $name = $user->name;
+            $name = $user->firstname;
         }
 
         return $name;

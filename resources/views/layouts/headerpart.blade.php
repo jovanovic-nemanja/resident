@@ -96,12 +96,12 @@
                 @if(auth()->user()->hasRole('admin'))
                     <div class="topbar-item mr-4" data-toggle="dropdown" data-offset="10px,0px" aria-expanded="false">
                         <img src="{{ asset('images/nurse.jpg') }}" alt="user-image" class="img-circle img-inline custom_img_width">
-                        <span>{{ Auth::user()->name }} <i class="fa fa-angle-down"></i></span>
+                        <span>{{ Auth::user()->firstname }} <i class="fa fa-angle-down"></i></span>
                     </div>
                 @else
                     <div class="topbar-item mr-4" data-toggle="dropdown" data-offset="10px,0px" aria-expanded="false">
                         <img src="{{ asset('uploads/').'/'.Auth::user()->profile_logo }}" alt="user-image" class="img-circle img-inline custom_img_width">
-                        <span>{{ Auth::user()->name }} <i class="fa fa-angle-down"></i></span>
+                        <span>{{ Auth::user()->firstname }} <i class="fa fa-angle-down"></i></span>
                     </div>
                 @endif
 
@@ -121,7 +121,7 @@
                         @endif
                         <li class="navi-item">
                             <a href="{{ route('logout') }}" class="navi-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <span class="navi-icon"><i class="fa fa-lock"></i></span> {{ __('Logout') }} ({{ Auth::user()->name }})
+                                <span class="navi-icon"><i class="fa fa-lock"></i></span> {{ __('Logout') }} ({{ Auth::user()->firstname }})
                             </a>
                         </li>            
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
