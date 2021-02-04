@@ -1,12 +1,10 @@
-# L-Commerce
-Laravel Multivendor Marketplace Script
+# Bluecare Hub
+Laravel Resident bluecareHub
 
 1,   .env
-2,   composer install
+2,   composer install, npm install
+	commented cronjob schedule app\Console\Kernal.php -> action schedule
 3,   php artisan migrate --seed
-4,   npm install laravel-mix --save-dev
-	npm install vuex --save
-5,   npm cache clear --force
-6,   npm install
-7,   npm run dev(watch)
-8,   php artisan serve
+4,   php artisan serve
+
+
