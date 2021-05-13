@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Comments;
+use App\Reports;
 use App\Adminlogs;
 use App\Activities;
 use App\Useractivities;
@@ -128,7 +129,10 @@ class UseractivitiesController extends Controller
             $data = [];
             $data['caretakerId'] = auth()->id();
             $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $actName . "(" . $time . ")" . " to " . User::getUsernameById($request->resident);
+            $content = User::getUsernameById($data['caretakerId']) . " gave the Activity : " . $actName . "(" . $time . ")" . " to Patient : " . User::getUsernameById($request->resident);
+
             Adminlogs::Addlogs($data);
+            Reports::Addlogs($content);
 
             return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully given.');
         }else{  //assign activity as admin

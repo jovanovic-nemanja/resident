@@ -183,6 +183,14 @@
                                         <span class="menu-text">Admin Logs</span>
                                     </a>
                                 </li>
+                                <li class="menu-item <?= ($menu == "reports") ? "menu-item-active" : "" ?>" aria-haspopup="true">
+                                    <a href="{{ route('reports.index') }}" class="menu-link <?= ($menu == "reports") ? "menu-item-active" : "" ?>">
+                                        <i class="menu-bullet menu-bullet-dot">
+                                            <span></span>
+                                        </i>
+                                        <span class="menu-text">Reports</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>

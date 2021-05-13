@@ -115,6 +115,7 @@ Route::get('notifications/confirmIsread/{id}', 'Admin\NotificationsController@co
 Route::resource('routes', 'Admin\RoutesController');
 Route::resource('adminlogs', 'Admin\AdminlogsController');
 Route::resource('switchreminder', 'Admin\SwitchreminderController');
+Route::resource('reports', 'Admin\ReportsController');
 
 
 
