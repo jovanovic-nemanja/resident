@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Routes;
+use App\Reports;
 use Carbon\Carbon;
 use App\Adminlogs;
 use App\Comments;
@@ -226,7 +227,10 @@ class UsermedicationsController extends Controller
             $data = [];
             $data['caretakerId'] = auth()->id();
             $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $medicName . "(" . $time . ")" . " to " . User::getUsernameById($request->resident);
+            $content = User::getUsernameById($data['caretakerId']) . " gave the Medication  : " . $medicName . "(" . $time . ")" . " to Patient : " . User::getUsernameById($request->resident);
+
             Adminlogs::Addlogs($data);
+            Reports::Addlogs($content);
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully given.');
         }

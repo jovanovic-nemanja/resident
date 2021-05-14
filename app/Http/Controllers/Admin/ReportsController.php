@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use Carbon\Carbon;
 use App\Reports;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -22,7 +23,7 @@ class ReportsController extends Controller
      */
     public function index()
     {
-        $reports = Reports::all();
+        $reports = Reports::whereDate('created_at', Carbon::today())->get();
 
         return view('admin.reports.index', compact('reports'));
     }

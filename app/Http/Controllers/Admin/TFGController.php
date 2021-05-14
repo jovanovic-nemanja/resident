@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Reports;
 use App\TFG;
 use App\Adminlogs;
 use App\Medications;
@@ -104,7 +105,10 @@ class TFGController extends Controller
         $data = [];
         $data['caretakerId'] = auth()->id();
         $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $medicName . "(" . $request->time . ")" . " to " . User::getUsernameById($request->resident);
+        $content = User::getUsernameById($data['caretakerId']) . " gave the PRN : " . $medicName . "(" . $request->time . ")" . " to Patient : " . User::getUsernameById($request->resident);
+
         Adminlogs::Addlogs($data);
+        Reports::Addlogs($content);
 
         return redirect()->route('tfgs.indextfg', $request->resident)->with('flash', 'TFG has been successfully created.');
     }
