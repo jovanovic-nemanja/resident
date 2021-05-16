@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
-use Carbon\Carbon;
 use App\Reports;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -24,8 +24,43 @@ class ReportsController extends Controller
     public function index()
     {
         $reports = Reports::whereDate('created_at', Carbon::today())->get();
+        $nurses = DB::table('users')
+                        ->join('role_user', 'users.id', '=', 'role_user.user_id')
+                        ->where('role_user.role_id', 2)
+                        ->select('users.*')
+                        ->get();
+        $active = [];
 
-        return view('admin.reports.index', compact('reports'));
+        return view('admin.reports.index', compact('reports', 'nurses', 'active'));
+    }
+
+    /**
+     * Return filtered reports data by ajax.
+     * @author Nemanja
+     * @since 2021-05-16
+     * @return \Illuminate\Http\Response
+     */
+    public function indexbyfilter(Request $request)
+    {
+        $query = Reports::whereDate('created_at', Carbon::today());
+        if(@$request->type) {
+            $query = $query->where('type', $request->type);
+        }
+        if(@$request->user_id) {
+            $query = $query->where('user_id', $request->user_id);
+        }
+
+        $reports = $query->get();
+        $nurses = DB::table('users')
+                        ->join('role_user', 'users.id', '=', 'role_user.user_id')
+                        ->where('role_user.role_id', 2)
+                        ->select('users.*')
+                        ->get();
+        
+        $active['typeID'] = ($request->type) ? $request->type : "";
+        $active['user_id'] = $request->user_id;
+
+        return view('admin.reports.index', compact('reports', 'nurses', 'active'));
     }
 
     /**

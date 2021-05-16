@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Reports;
 use App\Comments;
 use App\Adminlogs;
 use App\Activities;
@@ -112,7 +113,28 @@ class UseractivitiesController extends Controller
             $date = $dates['date'];
 
             $assigned = Useractivities::where('id', $request->assign_id)->first();
-            $time = $assigned->time;
+            if(@$assigned) {
+                $time = $assigned->time;
+                $activityDuration = $assigned->day;
+
+                switch ($activityDuration) {
+                    case '1':   //daily
+                        $duration = "Daily";
+                        break;
+                    case '2':   //weekly
+                        $duration = "Weekly";
+                        break;
+                    case '3':   //monthly
+                        $duration = "Monthly";
+                        break;                    
+                    default:
+                        $duration = "Daily";
+                        break;
+                }
+            }else{
+                $time = "";
+                $duration = "...";
+            }
 
             $reports = Useractivityreports::create([
                 'assign_id' => $request->assign_id,
@@ -123,14 +145,28 @@ class UseractivitiesController extends Controller
             ]);
 
             $activities = Activities::where('id', $assigned->activities)->first();
-            $actName = $activities->title;
+            if(@$activities) {
+                $actName = $activities->title;
+                $activityType = $activities->type;
+            }else{
+                $actName = "";
+                $activityType = "";
+            }
 
             $data = [];
             $data['caretakerId'] = auth()->id();
             $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $actName . "(" . $time . ")" . " to " . User::getUsernameById($request->resident);
-            $content = User::getUsernameById($data['caretakerId']) . " gave the Activity : " . $actName . "(" . $time . ")" . " to Patient : " . User::getUsernameById($request->resident);
-
             Adminlogs::Addlogs($data);
+
+            $report = [];
+            $report['user_id'] = auth()->id();
+            $report['resident_id'] = $request->resident;
+            $report['type'] = $activityType;  //1: primary activity, 2: secondary activity, 3: medication Routine, 4: PRN
+            $report['activityName'] = $actName;
+            $report['activityTime'] = $time;
+            $report['activityDuration'] = $duration;
+
+            Reports::AddactivityLogs($report);
 
             return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully given.');
         }else{  //assign activity as admin
