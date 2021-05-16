@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Routes;
+use App\Reports;
 use Carbon\Carbon;
 use App\Adminlogs;
 use App\Comments;
@@ -210,7 +211,11 @@ class UsermedicationsController extends Controller
             $date = $dates['date'];
 
             $assigned = Assignmedications::where('id', $request->assign_id)->first();
-            $time = $assigned->time;
+            if(@$assigned) {
+                $time = $assigned->time;
+            }else{
+                $time = "";
+            }
 
             $usermedications = Usermedications::create([
                 'assign_id' => $request->assign_id,
@@ -221,14 +226,26 @@ class UsermedicationsController extends Controller
             ]);
 
             $medicationss = Medications::where('id', $assigned->medications)->first();
-            $medicName = $medicationss->name;
+            if(@$medicationss) {
+                $medicName = $medicationss->name;
+            }else{
+                $medicName = "";
+            }
 
             $data = [];
             $data['caretakerId'] = auth()->id();
             $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $medicName . "(" . $time . ")" . " to " . User::getUsernameById($request->resident);
-            $content = User::getUsernameById($data['caretakerId']) . " gave the Medication  : " . $medicName . "(" . $time . ")" . " to Patient : " . User::getUsernameById($request->resident);
 
             Adminlogs::Addlogs($data);
+
+            $report = [];
+            $report['user_id'] = auth()->id();
+            $report['resident_id'] = $request->resident;
+            $report['type'] = 3;  //1: primary activity, 2: secondary activity, 3: medication Routine, 4: PRN
+            $report['medicationName'] = $medicName;
+            $report['medicationTime'] = $time;
+
+            Reports::AddmedicationLogs($report);
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully given.');
         }

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
+use App\TFG;
 use App\User;
 use App\Reports;
-use App\TFG;
 use App\Adminlogs;
 use App\Medications;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TFGController extends Controller
 {
@@ -100,15 +99,26 @@ class TFGController extends Controller
         TFG::upload_file($tfg->id);
 
         $medicationss = Medications::where('id', $request->medications)->first();
-        $medicName = $medicationss->name;
+        if(@$medicationss) {
+            $medicName = $medicationss->name;
+        }else{
+            $medicName = "";
+        }
 
         $data = [];
         $data['caretakerId'] = auth()->id();
         $data['content'] = User::getUsernameById($data['caretakerId']) . " gave " . $medicName . "(" . $request->time . ")" . " to " . User::getUsernameById($request->resident);
-        $content = User::getUsernameById($data['caretakerId']) . " gave the PRN : " . $medicName . "(" . $request->time . ")" . " to Patient : " . User::getUsernameById($request->resident);
 
         Adminlogs::Addlogs($data);
-        Reports::Addlogs($content);
+
+        $report = [];
+        $report['user_id'] = auth()->id();
+        $report['resident_id'] = $request->resident;
+        $report['type'] = 4;  //1: primary activity, 2: secondary activity, 3: medication Routine, 4: PRN
+        $report['medicationName'] = $medicName;
+        $report['medicationTime'] = $time;
+
+        Reports::AddmedicationLogs($report);
 
         return redirect()->route('tfgs.indextfg', $request->resident)->with('flash', 'TFG has been successfully created.');
     }

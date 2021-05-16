@@ -39,9 +39,68 @@
             <div class="container">
                 <!--begin::Card-->
                 <div class="card card-custom">
-                    <div class="card-header">
+                    <div class="card-header p-10">
                         <div class="card-title">
                             <h3 class="card-label">Reports</h3>
+                            <input type="hidden" id="env_domain_url" value="{{ env('APP_URL') }}" />
+                        </div>
+                        <div class="card-right d-flex">
+                            <select class="form-control types mr-2" id="types">
+                                @if($active)
+                                    @if($active['typeID'] == 1)
+                                        <option value="">Choose Anything...</option>
+                                        <option value="1" selected>Primary Activity</option>
+                                        <option value="2">Secondary Activity</option>
+                                        <option value="3">Medication Routine</option>
+                                        <option value="4">Medication PRN</option>
+                                    @elseif($active['typeID'] == 2)
+                                        <option value="">Choose Anything...</option>
+                                        <option value="1">Primary Activity</option>
+                                        <option value="2" selected>Secondary Activity</option>
+                                        <option value="3">Medication Routine</option>
+                                        <option value="4">Medication PRN</option>
+                                    @elseif($active['typeID'] == 3)
+                                        <option value="">Choose Anything...</option>
+                                        <option value="1">Primary Activity</option>
+                                        <option value="2">Secondary Activity</option>
+                                        <option value="3" selected>Medication Routine</option>
+                                        <option value="4">Medication PRN</option>
+                                    @elseif($active['typeID'] == 4)
+                                        <option value="">Choose Anything...</option>
+                                        <option value="1">Primary Activity</option>
+                                        <option value="2">Secondary Activity</option>
+                                        <option value="3">Medication Routine</option>
+                                        <option value="4" selected>Medication PRN</option>
+                                    @else
+                                        <option value="">Choose Anything...</option>
+                                        <option value="1">Primary Activity</option>
+                                        <option value="2">Secondary Activity</option>
+                                        <option value="3">Medication Routine</option>
+                                        <option value="4">Medication PRN</option>
+                                    @endif
+                                @else
+                                    <option value="">Choose Anything...</option>
+                                    <option value="1">Primary Activity</option>
+                                    <option value="2">Secondary Activity</option>
+                                    <option value="3">Medication Routine</option>
+                                    <option value="4">Medication PRN</option>
+                                @endif
+                            </select>
+
+                            <select class="form-control nurse mr-2" id="nurse">
+                                @if($nurses)
+                                    <option value="">Choose Nurse...</option>
+                                    @if($active)
+                                        @foreach($nurses as $nurse)
+                                            <option value="{{ $nurse->id }}" <?php if($active['user_id'] == $nurse->id){echo 'selected';} ?>>{{ $nurse->firstname }}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach($nurses as $nurse)
+                                            <option value="{{ $nurse->id }}">{{ $nurse->firstname }}</option>
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </select>
                         </div>
                     </div>
                         
@@ -51,32 +110,25 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Contents</th>
+                                    <th>Resident Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Nurse Name</th>
                                     <th>Date</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="reports_tbody">
                                 <?php 
-                                    if($reports) {
+                                    if(@$reports) {
                                         $i = 1;
                                         foreach($reports as $rep) { ?>
                                             <tr>
                                                 <td>{{ $i }}</td>
-                                                <td>
-                                                    <div class="designer-info">
-                                                        <h6>{{ $rep->content }}</h6>
-                                                    </div>
-                                                </td>
+                                                <td>{{ App\User::getUsernameById($rep->resident_id) }}</td>
+                                                <td>{{ App\Reports::getTypeById($rep->type) }}</td>
+                                                <td>{{ $rep->description }}</td>
+                                                <td>{{ App\User::getUsernameById($rep->user_id) }}</td>
                                                 <td>{{ $rep->sign_date }}</td>
-                                                <td>
-                                                    <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$rep->id}}').submit();" class="btn btn-primary">Delete</a>
-
-                                                    <form id="delete-form-{{$rep->id}}" action="{{ route('reports.destroy', $rep->id) }}" method="POST" style="display: none;">
-                                                        <input type="hidden" name="_method" value="delete">
-                                                        @csrf
-                                                    </form>
-                                                </td>
                                             </tr>
                                 <?php $i++; } }else{ ?>
 
