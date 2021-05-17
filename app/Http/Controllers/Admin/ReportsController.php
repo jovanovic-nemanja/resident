@@ -42,7 +42,35 @@ class ReportsController extends Controller
      */
     public function indexbyfilter(Request $request)
     {
-        $query = Reports::whereDate('created_at', Carbon::today());
+        if(@$request->duration) {
+            switch ($request->duration) {
+                case '1':   //Today
+                    $query = Reports::whereDate('created_at', Carbon::today());
+                    break;
+                case '2':   //Yesterday
+                    $query = Reports::whereDate('created_at', Carbon::yesterday());
+                    break;
+                case '3':   //Week
+                    $query = Reports::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                    break;    
+                case '4':   //Month
+                    $query = Reports::whereMonth('created_at', Carbon::now()->format('m'));
+                    break;   
+                case '5':   //Range start and end date
+                    $start = $request->start;
+                    $end = $request->end;
+                    $query = Reports::whereBetween('created_at', [$start." 00:00:00", $end." 23:59:59"]);
+                    break;   
+
+                default:
+                    $query = Reports::whereDate('created_at', Carbon::today());
+                    break;
+            }
+            
+        }else{
+            $query = Reports::whereDate('created_at', Carbon::today());
+        }
+        
         if(@$request->type) {
             $query = $query->where('type', $request->type);
         }
@@ -59,6 +87,7 @@ class ReportsController extends Controller
         
         $active['typeID'] = ($request->type) ? $request->type : "";
         $active['user_id'] = $request->user_id;
+        $active['durations'] = $request->duration;
 
         return view('admin.reports.index', compact('reports', 'nurses', 'active'));
     }
