@@ -68,7 +68,7 @@ class ReportsController extends Controller
             }
             
         }else{
-            // $query = Reports::whereDate('created_at', Carbon::today());
+            $query = Reports::whereNotNull('created_at');
         }
         
         if(@$request->type) {
