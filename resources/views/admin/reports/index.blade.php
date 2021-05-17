@@ -188,7 +188,7 @@
                                                 <td>{{ App\Reports::getTypeById($rep->type) }}</td>
                                                 <td>{{ $rep->description }}</td>
                                                 <td>{{ App\User::getUsernameById($rep->user_id) }}</td>
-                                                <td>{{ $rep->sign_date }}</td>
+                                                <td>{{ $rep->created_at }}</td>
                                             </tr>
                                 <?php $i++; } }else{ ?>
 
