@@ -138,3 +138,5 @@ Route::post('/storeStorage', 'Admin\BodyharmController@storeStorage')->name('bod
 
 
 Route::get('/indexbyfilter', 'Admin\ReportsController@indexbyfilter')->name('indexbyfilter');
+Route::get('/indexresident/{resident}', 'Admin\ReportsController@indexresident')->name('reports.indexresident');
+Route::get('/indexresidentbyfilter', 'Admin\ReportsController@indexresidentbyfilter')->name('indexresidentbyfilter');
