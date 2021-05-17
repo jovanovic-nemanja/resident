@@ -111,4 +111,101 @@ $(function() {
             "&end=" +
             end;
     });
+
+    $("#types_resident").change(function() {
+        var typeID = $(this).val();
+        var nurseVal = $("#nurse_resident").val();
+        var duration = $("#durations_resident").val();
+        var resident = $("#resident_id").val();
+        var href = $("#env_domain_url").val();
+        window.location.href =
+            href +
+            "/indexresidentbyfilter?type=" +
+            typeID +
+            "&user_id=" +
+            nurseVal +
+            "&duration=" +
+            duration +
+            "&resident=" +
+            resident;
+    });
+
+    $("#nurse_resident").change(function() {
+        var nurseVal = $(this).val();
+        var typeID = $("#types_resident").val();
+        var duration = $("#durations_resident").val();
+        var resident = $("#resident_id").val();
+        var href = $("#env_domain_url").val();
+        window.location.href =
+            href +
+            "/indexresidentbyfilter?type=" +
+            typeID +
+            "&user_id=" +
+            nurseVal +
+            "&duration=" +
+            duration +
+            "&resident=" +
+            resident;
+    });
+
+    $("document").ready(function() {
+        var duration = $("#durations_resident").val();
+        if (duration == 5) {
+            $("#start_time_resident").show();
+            $("#end_time_resident").show();
+            $("#search_resident").show();
+        } else {
+            $("#start_time_resident").hide();
+            $("#end_time_resident").hide();
+            $("#search_resident").show();
+        }
+    });
+
+    $("#durations_resident").change(function() {
+        var duration = $(this).val();
+        var nurseVal = $("#nurse_resident").val();
+        var typeID = $("#types_resident").val();
+        var resident = $("#resident_id").val();
+        if (duration == 5) {
+            $("#start_time_resident").show();
+            $("#end_time_resident").show();
+            $("#search_resident").show();
+        } else {
+            var href = $("#env_domain_url").val();
+            window.location.href =
+                href +
+                "/indexresidentbyfilter?type=" +
+                typeID +
+                "&user_id=" +
+                nurseVal +
+                "&duration=" +
+                duration +
+                "&resident=" +
+                resident;
+        }
+    });
+
+    $("#search_resident").click(function() {
+        var nurseVal = $("#nurse_resident").val();
+        var typeID = $("#types_resident").val();
+        var duration = $("#durations_resident").val();
+        var start = $("#start_time_resident").val();
+        var end = $("#end_time_resident").val();
+        var resident = $("#resident_id").val();
+        var href = $("#env_domain_url").val();
+        window.location.href =
+            href +
+            "/indexresidentbyfilter?type=" +
+            typeID +
+            "&user_id=" +
+            nurseVal +
+            "&duration=" +
+            duration +
+            "&start=" +
+            start +
+            "&end=" +
+            end +
+            "&resident=" +
+            resident;
+    });
 });
