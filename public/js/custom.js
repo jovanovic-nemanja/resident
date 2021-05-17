@@ -27,18 +27,88 @@ $(function() {
     $("#types").change(function() {
         var typeID = $(this).val();
         var nurseVal = $("#nurse").val();
+        var duration = $("#durations").val();
 
         var href = $("#env_domain_url").val();
         window.location.href =
-            href + "/indexbyfilter?type=" + typeID + "&user_id=" + nurseVal;
+            href +
+            "/indexbyfilter?type=" +
+            typeID +
+            "&user_id=" +
+            nurseVal +
+            "&duration=" +
+            duration;
     });
 
     $("#nurse").change(function() {
         var nurseVal = $(this).val();
         var typeID = $("#types").val();
+        var duration = $("#durations").val();
 
         var href = $("#env_domain_url").val();
         window.location.href =
-            href + "/indexbyfilter?type=" + typeID + "&user_id=" + nurseVal;
+            href +
+            "/indexbyfilter?type=" +
+            typeID +
+            "&user_id=" +
+            nurseVal +
+            "&duration=" +
+            duration;
+    });
+
+    $("document").ready(function() {
+        var duration = $("#durations").val();
+        if (duration == 5) {
+            $("#start_time").show();
+            $("#end_time").show();
+            $("#search").show();
+        } else {
+            $("#start_time").hide();
+            $("#end_time").hide();
+            $("#search").show();
+        }
+    });
+
+    $("#durations").change(function() {
+        var duration = $(this).val();
+        var nurseVal = $("#nurse").val();
+        var typeID = $("#types").val();
+        if (duration == 5) {
+            $("#start_time").show();
+            $("#end_time").show();
+            $("#search").show();
+        } else {
+            var href = $("#env_domain_url").val();
+            window.location.href =
+                href +
+                "/indexbyfilter?type=" +
+                typeID +
+                "&user_id=" +
+                nurseVal +
+                "&duration=" +
+                duration;
+        }
+    });
+
+    $("#search").click(function() {
+        var nurseVal = $("#nurse").val();
+        var typeID = $("#types").val();
+        var duration = $("#durations").val();
+        var start = $("#start_time").val();
+        var end = $("#end_time").val();
+
+        var href = $("#env_domain_url").val();
+        window.location.href =
+            href +
+            "/indexbyfilter?type=" +
+            typeID +
+            "&user_id=" +
+            nurseVal +
+            "&duration=" +
+            duration +
+            "&start=" +
+            start +
+            "&end=" +
+            end;
     });
 });

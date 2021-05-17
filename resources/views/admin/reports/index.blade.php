@@ -101,6 +101,66 @@
                                     @endif
                                 @endif
                             </select>
+
+                            <select class="form-control durations mr-2" id="durations">
+                                @if($active)
+                                    @if($active['durations'] == 1)
+                                        <option value="">Choose Duration...</option>
+                                        <option value="1" selected>Today</option>
+                                        <option value="2">Yesterday</option>
+                                        <option value="3">Week</option>
+                                        <option value="4">Month</option>
+                                        <option value="5">Range</option>
+                                    @elseif($active['durations'] == 2)
+                                        <option value="">Choose Duration...</option>
+                                        <option value="1">Today</option>
+                                        <option value="2" selected>Yesterday</option>
+                                        <option value="3">Week</option>
+                                        <option value="4">Month</option>
+                                        <option value="5">Range</option>
+                                    @elseif($active['durations'] == 3)
+                                        <option value="">Choose Duration...</option>
+                                        <option value="1">Today</option>
+                                        <option value="2">Yesterday</option>
+                                        <option value="3" selected>Week</option>
+                                        <option value="4">Month</option>
+                                        <option value="5">Range</option>
+                                    @elseif($active['durations'] == 4)
+                                        <option value="">Choose Duration...</option>
+                                        <option value="1">Today</option>
+                                        <option value="2">Yesterday</option>
+                                        <option value="3">Week</option>
+                                        <option value="4" selected>Month</option>
+                                        <option value="5">Range</option>
+                                    @elseif($active['durations'] == 5)
+                                        <option value="">Choose Duration...</option>
+                                        <option value="1">Today</option>
+                                        <option value="2">Yesterday</option>
+                                        <option value="3">Week</option>
+                                        <option value="4">Month</option>
+                                        <option value="5" selected>Range</option>
+                                    @else
+                                        <option value="">Choose Duration...</option>
+                                        <option value="1">Today</option>
+                                        <option value="2">Yesterday</option>
+                                        <option value="3">Week</option>
+                                        <option value="4">Month</option>
+                                        <option value="5">Range</option>
+                                    @endif
+                                @else
+                                    <option value="">Choose Duration...</option>
+                                    <option value="1">Today</option>
+                                    <option value="2">Yesterday</option>
+                                    <option value="3">Week</option>
+                                    <option value="4">Month</option>
+                                    <option value="5">Range</option>
+                                @endif
+                            </select>
+
+                            <input type="date" name="start_time" id="start_time" class="start_time form-control" />
+                            <input type="date" name="end_time" id="end_time" class="end_time form-control" />
+
+                            <button name="search" id="search" class="btn btn-success btn-sm form-control search">Search</button>
                         </div>
                     </div>
                         
