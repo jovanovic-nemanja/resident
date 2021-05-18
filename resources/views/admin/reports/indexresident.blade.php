@@ -124,6 +124,7 @@
                             <select class="form-control nurse_resident mr-2" id="nurse_resident">
                                 @if($nurses)
                                     <option value="">Choose Nurse...</option>
+                                    <option value="1">Admin</option>
                                     @if($active)
                                         @foreach($nurses as $nurse)
                                             <option value="{{ $nurse->id }}" <?php if($active['user_id'] == $nurse->id){echo 'selected';} ?>>{{ $nurse->firstname }}</option>
