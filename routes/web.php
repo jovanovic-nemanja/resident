@@ -48,6 +48,12 @@ Route::resource('medications', 'Admin\MedicationsController');
 
 
 
+Route::resource('settings', 'Admin\SettingsController');
+Route::post('/storeSettings', 'Admin\SettingsController@storeSettings')->name('settings.storeSettings');
+
+
+
+
 Route::resource('useractivities', 'Admin\UseractivitiesController');
 Route::get('useractivities/indexuseractivity/{type}', 'Admin\UseractivitiesController@indexuseractivity')->name('useractivities.indexuseractivity');
 Route::get('useractivities/indexuseractivitygiven/{type}', 'Admin\UseractivitiesController@indexuseractivitygiven')->name('useractivities.indexuseractivitygiven');
@@ -116,7 +122,6 @@ Route::resource('routes', 'Admin\RoutesController');
 Route::resource('adminlogs', 'Admin\AdminlogsController');
 Route::resource('switchreminder', 'Admin\SwitchreminderController');
 Route::resource('reports', 'Admin\ReportsController');
-
 
 
 
