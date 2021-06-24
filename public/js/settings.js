@@ -97,29 +97,32 @@ $(function() {
 
                 sendArray.push(oneItem);
             });
-                        
-            console.log(sendArray);
 
-            formData.append("group_title", group_title);
-            formData.append("arrayValue", JSON.stringify(sendArray));
+            if(sendArray.length == 0) {
+                $('.submit_btn').click();
+                return;
+            }else{
+                formData.append("group_title", group_title);
+                formData.append("arrayValue", JSON.stringify(sendArray));
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
-            $.ajax({
-                url: "/storeSettings",
-                type: 'POST',
-                contentType: false,
-                cache: false,
-                processData: false,
-                data: formData,
-                success: function(result, status) {
-                    window.location.href = result;
-                }
-            });
+                $.ajax({
+                    url: "/storeSettings",
+                    type: 'POST',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: formData,
+                    success: function(result, status) {
+                        window.location.href = result;
+                    }
+                });
+            }                
         }
     });
 });
