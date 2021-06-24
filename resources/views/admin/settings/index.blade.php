@@ -71,7 +71,7 @@
                                                 <td>{{ $setting->title }}</td>
                                                 <td>{{ $setting->sign_date_group }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-success">Edit</a>
+                                                    <!-- <a href="#" class="btn btn-success">Edit</a> -->
                                                     <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$setting->GroupID}}').submit();" class="btn btn-primary">Delete</a>
 
                                                     <form id="delete-form-{{$setting->GroupID}}" action="{{ route('settings.destroy', $setting->GroupID) }}" method="POST" style="display: none;">
