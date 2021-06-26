@@ -65,8 +65,6 @@ class SettingsController extends Controller
      */
     public function storeSettings(Request $request)
     {
-        // print_r(json_decode($request->all()['arrayValue']));
-
         $validator = Validator::make($request->all(), [
             'group_title' => 'required',
             'arrayValue' => 'required'
