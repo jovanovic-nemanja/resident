@@ -43,7 +43,9 @@ class SettingsController extends Controller
      */
     public function create()
     {
-        return view('admin.settings.create');
+        $setting_tabs = Tabs::all();
+
+        return view('admin.settings.create', compact('setting_tabs'));
     }
 
     /**
@@ -66,6 +68,7 @@ class SettingsController extends Controller
     public function storeSettings(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'tabsID' => 'required',
             'group_title' => 'required',
             'arrayValue' => 'required'
         ]);
@@ -83,7 +86,7 @@ class SettingsController extends Controller
 
         $group = Groups::create([
             'title' => $group_title,
-            'tabId' => 1,   //for test
+            'tabId' => $request->tabsID,
             'sign_date_group' => $date,
         ]);
         $groupID = $group['id'];
