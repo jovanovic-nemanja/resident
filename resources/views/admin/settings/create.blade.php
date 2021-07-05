@@ -41,8 +41,19 @@
                 <!--begin::Card-->
                 <div class="card card-custom">
                     <div class="card-body">
-                        <form action="{{ route('settings.store') }}" method="POST" id="settings_form">
-                            @csrf
+                        <div id="settings_form">
+                            <div class="form-group pb-5">
+                                <label class="col-form-label">Tabs</label>
+                                <div class="controls">
+                                    <select class="form-control tabs-control-dropdown" id="tabs-control-dropdown">
+                                        @if($setting_tabs)
+                                            @foreach($setting_tabs as $st)
+                                                <option value="{{ $st->id }}">{{ $st->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="form-group pb-5">
                                 <label class="col-form-label">Group Title</label>
@@ -54,13 +65,7 @@
                             <div class="form_area"></div>
 
                             <button class="btn btn-warning add_more_field mr-2 mt-5" type="button">Add Field</button>
-
-                            <div class="padding-bottom-30" style="text-align: center;">
-                                <div class="">
-                                    <button type="submit" style="display: none;" class="btn btn-primary gradient-blue submit_btn">Submit</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
 
                         <div class="padding-bottom-30" style="text-align: center;">
                             <div class="">
