@@ -31,6 +31,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $enable = Switchreminder::first();
+        
         if (@$enable) { //disabled case
             # code...
         }else{  //enabled case
