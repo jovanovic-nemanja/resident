@@ -56,8 +56,14 @@ class BodyharmController extends Controller
     public function createbodyharm($resident)
     {
         $resident = $resident;
+        $user = User::where('id', $resident)->first();
+        $gender = $user->gender;
 
-        return view('admin.bodyharm.create', compact('resident'));
+        if ($gender == 1) { //women
+            return view('admin.bodyharm.createwomen', compact('resident'));
+        }else {
+            return view('admin.bodyharm.create', compact('resident'));
+        }
     }
 
     /**
