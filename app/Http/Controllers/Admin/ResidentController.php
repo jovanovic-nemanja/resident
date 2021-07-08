@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Tabs;
 use App\User;
 use App\Role;
 use App\Assignmedications;
@@ -22,7 +23,7 @@ class ResidentController extends Controller
 {
     
     public function __construct(){
-        // $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'admin']);
     }
 
     /**
@@ -32,7 +33,9 @@ class ResidentController extends Controller
      */
     public function index()
     {
-        return view('admin.resident.create');
+        $setting_tabs = Tabs::all();
+
+        return view('admin.resident.create', compact('setting_tabs'));
     }
 
     /**
@@ -79,7 +82,7 @@ class ResidentController extends Controller
             'profile_logo'      => 'required',
         ]);
         
-        $request['gender'] == "male" ? $request['gender'] = 0 : $request['gender'] = 1;
+        ($request['gender'] == "male") ? $request['gender'] = 0 : $request['gender'] = 1;
 
         DB::beginTransaction();
 
