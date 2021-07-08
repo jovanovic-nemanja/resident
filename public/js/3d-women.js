@@ -280,9 +280,10 @@ import * as THREE from '/3d/src/build/three.module.js';
 
 			loader.load( '/3d/src/models/gltf/whole/female.glb', function ( gltf ) {
 
-				mesh = gltf.scene.children[ 0 ].children[0];
+				mesh = gltf.scene.children[1];
 				scene.add( mesh );
-				mesh.scale.set( 10, 10, 10 );
+				mesh.scale.set( 3, 3, 3 );
+				mesh.position.set(0, -20, 0);
 			} );
 
 		}
