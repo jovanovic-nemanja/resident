@@ -199,4 +199,33 @@ class User extends Authenticatable
 
         return $gender;
     }
+
+    /**
+    * @return file name
+    * @since 2021-07-10
+    * @author Nemanja
+    * This is a feature to upload a screen shot image
+    */
+    public static function upload_file($file) 
+    {
+        $image = $file;
+
+        $location = "uploads/";
+
+        $image_parts = explode(";base64,", $image);
+
+        $image_base64 = base64_decode($image_parts[1]);
+
+        $filename = "resident_".uniqid().'.png';
+
+        $file = $location . $filename;
+
+        if (file_put_contents($file, $image_base64)) {
+            $result = $filename;
+        }else{
+            $result = "";
+        }
+
+        return $result;
+    }
 }

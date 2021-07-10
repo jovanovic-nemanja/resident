@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Poas;
 use App\Tabs;
 use App\User;
 use App\Role;
@@ -18,6 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ResidentController extends Controller
 {
@@ -34,8 +37,14 @@ class ResidentController extends Controller
     public function index()
     {
         $setting_tabs = Tabs::all();
+        $fields = DB::table('setting_tabs')
+                    ->leftJoin('groups', 'groups.tabId', '=', 'setting_tabs.id')
+                    ->leftJoin('fields', 'fields.group_id', '=', 'groups.id')
+                    // ->leftJoin('field_types', 'field_types.fieldID', '=', 'fields.id')
+                    ->select('fields.*', 'groups.tabId')
+                    ->get();
 
-        return view('admin.resident.create', compact('setting_tabs'));
+        return view('admin.resident.create', compact('setting_tabs', 'fields'));
     }
 
     /**
@@ -181,6 +190,145 @@ class ResidentController extends Controller
         }  
 
         return redirect()->route('home')->with('flash', 'Successfully added new Resident.');
+    }
+
+    /**
+     * AJAX API : add resident-personal information tab.
+     *
+     * @since 2021-07-10
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveResidentPersonalinfo(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'profile_logo' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|string|unique:users|email', //|unique:users
+            'birthday' => 'required',
+            'gender' => 'required',
+            'street1' => 'required',
+            'city' => 'required',
+            'zip_code' => 'required',
+            'state' => 'required',
+            'phone_number' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
+        }
+
+        ($request['gender'] == "male") ? $request['gender'] = 0 : $request['gender'] = 1;
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        DB::beginTransaction();
+
+        try {
+            $profile_logo = User::upload_file($request->profile_logo);
+
+            $user = User::create([
+                'firstname' => $request['firstname'],
+                'lastname' => $request['lastname'],
+                'email' => $request['email'],
+                'birthday' => $request['birthday'],
+                'street1' => $request['street1'],
+                'city' => $request['city'],
+                'zip_code' => $request['zip_code'],
+                'state' => $request['state'],
+                'phone_number' => $request['phone_number'],
+                'profile_logo' => $profile_logo,
+                'gender' => $request['gender'],
+                'middlename' => @$request['middlename'],
+                'street2' => @$request['street2'],
+                'sign_date' => $date,
+            ]);
+
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => 3,
+            ]);
+
+            $resident_information = Resident_information::create([
+                'user_id' => $user->id,
+                'date_admitted' => @$request['date_admitted'],
+                'ssn' => @$request['ssn'],
+                'primary_language' => @$request['primary_language'],
+                'signDate' => $date
+            ]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }  
+
+        return response()->json(['status' => "success", 'data' => $user, 'msg' => 'Successfully added new Resident.']);
+    }
+
+    /**
+     * AJAX API : add resident-POA information tab.
+     *
+     * @since 2021-07-10
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveResidentPOAinfo(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'poa_firstname' => 'required',
+            'poa_type' => 'required',
+            'poa_lastname' => 'required',
+            'poa_street1' => 'required',
+            'poa_city' => 'required',
+            'poa_zip_code' => 'required',
+            'poa_state' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
+        }
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        DB::beginTransaction();
+
+        try {
+            $poa = Poas::create([
+                'user_id' => $request['user_id'],
+                'poa_type' => $request['poa_type'],
+                'poa_firstname' => $request['poa_firstname'],
+                'poa_lastname' => $request['poa_lastname'],
+                'poa_street1' => $request['poa_street1'],
+                'poa_street2' => $request['poa_street2'],
+                'poa_city' => $request['poa_city'],
+                'poa_zip_code' => $request['poa_zip_code'],
+                'poa_state' => $request['poa_state'],
+                'poa_home_phone' => $request['poa_home_phone'],
+                'poa_cell_phone' => $request['poa_cell_phone'],
+                'sign_date' => $date,
+            ]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }  
+
+        return response()->json(['status' => "success", 'data' => $poa, 'msg' => 'Successfully added the POA information.']);
     }
 
     /**
