@@ -28,6 +28,9 @@ Route::get('/resident/add', 'Admin\ResidentController@index')->name('resident.ad
 Route::get('/resident/bodyharm', 'Admin\ResidentController@bodyharm')->name('resident.bodyharm');
 Route::get('/resident/management', 'Admin\ResidentController@management')->name('resident.management');
 Route::resource('resident', 'Admin\ResidentController');
+Route::post('/resident/saveResidentPersonalinfo', 'Admin\ResidentController@saveResidentPersonalinfo')->name('resident.saveResidentPersonalinfo');
+Route::post('/resident/saveResidentPOAinfo', 'Admin\ResidentController@saveResidentPOAinfo')->name('resident.saveResidentPOAinfo');
+
 
 
 
