@@ -30,6 +30,7 @@ Route::get('/resident/management', 'Admin\ResidentController@management')->name(
 Route::resource('resident', 'Admin\ResidentController');
 Route::post('/resident/saveResidentPersonalinfo', 'Admin\ResidentController@saveResidentPersonalinfo')->name('resident.saveResidentPersonalinfo');
 Route::post('/resident/saveResidentPOAinfo', 'Admin\ResidentController@saveResidentPOAinfo')->name('resident.saveResidentPOAinfo');
+Route::post('/resident/saveResidentPhysicianinfo', 'Admin\ResidentController@saveResidentPhysicianinfo')->name('resident.saveResidentPhysicianinfo');
 
 
 

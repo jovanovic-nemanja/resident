@@ -288,7 +288,7 @@
                                         </div>
                                         <div class="tab-pane fade justify-content-center" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
                                             <div>
-                                                <div class="form-group row">
+                                                <!-- <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Type </label>
                                                     <div class="col-lg-9 col-xl-9">
                                                         <select class="form-control physician_medical_dentist_type">
@@ -296,7 +296,7 @@
                                                             <option value="2">Financial POA</option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
                                                 <!--begin::Group-->
                                                 <div class="form-group row">
@@ -410,7 +410,7 @@
                                         </div>
                                         <div class="tab-pane fade justify-content-center" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                                             <div>
-                                                <div class="form-group row">
+                                                <!-- <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Type </label>
                                                     <div class="col-lg-9 col-xl-9">
                                                         <select class="form-control physician_medical_dentist_type">
@@ -419,7 +419,7 @@
                                                             <option value="3">Dentist</option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
                                                 <!--begin::Group-->
                                                 <div class="form-group row">
@@ -498,6 +498,178 @@
                                                     <label class="col-xl-3 col-lg-3 col-form-label">FAX </label>
                                                     <div class="col-lg-9 col-xl-9">
                                                         <input class="form-control form-control-solid form-control-lg" name="physician_or_medical_group_fax" type="text" />
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+
+                                                <br>
+                                                <hr>
+                                                <br>
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">NAME OF PHARMACY </label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control form-control-solid form-control-lg" name="pharmacy_firstname" type="text" />
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Last Name </label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control form-control-solid form-control-lg" name="pharmacy_lastname" type="text" />
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Street</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <div class="input-group input-group-solid input-group-lg">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="pharmacy_street1" placeholder="Street" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <div class="col-xl-3 col-lg-3"></div>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <div class="input-group input-group-solid input-group-lg">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="pharmacy_street2" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">City</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <div class="input-group input-group-solid input-group-lg">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="pharmacy_city" placeholder="City" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">HOME PHONE </label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control form-control-solid form-control-lg" name="pharmacy_phone" type="text" />
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">FAX </label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control form-control-solid form-control-lg" name="pharmacy_fax" type="text" />
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+
+                                                <br>
+                                                <hr>
+                                                <br>
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">NAME OF DENTIST </label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control form-control-solid form-control-lg" name="dentist_firstname" type="text" />
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Last Name </label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control form-control-solid form-control-lg" name="dentist_lastname" type="text" />
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Street</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <div class="input-group input-group-solid input-group-lg">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="dentist_street1" placeholder="Street" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <div class="col-xl-3 col-lg-3"></div>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <div class="input-group input-group-solid input-group-lg">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="dentist_street2" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">City</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <div class="input-group input-group-solid input-group-lg">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="dentist_city" placeholder="City" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">HOME PHONE </label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control form-control-solid form-control-lg" name="dentist_phone" type="text" />
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+                                                </div>
+                                                <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">FAX </label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control form-control-solid form-control-lg" name="dentist_fax" type="text" />
                                                     </div>
 
                                                     <div class="fv-plugins-message-container"></div>
