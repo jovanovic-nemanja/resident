@@ -55,8 +55,8 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Tab Name</th>
-                                    <th>Group Title</th>
-                                    <th>Group Created Date</th>
+                                    <th>Field Name</th>
+                                    <th>Field Created Date</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -68,13 +68,13 @@
                                             <tr>
                                                 <td>{{ $i }}</td>
                                                 <td>{{ $setting->name }}</td>
-                                                <td>{{ $setting->title }}</td>
-                                                <td>{{ $setting->sign_date_group }}</td>
+                                                <td>{{ $setting->fieldName }}</td>
+                                                <td>{{ $setting->sign_date_field }}</td>
                                                 <td>
                                                     <!-- <a href="#" class="btn btn-success">Edit</a> -->
-                                                    <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$setting->GroupID}}').submit();" class="btn btn-primary">Delete</a>
+                                                    <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$setting->FieldID}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                    <form id="delete-form-{{$setting->GroupID}}" action="{{ route('settings.destroy', $setting->GroupID) }}" method="POST" style="display: none;">
+                                                    <form id="delete-form-{{$setting->FieldID}}" action="{{ route('settings.destroy', $setting->FieldID) }}" method="POST" style="display: none;">
                                                         <input type="hidden" name="_method" value="delete">
                                                         @csrf
                                                     </form>

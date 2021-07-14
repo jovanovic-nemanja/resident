@@ -223,7 +223,7 @@ jQuery(document).ready(function () {
 						}
 					});
 				}
-			}if (current_tab == "#kt_tab_pane_2") {
+			}else if (current_tab == "#kt_tab_pane_2") {
 				if(!user_id) {
 					swal.fire({
 		                text: "Sorry, Please enter and submit the personal information before the POA information submitting.",
@@ -359,7 +359,7 @@ jQuery(document).ready(function () {
 						}
 					});
 				}
-			}if (current_tab == "#kt_tab_pane_3") {
+			}else if (current_tab == "#kt_tab_pane_3") {
 				if(!user_id) {
 					swal.fire({
 		                text: "Sorry, Please enter and submit the personal information before the POA information submitting.",
@@ -645,6 +645,59 @@ jQuery(document).ready(function () {
 						}
 					});
 				}
+			}else{
+				var id = current_tab + ' .field-value';
+				var vals = [];
+				$(id).each((index) => {
+					var elements = $(id);
+					var value = elements[index].value;
+					vals.push(value);
+				});
+
+				console.log(vals);
+
+				var formData = new FormData();
+				formData.append("user_id", user_id);
+
+				formData.append("vals", JSON.stringify(vals));
+
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+
+				$.ajax({
+					url: "/resident/saveSettingsinfo",
+					type: 'POST',
+					contentType: false,
+				    cache: false,
+				    processData: false,
+					data: formData,
+					success: function(result, status) {
+						if (result.status == "failed") {
+							swal.fire({
+				                text: result.msg,
+				                icon: "error",
+				                buttonsStyling: false,
+				                confirmButtonText: "Ok, got it!",
+				                confirmButtonClass: "btn font-weight-bold btn-light"
+				            }).then(function() {
+								KTUtil.scrollTop();
+							});
+						}else{
+							swal.fire({
+				                text: result.msg,
+				                icon: "success",
+				                buttonsStyling: false,
+				                confirmButtonText: "Ok, got it!",
+				                confirmButtonClass: "btn font-weight-bold btn-light-primary"
+				            }).then(function() {
+								KTUtil.scrollTop();
+							});
+						}
+					}
+				});
 			}
 		}
 	});

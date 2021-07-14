@@ -17,7 +17,7 @@ class CreateFieldsTable extends Migration
             $table->increments('id');
 
             $table->text('fieldName');
-            $table->integer('group_id');
+            $table->integer('tab_id');
             $table->datetime('sign_date_field');
             
             $table->timestamps();

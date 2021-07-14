@@ -40,69 +40,62 @@ $(function() {
     $('.validate_btn').click(function(e) {
         e.preventDefault();
         var tabsID = $('#tabs-control-dropdown').val();
-        var group_title = $("input[name='group_title']").val();
 
         const formData = new FormData();
         const sendArray = [];
 
-        if (!group_title) {
-            alert('Please input the group title.');
-            return;
-        }else{
-            $('.field-form').each((index) => {
+        $('.field-form').each((index) => {
 
-                const oneItem = {
-                    fieldName: '',
-                    fieldValue: []
-                };
+            const oneItem = {
+                fieldName: '',
+                fieldValue: []
+            };
 
-                let fieldForm = $('.field-form').eq(index);
-                const fieldName = fieldForm.find("input[name='field_name']").val();
+            let fieldForm = $('.field-form').eq(index);
+            const fieldName = fieldForm.find("input[name='field_name']").val();
 
-                if(!fieldName) {
-                    alert('Please input the Field Name.');
-                    return;
-                }else{
-                    oneItem.fieldName = fieldName;
-                }
-                fieldForm.find("input[name='typeName']").each((typeNameInx) => {
-                    const fieldValue = fieldForm.find("input[name='typeName']").eq(typeNameInx).val();
-                    if(!fieldValue) {
-                        alert('Please input the Field Type Value.');
-                        return;
-                    }else{
-                        oneItem.fieldValue.push(fieldValue);
-                        sendArray.push(oneItem);
-                    }
-                });
-            });
-
-            if(sendArray.length == 0) {
-                alert('Please input the Field Name and Type Value.');
+            if(!fieldName) {
+                alert('Please input the Field Name.');
                 return;
             }else{
-                formData.append("tabsID", tabsID);
-                formData.append("group_title", group_title);
-                formData.append("arrayValue", JSON.stringify(sendArray));
+                oneItem.fieldName = fieldName;
+            }
+            fieldForm.find("input[name='typeName']").each((typeNameInx) => {
+                const fieldValue = fieldForm.find("input[name='typeName']").eq(typeNameInx).val();
+                if(!fieldValue) {
+                    alert('Please input the Field Type Value.');
+                    return;
+                }else{
+                    oneItem.fieldValue.push(fieldValue);
+                }
+            });
+            sendArray.push(oneItem);
+        });
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+        if(sendArray.length == 0) {
+            alert('Please input the Field Name and Type Value.');
+            return;
+        }else{
+            formData.append("tabsID", tabsID);
+            formData.append("arrayValue", JSON.stringify(sendArray));
 
-                $.ajax({
-                    url: "/storeSettings",
-                    type: 'POST',
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    data: formData,
-                    success: function(result, status) {
-                        window.location.href = result;
-                    }
-                });
-            }                
-        }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: "/storeSettings",
+                type: 'POST',
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: formData,
+                success: function(result, status) {
+                    window.location.href = result;
+                }
+            });
+        }                
     });
 });

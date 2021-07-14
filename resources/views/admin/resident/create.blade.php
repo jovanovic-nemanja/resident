@@ -682,17 +682,19 @@
                                                 <div class="tab-pane fade justify-content-center" id="kt_tab_pane_<?= $i; ?>" role="tabpanel" aria-labelledby="kt_tab_pane_<?= $i; ?>">
                                                     <div class="form-group row">
                                                         @foreach($fields as $fl)
-                                                            @if($fl->tabId == $st->id && $fl->fieldName)
-                                                                <label class="col-form-label pl-5">{{ $fl->fieldName }}</label>
-                                                                <select class="form-control col-lg-3 ml-3">
-                                                                    <?php 
-                                                                        $fieldsTypes = App\FieldTypes::where('fieldID', $fl->id)->get();
+                                                            @if($fl->tab_id == $st->id && $fl->fieldName)
+                                                                <div class="col-lg-4 pt-4">
+                                                                    <label class="col-form-label pl-5">{{ $fl->fieldName }}</label>
+                                                                    <select class="form-control field-value">
+                                                                        <?php 
+                                                                            $fieldsTypes = App\FieldTypes::where('fieldID', $fl->id)->get();
 
-                                                                        if($fieldsTypes){
-                                                                            foreach ($fieldsTypes as $ft) { ?>
-                                                                                <option value="{{ $ft->id }}">{{ $ft->typeName }}</option>
-                                                                    <?php } } ?>
-                                                                </select>
+                                                                            if($fieldsTypes){
+                                                                                foreach ($fieldsTypes as $ft) { ?>
+                                                                                    <option value="{{ $ft->id }}">{{ $ft->typeName }}</option>
+                                                                        <?php } } ?>
+                                                                    </select>
+                                                                </div>
                                                             @endif
                                                         @endforeach
                                                     </div>

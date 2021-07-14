@@ -172,7 +172,7 @@
                                                     <i class='fas fa-thermometer' style='font-size: 70px; color: red;'></i>
                                                 </div>
                                                 <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
-                                                    <a class="btn font-weight-bolder text-uppercase py-4 px-6">{{ $vitalsign['temperature']['data'] }} <span>°F</span></a>
+                                                    <a class="btn font-weight-bolder text-uppercase py-4 px-6">{{ ($vitalsign['temperature']) ? $vitalsign['temperature']['data'] : '' }} <span>°F</span></a>
                                                 </div>
                                             </div>
                                             <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
@@ -191,7 +191,7 @@
                                                     <i class='fas fa-signal' style='font-size: 70px; color: red;'></i>
                                                 </div>
                                                 <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
-                                                    <a class="btn font-weight-bolder text-uppercase py-4 px-6">{{ $vitalsign['blood_pressure']['data'] }} <span>mmHG</span></a>
+                                                    <a class="btn font-weight-bolder text-uppercase py-4 px-6">{{ ($vitalsign['blood_pressure']) ? $vitalsign['blood_pressure']['data'] : '' }} <span>mmHG</span></a>
                                                 </div>
                                             </div>
                                             <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
@@ -210,13 +210,164 @@
                                                     <i class='fa fa-heart' style='font-size: 70px; color: red;'></i>
                                                 </div>
                                                 <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
-                                                    <a class="btn font-weight-bolder text-uppercase py-4 px-6">{{ $vitalsign['heart_rate']['data'] }} <span>Per min</span></a>
+                                                    <a class="btn font-weight-bolder text-uppercase py-4 px-6">{{ ($vitalsign['heart_rate']) ? $vitalsign['heart_rate']['data'] : '' }} <span>Per min</span></a>
                                                 </div>
                                             </div>
                                             <a href="{{ route('vitalsign.indexresidentvitalsign', $user->id) }}">Read more</a>
                                         </div>
                                     </div>
                                     <!--end::Callout-->
+                                </div>
+                            </div>
+
+                            <div class="card-body pt-5 pb-3 row">
+                                <div class="row pt-5 m-5">
+                                    <h4>POA Info</h4>
+                                    <hr />
+
+                                    <table class="table table-bordered table-hover table-checkable" id="kt_datatable" style="margin-top: 13px !important">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Street</th>
+                                                <th>City</th>
+                                                <th>Zip Code</th>
+                                                <th>State</th>
+                                                <th>HOME PHONE</th>
+                                                <th>CELL PHONE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if($poas)
+                                                @foreach($poas as $ps)
+                                                    <tr>
+                                                        <td>{{ $ps->id }}</td>
+                                                        <td>{{ $ps->poa_firstname }}</td>
+                                                        <td>{{ $ps->poa_lastname }}</td>
+                                                        <td>{{ $ps->poa_street1.$ps->poa_street2 }}</td>
+                                                        <td>{{ $ps->poa_city }}</td>
+                                                        <td>{{ $ps->poa_zip_code }}</td>
+                                                        <td>{{ $ps->poa_state }}</td>
+                                                        <td>{{ $ps->poa_home_phone }}</td>
+                                                        <td>{{ $ps->poa_cell_phone }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="card-body pt-5 pb-3 row">
+                                <div class="row pt-5 m-5">
+                                    <h4>Physician/Medical and Dentist Info</h4>
+
+                                    <div class="row col-lg-12">
+                                        <div class="col-lg-6 d-flex align-items-center">
+                                            <label class="col-form-label">Physician/Medical First Name: </label>
+                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_firstname : '' }}">
+                                        </div>
+                                        <div class="col-lg-6 d-flex align-items-center">
+                                            <label class="col-form-label">Physician/Medical Last Name</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_lastname : '' }}">
+                                        </div>
+                                        <div class="col-lg-6 d-flex align-items-center">
+                                            <label class="col-form-label">Physician/Medical Address</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_street1.$physician_medicals[0]->physician_or_medical_group_street2 : '' }}">
+                                        </div>
+                                        <div class="col-lg-6 d-flex align-items-center">
+                                            <label class="col-form-label">Physician/Medical City</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_city : '' }}">
+                                        </div>
+                                        <div class="col-lg-6 d-flex align-items-center">
+                                            <label class="col-form-label">Physician/Medical Phone</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_phone : '' }}">
+                                        </div>
+                                        <div class="col-lg-6 d-flex align-items-center">
+                                            <label class="col-form-label">Physician/Medical Fax</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_fax : '' }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row col-lg-12 pt-5 mt-5">
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Pharmacy First Name</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_firstname : '' }}">
+                                            <span></span>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Pharmacy Last Name</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_lastname : '' }}">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Pharmacy Address</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_street1.$pharmacys[0]->pharmacy_street2 : '' }}">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Pharmacy City</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_city : '' }}">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Pharmacy Phone</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_phone : '' }}">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Pharmacy Fax</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_fax : '' }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row col-lg-12 pt-5 mt-5">
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Dentist First Name</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_firstname : '' }}">
+                                            <span></span>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Dentist Last Name</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_lastname : '' }}">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Dentist Address</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_street1.$dentists[0]->dentist_street2 : '' }}">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Dentist City</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_city : '' }}">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Dentist Phone</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_phone : '' }}">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-form-label">Dentist Fax</label>
+                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_fax : '' }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body pt-5 pb-3 row">
+                                <div class="row pt-5 m-5">
+                                    <h4>Settings Info</h4>
+
+                                    <div class="row col-lg-12">
+                                        @if($resident_settings)
+                                            @foreach($resident_settings as $rs)
+                                                <div class="col-lg-4 pt-5">
+                                                    <label class="col-form-label">{{ $rs->tabName }}</label>
+                                                </div>
+                                                <div class="col-lg-4 pt-5">
+                                                    <label class="col-form-label">{{ $rs->fieldName }}</label>
+                                                </div>
+                                                <div class="col-lg-4 pt-5">
+                                                    <input class="form-control input-sm" disabled value="{{ $rs->typeName }}">
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <!--end::Body-->
