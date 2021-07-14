@@ -6,7 +6,6 @@ use App\User;
 use App\Role;
 use App\Tabs;
 use App\Fields;
-use App\Groups;
 use App\RoleUser;
 use App\FieldTypes;
 use Illuminate\Http\Request;
@@ -29,8 +28,8 @@ class SettingsController extends Controller
     public function index()
     {
         $settings = DB::table('setting_tabs')
-                            ->join('groups', 'setting_tabs.id', '=', 'groups.tabId')
-                            ->select('setting_tabs.*', 'groups.id as GroupID', 'groups.*')
+                            ->join('fields', 'setting_tabs.id', '=', 'fields.tab_id')
+                            ->select('setting_tabs.*', 'fields.id as FieldID', 'fields.*')
                             ->get();
 
         return view('admin.settings.index', compact('settings'));
@@ -69,7 +68,6 @@ class SettingsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'tabsID' => 'required',
-            'group_title' => 'required',
             'arrayValue' => 'required'
         ]);
 
@@ -82,14 +80,6 @@ class SettingsController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
-        $group_title = $request->group_title;
-
-        $group = Groups::create([
-            'title' => $group_title,
-            'tabId' => $request->tabsID,
-            'sign_date_group' => $date,
-        ]);
-        $groupID = $group['id'];
 
         $arrayValue = json_decode($request->arrayValue);
         if($arrayValue) {
@@ -98,7 +88,7 @@ class SettingsController extends Controller
                 $field = new Fields;
 
                 $field->fieldName = $arr->fieldName;
-                $field->group_id = $groupID;
+                $field->tab_id = $request->tabsID;
                 $field->sign_date_field = $date;
                 $field->save();
                 
@@ -168,17 +158,8 @@ class SettingsController extends Controller
      */
     public function destroy($id)
     {
-        $group = Groups::where('id', $id)->first();
-        $groupID = $group->id;
-
-        $fields = Fields::where('group_id', $groupID)->get();
-        if (@$fields) {
-            foreach ($fields as $field) {
-                $fieldtypes = FieldTypes::where('fieldID', $field->id)->delete();
-            }
-        }
-        $fields = Fields::where('group_id', $groupID)->delete();
-        $fields = Groups::where('id', $id)->delete();
+        $fieldtypes = FieldTypes::where('fieldID', $id)->delete();
+        $fields = Fields::where('id', $id)->delete();
         
         return redirect()->route('settings.index');
     }

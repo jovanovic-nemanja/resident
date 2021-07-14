@@ -55,13 +55,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group pb-5">
-                                <label class="col-form-label">Group Title</label>
-                                <div class="controls">
-                                    <input type="text" class="form-control" name="group_title" placeholder="Group Title" required>
-                                </div>
-                            </div>
-
                             <div class="form_area"></div>
 
                             <button class="btn btn-warning add_more_field mr-2 mt-5" type="button">Add Field</button>

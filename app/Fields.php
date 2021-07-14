@@ -10,5 +10,5 @@ class Fields extends Model
 {
     public $table = "fields";
 
-    public $fillable = ['fieldName', 'group_id', 'sign_date_field'];
+    public $fillable = ['fieldName', 'tab_id', 'sign_date_field'];
 }

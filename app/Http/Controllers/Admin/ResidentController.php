@@ -18,6 +18,7 @@ use App\TFG;
 use App\Bodyharms;
 use App\RoleUser;
 use App\Vitalsign;
+use App\ResidentSettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -41,10 +42,8 @@ class ResidentController extends Controller
     {
         $setting_tabs = Tabs::all();
         $fields = DB::table('setting_tabs')
-                    ->leftJoin('groups', 'groups.tabId', '=', 'setting_tabs.id')
-                    ->leftJoin('fields', 'fields.group_id', '=', 'groups.id')
-                    // ->leftJoin('field_types', 'field_types.fieldID', '=', 'fields.id')
-                    ->select('fields.*', 'groups.tabId')
+                    ->leftJoin('fields', 'fields.tab_id', '=', 'setting_tabs.id')
+                    ->select('fields.*')
                     ->get();
 
         return view('admin.resident.create', compact('setting_tabs', 'fields'));
@@ -427,6 +426,52 @@ class ResidentController extends Controller
     }
 
     /**
+     * AJAX API : add resident-settings information tab.
+     *
+     * @since 2021-07-14
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveSettingsinfo(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'vals' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
+        }
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        DB::beginTransaction();
+
+        try {
+            foreach (json_decode($request->vals) as $rv) {
+                $residentsetting = ResidentSettings::create([
+                    'user_id' => $request['user_id'],
+                    'fieldVal' => $rv,
+                    'sign_date' => $date,
+                ]);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }  
+
+        return response()->json(['status' => "success", 'data' => "", 'msg' => 'Successfully added the settings information.']);
+    }
+
+    /**
      * Display the Incidence Body harm page.
      *
      * @param  int  $id userid
@@ -452,7 +497,21 @@ class ResidentController extends Controller
         $vitalsign['blood_pressure'] = Vitalsign::where('resident_id', $id)->where('type', 2)->latest()->first();
         $vitalsign['heart_rate'] = Vitalsign::where('resident_id', $id)->where('type', 3)->latest()->first();
 
-        return view('admin.resident.viewuser', compact('user', 'vitalsign'));
+        $poas = Poas::where('user_id', $id)->get();
+        $physician_medicals = Physician::where('user_id', $id)->get();
+        $pharmacys = Pharmacys::where('user_id', $id)->get();
+        $dentists = Dentists::where('user_id', $id)->get();
+        $setting_tabs = Tabs::all();
+
+        $resident_settings =  DB::table('resident_settings')
+                                ->leftJoin('field_types', 'field_types.id', '=', 'resident_settings.fieldVal')
+                                ->leftJoin('fields', 'fields.id', '=', 'field_types.fieldID')
+                                ->leftJoin('setting_tabs', 'setting_tabs.id', '=', 'fields.tab_id')
+                                ->where('resident_settings.user_id', $id)
+                                ->select('setting_tabs.name as tabName', 'fields.fieldName', 'field_types.typeName')
+                                ->get();
+
+        return view('admin.resident.viewuser', compact('user', 'vitalsign', 'poas', 'physician_medicals', 'pharmacys', 'resident_settings', 'dentists', 'setting_tabs'));
     }
 
     /**
