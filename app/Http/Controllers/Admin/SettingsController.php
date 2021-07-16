@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 class SettingsController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'manager']);
     }
 
     /**
@@ -27,8 +27,10 @@ class SettingsController extends Controller
      */
     public function index()
     {
+        $clinic_id = auth()->id();
         $settings = DB::table('setting_tabs')
                             ->join('fields', 'setting_tabs.id', '=', 'fields.tab_id')
+                            ->where('fields.clinic_id', $clinic_id)
                             ->select('setting_tabs.*', 'fields.id as FieldID', 'fields.*')
                             ->get();
 
@@ -80,6 +82,7 @@ class SettingsController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
+        $clinic_id = auth()->id();
 
         $arrayValue = json_decode($request->arrayValue);
         if($arrayValue) {
@@ -89,6 +92,7 @@ class SettingsController extends Controller
 
                 $field->fieldName = $arr->fieldName;
                 $field->tab_id = $request->tabsID;
+                $field->clinic_id = $clinic_id;
                 $field->sign_date_field = $date;
                 $field->save();
                 

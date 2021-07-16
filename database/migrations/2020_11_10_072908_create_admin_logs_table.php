@@ -17,6 +17,7 @@ class CreateAdminLogsTable extends Migration
             $table->increments('id');
 
             $table->string('content', 2048);
+            $table->integer('clinic_id');
             $table->integer('caretakerId');
             $table->datetime('sign_date');
             

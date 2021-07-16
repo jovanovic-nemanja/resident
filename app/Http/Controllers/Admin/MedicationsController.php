@@ -17,7 +17,7 @@ use App\Http\Controllers\Controller;
 class MedicationsController extends Controller
 {
     public function __construct(){
-        // $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'manager']);
     }
 
     /**
@@ -27,7 +27,8 @@ class MedicationsController extends Controller
      */
     public function index()
     {
-        $medications = Medications::all();
+        $clinic_id = auth()->id();
+        $medications = Medications::where('clinic_id', $clinic_id)->get();
 
         return view('admin.medications.index', compact('medications'));
     }
@@ -58,11 +59,13 @@ class MedicationsController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
+        $clinic_id = auth()->id();
 
         $medications = Medications::create([
             'name' => $request->name,
             'dose' => $request->dose,
             'photo' => $request->photo,
+            'clinic_id' => $clinic_id,
             'sign_date' => $date,
             'comments' => $request->comments
         ]);

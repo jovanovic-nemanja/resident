@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 class CaretakerController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'manager']);
     }
 
     /**
@@ -23,7 +23,9 @@ class CaretakerController extends Controller
      */
     public function index()
     {
-        $caretakers = User::all();
+        $clinic_id = auth()->id();
+        $caretakers = User::where('clinic_id', $clinic_id)->get();
+        
         return view('admin.caretaker.index', compact('caretakers'));
     }
 
@@ -57,6 +59,8 @@ class CaretakerController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
+
+        $clinic_id = auth()->id();
         
         DB::beginTransaction();
 
@@ -66,6 +70,7 @@ class CaretakerController extends Controller
                 'lastname' => $request['lastname'],
                 'username' => $request['username'],
                 'email' => $request['email'],
+                'clinic_id' => $clinic_id,
                 'profile_logo' => $request['profile_logo'],
                 'password' => Hash::make($request['password']),
                 'phone_number' => $request['phone_number'],

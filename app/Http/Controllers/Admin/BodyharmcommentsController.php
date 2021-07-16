@@ -12,7 +12,7 @@ use App\Bodyharmcomments;
 class BodyharmcommentsController extends Controller
 {
     public function __construct(){
-        // $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'manager']);
     }
 
     /**
@@ -22,7 +22,8 @@ class BodyharmcommentsController extends Controller
      */
     public function index()
     {
-        $comments = Bodyharmcomments::all();
+        $clinic_id = auth()->id();
+        $comments = Bodyharmcomments::where('clinic_id', $clinic_id)->get();
 
         return view('admin.bodyharmcomments.index', compact('comments'));
     }
@@ -51,9 +52,11 @@ class BodyharmcommentsController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
+        $clinic_id = auth()->id();
 
         $activities = Bodyharmcomments::create([
             'name' => $request->name,
+            'clinic_id' => $clinic_id,
             'sign_date' => $date,
         ]);
 

@@ -16,6 +16,7 @@ class CreateRoutesTable extends Migration
         Schema::create('routes', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('clinic_id');
             $table->string('name');
             $table->datetime('sign_date');
             

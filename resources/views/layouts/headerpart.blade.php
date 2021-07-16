@@ -86,7 +86,7 @@
             </div>
             <!--end::Tablet & Mobile Search-->
             <div class="topbar-item mr-4">
-                @if(auth()->user()->hasRole('admin'))
+                @if(auth()->user()->hasRole('clinicowner'))
                     <a href="{{ route('notifications.index') }}" class="new-link w-text btn btn-sm btn-light-success">Reminders
                         <span class="badge badge-danger ml-5 reminder_badge">New</span>
                     </a>

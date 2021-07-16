@@ -30,7 +30,7 @@ class ResidentController extends Controller
 {
     
     public function __construct(){
-        $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'manager']);
     }
 
     /**
@@ -228,6 +228,7 @@ class ResidentController extends Controller
         ($request['gender'] == "male") ? $request['gender'] = 0 : $request['gender'] = 1;
         $dates = User::getformattime();
         $date = $dates['date'];
+        $clinic_id = auth()->id();
 
         DB::beginTransaction();
 
@@ -243,6 +244,7 @@ class ResidentController extends Controller
                 'city' => $request['city'],
                 'zip_code' => $request['zip_code'],
                 'state' => $request['state'],
+                'clinic_id' => $clinic_id,
                 'phone_number' => $request['phone_number'],
                 'profile_logo' => $profile_logo,
                 'gender' => $request['gender'],

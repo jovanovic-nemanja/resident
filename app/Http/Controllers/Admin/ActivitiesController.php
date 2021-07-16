@@ -15,7 +15,7 @@ use App\Useractivities;
 class ActivitiesController extends Controller
 {
     public function __construct(){
-        // $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'manager']);
     }
     
     /**
@@ -25,7 +25,8 @@ class ActivitiesController extends Controller
      */
     public function index()
     {
-        $activities = Activities::all();
+        $clinic_id = auth()->id();
+        $activities = Activities::where('clinic_id', $clinic_id)->get();
 
         return view('admin.activities.index', compact('activities'));
     }
@@ -55,9 +56,11 @@ class ActivitiesController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
+        $clinic_id = auth()->id();
 
         $activities = Activities::create([
             'title' => $request->title,
+            'clinic_id' => $clinic_id,
             'type' => $request->type,
             'comments' => $request->comments,
             'sign_date' => $date,

@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
-use App\Http\Controllers\Frontend\EmailsController;
-
 class RegisterController extends Controller
 {
     /*
@@ -58,13 +56,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'gender' => 'required|integer',
-            'birthday' => 'required|date',
-            'address' => 'required|string',
-            'password' => 'string|min:6|confirmed',
-            'phone_number' => 'string|max:255',
+            'profile_logo' => 'required',
+            'firstname' => 'required|string|max:190',
+            'lastname' => 'required|string|max:190',
+            'username' => 'required|string|max:190|unique:users',
+            'email' => 'required|string|email|max:190|unique:users',
+            'password' => 'string|min:6|confirmed'
         ]);
     }
 
@@ -76,64 +73,40 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if(!@$data['role']) {
-            return false;
-        }else{
-            if($data['role'] == 1) {    //seller
-                $role = 2;
-            }else if($data['role'] == 2) {    //buyer
-                $role = 3;
-            }else{
-                
-            }
+        DB::beginTransaction();
 
-            $verify = VerifyEmailcodes::where('email', $data['email'])->first();
-            $data['password'] = $verify->password;
+        try {
+            $user = User::create([
+                'firstname' => $data['firstname'],
+                'lastname' => $data['lastname'],
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'gender' => 1,
+                'password' => Hash::make($data['password']),
+                'phone_number' => @$data['phone_number'],
+                'sign_date' => date('Y-m-d h:i:s'),
+            ]);
 
-            DB::beginTransaction();
+            User::upload_logo_img($user->id);
 
-            try {
-                $user = User::create([
-                    'name' => $data['name'],
-                    'company_name' => $data['company_name'],
-                    'company_logo' => @$data['company_logo'],
-                    'email' => $data['email'],
-                    'block' => 0,
-                    'password' => Hash::make($data['password']),
-                    'phone_number' => @$data['phone_number'],
-                    'sign_date' => date('Y-m-d h:i:s'),
-                ]);
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => 4,
+            ]);
 
-                Image::upload_logo_img($user->id);
+            DB::commit();
 
-                RoleUser::create([
-                    'user_id' => $user->id,
-                    'role_id' => $role,
-                ]);
-                DB::commit();
+            return $user;
+        } catch (\Exception $e) {
+            DB::rollback();
 
-
-                $controller = new EmailsController;
-                $array = [];
-                
-                $array['username'] = $data['name'];
-                $array['receiver_address'] = $data['email'];
-                $array['data'] = array('name' => $array['username'], "body" => "Welcome for sign up our site!");
-                $array['subject'] = "Successfully sign up your account.";
-                $array['sender_address'] = "jovanovic.nemanja.1029@gmail.com";
-
-                $controller->save($array);
-                return $user;
-            } catch (\Exception $e) {
-                DB::rollback();
-                throw $e;
-            }            
-        }
+            throw $e;
+        }            
     }
 
-    public function sellerregister() 
+    public function registerasclinic() 
     {
-        return view('auth.sellerregister');
+        return view('auth.clinic');
     }
 
     public function emailverify() 

@@ -11,7 +11,7 @@ class Adminlogs extends Model
 {
     public $table = "admin_logs";
 
-    public $fillable = ['content', 'caretakerId', 'sign_date'];
+    public $fillable = ['content', 'clinic_id', 'caretakerId', 'sign_date'];
 
     /**
     * @param time

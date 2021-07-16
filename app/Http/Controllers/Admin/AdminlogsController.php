@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class AdminlogsController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'manager']);
     }
 
     /**
@@ -22,7 +22,8 @@ class AdminlogsController extends Controller
      */
     public function index()
     {
-        $adminlogs = Adminlogs::all();
+        $clinic_id = auth()->id();
+        $adminlogs = Adminlogs::where('clinic_id', $clinic_id)->get();
 
         return view('admin.adminlogs.index', compact('adminlogs'));
     }

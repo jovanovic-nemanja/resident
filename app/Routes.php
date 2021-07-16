@@ -9,7 +9,7 @@ class Routes extends Model
 {
     public $table = "routes";
 
-    public $fillable = ['name', 'sign_date'];
+    public $fillable = ['name', 'clinic_id', 'sign_date'];
 
     public static function getRoutename($id)
     {

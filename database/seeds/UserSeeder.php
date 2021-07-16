@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'username' => 'admin',
 	        'email' => 'admin@gmail.com',
             'email_verified_at' => 1,
+            'clinic_id' => '',
             'profile_logo' => '1.png',
             'password' => '$2y$10$43Lgdx7qDxGdj3cDyfcw4uLj5nVQ6vsQ3obexrb/axByYf4B6roZO', // 111111
             'phone_number' => '029292162',
@@ -47,6 +48,10 @@ class UserSeeder extends Seeder
         Role::create([
             'id' => 3,
             'name' => 'resident' 
+        ]);
+        Role::create([
+            'id' => 4,
+            'name' => 'clinicowner' 
         ]);
 
         RoleUser::create([

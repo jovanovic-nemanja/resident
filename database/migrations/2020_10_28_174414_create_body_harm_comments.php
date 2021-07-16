@@ -16,6 +16,7 @@ class CreateBodyHarmComments extends Migration
         Schema::create('body_harm_comments', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('clinic_id');
             $table->string('name');
             $table->datetime('sign_date');
             

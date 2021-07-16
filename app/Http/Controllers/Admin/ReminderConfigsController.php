@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class ReminderConfigsController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'manager']);
     }
 
     /**
@@ -22,7 +22,8 @@ class ReminderConfigsController extends Controller
      */
     public function index()
     {
-        $reminderconfigs = ReminderConfigs::all();
+        $clinic_id = auth()->id();
+        $reminderconfigs = ReminderConfigs::where('clinic_id', $clinic_id)->get();
 
         return view('admin.reminderconfigs.index', compact('reminderconfigs'));
     }
@@ -51,9 +52,11 @@ class ReminderConfigsController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
+        $clinic_id = auth()->id();
 
         $reminderConfigs = ReminderConfigs::create([
             'minutes' => $request->minutes,
+            'clinic_id' => $clinic_id,
             'active' => $request->active,
             'sign_date' => $date,
         ]);
@@ -123,7 +126,9 @@ class ReminderConfigsController extends Controller
     {
         $dates = User::getformattime();
         $date = $dates['date'];
-        $result = ReminderConfigs::whereNotNull('active')->first();
+        $clinic_id = auth()->id();
+        
+        $result = ReminderConfigs::where('clinic_id', $clinic_id)->whereNotNull('active')->first();
         if (@$result) {
             $result->active = NULL;
             $result->update();

@@ -10,6 +10,10 @@ use App\User;
 
 class IncidencesController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth', 'manager']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,8 @@ class IncidencesController extends Controller
      */
     public function index()
     {
-        $incidences = Incidences::all();
+        $clinic_id = auth()->id();
+        $incidences = Incidences::where('clinic_id', $clinic_id)->get();
 
         return view('admin.incidences.index', compact('incidences'));
     }
@@ -47,11 +52,13 @@ class IncidencesController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
+        $clinic_id = auth()->id();
 
         $incidences = Incidences::create([
             'title' => $request->title,
             'content' => $request->content,
             'type' => $request->type,
+            'clinic_id' => $clinic_id,
             'sign_date' => $date,
         ]);
 

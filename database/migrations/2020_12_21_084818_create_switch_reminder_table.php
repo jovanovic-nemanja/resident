@@ -16,6 +16,7 @@ class CreateSwitchReminderTable extends Migration
         Schema::create('switch_reminder', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('clinic_id');
             $table->integer('status');
             $table->datetime('set_time');
 

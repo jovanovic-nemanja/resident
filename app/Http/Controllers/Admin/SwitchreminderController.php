@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class SwitchreminderController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth', 'manager']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,8 @@ class SwitchreminderController extends Controller
      */
     public function index()
     {
-        $result = Switchreminder::first();
+        $clinic_id = auth()->id();
+        $result = Switchreminder::where('clinic_id', $clinic_id)->first();
 
         return view('admin.switchreminder.index', compact('result'));
     }
@@ -41,9 +46,11 @@ class SwitchreminderController extends Controller
     {
         $dates = User::getformattime();
         $date = $dates['date'];
+        $clinic_id = auth()->id();
 
         $record = Switchreminder::create([
             'status' => 1,
+            'clinic_id' => $clinic_id,
             'set_time' => $date,
         ]);
 

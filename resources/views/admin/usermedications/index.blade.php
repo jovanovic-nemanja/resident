@@ -82,7 +82,7 @@
 			                </a>
                         </div>
                         <div class="card-toolbar">
-                        	@if(auth()->user()->hasRole('admin'))
+                        	@if(auth()->user()->hasRole('clinicowner'))
 		                		<a href="{{ route('usermedications.createassignmedication', $user->id) }}" class="btn btn-primary font-weight-bolder">Assign</a>
 							@endif
                         </div>
@@ -148,7 +148,7 @@
 													@endif
 													
 			                                        <td>
-				                                        @if(auth()->user()->hasRole('admin'))
+				                                        @if(auth()->user()->hasRole('clinicowner'))
 				                                        	<a href="{{ route('usermedications.showassign', $assignmedication['id']) }}" class="btn btn-success">Edit</a>
 				                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$assignmedication['id']}}').submit();">Delete</a>
 
