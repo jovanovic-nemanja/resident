@@ -17,6 +17,7 @@ class CreateActivitiesTable extends Migration
             $table->increments('id');
 
             $table->string('title', '256');
+            $table->integer('clinic_id');
             $table->integer('type');
             $table->string('comments')->nullable();
             $table->datetime('sign_date');

@@ -16,6 +16,7 @@ class CreateReminderConfigsTable extends Migration
         Schema::create('reminder_configs', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('clinic_id');
             $table->integer('minutes');
             $table->integer('active')->nullable();
             $table->datetime('sign_date');

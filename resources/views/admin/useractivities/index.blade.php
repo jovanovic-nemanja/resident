@@ -82,7 +82,7 @@
 			                </a>
                         </div>
                         <div class="card-toolbar">
-                            @if(auth()->user()->hasRole('admin'))
+                            @if(auth()->user()->hasRole('clinicowner'))
 		                		<a href="{{ route('useractivities.createuseractivity', ['type' => 1, 'resident' => $user->id]) }}" class="btn btn-success">Assign Primary ADL</a>
 			                	<a href="{{ route('useractivities.createuseractivity', ['type' => 2, 'resident' => $user->id]) }}" class="btn btn-primary">Assign Secondary ADL</a>
 							@endif
@@ -132,7 +132,7 @@
 			                                        </td>
 				                                        
 			                                        <td>
-			                                        	@if(auth()->user()->hasRole('admin'))
+			                                        	@if(auth()->user()->hasRole('clinicowner'))
 			                                        		{{ App\Useractivities::getCommentById($useractivity->id) }}
 			                                        	@else
 															<select class="form-control" id="comment" name="comment">
@@ -144,7 +144,7 @@
 														@endif
 			                                        </td>
 			                                        <td>
-			                                        	@if(auth()->user()->hasRole('admin'))
+			                                        	@if(auth()->user()->hasRole('clinicowner'))
 			                                        		<a href="{{ route('useractivities.show', $useractivity->id) }}" class="btn btn-success">Edit</a>
 				                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$useractivity->id}}').submit();">Delete</a>
 

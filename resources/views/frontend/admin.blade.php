@@ -1,4 +1,4 @@
-@extends('layouts.appsecond', ['menu' => 'residents'])
+@extends('layouts.appsecond', ['menu' => 'clinicowners'])
 
 @section('content')
 
@@ -9,14 +9,14 @@
                 <!--begin::Details-->
                 <div class="d-flex align-items-center flex-wrap mr-2">
                     <!--begin::Title-->
-                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Residents</h5>
+                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Clinic Owners</h5>
                     <!--end::Title-->
                     <!--begin::Separator-->
                     <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
                     <!--end::Separator-->
                     <!--begin::Search Form-->
                     <div class="d-flex align-items-center" id="kt_subheader_search">
-                        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= count($residents); ?> Total</span>
+                        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= count($clinicowners); ?> Total</span>
                         
                     </div>
                     <!--end::Search Form-->
@@ -29,7 +29,7 @@
                     <!--end::Button-->
                     <!--begin::Button-->
                     @if(auth()->user()->hasRole('clinicowner'))
-                    <a href="{{ route('resident.add') }}" class="btn btn-light-primary font-weight-bold ml-2">Add Resident</a>
+                    <!-- <a href="{{ route('resident.add') }}" class="btn btn-light-primary font-weight-bold ml-2">Add Resident</a> -->
                     @endif
                     <!--end::Button-->
                 </div>
@@ -43,9 +43,9 @@
             <div class="container">
                 <!--begin::Row-->
                 
-                <?php if(count($residents) > 0) { ?>
+                <?php if(count($clinicowners) > 0) { ?>
                     <div class="row">
-                        @foreach($residents as $resident)
+                        @foreach($clinicowners as $clinicowner)
                             <!--begin::Col-->
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                                 <!--begin::Card-->
@@ -65,9 +65,7 @@
                                                 <!--begin::Pic-->
                                                 <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                     <div class="symbol symbol-circle symbol-lg-75">
-                                                        <!-- <a href="{{ route('resident.show', $resident->id) }}"> -->
-                                                            <img src="{{ asset('uploads/').'/'.$resident->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="image">
-                                                        <!-- </a> -->
+                                                        <img src="{{ asset('uploads/').'/'.$clinicowner->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="image">
                                                     </div>
                                                     <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
                                                         <span class="font-size-h3 font-weight-boldest">JM</span>
@@ -76,8 +74,8 @@
                                                 <!--end::Pic-->
                                                 <!--begin::Title-->
                                                 <div class="d-flex flex-column">
-                                                    <a href="{{ route('resident.show', $resident->id) }}" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0 custom_a_tag">{{ $resident->firstname }}</a>
-                                                    <span class="text-muted font-weight-bold">Resident</span>
+                                                    <a href="{{ route('home') }}" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0 custom_a_tag">{{ $clinicowner->firstname }}</a>
+                                                    <span class="text-muted font-weight-bold">Clinic Owner</span>
                                                 </div>
                                                 <!--end::Title-->
                                             </div>
@@ -85,68 +83,46 @@
                                         </div>
                                         <!--end::User-->
                                         <!--begin::Desc-->
-                                        <p class="mb-7"><a href="{{ route('resident.show', $resident->id) }}" class="text-primary pr-1">{{ App\User::getGender($resident->gender) }} / {{ $resident->birthday }}</a></p>
+                                        <p class="mb-7"><a href="{{ route('home') }}" class="text-primary pr-1">{{ App\User::getGender($clinicowner->gender) }} / {{ $clinicowner->birthday }}</a></p>
                                         <!--end::Desc-->
                                         <!--begin::Info-->
                                         <div class="mb-7">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                <a href="{{ route('resident.show', $resident->id) }}" class="text-muted text-hover-primary custom_a_tag">{{ $resident->email }}</a>
+                                                <a href="{{ route('home') }}" class="text-muted text-hover-primary custom_a_tag">{{ $clinicowner->email }}</a>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-cente my-1">
                                                 <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
-                                                <a href="{{ route('resident.show', $resident->id) }}" class="text-muted text-hover-primary custom_a_tag">{{ $resident->phone_number }}</a>
+                                                <a href="{{ route('home') }}" class="text-muted text-hover-primary custom_a_tag">{{ $clinicowner->phone_number }}</a>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                <span class="text-muted font-weight-bold">{{ $resident->street1 }}</span>
+                                                <span class="text-muted font-weight-bold">{{ $clinicowner->street1 }}</span>
                                             </div>
                                         </div>
                                         <!--end::Info-->
 
-                                        <div class="dropdown custom_drop_down">
-                                            <button class="btn btn-success dropdown-toggle custom_div_tag" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Medications
-                                            </button>
-                                            <div class="dropdown-menu custom_div_tag" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="{{ route('usermedications.indexusermedication', $resident->id) }}">Routine</a>
-                                                <a class="dropdown-item" href="{{ route('tfgs.indextfg', $resident->id) }}">PRN</a>
-                                            </div>
-                                        </div>
+                                        @if($clinicowner->status != 1)
+                                            <a href="" class="btn btn-block btn-sm btn-success font-weight-bolder text-uppercase py-4" onclick="event.preventDefault(); document.getElementById('enable-form-{{$clinicowner->id}}').submit();">Enable</a>
 
-                                        <div class="dropdown custom_drop_down">
-                                            <button class="btn btn-custom dropdown-toggle custom_div_tag" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Activities
-                                            </button>
-                                            <div class="dropdown-menu custom_div_tag" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="{{ route('useractivities.indexuseractivity', $resident->id) }}">View ADL</a>
+                                            <form id="enable-form-{{$clinicowner->id}}" action="{{ route('clinic.status') }}" method="POST" style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="clinic_id" value="{{ $clinicowner->id }}">
+                                            </form>
+                                        @else
+                                            <a class="btn btn-block btn-sm btn-success font-weight-bolder text-uppercase py-4" style="cursor: not-allowed;">Enable</a>
+                                        @endif
 
-                                                @if(auth()->user()->hasRole('admin'))
-                                                    <a class="dropdown-item" href="{{ route('useractivities.createuseractivity', ['type' => 1, 'resident' => $resident->id]) }}">Primary ADL</a>
-                                                    
-                                                    <a class="dropdown-item" href="{{ route('useractivities.createuseractivity', ['type' => 2, 'resident' => $resident->id]) }}">Secondary ADL</a>
-                                                @else
-                                                    <a class="dropdown-item" href="{{ route('useractivities.indexuseractivity', $resident->id) }}">Primary ADL</a>
+                                        @if($clinicowner->status == 1)
+                                            <a href="" class="btn btn-block btn-sm btn-danger font-weight-bolder text-uppercase py-4 mt-3" onclick="event.preventDefault(); document.getElementById('disable-form-{{$clinicowner->id}}').submit();">Disable</a>
 
-                                                    <a class="dropdown-item" href="{{ route('useractivities.indexuseractivity', $resident->id) }}">Secondary ADL</a>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="dropdown custom_drop_down">
-                                            <button class="btn btn-warning dropdown-toggle custom_div_tag" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Incidence
-                                            </button>
-                                            <div class="dropdown-menu custom_div_tag" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Family visit</a>
-                                                <a class="dropdown-item" href="#">Mood Change</a>
-                                                <a class="dropdown-item" href="{{ route('bodyharm.indexbodyharm', $resident->id) }}">Body harm</a>
-                                            </div>
-                                        </div>
-
-                                        <a href="{{ route('vitalsign.indexresidentvitalsign', $resident->id) }}" class="btn btn-block btn-sm btn-danger font-weight-bolder text-uppercase py-4">Vital Sign</a>
-
-                                        <a href="{{ route('reports.indexresident', $resident->id) }}" class="btn btn-block btn-sm btn-default font-weight-bolder text-uppercase py-4">Reports</a>
+                                            <form id="disable-form-{{$clinicowner->id}}" action="{{ route('clinic.status') }}" method="POST" style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="clinic_id" value="{{ $clinicowner->id }}">
+                                            </form>
+                                        @else
+                                            <a class="btn btn-block btn-sm btn-danger font-weight-bolder text-uppercase py-4 mt-3" style="cursor: not-allowed;">Disable</a>
+                                        @endif
                                     </div>
                                     <!--end::Body-->
                                 </div>

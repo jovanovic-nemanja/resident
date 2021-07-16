@@ -12,7 +12,7 @@ class Activities extends Model
 {
     public $table = "activities";
 
-    public $fillable = ['title', 'type', 'comments', 'sign_date'];
+    public $fillable = ['title', 'type', 'clinic_id', 'comments', 'sign_date'];
 
     public static function getTypeasstring($id) 
     {

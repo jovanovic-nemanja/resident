@@ -147,7 +147,7 @@
                                                             <div>
                                                                 <button type="button" class="btn btn-success submit_btn" data-wizard-type="action-submit" style="display: initial!important;">Submit</button>
 
-                                                                <a href="{{ route('admin.general.redirectBack') }}" class="btn btn-danger">Cancel</a>
+                                                                <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
                                                             </div>
                                                         </div>
                                                         <!--end::Wizard Actions-->

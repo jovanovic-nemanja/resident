@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class RoutesController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'manager']);
     }
 
     /**
@@ -22,7 +22,8 @@ class RoutesController extends Controller
      */
     public function index()
     {
-        $routes = Routes::all();
+        $clinic_id = auth()->id();
+        $routes = Routes::where('clinic_id', $clinic_id)->get();
 
         return view('admin.routes.index', compact('routes'));
     }
@@ -51,9 +52,11 @@ class RoutesController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
+        $clinic_id = auth()->id();
 
         $routes = Routes::create([
             'name' => $request->name,
+            'clinic_id' => $clinic_id,
             'sign_date' => $date,
         ]);
 

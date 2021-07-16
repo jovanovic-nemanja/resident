@@ -267,83 +267,83 @@
                                     <div class="row col-lg-12">
                                         <div class="col-lg-6 d-flex align-items-center">
                                             <label class="col-form-label">Physician/Medical First Name: </label>
-                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_firstname : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_firstname : '' }}">
                                         </div>
                                         <div class="col-lg-6 d-flex align-items-center">
                                             <label class="col-form-label">Physician/Medical Last Name</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_lastname : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_lastname : '' }}">
                                         </div>
                                         <div class="col-lg-6 d-flex align-items-center">
                                             <label class="col-form-label">Physician/Medical Address</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_street1.$physician_medicals[0]->physician_or_medical_group_street2 : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_street1.$physician_medicals[0]->physician_or_medical_group_street2 : '' }}">
                                         </div>
                                         <div class="col-lg-6 d-flex align-items-center">
                                             <label class="col-form-label">Physician/Medical City</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_city : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_city : '' }}">
                                         </div>
                                         <div class="col-lg-6 d-flex align-items-center">
                                             <label class="col-form-label">Physician/Medical Phone</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_phone : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_phone : '' }}">
                                         </div>
                                         <div class="col-lg-6 d-flex align-items-center">
                                             <label class="col-form-label">Physician/Medical Fax</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($physician_medicals) ? $physician_medicals[0]->physician_or_medical_group_fax : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_fax : '' }}">
                                         </div>
                                     </div>
 
                                     <div class="row col-lg-12 pt-5 mt-5">
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Pharmacy First Name</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_firstname : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_firstname : '' }}">
                                             <span></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Pharmacy Last Name</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_lastname : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_lastname : '' }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Pharmacy Address</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_street1.$pharmacys[0]->pharmacy_street2 : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_street1.$pharmacys[0]->pharmacy_street2 : '' }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Pharmacy City</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_city : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_city : '' }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Pharmacy Phone</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_phone : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_phone : '' }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Pharmacy Fax</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($pharmacys) ? $pharmacys[0]->pharmacy_fax : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_fax : '' }}">
                                         </div>
                                     </div>
 
                                     <div class="row col-lg-12 pt-5 mt-5">
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Dentist First Name</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_firstname : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_firstname : '' }}">
                                             <span></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Dentist Last Name</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_lastname : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_lastname : '' }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Dentist Address</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_street1.$dentists[0]->dentist_street2 : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_street1.$dentists[0]->dentist_street2 : '' }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Dentist City</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_city : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_city : '' }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Dentist Phone</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_phone : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_phone : '' }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-form-label">Dentist Fax</label>
-                                            <input class="form-control input-sm" disabled value="{{ ($dentists) ? $dentists[0]->dentist_fax : '' }}">
+                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_fax : '' }}">
                                         </div>
                                     </div>
                                 </div>

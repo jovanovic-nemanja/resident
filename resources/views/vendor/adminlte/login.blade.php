@@ -1,7 +1,6 @@
 @extends('layouts.applogin')
 
 @section('content')
-    
     <!--begin::Aside-->
     <div class="login-aside d-flex flex-column flex-row-auto">
         <!--begin::Aside Bottom-->
@@ -64,6 +63,7 @@
                     <!--begin::Action-->
                     <div class="pb-lg-0 pb-5">
                         <button type="submit" id="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
+                        <a href="{{ route('signup.clinicowner') }}" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign Up as Clinic Owner</a>
                     </div>
                     <!--end::Action-->
                 </form>
@@ -98,6 +98,13 @@
             <!--end::Forgot-->
         </div>
         <!--end::Content body-->
+
+        @if(session('danger'))
+            <div class="alert alert-danger">
+                {{ session('danger') }}
+            </div>
+        @endif
+        
         <!--begin::Content footer-->
         <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
             <div class="text-dark-50 font-size-lg font-weight-bolder mr-10">

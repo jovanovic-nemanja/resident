@@ -16,6 +16,8 @@ Auth::routes();
 Route::get('/', 'Frontend\HomeController@index')->name('home');
 Route::get('/home', 'Frontend\HomeController@index')->name('home');
 
+Route::get('/signup/clinicowner', 'Auth\RegisterController@registerasclinic')->name('signup.clinicowner');
+
 Route::get('/admin/general', 'Admin\GeneralSettingsController@index')->name('admin.generalsetting');
 Route::put('/admin/general/update/{generalsetting}', 'Admin\GeneralSettingsController@update')->name('admin.generalsetting.update');
 Route::get('/admin/general/redirectBack', 'Admin\GeneralSettingsController@redirectBack')->name('admin.general.redirectBack');
@@ -56,6 +58,7 @@ Route::resource('medications', 'Admin\MedicationsController');
 
 Route::resource('settings', 'Admin\SettingsController');
 Route::post('/storeSettings', 'Admin\SettingsController@storeSettings')->name('settings.storeSettings');
+Route::post('/clinicstatus', 'Frontend\HomeController@clinicstatus')->name('clinic.status');
 
 
 

@@ -91,7 +91,7 @@
                                     <th>Medication</th>
                                     <th>Time</th>
                                     <th>comment</th>
-                                    @if(auth()->user()->hasRole('admin'))
+                                    @if(auth()->user()->hasRole('clinicowner'))
                                         <th>Actions</th>
                                     @endif
                                 </tr>
@@ -120,7 +120,7 @@
                                                     {{ $tfg->comment }}
                                                 </td>
 
-                                                @if(auth()->user()->hasRole('admin'))
+                                                @if(auth()->user()->hasRole('clinicowner'))
                                                     <td>    
                                                         <a href="{{ route('tfgs.show', $tfg->id) }}" class="btn btn-success">Edit</a>
                                                         <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$tfg->id}}').submit();">Delete</a>

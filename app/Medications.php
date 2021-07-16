@@ -12,7 +12,7 @@ class Medications extends Model
 {
     public $table = "medications";
 
-    public $fillable = ['name', 'dose', 'photo', 'comments', 'sign_date'];
+    public $fillable = ['name', 'dose', 'photo', 'comments', 'clinic_id', 'sign_date'];
 
     /**
     * @param user_id

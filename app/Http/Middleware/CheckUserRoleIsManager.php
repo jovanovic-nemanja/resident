@@ -15,7 +15,7 @@ class CheckUserRoleIsManager
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->hasRole('seller') || auth()->user()->hasRole('buyer')) {
+        if(!auth()->user()->hasRole('clinicowner')) {
             abort(404);
         }
 
