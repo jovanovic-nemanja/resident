@@ -110,7 +110,7 @@
                                                 <input type="hidden" name="clinic_id" value="{{ $clinicowner->id }}">
                                             </form>
                                         @else
-                                            <a class="btn btn-block btn-sm btn-success font-weight-bolder text-uppercase py-4" style="cursor: not-allowed;">Enable</a>
+                                            <a class="btn btn-block btn-sm btn-default font-weight-bolder text-uppercase py-4" style="cursor: not-allowed;">Enable</a>
                                         @endif
 
                                         @if($clinicowner->status == 1)
@@ -121,7 +121,7 @@
                                                 <input type="hidden" name="clinic_id" value="{{ $clinicowner->id }}">
                                             </form>
                                         @else
-                                            <a class="btn btn-block btn-sm btn-danger font-weight-bolder text-uppercase py-4 mt-3" style="cursor: not-allowed;">Disable</a>
+                                            <a class="btn btn-block btn-sm btn-default font-weight-bolder text-uppercase py-4 mt-3" style="cursor: not-allowed;">Disable</a>
                                         @endif
                                     </div>
                                     <!--end::Body-->

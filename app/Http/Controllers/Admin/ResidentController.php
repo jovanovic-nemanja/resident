@@ -40,9 +40,11 @@ class ResidentController extends Controller
      */
     public function index()
     {
+        $clinic_id = auth()->id();
         $setting_tabs = Tabs::all();
         $fields = DB::table('setting_tabs')
                     ->leftJoin('fields', 'fields.tab_id', '=', 'setting_tabs.id')
+                    ->where('fields.clinic_id', $clinic_id)
                     ->select('fields.*')
                     ->get();
 
