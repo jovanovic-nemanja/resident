@@ -17,6 +17,7 @@ class CreateFieldsTable extends Migration
             $table->increments('id');
 
             $table->text('fieldName');
+            $table->integer('clinic_id');
             $table->integer('tab_id');
             $table->datetime('sign_date_field');
             
