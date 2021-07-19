@@ -119,7 +119,7 @@ var KTAddUser = function () {
 					profile_logo: {
 						validators: {
 							notEmpty: {
-								message: 'Avatar is required'
+								message: 'Logo is required'
 							}
 						}
 					},

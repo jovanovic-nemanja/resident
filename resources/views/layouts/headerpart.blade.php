@@ -102,7 +102,12 @@
                     </div>
                 @else
                     <div class="topbar-item mr-4" data-toggle="dropdown" data-offset="10px,0px" aria-expanded="false">
-                        <img src="{{ asset('uploads/').'/'.Auth::user()->profile_logo }}" alt="user-image" class="img-circle img-inline custom_img_width">
+                        @if(@Auth::user()->profile_logo)
+                            <?php $path = asset('uploads/').'/'.Auth::user()->profile_logo; ?>
+                        @else
+                            <?php $path = asset('images/nurse.jpg'); ?>
+                        @endif
+                        <img src="<?= $path ?>" alt="user-image" class="img-circle img-inline custom_img_width">
                         <span>{{ Auth::user()->firstname }} <i class="fa fa-angle-down"></i></span>
                     </div>
                 @endif

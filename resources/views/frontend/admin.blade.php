@@ -9,7 +9,7 @@
                 <!--begin::Details-->
                 <div class="d-flex align-items-center flex-wrap mr-2">
                     <!--begin::Title-->
-                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Clinic Owners</h5>
+                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Health Care Facility</h5>
                     <!--end::Title-->
                     <!--begin::Separator-->
                     <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
@@ -65,7 +65,13 @@
                                                 <!--begin::Pic-->
                                                 <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                     <div class="symbol symbol-circle symbol-lg-75">
-                                                        <img src="{{ asset('uploads/').'/'.$clinicowner->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="image">
+                                                        @if(@$clinicowner->profile_logo)
+                                                            <?php $path = asset('uploads/').'/'.$clinicowner->profile_logo; ?>
+                                                        @else
+                                                            <?php $path = asset('images/nurse.jpg'); ?>
+                                                        @endif
+
+                                                        <img src="<?= $path; ?>" class="rad-50 center-block custom_img_tag" alt="image">
                                                     </div>
                                                     <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
                                                         <span class="font-size-h3 font-weight-boldest">JM</span>

@@ -116,13 +116,13 @@ var KTAddUser = function () {
 			_formEl,
 			{
 				fields: {
-					profile_logo: {
-						validators: {
-							notEmpty: {
-								message: 'Avatar is required'
-							}
-						}
-					},
+					// profile_logo: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Logo is required'
+					// 		}
+					// 	}
+					// },
 					firstname: {
 						validators: {
 							notEmpty: {
