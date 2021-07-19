@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->integer('clinic_id')->nullable();
             $table->integer('status')->nullable();
 
-            $table->string('profile_logo', '256');
+            $table->string('profile_logo', '256')->nullable();
             $table->integer('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('phone_number')->nullable();

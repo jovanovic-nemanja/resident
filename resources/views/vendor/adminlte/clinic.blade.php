@@ -33,10 +33,10 @@
                                         <div class="col-xl-9">
                                             <!--begin::Wizard Step 1-->
                                             <div class="my-5 step" data-wizard-type="step-content" data-type-status="current">
-                                                <h5 class="text-dark font-weight-bold mb-10">Clinic Owner's Profile Details:</h5>
+                                                <h5 class="text-dark font-weight-bold mb-10">Health Care Facility's Profile Details:</h5>
                                                 <!--begin::Group-->
-                                                <div class="form-group row {{ $errors->has('profile_logo') ? 'has-error' : '' }}">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label text-left">Avatar</label>
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label text-left">Logo</label>
                                                     <div class="col-lg-9 col-xl-9">
                                                         <div class="image-input image-input-outline" id="kt_user_add_avatar">
                                                             <div class="image-input-wrapper"></div>
@@ -50,14 +50,6 @@
                                                             </span>
                                                         </div>
                                                     </div>
-
-                                                    <div class="fv-plugins-message-container"></div>
-
-                                                    @if ($errors->has('profile_logo'))
-                                                        <span class="help-block">
-                                                            <strong>{{ $errors->first('profile_logo') }}</strong>
-                                                        </span>
-                                                    @endif
                                                 </div>
                                                 <!--end::Group-->
                                                 <!--begin::Group-->

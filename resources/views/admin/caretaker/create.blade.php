@@ -15,7 +15,7 @@
                 <!--begin::Details-->
                 <div class="d-flex align-items-center flex-wrap mr-2">
                     <!--begin::Title-->
-                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Care taker</h5>
+                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Care giver</h5>
                     <!--end::Title-->
                     
                     <!--begin::Breadcrumb-->
@@ -31,7 +31,7 @@
                     <!--end::Separator-->
                     <!--begin::Search Form-->
                     <div class="d-flex align-items-center" id="kt_subheader_search">
-                        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Enter caretaker details and submit</span>
+                        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Enter Care giver details and submit</span>
                     </div>
                     <!--end::Search Form-->
                 </div>
@@ -62,10 +62,10 @@
                                                     <div class="col-xl-9">
                                                         <!--begin::Wizard Step 1-->
                                                         <div class="my-5 step" data-wizard-type="step-content" data-type-status="current">
-                                                            <h5 class="text-dark font-weight-bold mb-10">Caretaker's Profile Details:</h5>
+                                                            <h5 class="text-dark font-weight-bold mb-10">Care giver's Profile Details:</h5>
                                                             <!--begin::Group-->
                                                             <div class="form-group row {{ $errors->has('profile_logo') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label text-left">Avatar</label>
+                                                                <label class="col-xl-3 col-lg-3 col-form-label text-left">Logo</label>
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <div class="image-input image-input-outline" id="kt_user_add_avatar">
                                                                         <div class="image-input-wrapper"></div>

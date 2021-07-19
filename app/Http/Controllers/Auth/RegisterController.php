@@ -56,7 +56,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'profile_logo' => 'required',
+            // 'profile_logo' => 'required',
             'firstname' => 'required|string|max:190',
             'lastname' => 'required|string|max:190',
             'username' => 'required|string|max:190|unique:users',
@@ -87,7 +87,9 @@ class RegisterController extends Controller
                 'sign_date' => date('Y-m-d h:i:s'),
             ]);
 
-            User::upload_logo_img($user->id);
+            if(@$data['profile_logo']) {
+                User::upload_logo_img($user->id);    
+            }            
 
             RoleUser::create([
                 'user_id' => $user->id,

@@ -63,7 +63,7 @@
                     <!--begin::Action-->
                     <div class="pb-lg-0 pb-5">
                         <button type="submit" id="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
-                        <a href="{{ route('signup.clinicowner') }}" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign Up as Clinic Owner</a>
+                        <a href="{{ route('signup.clinicowner') }}" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign Up as Health Care Facility</a>
                     </div>
                     <!--end::Action-->
                 </form>

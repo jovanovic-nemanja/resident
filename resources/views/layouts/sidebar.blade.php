@@ -77,7 +77,7 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-text">Clinic Owners</span>
+                            <span class="menu-text">Health Care Facility</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="menu-submenu">
@@ -85,7 +85,7 @@
                             <ul class="menu-subnav">
                                 <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
-                                        <span class="menu-text">Clinic Owners</span>
+                                        <span class="menu-text">Health Care Facility</span>
                                     </span>
                                 </li>
                                 <li class="menu-item <?= ($menu == "clinicowners") ? "menu-item-active" : "" ?>" aria-haspopup="true">
@@ -93,7 +93,7 @@
                                         <i class="menu-bullet menu-bullet-dot">
                                             <span></span>
                                         </i>
-                                        <span class="menu-text">All Clinic Owners</span>
+                                        <span class="menu-text">All Health Care Facilities</span>
                                     </a>
                                 </li>
                             </ul>
@@ -114,7 +114,7 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-text">Care Takers</span>
+                            <span class="menu-text">Care Givers</span>
                         </a>
                     </li>
 

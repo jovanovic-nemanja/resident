@@ -17,7 +17,7 @@
                     <!--begin::Page Heading-->
                     <div class="d-flex align-items-baseline flex-wrap mr-5">
                         <!--begin::Page Title-->
-                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Care takers</h2>
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Care givers</h2>
                         <!--end::Page Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
@@ -41,7 +41,7 @@
                 <div class="card card-custom">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Manage Care takers
+                            <h3 class="card-label">Manage Care givers
                         </div>
                         <div class="card-toolbar">
                             <!--begin::Button-->
