@@ -4,7 +4,7 @@
         <!--begin::Copyright-->
         <div class="text-dark order-2 order-md-1">
             <span class="text-muted font-weight-bold mr-2"><?= date('Y'); ?>©</span>
-            <a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">Powered by Solaris Dubai</a>
+            <a href="https://solarisdubai.com/" target="_blank" class="text-dark-75 text-hover-primary">Powered by Solaris Dubai</a>
         </div>
         <!--end::Copyright-->
     </div>
