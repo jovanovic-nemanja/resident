@@ -218,6 +218,33 @@ class ResidentController extends Controller
             'zip_code' => 'required',
             'state' => 'required',
             'phone_number' => 'required',
+
+            'poa_firstname' => 'required',
+            'poa_lastname' => 'required',
+            'poa_street1' => 'required',
+            'poa_city' => 'required',
+            'poa_zip_code' => 'required',
+            'poa_state' => 'required',
+
+            'physician_or_medical_group_firstname' => 'required',
+            'physician_or_medical_group_lastname' => 'required',
+            'physician_or_medical_group_street1' => 'required',
+            'physician_or_medical_group_city' => 'required',
+            'physician_or_medical_group_phone' => 'required',
+            'physician_or_medical_group_fax' => 'required',
+            'pharmacy_firstname' => 'required',
+            'pharmacy_lastname' => 'required',
+            'pharmacy_street1' => 'required',
+            'pharmacy_city' => 'required',
+            'pharmacy_phone' => 'required',
+            'pharmacy_fax' => 'required',
+            'dentist_firstname' => 'required',
+            'dentist_lastname' => 'required',
+            'dentist_street1' => 'required',
+            'dentist_city' => 'required',
+            'dentist_phone' => 'required',
+            'dentist_fax' => 'required',
+            'vals' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -268,53 +295,8 @@ class ResidentController extends Controller
                 'signDate' => $date
             ]);
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-
-            throw $e;
-        }  
-
-        return response()->json(['status' => "success", 'data' => $user, 'msg' => 'Successfully added new Resident.']);
-    }
-
-    /**
-     * AJAX API : add resident-POA information tab.
-     *
-     * @since 2021-07-10
-     * @author Nemanja
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function saveResidentPOAinfo(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
-            'poa_firstname' => 'required',
-            // 'poa_type' => 'required',
-            'poa_lastname' => 'required',
-            'poa_street1' => 'required',
-            'poa_city' => 'required',
-            'poa_zip_code' => 'required',
-            'poa_state' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $messages = $validator->messages();
-
-            //pass validator errors as errors object for ajax response
-            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
-        }
-
-        $dates = User::getformattime();
-        $date = $dates['date'];
-
-        DB::beginTransaction();
-
-        try {
             $poa = Poas::create([
-                'user_id' => $request['user_id'],
-                // 'poa_type' => $request['poa_type'],
+                'user_id' => $user->id,
                 'poa_type' => 1,
                 'poa_firstname' => $request['poa_firstname'],
                 'poa_lastname' => $request['poa_lastname'],
@@ -328,63 +310,8 @@ class ResidentController extends Controller
                 'sign_date' => $date,
             ]);
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-
-            throw $e;
-        }  
-
-        return response()->json(['status' => "success", 'data' => $poa, 'msg' => 'Successfully added the POA information.']);
-    }
-
-    /**
-     * AJAX API : add resident-Physician/Medical-Dentist information tab.
-     *
-     * @since 2021-07-13
-     * @author Nemanja
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function saveResidentPhysicianinfo(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
-            'physician_or_medical_group_firstname' => 'required',
-            'physician_or_medical_group_lastname' => 'required',
-            'physician_or_medical_group_street1' => 'required',
-            'physician_or_medical_group_city' => 'required',
-            'physician_or_medical_group_phone' => 'required',
-            'physician_or_medical_group_fax' => 'required',
-            'pharmacy_firstname' => 'required',
-            'pharmacy_lastname' => 'required',
-            'pharmacy_street1' => 'required',
-            'pharmacy_city' => 'required',
-            'pharmacy_phone' => 'required',
-            'pharmacy_fax' => 'required',
-            'dentist_firstname' => 'required',
-            'dentist_lastname' => 'required',
-            'dentist_street1' => 'required',
-            'dentist_city' => 'required',
-            'dentist_phone' => 'required',
-            'dentist_fax' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $messages = $validator->messages();
-
-            //pass validator errors as errors object for ajax response
-            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
-        }
-
-        $dates = User::getformattime();
-        $date = $dates['date'];
-
-        DB::beginTransaction();
-
-        try {
             $physician_medical = Physician::create([
-                'user_id' => $request['user_id'],
+                'user_id' => $user->id,
                 'physician_or_medical_group_firstname' => $request['physician_or_medical_group_firstname'],
                 'physician_or_medical_group_lastname' => $request['physician_or_medical_group_lastname'],
                 'physician_or_medical_group_street1' => $request['physician_or_medical_group_street1'],
@@ -396,7 +323,7 @@ class ResidentController extends Controller
             ]);
 
             $pharmacy = Pharmacys::create([
-                'user_id' => $request['user_id'],
+                'user_id' => $user->id,
                 'pharmacy_firstname' => $request['pharmacy_firstname'],
                 'pharmacy_lastname' => $request['pharmacy_lastname'],
                 'pharmacy_street1' => $request['pharmacy_street1'],
@@ -408,7 +335,7 @@ class ResidentController extends Controller
             ]);
 
             $dentist = Dentists::create([
-                'user_id' => $request['user_id'],
+                'user_id' => $user->id,
                 'dentist_firstname' => $request['dentist_firstname'],
                 'dentist_lastname' => $request['dentist_lastname'],
                 'dentist_street1' => $request['dentist_street1'],
@@ -419,47 +346,9 @@ class ResidentController extends Controller
                 'sign_date' => $date,
             ]);
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-
-            throw $e;
-        }  
-
-        return response()->json(['status' => "success", 'data' => "", 'msg' => 'Successfully added the Physician/Medical, Dentist information.']);
-    }
-
-    /**
-     * AJAX API : add resident-settings information tab.
-     *
-     * @since 2021-07-14
-     * @author Nemanja
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function saveSettingsinfo(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
-            'vals' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $messages = $validator->messages();
-
-            //pass validator errors as errors object for ajax response
-            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
-        }
-
-        $dates = User::getformattime();
-        $date = $dates['date'];
-
-        DB::beginTransaction();
-
-        try {
             foreach (json_decode($request->vals) as $rv) {
                 $residentsetting = ResidentSettings::create([
-                    'user_id' => $request['user_id'],
+                    'user_id' => $user->id,
                     'fieldVal' => $rv,
                     'sign_date' => $date,
                 ]);
@@ -472,7 +361,7 @@ class ResidentController extends Controller
             throw $e;
         }  
 
-        return response()->json(['status' => "success", 'data' => "", 'msg' => 'Successfully added the settings information.']);
+        return response()->json(['status' => "success", 'data' => $user, 'msg' => 'Successfully added new Resident.']);
     }
 
     /**
