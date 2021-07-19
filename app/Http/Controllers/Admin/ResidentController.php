@@ -361,7 +361,7 @@ class ResidentController extends Controller
             throw $e;
         }  
 
-        return response()->json(['status' => "success", 'data' => $user, 'msg' => 'Successfully added new Resident.']);
+        return response()->json(['status' => "success", 'data' => $user, 'msg' => 'Successfully added new Resident.', 'url' => route('home')]);
     }
 
     /**

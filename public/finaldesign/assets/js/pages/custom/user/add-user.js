@@ -545,7 +545,7 @@ jQuery(document).ready(function () {
 			                confirmButtonClass: "btn font-weight-bold btn-light-primary"
 			            }).then(function() {
 							KTUtil.scrollTop();
-							$('#user_id').val(result.data.id);
+							window.location.href = result.url;
 						});
 					}
 				}
