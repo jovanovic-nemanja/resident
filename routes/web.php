@@ -154,3 +154,17 @@ Route::post('/storeStorage', 'Admin\BodyharmController@storeStorage')->name('bod
 Route::get('/indexbyfilter', 'Admin\ReportsController@indexbyfilter')->name('indexbyfilter');
 Route::get('/indexresident/{resident}', 'Admin\ReportsController@indexresident')->name('reports.indexresident');
 Route::get('/indexresidentbyfilter', 'Admin\ReportsController@indexresidentbyfilter')->name('indexresidentbyfilter');
+
+
+
+Route::resource('relations', 'Admin\RelationsController');
+Route::resource('moods', 'Admin\MoodsController');
+
+Route::resource('familyvisit', 'Admin\FamilyvisitController');
+Route::get('familyvisit/indexfamilyvisit/{resident}', 'Admin\FamilyvisitController@indexfamilyvisit')->name('familyvisit.indexfamilyvisit');
+Route::get('familyvisit/createfamilyvisit/{resident}', 'Admin\FamilyvisitController@createfamilyvisit')->name('familyvisit.createfamilyvisit');
+
+
+Route::resource('moodchange', 'Admin\MoodchangeController');
+Route::get('moodchange/indexmoodchange/{resident}', 'Admin\MoodchangeController@indexmoodchange')->name('moodchange.indexmoodchange');
+Route::get('moodchange/createmoodchange/{resident}', 'Admin\MoodchangeController@createmoodchange')->name('moodchange.createmoodchange');
