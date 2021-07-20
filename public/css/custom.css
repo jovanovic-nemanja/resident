@@ -49,3 +49,6 @@
 .custom_col-3 {
 	flex: initial;
 }
+.help-block {
+	color: red;
+}
