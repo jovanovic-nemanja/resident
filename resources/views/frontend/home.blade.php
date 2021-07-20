@@ -138,8 +138,8 @@
                                                 Incidence
                                             </button>
                                             <div class="dropdown-menu custom_div_tag" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Family visit</a>
-                                                <a class="dropdown-item" href="#">Mood Change</a>
+                                                <a class="dropdown-item" href="{{ route('familyvisit.indexfamilyvisit', $resident->id) }}">Family visit</a>
+                                                <a class="dropdown-item" href="{{ route('moodchange.indexmoodchange', $resident->id) }}">Mood Change</a>
                                                 <a class="dropdown-item" href="{{ route('bodyharm.indexbodyharm', $resident->id) }}">Body harm</a>
                                             </div>
                                         </div>
