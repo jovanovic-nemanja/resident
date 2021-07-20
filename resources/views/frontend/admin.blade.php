@@ -89,7 +89,7 @@
                                         </div>
                                         <!--end::User-->
                                         <!--begin::Desc-->
-                                        <p class="mb-7"><a href="{{ route('home') }}" class="text-primary pr-1">{{ App\User::getGender($clinicowner->gender) }} / {{ $clinicowner->birthday }}</a></p>
+                                        <p class="mb-7"><a href="{{ route('home') }}" class="text-primary pr-1">{{ $clinicowner->birthday }}</a></p>
                                         <!--end::Desc-->
                                         <!--begin::Info-->
                                         <div class="mb-7">
