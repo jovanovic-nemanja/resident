@@ -127,7 +127,7 @@
                                                             <div class="form-group row {{ $errors->has('username') ? 'has-error' : '' }}">
                                                                 <label class="col-xl-3 col-lg-3 col-form-label">UserName</label>
                                                                 <div class="col-lg-9 col-xl-9">
-                                                                    <input class="form-control form-control-solid form-control-lg" name="username" type="text" />
+                                                                    <input class="form-control form-control-solid form-control-lg" id="username" name="username" type="text" />
                                                                 </div>
 
                                                                 <div class="fv-plugins-message-container"></div>
