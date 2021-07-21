@@ -207,4 +207,40 @@ var KTAddUser = function () {
 
 jQuery(document).ready(function () {
 	KTAddUser.init();
+
+	$('#username').change(function() {
+		if($(this).val()) {
+			$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+			$.ajax({
+				url: '/validationUsername',
+				type: 'POST',
+				data: { username : $(this).val() },
+				success: function(status, result) {
+					if(!status.status) {
+						Swal.fire({
+							text: status.msg,
+							icon: "error",
+							buttonsStyling: false,
+							confirmButtonText: "Ok, got it!",
+							customClass: {
+								confirmButton: "btn font-weight-bold btn-light"
+							}
+						}).then(function () {
+							KTUtil.scrollTop();
+							$('.btn.btn-success').attr('disabled', true);
+							$('.btn.btn-success').css('cursor', 'not-allowed');
+						});
+					}else{
+						$('.btn.btn-success').attr('disabled', false);
+						$('.btn.btn-success').css('cursor', 'default');
+					}
+				}
+			});
+		}		
+	});
 });

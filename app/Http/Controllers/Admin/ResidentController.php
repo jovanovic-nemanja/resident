@@ -84,7 +84,7 @@ class ResidentController extends Controller
         $this->validate(request(), [
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'gender' => 'required',
             'birthday' => 'required|date',
             'street1' => 'required|string',
@@ -210,7 +210,7 @@ class ResidentController extends Controller
             'profile_logo' => 'required',
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required|string|unique:users|email', //|unique:users
+            'email' => 'required|string|email',
             'birthday' => 'required',
             'gender' => 'required',
             'street1' => 'required',

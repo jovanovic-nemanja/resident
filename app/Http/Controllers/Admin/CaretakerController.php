@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 class CaretakerController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'manager']);
+        $this->middleware(['auth', 'manager'])->except(['validationUsername']);
     }
 
     /**
@@ -51,7 +51,7 @@ class CaretakerController extends Controller
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'username' => 'required|string|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6|confirmed',
             'phone_number' => 'string|max:20',
             'profile_logo'      => 'required',
@@ -164,5 +164,31 @@ class CaretakerController extends Controller
         $record = User::where('id', $id)->delete();
         
         return redirect()->route('caretaker.index');
+    }
+
+    /**
+     * validate the username for caregiver
+     * @param username
+     * @author Nemanja
+     * @since 2021-07-21
+     * @return boolean true or false for validation with message
+     */
+    public function validationUsername(Request $request)
+    {
+        if($request->username) {
+            $user = User::where('username', $request->username)->first();
+            if(@$user) {
+                $status = false;
+                $msg = "Sorry, Please change the entered username. This seems to used by someone. Username is Unique field.";
+            }else {
+                $status = true;
+                $msg = "Ok";
+            }
+        }else {
+            $status = false;
+            $msg = "Sorry, Please enter the username. This is required.";
+        }
+
+        return response()->json(['status' => $status, 'msg' => $msg]); 
     }
 }
