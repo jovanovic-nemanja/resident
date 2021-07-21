@@ -208,7 +208,7 @@
         <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0 mt-10">
             <div class="text-dark-50 font-size-lg font-weight-bolder mr-10">
                 <span class="mr-1"><?= date('Y'); ?>©</span>
-                <a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">Powered by Solaris Dubai</a>
+                <a href="https://solarisdubai.com/" target="_blank" class="text-dark-75 text-hover-primary">Powered by Solaris Dubai</a>
             </div>
         </div>
         <!--end::Content footer-->
