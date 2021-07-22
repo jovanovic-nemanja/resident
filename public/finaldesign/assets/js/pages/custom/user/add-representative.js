@@ -1,12 +1,11 @@
 "use strict";
 
 // Class Definition
-var KTEditUser = function () {
+var KTAddRepresentative = function () {
 	// Private Variables
 	var _wizardEl;
 	var _formEl;
 	var _wizardObj;
-	var _avatar;
 	var _validations = [];
 
 	// Private Functions
@@ -116,6 +115,13 @@ var KTEditUser = function () {
 			_formEl,
 			{
 				fields: {
+					representative_type: {
+						validators: {
+							notEmpty: {
+								message: 'Type is required'
+							}
+						}
+					},
 					firstname: {
 						validators: {
 							notEmpty: {
@@ -130,31 +136,6 @@ var KTEditUser = function () {
 							}
 						}
 					},
-					email: {
-						validators: {
-							notEmpty: {
-								message: 'Email Address is required'
-							},
-							emailAddress: {
-								message: 'The value is not a valid email address'
-							}
-						}
-					},
-					birthday: {
-						validators: {
-							notEmpty: {
-								message: 'Birthday is required'
-							}
-						}
-					},
-					phone_number: {
-						validators: {
-							notEmpty: {
-								message: 'Phone Number is required'
-							}
-						}
-					},
-					
 					street1: {
 						validators: {
 							notEmpty: {
@@ -162,7 +143,6 @@ var KTEditUser = function () {
 							}
 						}
 					},
-
 					city: {
 						validators: {
 							notEmpty: {
@@ -170,7 +150,6 @@ var KTEditUser = function () {
 							}
 						}
 					},
-
 					zip_code: {
 						validators: {
 							notEmpty: {
@@ -178,7 +157,6 @@ var KTEditUser = function () {
 							}
 						}
 					},
-
 					state: {
 						validators: {
 							notEmpty: {
@@ -199,10 +177,6 @@ var KTEditUser = function () {
 		));
 	}
 
-	var _initAvatar = function () {
-		_avatar = new KTImageInput('kt_user_edit_avatar');
-	}
-
 	return {
 		// public functions
 		init: function () {
@@ -211,11 +185,10 @@ var KTEditUser = function () {
 
 			_initWizard();
 			_initValidations();
-			_initAvatar();
 		}
 	};
 }();
 
 jQuery(document).ready(function () {
-	KTEditUser.init();
+	KTAddRepresentative.init();
 });

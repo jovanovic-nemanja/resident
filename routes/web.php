@@ -169,3 +169,17 @@ Route::get('familyvisit/createfamilyvisit/{resident}', 'Admin\FamilyvisitControl
 Route::resource('moodchange', 'Admin\MoodchangeController');
 Route::get('moodchange/indexmoodchange/{resident}', 'Admin\MoodchangeController@indexmoodchange')->name('moodchange.indexmoodchange');
 Route::get('moodchange/createmoodchange/{resident}', 'Admin\MoodchangeController@createmoodchange')->name('moodchange.createmoodchange');
+
+
+
+Route::resource('representativetypes', 'Admin\RepresentativeTypeController');
+Route::resource('healthcarecentertypes', 'Admin\HealthCareCenterTypeController');
+
+Route::resource('representative', 'Admin\RepresentativeController');
+Route::get('representative/indexrepresentative/{resident}', 'Admin\RepresentativeController@indexrepresentative')->name('representative.indexrepresentative');
+Route::get('representative/createrepresentative/{resident}', 'Admin\RepresentativeController@createrepresentative')->name('representative.createrepresentative');
+
+
+Route::resource('healthcarecenter', 'Admin\HealtheCareCenterController');
+Route::get('healthcarecenter/indexhealthcarecenter/{resident}', 'Admin\HealtheCareCenterController@indexhealthcarecenter')->name('healthcarecenter.indexhealthcarecenter');
+Route::get('healthcarecenter/createhealthcarecenter/{resident}', 'Admin\HealtheCareCenterController@createhealthcarecenter')->name('healthcarecenter.createhealthcarecenter');

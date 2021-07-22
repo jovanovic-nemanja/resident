@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Poas;
 use App\Tabs;
 use App\User;
 use App\Role;
@@ -11,14 +10,13 @@ use App\Usermedications;
 use App\Useractivities;
 use App\Resident_information;
 use App\Useractivityreports;
-use App\Physician;
-use App\Pharmacys;
-use App\Dentists;
 use App\TFG;
 use App\Bodyharms;
 use App\RoleUser;
 use App\Vitalsign;
 use App\ResidentSettings;
+use App\Representatives;
+use App\HealthCareCenters;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -219,31 +217,6 @@ class ResidentController extends Controller
             'state' => 'required',
             'phone_number' => 'required',
 
-            'poa_firstname' => 'required',
-            'poa_lastname' => 'required',
-            'poa_street1' => 'required',
-            'poa_city' => 'required',
-            'poa_zip_code' => 'required',
-            'poa_state' => 'required',
-
-            'physician_or_medical_group_firstname' => 'required',
-            'physician_or_medical_group_lastname' => 'required',
-            'physician_or_medical_group_street1' => 'required',
-            'physician_or_medical_group_city' => 'required',
-            'physician_or_medical_group_phone' => 'required',
-            'physician_or_medical_group_fax' => 'required',
-            'pharmacy_firstname' => 'required',
-            'pharmacy_lastname' => 'required',
-            'pharmacy_street1' => 'required',
-            'pharmacy_city' => 'required',
-            'pharmacy_phone' => 'required',
-            'pharmacy_fax' => 'required',
-            'dentist_firstname' => 'required',
-            'dentist_lastname' => 'required',
-            'dentist_street1' => 'required',
-            'dentist_city' => 'required',
-            'dentist_phone' => 'required',
-            'dentist_fax' => 'required',
             'vals' => 'required'
         ]);
 
@@ -295,57 +268,6 @@ class ResidentController extends Controller
                 'signDate' => $date
             ]);
 
-            $poa = Poas::create([
-                'user_id' => $user->id,
-                'poa_type' => 1,
-                'poa_firstname' => $request['poa_firstname'],
-                'poa_lastname' => $request['poa_lastname'],
-                'poa_street1' => $request['poa_street1'],
-                'poa_street2' => $request['poa_street2'],
-                'poa_city' => $request['poa_city'],
-                'poa_zip_code' => $request['poa_zip_code'],
-                'poa_state' => $request['poa_state'],
-                'poa_home_phone' => $request['poa_home_phone'],
-                'poa_cell_phone' => $request['poa_cell_phone'],
-                'sign_date' => $date,
-            ]);
-
-            $physician_medical = Physician::create([
-                'user_id' => $user->id,
-                'physician_or_medical_group_firstname' => $request['physician_or_medical_group_firstname'],
-                'physician_or_medical_group_lastname' => $request['physician_or_medical_group_lastname'],
-                'physician_or_medical_group_street1' => $request['physician_or_medical_group_street1'],
-                'physician_or_medical_group_street2' => $request['physician_or_medical_group_street2'],
-                'physician_or_medical_group_city' => $request['physician_or_medical_group_city'],
-                'physician_or_medical_group_phone' => $request['physician_or_medical_group_phone'],
-                'physician_or_medical_group_fax' => $request['physician_or_medical_group_fax'],
-                'sign_date' => $date,
-            ]);
-
-            $pharmacy = Pharmacys::create([
-                'user_id' => $user->id,
-                'pharmacy_firstname' => $request['pharmacy_firstname'],
-                'pharmacy_lastname' => $request['pharmacy_lastname'],
-                'pharmacy_street1' => $request['pharmacy_street1'],
-                'pharmacy_street2' => $request['pharmacy_street2'],
-                'pharmacy_city' => $request['pharmacy_city'],
-                'pharmacy_phone' => $request['pharmacy_phone'],
-                'pharmacy_fax' => $request['pharmacy_fax'],
-                'sign_date' => $date,
-            ]);
-
-            $dentist = Dentists::create([
-                'user_id' => $user->id,
-                'dentist_firstname' => $request['dentist_firstname'],
-                'dentist_lastname' => $request['dentist_lastname'],
-                'dentist_street1' => $request['dentist_street1'],
-                'dentist_street2' => $request['dentist_street2'],
-                'dentist_city' => $request['dentist_city'],
-                'dentist_phone' => $request['dentist_phone'],
-                'dentist_fax' => $request['dentist_fax'],
-                'sign_date' => $date,
-            ]);
-
             foreach (json_decode($request->vals) as $rv) {
                 $residentsetting = ResidentSettings::create([
                     'user_id' => $user->id,
@@ -390,10 +312,8 @@ class ResidentController extends Controller
         $vitalsign['blood_pressure'] = Vitalsign::where('resident_id', $id)->where('type', 2)->latest()->first();
         $vitalsign['heart_rate'] = Vitalsign::where('resident_id', $id)->where('type', 3)->latest()->first();
 
-        $poas = Poas::where('user_id', $id)->get();
-        $physician_medicals = Physician::where('user_id', $id)->get();
-        $pharmacys = Pharmacys::where('user_id', $id)->get();
-        $dentists = Dentists::where('user_id', $id)->get();
+        $representatives = Representatives::where('user_id', $id)->get();
+        $healthcarecenters = HealthCareCenters::where('user_id', $id)->get();
         $setting_tabs = Tabs::all();
 
         $resident_settings =  DB::table('resident_settings')
@@ -404,7 +324,7 @@ class ResidentController extends Controller
                                 ->select('setting_tabs.name as tabName', 'fields.fieldName', 'field_types.typeName')
                                 ->get();
 
-        return view('admin.resident.viewuser', compact('user', 'vitalsign', 'poas', 'physician_medicals', 'pharmacys', 'resident_settings', 'dentists', 'setting_tabs'));
+        return view('admin.resident.viewuser', compact('user', 'vitalsign', 'representatives', 'healthcarecenters', 'resident_settings', 'setting_tabs'));
     }
 
     /**
@@ -416,8 +336,9 @@ class ResidentController extends Controller
     public function edit($id)
     {
         $resident = User::where('id', $id)->first();
+        $resident_info = Resident_information::where('user_id', $id)->first();
 
-        return view('admin.resident.edit', compact('resident'));
+        return view('admin.resident.edit', compact('resident', 'resident_info'));
     }
 
     /**
@@ -430,22 +351,28 @@ class ResidentController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'name' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'gender' => 'required',
             'birthday' => 'required|date',
-            'address' => 'required|string',
-            'phone_number' => 'string|max:20',
-            'profile_logo'      => 'required',
+            'street1' => 'required|string'
         ]);
 
         $record = User::where('id', $id)->first();
+        ($request['gender'] == "male") ? $request['gender'] = 0 : $request['gender'] = 1;
+
         if (@$record) {
-            $record->name = $request->name;
+            $record->firstname = $request->firstname;
+            $record->lastname = $request->lastname;
             $record->email = $request->email;
             $record->gender = $request->gender;
-            $record->address = $request->address;
+            $record->street1 = $request->street1;
+            $record->street2 = @$request->street2;
             $record->birthday = $request->birthday;
+            $record->city = @$request->city;
+            $record->zip_code = @$request->zip_code;
+            $record->state = @$request->state;
             $record->phone_number = $request->phone_number;
             if (@$request->profile_logo) {
                 $record->profile_logo = $request->profile_logo;

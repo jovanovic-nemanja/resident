@@ -59,7 +59,7 @@
                                             <h5 class="text-dark font-weight-bold mb-10">User's Profile Details:</h5>
                                             <!--begin::Group-->
                                             <div class="form-group row {{ $errors->has('profile_logo') ? 'has-error' : '' }}">
-                                                <label class="col-xl-3 col-lg-3 col-form-label text-left">Avatar</label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label text-left">Logo<span style="color: red;">*</span></label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <?php 
                                                         if(@$resident->profile_logo) {
@@ -95,7 +95,7 @@
                                             <!--end::Group-->
                                             <!--begin::Group-->
                                             <div class="form-group row {{ $errors->has('firstname') ? 'has-error' : '' }}">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Name</label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">First Name<span style="color: red;">*</span></label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <input class="form-control form-control-solid form-control-lg" name="firstname" value="{{ $resident->firstname }}" type="text" />
                                                 </div>
@@ -111,8 +111,30 @@
                                             <!--end::Group-->
 
                                             <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Middle Name</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <input class="form-control form-control-solid form-control-lg" name="middlename" value="{{ $resident->middlename }}" type="text" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Last Name<span style="color: red;">*</span></label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <input class="form-control form-control-solid form-control-lg" name="lastname" type="text" value="{{ $resident->lastname }}" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
                                             <div class="form-group row {{ $errors->has('email') ? 'has-error' : '' }}">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Email Address<span style="color: red;">*</span></label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <div class="input-group input-group-solid input-group-lg">
                                                         <div class="input-group-prepend">
@@ -136,7 +158,7 @@
                                             
                                             <!--begin::Group-->
                                             <div class="form-group row {{ $errors->has('birthday') ? 'has-error' : '' }}">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Date of birthday</label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Date of birthday<span style="color: red;">*</span></label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <input class="form-control form-control-solid form-control-lg" name="birthday" type="date" data-format="mm/dd/yyyy" value="{{ $resident->birthday }}" />
                                                 </div>
@@ -152,7 +174,7 @@
                                             <!--end::Group-->
                                             <!--begin::Group-->
                                             <div class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Gender</label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Gender<span style="color: red;">*</span></label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <select class="form-control form-control-solid form-control-lg" name="gender">
                                                         <option value="male" <?php if($resident->gender == 0){echo 'selected';} ?>>Male</option>
@@ -172,7 +194,7 @@
                                             
                                             <!--begin::Group-->
                                             <div class="form-group row {{ $errors->has('phone_number') ? 'has-error' : '' }}">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Phone Number</label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Phone Number<span style="color: red;">*</span></label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <div class="input-group input-group-solid input-group-lg">
                                                         <input type="text" class="form-control form-control-solid form-control-lg" name="phone_number" placeholder="Phone Number" value="{{ $resident->phone_number }}" />
@@ -191,7 +213,7 @@
 
                                             <!--begin::Group-->
                                             <div class="form-group row {{ $errors->has('street1') ? 'has-error' : '' }}">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Street</label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Street<span style="color: red;">*</span></label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <div class="input-group input-group-solid input-group-lg">
                                                         <textarea class="form-control form-control-solid form-control-lg" name="street1" placeholder="Street" rows="8">{{ $resident->street1 }}</textarea>
@@ -205,6 +227,91 @@
                                                         <strong>{{ $errors->first('street1') }}</strong>
                                                     </span>
                                                 @endif
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 col-xl-3"></div>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="street2" value="{{ $resident->street2 }}" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">City<span style="color: red;">*</span></label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="city" placeholder="City" value="{{ $resident->city }}" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Zip Code<span style="color: red;">*</span></label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="zip_code" placeholder="Zip Code" value="{{ $resident->zip_code }}" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">State<span style="color: red;">*</span></label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <div class="input-group input-group-solid input-group-lg">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="state" placeholder="State" value="{{ $resident->state }}" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Date Admitted</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <input class="form-control form-control-solid form-control-lg" name="date_admitted" type="date" data-format="mm/dd/yyyy" value="{{ $resident_info->date_admitted }}" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">SSN</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <input class="form-control form-control-solid form-control-lg" name="ssn" type="text" value="{{ $resident_info->ssn }}" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
+                                            </div>
+                                            <!--end::Group-->
+
+                                            <!--begin::Group-->
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">PRIMARY LANGUAGE</label>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <input class="form-control form-control-solid form-control-lg" name="primary_language" type="text" value="{{ $resident_info->primary_language }}" />
+                                                </div>
+
+                                                <div class="fv-plugins-message-container"></div>
                                             </div>
                                             <!--end::Group-->
                                         </div>
