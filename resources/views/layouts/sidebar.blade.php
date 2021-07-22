@@ -118,7 +118,7 @@
                         </a>
                     </li>
 
-                    <li class="menu-item menu-item-submenu <?= ($menu == 'activities' || $menu == 'incidences' || $menu == 'medications' || $menu == 'routes' || $menu == 'bodyharmcomments' || $menu == 'reminderconfigs' || $menu == 'adminlogs' || $menu == 'switchreminder' || $menu == 'reports' || $menu == 'settings' || $menu == 'relations' || $menu == 'moods') ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
+                    <li class="menu-item menu-item-submenu <?= ($menu == 'activities' || $menu == 'incidences' || $menu == 'medications' || $menu == 'routes' || $menu == 'bodyharmcomments' || $menu == 'reminderconfigs' || $menu == 'adminlogs' || $menu == 'switchreminder' || $menu == 'reports' || $menu == 'settings' || $menu == 'relations' || $menu == 'moods' || $menu == 'representativetypes' || $menu == 'healthcarecentertypes') ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
                         <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon svg-icon-primary svg-icon-2x">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -162,6 +162,22 @@
                                             <span></span>
                                         </i>
                                         <span class="menu-text">Moods</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item <?= ($menu == "representativetypes") ? "menu-item-active" : "" ?>" aria-haspopup="true">
+                                    <a href="{{ route('representativetypes.index') }}" class="menu-link <?= ($menu == "representativetypes") ? "menu-item-active" : "" ?>">
+                                        <i class="menu-bullet menu-bullet-dot">
+                                            <span></span>
+                                        </i>
+                                        <span class="menu-text">Representative Types</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item <?= ($menu == "healthcarecentertypes") ? "menu-item-active" : "" ?>" aria-haspopup="true">
+                                    <a href="{{ route('healthcarecentertypes.index') }}" class="menu-link <?= ($menu == "healthcarecentertypes") ? "menu-item-active" : "" ?>">
+                                        <i class="menu-bullet menu-bullet-dot">
+                                            <span></span>
+                                        </i>
+                                        <span class="menu-text">Health Care Center Types</span>
                                     </a>
                                 </li>
                                 <li class="menu-item <?= ($menu == "incidences") ? "menu-item-active" : "" ?>" aria-haspopup="true">

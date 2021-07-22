@@ -146,6 +146,10 @@
 
                                         <a href="{{ route('vitalsign.indexresidentvitalsign', $resident->id) }}" class="btn btn-block btn-sm btn-danger font-weight-bolder text-uppercase py-4">Vital Sign</a>
 
+                                        <a href="{{ route('representative.indexrepresentative', $resident->id) }}" class="btn btn-block btn-sm btn-info font-weight-bolder text-uppercase py-4">Representative</a>
+
+                                        <a href="{{ route('healthcarecenter.indexhealthcarecenter', $resident->id) }}" class="btn btn-block btn-sm btn-success font-weight-bolder text-uppercase py-4">Health Care Center</a>
+
                                         <a href="{{ route('reports.indexresident', $resident->id) }}" class="btn btn-block btn-sm btn-default font-weight-bolder text-uppercase py-4">Reports</a>
                                     </div>
                                     <!--end::Body-->

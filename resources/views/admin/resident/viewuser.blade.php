@@ -222,15 +222,15 @@
 
                             <div class="card-body pt-5 pb-3 row">
                                 <div class="row pt-5 m-5">
-                                    <h4>POA Info</h4>
+                                    <h4>Representatives Info</h4>
                                     <hr />
 
                                     <table class="table table-bordered table-hover table-checkable" id="kt_datatable" style="margin-top: 13px !important">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
+                                                <th>Type</th>
+                                                <th>Name</th>
                                                 <th>Street</th>
                                                 <th>City</th>
                                                 <th>Zip Code</th>
@@ -240,18 +240,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if($poas)
-                                                @foreach($poas as $ps)
+                                            @if($representatives)
+                                                @foreach($representatives as $representative)
                                                     <tr>
-                                                        <td>{{ $ps->id }}</td>
-                                                        <td>{{ $ps->poa_firstname }}</td>
-                                                        <td>{{ $ps->poa_lastname }}</td>
-                                                        <td>{{ $ps->poa_street1.$ps->poa_street2 }}</td>
-                                                        <td>{{ $ps->poa_city }}</td>
-                                                        <td>{{ $ps->poa_zip_code }}</td>
-                                                        <td>{{ $ps->poa_state }}</td>
-                                                        <td>{{ $ps->poa_home_phone }}</td>
-                                                        <td>{{ $ps->poa_cell_phone }}</td>
+                                                        <td>{{ $representative->id }}</td>
+                                                        <td>{{ App\Representatives::getTypeasstring($representative->representative_type) }}</td>
+                                                        <td>{{ $representative->firstname . " " . $representative->lastname }}</td>
+                                                        <td>{{ $representative->street1." ".$representative->street2 }}</td>
+                                                        <td>{{ $representative->city }}</td>
+                                                        <td>{{ $representative->zip_code }}</td>
+                                                        <td>{{ $representative->state }}</td>
+                                                        <td>{{ $representative->home_phone }}</td>
+                                                        <td>{{ $representative->cell_phone }}</td>
                                                     </tr>
                                                 @endforeach
                                             @endif
@@ -262,90 +262,36 @@
 
                             <div class="card-body pt-5 pb-3 row">
                                 <div class="row pt-5 m-5">
-                                    <h4>Physician/Medical and Dentist Info</h4>
+                                    <h4>Health Care Center Info</h4>
 
-                                    <div class="row col-lg-12">
-                                        <div class="col-lg-6 d-flex align-items-center">
-                                            <label class="col-form-label">Physician/Medical First Name: </label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_firstname : '' }}">
-                                        </div>
-                                        <div class="col-lg-6 d-flex align-items-center">
-                                            <label class="col-form-label">Physician/Medical Last Name</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_lastname : '' }}">
-                                        </div>
-                                        <div class="col-lg-6 d-flex align-items-center">
-                                            <label class="col-form-label">Physician/Medical Address</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_street1.$physician_medicals[0]->physician_or_medical_group_street2 : '' }}">
-                                        </div>
-                                        <div class="col-lg-6 d-flex align-items-center">
-                                            <label class="col-form-label">Physician/Medical City</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_city : '' }}">
-                                        </div>
-                                        <div class="col-lg-6 d-flex align-items-center">
-                                            <label class="col-form-label">Physician/Medical Phone</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_phone : '' }}">
-                                        </div>
-                                        <div class="col-lg-6 d-flex align-items-center">
-                                            <label class="col-form-label">Physician/Medical Fax</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($physician_medicals) > 0) ? $physician_medicals[0]->physician_or_medical_group_fax : '' }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="row col-lg-12 pt-5 mt-5">
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Pharmacy First Name</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_firstname : '' }}">
-                                            <span></span>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Pharmacy Last Name</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_lastname : '' }}">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Pharmacy Address</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_street1.$pharmacys[0]->pharmacy_street2 : '' }}">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Pharmacy City</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_city : '' }}">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Pharmacy Phone</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_phone : '' }}">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Pharmacy Fax</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($pharmacys) > 0) ? $pharmacys[0]->pharmacy_fax : '' }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="row col-lg-12 pt-5 mt-5">
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Dentist First Name</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_firstname : '' }}">
-                                            <span></span>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Dentist Last Name</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_lastname : '' }}">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Dentist Address</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_street1.$dentists[0]->dentist_street2 : '' }}">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Dentist City</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_city : '' }}">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Dentist Phone</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_phone : '' }}">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-form-label">Dentist Fax</label>
-                                            <input class="form-control input-sm" disabled value="{{ (count($dentists) > 0) ? $dentists[0]->dentist_fax : '' }}">
-                                        </div>
-                                    </div>
+                                    <table class="table table-bordered table-hover table-checkable" id="kt_datatable_1">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Type</th>
+                                                <th>Name</th>
+                                                <th>Street</th>
+                                                <th>City</th>
+                                                <th>Phone</th>
+                                                <th>Fax</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if($healthcarecenters)
+                                                @foreach($healthcarecenters as $healthcarecenter)
+                                                    <tr>
+                                                        <td>{{ $healthcarecenter->id }}</td>
+                                                        <td>{{ App\HealthCareCenters::getTypeasstring($healthcarecenter->health_care_center_type   ) }}</td>
+                                                        <td>{{ $healthcarecenter->firstname . " " . $healthcarecenter->lastname }}</td>
+                                                        <td>{{ $healthcarecenter->street1." ".$healthcarecenter->street2 }}</td>
+                                                        <td>{{ $healthcarecenter->city }}</td>
+                                                        <td>{{ $healthcarecenter->phone }}</td>
+                                                        <td>{{ $healthcarecenter->fax }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
 

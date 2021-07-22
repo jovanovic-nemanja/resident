@@ -11,11 +11,22 @@ var KTDatatablesDataSourceHtml = function() {
 
 	};
 
+	var initTable2 = function() {
+		var table1 = $('#kt_datatable_1');
+
+		// begin first table
+		table1.DataTable({
+			responsive: true,
+		});
+
+	};
+
 	return {
 
 		//main function to initiate the module
 		init: function() {
 			initTable1();
+			initTable2();
 		},
 
 	};
