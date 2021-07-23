@@ -56,15 +56,6 @@
                                         <li class="nav-item">
                                             <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Personal Information</a>
                                         </li>
-                                        @if($setting_tabs)
-                                            <?php $i = 2; ?>
-                                            @foreach($setting_tabs as $st)
-                                                <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_<?= $i; ?>">{{ $st->name }}</a>
-                                                </li>
-                                                <?php $i++; ?>
-                                            @endforeach
-                                        @endif
                                     </ul>
                                     <div class="tab-content mt-5 pt-10 pb-10" id="myTabContent">
                                         <input type="hidden" name="user_id" id="user_id" value="" />
@@ -280,33 +271,6 @@
                                                 <!--end::Group-->
                                             </div>
                                         </div>
-                                        
-                                        @if($setting_tabs)
-                                            <?php $i = 2; ?>
-                                            @foreach($setting_tabs as $st)
-                                                <div class="tab-pane fade justify-content-center" id="kt_tab_pane_<?= $i; ?>" role="tabpanel" aria-labelledby="kt_tab_pane_<?= $i; ?>">
-                                                    <div class="form-group row">
-                                                        @foreach($fields as $fl)
-                                                            @if($fl->tab_id == $st->id && $fl->fieldName)
-                                                                <div class="col-lg-4 pt-4">
-                                                                    <label class="col-form-label pl-5">{{ $fl->fieldName }}</label>
-                                                                    <select class="form-control field-value">
-                                                                        <?php 
-                                                                            $fieldsTypes = App\FieldTypes::where('fieldID', $fl->id)->get();
-
-                                                                            if($fieldsTypes){
-                                                                                foreach ($fieldsTypes as $ft) { ?>
-                                                                                    <option value="{{ $ft->id }}">{{ $ft->typeName }}</option>
-                                                                        <?php } } ?>
-                                                                    </select>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                                <?php $i++; ?>
-                                            @endforeach
-                                        @endif
                                     </div>
 
                                     <div class="d-flex justify-content-center pt-5">

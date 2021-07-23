@@ -35,6 +35,13 @@ Route::post('/resident/saveResidentPOAinfo', 'Admin\ResidentController@saveResid
 Route::post('/resident/saveResidentPhysicianinfo', 'Admin\ResidentController@saveResidentPhysicianinfo')->name('resident.saveResidentPhysicianinfo');
 Route::post('/resident/saveSettingsinfo', 'Admin\ResidentController@saveSettingsinfo')->name('resident.saveSettingsinfo');
 
+Route::get('/resident/indexprofile/{resident}/{tabid}', 'Admin\ResidentController@indexprofile')->name('resident.indexprofile');
+Route::get('/resident/createprofile/{resident}/{tabid}', 'Admin\ResidentController@createprofile')->name('resident.createprofile');
+Route::post('/resident/storeprofile', 'Admin\ResidentController@storeprofile')->name('resident.storeprofile');
+Route::get('/resident/showprofile/{id}', 'Admin\ResidentController@showprofile')->name('resident.showprofile');
+Route::put('/resident/updateprofile/{id}', 'Admin\ResidentController@updateprofile')->name('resident.updateprofile');
+Route::delete('/resident/destroyprofile/{id}', 'Admin\ResidentController@destroyprofile')->name('resident.destroyprofile');
+
 
 
 
