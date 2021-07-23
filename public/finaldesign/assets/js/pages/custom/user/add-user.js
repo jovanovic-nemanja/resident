@@ -43,15 +43,6 @@ jQuery(document).ready(function () {
 			var ssn = $('#kt_tab_pane_1 input[name="ssn"]').val();
 			var primary_language = $('#kt_tab_pane_1 input[name="primary_language"]').val();
 
-			// tab 4 ~
-			var id = ' .field-value';
-			var vals = [];
-			$(id).each((index) => {
-				var elements = $(id);
-				var value = elements[index].value;
-				vals.push(value);
-			});
-
 			// Validation part
 				// tab 1
 				if (!profile_logo || profile_logo == "none") {
@@ -186,9 +177,6 @@ jQuery(document).ready(function () {
 			formData.append("date_admitted", date_admitted);
 			formData.append("ssn", ssn);
 			formData.append("primary_language", primary_language);
-
-			// tab 4 ~
-			formData.append("vals", JSON.stringify(vals));
 
 			$.ajaxSetup({
 				headers: {

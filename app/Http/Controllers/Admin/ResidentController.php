@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\TFG;
 use App\Tabs;
 use App\User;
 use App\Role;
-use App\Assignmedications;
-use App\Usermedications;
-use App\Useractivities;
-use App\Resident_information;
-use App\Useractivityreports;
-use App\TFG;
-use App\Bodyharms;
+use App\Fields;
+use App\FieldTypes;
 use App\RoleUser;
+use App\Bodyharms;
 use App\Vitalsign;
-use App\ResidentSettings;
+use App\Useractivities;
 use App\Representatives;
+use App\Usermedications;
+use App\ResidentSettings;
 use App\HealthCareCenters;
+use App\Assignmedications;
+use App\Useractivityreports;
+use App\Resident_information;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -39,14 +42,160 @@ class ResidentController extends Controller
     public function index()
     {
         $clinic_id = auth()->id();
-        $setting_tabs = Tabs::all();
         $fields = DB::table('setting_tabs')
                     ->leftJoin('fields', 'fields.tab_id', '=', 'setting_tabs.id')
                     ->where('fields.clinic_id', $clinic_id)
                     ->select('fields.*')
                     ->get();
 
-        return view('admin.resident.create', compact('setting_tabs', 'fields'));
+        return view('admin.resident.create', compact('fields'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexprofile($resident, $id)
+    {
+        $setting_tab = Tabs::where('id', $id)->first();
+        $user = User::where('id', $resident)->first();
+
+        $resident_settings =  DB::table('resident_settings')
+                                ->leftJoin('field_types', 'field_types.id', '=', 'resident_settings.fieldVal')
+                                ->leftJoin('fields', 'fields.id', '=', 'field_types.fieldID')
+                                ->leftJoin('setting_tabs', 'setting_tabs.id', '=', 'fields.tab_id')
+                                ->where('resident_settings.user_id', $resident)
+                                ->where('fields.tab_id', $id)
+                                ->select('setting_tabs.name as tabName', 'fields.fieldName', 'field_types.typeName', 'resident_settings.id')
+                                ->get();
+
+        return view('admin.resident.indexprofile', compact('setting_tab', 'resident_settings', 'user'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function createprofile($resident, $id)
+    {
+        $setting_tab = Tabs::where('id', $id)->first();
+        $user = User::where('id', $resident)->first();
+
+        $resident_settings =  DB::table('fields')
+                                ->leftJoin('setting_tabs', 'setting_tabs.id', '=', 'fields.tab_id')
+                                ->where('fields.tab_id', $id)
+                                ->select('fields.*')
+                                ->get();
+
+        return view('admin.resident.createprofile', compact('setting_tab', 'resident_settings', 'user'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeprofile(Request $request)
+    {
+        $this->validate(request(), [
+            'value' => 'required',
+            'resident' => 'required'
+        ]);
+        
+        DB::beginTransaction();
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        try {
+            foreach ($request['value'] as $v) {
+                $resident_setting = ResidentSettings::create([
+                    'user_id' => $request['resident'],
+                    'fieldVal' => $v,
+                    'sign_date' => $date,
+                ]);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }  
+
+        return redirect()->route('resident.indexprofile', [$request->resident, $request->tab_id])->with('flash', 'Successfully added new setting.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showprofile($id)
+    {
+        $resident_setting = ResidentSettings::where('id', $id)->first();
+        $user = User::where('id', $resident_setting->user_id)->first();
+        $fieldtype = FieldTypes::where('id', $resident_setting->fieldVal)->first();
+        if (@$fieldtype) {
+            $fieldID = $fieldtype->fieldID;
+            $field = Fields::where('id', $fieldID)->first();
+            $field_types = FieldTypes::where('fieldID', $fieldID)->get();
+            $tabID = $field->tab_id;
+        }
+
+        return view('admin.resident.editprofile', compact('field', 'field_types', 'user', 'resident_setting', 'tabID'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateprofile(Request $request, $id)
+    {
+        $this->validate(request(), [
+            'value' => 'required'
+        ]);
+        
+        DB::beginTransaction();
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        try {
+            $record = ResidentSettings::where('id', $id)->first();
+
+            if(@$record) {
+                $record->fieldVal = $request->value;
+
+                $record->update();
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }  
+
+        return redirect()->route('resident.indexprofile', [$request->resident, $request->tab_id])->with('flash', 'Successfully updated new setting.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyprofile($id)
+    {
+        $record = ResidentSettings::where('id', $id)->delete();
+        
+        return back()->with('flash', 'Setting has been successfully deleted.');
     }
 
     /**
@@ -215,9 +364,7 @@ class ResidentController extends Controller
             'city' => 'required',
             'zip_code' => 'required',
             'state' => 'required',
-            'phone_number' => 'required',
-
-            'vals' => 'required'
+            'phone_number' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -267,14 +414,6 @@ class ResidentController extends Controller
                 'primary_language' => @$request['primary_language'],
                 'signDate' => $date
             ]);
-
-            foreach (json_decode($request->vals) as $rv) {
-                $residentsetting = ResidentSettings::create([
-                    'user_id' => $user->id,
-                    'fieldVal' => $rv,
-                    'sign_date' => $date,
-                ]);
-            }
 
             DB::commit();
         } catch (\Exception $e) {

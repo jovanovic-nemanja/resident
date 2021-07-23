@@ -104,6 +104,22 @@
                                         </div>
                                         <!--end::Info-->
 
+
+                                        <div class="dropdown custom_drop_down">
+                                            <button class="btn btn-info dropdown-toggle custom_div_tag" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Profile
+                                            </button>
+                                            <div class="dropdown-menu custom_div_tag" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="{{ route('representative.indexrepresentative', $resident->id) }}">Representative</a>
+                                                <a class="dropdown-item" href="{{ route('healthcarecenter.indexhealthcarecenter', $resident->id) }}">Health Care Center</a>
+                                                @if($setting_tabs)
+                                                    @foreach($setting_tabs as $st)
+                                                        <a class="dropdown-item" href="{{ route('resident.indexprofile', [$resident->id, $st->id]) }}">{{ $st->name }}</a>
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
+
                                         <div class="dropdown custom_drop_down">
                                             <button class="btn btn-success dropdown-toggle custom_div_tag" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Medications
@@ -145,10 +161,6 @@
                                         </div>
 
                                         <a href="{{ route('vitalsign.indexresidentvitalsign', $resident->id) }}" class="btn btn-block btn-sm btn-danger font-weight-bolder text-uppercase py-4">Vital Sign</a>
-
-                                        <a href="{{ route('representative.indexrepresentative', $resident->id) }}" class="btn btn-block btn-sm btn-info font-weight-bolder text-uppercase py-4">Representative</a>
-
-                                        <a href="{{ route('healthcarecenter.indexhealthcarecenter', $resident->id) }}" class="btn btn-block btn-sm btn-success font-weight-bolder text-uppercase py-4">Health Care Center</a>
 
                                         <a href="{{ route('reports.indexresident', $resident->id) }}" class="btn btn-block btn-sm btn-default font-weight-bolder text-uppercase py-4">Reports</a>
                                     </div>
