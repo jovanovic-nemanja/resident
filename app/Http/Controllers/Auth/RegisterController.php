@@ -7,7 +7,7 @@ use Session;
 use App\User;
 use App\Role;
 use App\RoleUser;
-
+use App\Facilities;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -57,6 +57,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             // 'profile_logo' => 'required',
+            'clinic_name' => 'required|string|max:190',
             'firstname' => 'required|string|max:190',
             'lastname' => 'required|string|max:190',
             'username' => 'required|string|max:190|unique:users',
@@ -94,6 +95,12 @@ class RegisterController extends Controller
             RoleUser::create([
                 'user_id' => $user->id,
                 'role_id' => 4,
+            ]);
+
+            $facility = Facilities::create([
+                'clinic_name' => $data['clinic_name'],
+                'clinic_id' => $user->id,
+                'sign_date' => date('Y-m-d h:i:s')
             ]);
 
             DB::commit();

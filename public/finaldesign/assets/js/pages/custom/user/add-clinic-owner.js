@@ -123,6 +123,13 @@ var KTAddUser = function () {
 					// 		}
 					// 	}
 					// },
+					clinic_name: {
+						validators: {
+							notEmpty: {
+								message: 'Clinic Name is required'
+							}
+						}
+					},
 					firstname: {
 						validators: {
 							notEmpty: {

@@ -52,6 +52,24 @@
                                                     </div>
                                                 </div>
                                                 <!--end::Group-->
+
+                                                <!--begin::Group-->
+                                                <div class="form-group row {{ $errors->has('clinic_name') ? 'has-error' : '' }}">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Clinic Name</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control form-control-solid form-control-lg" name="clinic_name" type="text" />
+                                                    </div>
+
+                                                    <div class="fv-plugins-message-container"></div>
+
+                                                    @if ($errors->has('clinic_name'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('clinic_name') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                <!--end::Group-->
+
                                                 <!--begin::Group-->
                                                 <div class="form-group row {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
