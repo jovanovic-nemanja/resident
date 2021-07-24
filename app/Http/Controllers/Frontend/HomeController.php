@@ -65,8 +65,9 @@ class HomeController extends Controller
         }else if(auth()->user()->hasRole('admin')) {
 
             $clinicowners = DB::table('users')
-                            ->select('users.*')
+                            ->select('users.*', 'facilities.clinic_name')
                             ->Join('role_user', 'role_user.user_id', '=', 'users.id')
+                            ->Join('facilities', 'facilities.clinic_id', '=', 'users.id')
                             ->where('role_user.role_id', 4)
                             ->get();
 

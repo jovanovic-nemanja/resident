@@ -82,6 +82,7 @@
                                                 <div class="d-flex flex-column">
                                                     <a href="{{ route('home') }}" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0 custom_a_tag">{{ $clinicowner->firstname }}</a>
                                                     <span class="text-muted font-weight-bold">Clinic Owner</span>
+                                                    <span class="text-dark font-weight-bold text-hover-primary">{{$clinicowner->clinic_name}}</span>
                                                 </div>
                                                 <!--end::Title-->
                                             </div>
