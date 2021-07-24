@@ -104,7 +104,7 @@
                                         </div>
                                         <!--end::Info-->
 
-
+                                        @if(auth()->user()->hasRole('clinicowner'))
                                         <div class="dropdown custom_drop_down">
                                             <button class="btn btn-info dropdown-toggle custom_div_tag" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Profile
@@ -119,6 +119,7 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        @endif
 
                                         <div class="dropdown custom_drop_down">
                                             <button class="btn btn-success dropdown-toggle custom_div_tag" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
