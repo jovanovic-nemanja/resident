@@ -71,40 +71,38 @@
                                     if(@$residents) {
                                         $i = 1;
                                         foreach($residents as $resident) { ?>
-                                            @if($resident->hasRole('resident'))
-                                                <tr>
-                                                    <td>{{ $i }}</td>
-                                                    <td>{{ $resident->firstname }}</td>
-                                                    <td>{{ App\User::getGender($resident->gender) }}</td>
-                                                    <td>
-                                                        <div class="">
-                                                            <h6><?= $resident->email; ?></h6>
+                                            <tr>
+                                                <td>{{ $i }}</td>
+                                                <td>{{ $resident->firstname }}</td>
+                                                <td>{{ App\User::getGender($resident->gender) }}</td>
+                                                <td>
+                                                    <div class="">
+                                                        <h6><?= $resident->email; ?></h6>
+                                                    </div>
+                                                </td>
+                                                <td>{{ $resident->birthday }}</td>
+                                                <td>{{ $resident->street1 }}</td>
+                                                <td>
+                                                    <span class="badge round-primary">{{ $resident->phone_number }}</span>
+                                                </td>
+                                                <td>
+                                                    @if($resident->profile_logo)
+                                                        <div class="symbol symbol-circle symbol-lg-75">
+                                                            <img src="{{ asset('uploads/').'/'.$resident->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="">
                                                         </div>
-                                                    </td>
-                                                    <td>{{ $resident->birthday }}</td>
-                                                    <td>{{ $resident->street1 }}</td>
-                                                    <td>
-                                                        <span class="badge round-primary">{{ $resident->phone_number }}</span>
-                                                    </td>
-                                                    <td>
-                                                        @if($resident->profile_logo)
-                                                            <div class="symbol symbol-circle symbol-lg-75">
-                                                                <img src="{{ asset('uploads/').'/'.$resident->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="">
-                                                            </div>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('resident.edit', $resident->id) }}" class="btn btn-success">Edit</a>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('resident.edit', $resident->id) }}" class="btn btn-success">Edit</a>
 
-                                                        <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$resident->id}}').submit();">Delete</a>
+                                                    <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$resident->id}}').submit();">Delete</a>
 
-                                                        <form id="delete-form-{{$resident->id}}" action="{{ route('resident.destroy', $resident->id) }}" method="POST" style="display: none;">
-                                                            <input type="hidden" name="_method" value="delete">
-                                                            @csrf
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                                    <form id="delete-form-{{$resident->id}}" action="{{ route('resident.destroy', $resident->id) }}" method="POST" style="display: none;">
+                                                        <input type="hidden" name="_method" value="delete">
+                                                        @csrf
+                                                    </form>
+                                                </td>
+                                            </tr>
                                 <?php $i++; } }else{ ?>
 
                                 <?php } ?>
