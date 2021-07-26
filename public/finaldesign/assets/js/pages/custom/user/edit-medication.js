@@ -116,13 +116,13 @@ var KTEditUser = function () {
 			_formEl,
 			{
 				fields: {
-					photo: {
-						validators: {
-							notEmpty: {
-								message: 'Photo is required'
-							}
-						}
-					},
+					// photo: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Photo is required'
+					// 		}
+					// 	}
+					// },
 					name: {
 						validators: {
 							notEmpty: {

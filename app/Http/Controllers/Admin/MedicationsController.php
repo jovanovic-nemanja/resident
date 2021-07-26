@@ -53,8 +53,8 @@ class MedicationsController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required',
-            'dose' => 'required',
-            'photo' => 'required'
+            'dose' => 'required'
+            // 'photo' => 'required'
         ]);
 
         $dates = User::getformattime();
@@ -64,7 +64,7 @@ class MedicationsController extends Controller
         $medications = Medications::create([
             'name' => $request->name,
             'dose' => $request->dose,
-            'photo' => $request->photo,
+            'photo' => @$request->photo,
             'clinic_id' => $clinic_id,
             'sign_date' => $date,
             'comments' => $request->comments
@@ -82,7 +82,9 @@ class MedicationsController extends Controller
             }
         }
 
-        Medications::upload_file($medications->id);
+        if (@$request->photo) {
+            Medications::upload_file($medications->id);
+        }        
 
         return redirect()->route('medications.index')->with('flash', 'Medication has been successfully created.');
     }

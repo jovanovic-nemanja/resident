@@ -127,9 +127,17 @@ class UsermedicationsController extends Controller
             $result['user'] = $user;
         }
 
-        $result['medications'] = Medications::all();
+        if(auth()->user()->hasRole('clinicowner')) {
+            $clinic_id = auth()->id();
+        }else {
+            $userid = auth()->id();
+            $user = User::where('id', $userid)->first();
+            $clinic_id = $user->clinic_id;
+        }
 
-        $result['routes'] = Routes::all();
+        $result['medications'] = Medications::where('clinic_id', $clinic_id)->get();
+
+        $result['routes'] = Routes::where('clinic_id', $clinic_id)->get();
 
         return view('admin.usermedications.createassign', compact('result'));
     }

@@ -90,7 +90,15 @@ class UseractivitiesController extends Controller
             $result['user'] = $user;
         }
 
-        $result['activities'] = Activities::where('type', $type)->get();
+        if(auth()->user()->hasRole('clinicowner')) {
+            $clinic_id = auth()->id();
+        }else {
+            $userid = auth()->id();
+            $user = User::where('id', $userid)->first();
+            $clinic_id = $user->clinic_id;
+        }
+
+        $result['activities'] = Activities::where('type', $type)->where('clinic_id', $clinic_id)->get();
 
         return view('admin.useractivities.create', compact('result'));
     }
