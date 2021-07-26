@@ -207,6 +207,32 @@ class ResidentController extends Controller
     {
         $residents = User::all();
 
+        if(auth()->user()->hasRole('clinicowner')) {
+
+            $clinic_id = auth()->id();
+            $user = User::where('id', $clinic_id)->first();
+            
+            $residents = DB::table('users')
+                            ->select('users.*')
+                            ->Join('role_user', 'role_user.user_id', '=', 'users.id')
+                            ->where('role_user.role_id', 3)
+                            ->where('users.clinic_id', $clinic_id)
+                            ->get();
+
+        }else {
+
+            $userid = auth()->id();
+            $user = User::where('id', $userid)->first();
+            $clinic_id = $user->clinic_id;
+            $residents = DB::table('users')
+                            ->select('users.*')
+                            ->Join('role_user', 'role_user.user_id', '=', 'users.id')
+                            ->where('role_user.role_id', 3)
+                            ->where('users.clinic_id', $clinic_id)
+                            ->get();
+
+        }
+
         return view('admin.resident.index', compact('residents'));
     }
 
