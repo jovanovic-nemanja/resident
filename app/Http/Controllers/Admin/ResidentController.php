@@ -205,8 +205,6 @@ class ResidentController extends Controller
      */
     public function management()
     {
-        $residents = User::all();
-
         if(auth()->user()->hasRole('clinicowner')) {
 
             $clinic_id = auth()->id();
