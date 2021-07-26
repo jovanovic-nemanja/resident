@@ -19,7 +19,7 @@ class CreateMedicationsTable extends Migration
             $table->integer('clinic_id');
             $table->string('name', '256');
             $table->string('dose');
-            $table->string('photo', '256');
+            $table->string('photo', '256')->nullable();
             $table->string('comments')->nullable();
             $table->datetime('sign_date');
 
