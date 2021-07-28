@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'Solaris Dubai',
+    'title' => 'Blue Care Hub',
 
     'title_prefix' => '',
 

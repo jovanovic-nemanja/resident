@@ -49,7 +49,7 @@
                     <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                         <div class="d-flex justify-content-between mt-n5">
                             <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
-                            <!-- <a href="javascript:;" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5" id="kt_login_forgot">Forgot Password ?</a> -->
+                            <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Forgot Password ?</a>
                         </div>
                         <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="password" name="password" autocomplete="off" />
 
@@ -74,7 +74,10 @@
             <!--begin::Forgot-->
             <div class="login-form login-forgot">
                 <!--begin::Form-->
-                <form class="form" novalidate="novalidate" id="kt_login_forgot_form">
+                <form class="form" novalidate="novalidate" id="kt_login_forgot_form" action="{{ url(config('adminlte.login_url', 'login')) }}" method="POST">
+
+                    {!! csrf_field() !!}
+
                     <!--begin::Title-->
                     <div class="pb-13 pt-lg-0 pt-5">
                         <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Forgotten Password ?</h3>
