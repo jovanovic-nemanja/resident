@@ -574,7 +574,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `middlename`, `lastname`, `username`, `email`, `gender`, `birthday`, `street1`, `street2`, `city`, `zip_code`, `state`, `clinic_id`, `status`, `profile_logo`, `email_verified_at`, `password`, `phone_number`, `sign_date`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1,	'Admin',	'Admin',	'Admin',	'admin',	'admin@gmail.com',	0,	'1999-10-29',	'Serbia',	'Beograd',	'Beograd',	'11042',	'Beograd',	0,	NULL,	'1.png',	1,	'$2y$10$43Lgdx7qDxGdj3cDyfcw4uLj5nVQ6vsQ3obexrb/axByYf4B6roZO',	'029292162',	'2021-07-28 09:07:59',	'KpMRELOlWw',	'2021-07-28 09:44:59',	'2021-07-28 09:44:59'),
-(2,	'Nemanja',	NULL,	'Jovanovic',	'nemanja',	'jovanovic.nemanja.1029@gmail.com',	1,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1,	'nVxfBYpXKWo7xoTl0sVtQ4h6280XvWBlNSOo4Y9E.png',	NULL,	'$2y$10$xXLkilia4ctV95oixr6UbuPb4fLhdt.Wjc7.B.MuTOTIgo7YJjwNS',	'+381621115827',	'2021-07-28 09:52:18',	'E3JWkg4QXarVCudgU8eA1T79XMcT3xq2ovXHNwSn31lySbflIB3xxq2Ak7PB',	'2021-07-28 09:52:18',	'2021-07-28 09:52:50'),
+(2,	'Nemanja',	NULL,	'Jovanovic',	'nemanja',	'jovanovic.nemanja.1029@gmail.com',	1,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1,	'nVxfBYpXKWo7xoTl0sVtQ4h6280XvWBlNSOo4Y9E.png',	NULL,	'$2y$10$LgG8c2hjVKnKdN25d7Riv.7pQzQ5.4L30IEiT9PBZFjxQMmak71Km',	'+381621115827',	'2021-07-28 09:52:18',	'WiDSsbkmkftyUpUL5fHE9ekS8xk4PWKzKNd2E3L3bEkRHNN7WhjzCFSMpkcg',	'2021-07-28 09:52:18',	'2021-07-29 06:54:04'),
 (3,	'Nina',	NULL,	'Natalija',	NULL,	'nina@natalija.com',	1,	'1999-09-12',	'VOŽDOVAC SLOBODANA JOVIĆA 3V',	NULL,	'BEOGRAD',	'11042',	'BEOGRAD',	2,	NULL,	'resident_610129d65ab1d.png',	NULL,	NULL,	'+381066666',	'2021-07-28 02:56:38',	NULL,	'2021-07-28 02:56:38',	'2021-07-28 02:56:38');
 
 DROP TABLE IF EXISTS `user_activities`;
@@ -637,4 +637,4 @@ CREATE TABLE `vital_sign` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
--- 2021-07-28 11:40:22
+-- 2021-07-29 07:25:48
