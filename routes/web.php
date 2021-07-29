@@ -190,3 +190,8 @@ Route::get('representative/createrepresentative/{resident}', 'Admin\Representati
 Route::resource('healthcarecenter', 'Admin\HealtheCareCenterController');
 Route::get('healthcarecenter/indexhealthcarecenter/{resident}', 'Admin\HealtheCareCenterController@indexhealthcarecenter')->name('healthcarecenter.indexhealthcarecenter');
 Route::get('healthcarecenter/createhealthcarecenter/{resident}', 'Admin\HealtheCareCenterController@createhealthcarecenter')->name('healthcarecenter.createhealthcarecenter');
+
+
+
+Route::get('/changepass', 'Frontend\HomeController@changepass')->name('changepass');
+Route::put('/account/updatePassword', 'Frontend\HomeController@updatePassword')->name('account.updatePassword');

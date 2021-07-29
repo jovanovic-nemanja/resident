@@ -6,6 +6,7 @@ use App\Tabs;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -98,5 +99,55 @@ class HomeController extends Controller
         }
 
         return redirect()->route('home');
+    }
+
+    /**
+     * Display a Change password page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changepass()
+    {
+        $user = auth()->user();
+        return view('frontend.changepass', compact('user'));
+    }
+
+    /**
+     * Change password
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword()
+    {
+        $user = auth()->user();
+
+        if ($user->password) {
+            $this->validate(request(), [
+                'old_password' => 'required',
+                // 'password' => 'required',
+                // 'password_confirmation' => 'required|same:password',
+                'password_confirmation' => 'same:password'
+            ]);
+
+            if (Hash::check(request('old_password'), $user->password)) {
+                $user->password = Hash::make(request('password'));
+                $user->save();
+                return redirect()->route('home')->with('flash', 'Password has been successfully changed.');
+            }else{
+                $this->validate(request(), [
+                    'old_password' => 'confirmed',
+                ]);
+            }
+        }else{
+            $this->validate(request(), [
+                // 'old_password' => 'required',
+                'password' => 'required',
+                'password_confirmation' => 'required|same:password',
+            ]);
+
+            $user->password = Hash::make(request('password'));
+            $user->save();
+            return redirect()->route('changepass')->with('flash', 'Password has been successfully changed.');
+        }
     }
 }

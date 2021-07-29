@@ -1,7 +1,12 @@
 @extends('layouts.appsecond', ['menu' => 'residents'])
 
 @section('content')
-
+    @if(session('flash'))
+        <div class="alert alert-success">
+            {{ session('flash') }}
+        </div>
+    @endif
+    
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Subheader-->
         <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
