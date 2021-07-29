@@ -126,6 +126,16 @@
                                 </a>
                             </li>
                         @endif
+
+                        <li class="navi-item">
+                            <a href="{{ route('changepass') }}" class="navi-link">
+                                <span class="navi-icon">
+                                    <i class="flaticon2-gear"></i>
+                                </span>
+                                <span class="navi-text">Change Password</span>
+                            </a>
+                        </li>
+
                         <li class="navi-item">
                             <a href="{{ route('logout') }}" class="navi-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <span class="navi-icon"><i class="fa fa-lock"></i></span> {{ __('Logout') }} ({{ Auth::user()->firstname }})
