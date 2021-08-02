@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRelationsTable extends Migration
+class CreateTemplatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateRelationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('relations', function (Blueprint $table) {
+        Schema::create('templates', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title');
-            $table->integer('clinic_id');
-            $table->integer('template_id')->nullable();
+            $table->text('name');
             $table->datetime('sign_date');
             
             $table->timestamps();
@@ -32,6 +30,6 @@ class CreateRelationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relations');
+        Schema::dropIfExists('templates');
     }
 }

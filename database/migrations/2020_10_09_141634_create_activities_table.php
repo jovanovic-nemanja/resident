@@ -19,6 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->string('title', '256');
             $table->integer('clinic_id');
             $table->integer('type');
+            $table->integer('template_id')->nullable();
             $table->string('comments')->nullable();
             $table->datetime('sign_date');
 

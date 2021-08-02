@@ -10,7 +10,7 @@ class Incidences extends Model
 {
     public $table = "incidences";
 
-    public $fillable = ['title', 'type', 'content', 'clinic_id', 'sign_date'];
+    public $fillable = ['title', 'type', 'template_id', 'content', 'clinic_id', 'sign_date'];
 
     public function getTypeasstring($id) 
     {

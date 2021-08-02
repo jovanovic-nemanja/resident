@@ -18,6 +18,7 @@ class CreateFieldsTable extends Migration
 
             $table->text('fieldName');
             $table->integer('clinic_id');
+            $table->integer('template_id')->nullable();
             $table->integer('tab_id');
             $table->datetime('sign_date_field');
             

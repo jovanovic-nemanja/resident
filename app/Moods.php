@@ -11,5 +11,5 @@ class Moods extends Model
 {
     public $table = "moods";
 
-    public $fillable = ['clinic_id', 'title', 'sign_date'];
+    public $fillable = ['clinic_id', 'template_id', 'title', 'sign_date'];
 }

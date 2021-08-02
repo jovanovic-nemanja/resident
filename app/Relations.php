@@ -11,5 +11,5 @@ class Relations extends Model
 {
     public $table = "relations";
 
-    public $fillable = ['clinic_id', 'title', 'sign_date'];
+    public $fillable = ['clinic_id', 'template_id', 'title', 'sign_date'];
 }

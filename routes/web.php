@@ -195,3 +195,8 @@ Route::get('healthcarecenter/createhealthcarecenter/{resident}', 'Admin\HealtheC
 
 Route::get('/changepass', 'Frontend\HomeController@changepass')->name('changepass');
 Route::put('/account/updatePassword', 'Frontend\HomeController@updatePassword')->name('account.updatePassword');
+
+
+
+Route::resource('templates', 'Admin\TemplatesController');
+Route::get('templates/createactivity/{templateID}', 'Admin\TemplatesController@createactivity')->name('templates.createactivity');

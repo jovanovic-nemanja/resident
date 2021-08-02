@@ -17,6 +17,7 @@ class CreateReminderConfigsTable extends Migration
             $table->increments('id');
 
             $table->integer('clinic_id');
+            $table->integer('template_id')->nullable();
             $table->integer('minutes');
             $table->integer('active')->nullable();
             $table->datetime('sign_date');

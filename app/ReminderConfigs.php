@@ -11,7 +11,7 @@ class ReminderConfigs extends Model
 {
     public $table = "reminder_configs";
 
-    public $fillable = ['minutes', 'clinic_id', 'active', 'sign_date'];
+    public $fillable = ['minutes', 'clinic_id', 'template_id', 'active', 'sign_date'];
 
     public static function getActiveasString($active)
     {
