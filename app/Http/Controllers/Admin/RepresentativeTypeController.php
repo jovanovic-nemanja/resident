@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Representatives;
 use App\RepresentativeTypes;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -118,6 +119,7 @@ class RepresentativeTypeController extends Controller
      */
     public function destroy($id)
     {
+        $representatives = Representatives::where('representative_type', $id)->delete();
         $record = RepresentativeTypes::where('id', $id)->delete();
         
         return redirect()->route('representativetypes.index');

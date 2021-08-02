@@ -17,7 +17,7 @@
                     <!--begin::Page Heading-->
                     <div class="d-flex align-items-baseline flex-wrap mr-5">
                         <!--begin::Page Title-->
-                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Edit Activity</h2>
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Edit Incidence</h2>
                         <!--end::Page Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
@@ -47,30 +47,7 @@
                             <input type="hidden" name="_method" value="put">
 
                             <input type="hidden" name="template_id" value="{{ $templateID }}" />
-                            <input type="hidden" name="setting_type" value="1" />
-
-                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                                <label class="col-form-label">Type</label>
-                                <div class="controls">
-                                    <?php if($result->type == 1) {
-                                        $selected1 = "selected"; 
-                                        $selected2 = "";
-                                    }else{
-                                        $selected2 = "selected"; 
-                                        $selected1 = "";
-                                    } ?>
-                                    <select class="form-control" name="type" required>
-                                        <option value="">Choose Type</option>
-                                        <option value="1" <?= $selected1; ?>>Primary ADL</option>
-                                        <option value="2" <?= $selected2; ?>>Secondary ADL</option>
-                                    </select>
-                                </div>
-                                @if ($errors->has('type'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('type') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                            <input type="hidden" name="setting_type" value="4" />
 
                             <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                                 <label class="col-form-label">Title</label>
@@ -84,17 +61,41 @@
                                 @endif
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-form-label">Comments</label>
+                            <div class="form-group {{ $errors->has('content') ? 'has-error' : '' }}">
+                                <label class="col-form-label">Content</label>
                                 <div class="controls">
-                                    <input type="text" name="se" class="form-control" placeholder="Comments" id="kt_tagify_1" value="{{ $result->comments }}">
-                                    <div class="mt-3">
-                                        <a href="javascript:;" id="kt_tagify_1_remove" class="btn btn-sm btn-light-primary font-weight-bold">Remove comments</a>
-                                    </div>
+                                    <input type="text" class="form-control" id="content" name="content" placeholder="Content" value="{{ $result->content }}">
                                 </div>
+                                @if ($errors->has('content'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('content') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
-                            <input type="hidden" name="comments" class="comments_real" value="">
+                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
+                                <label class="col-form-label">Type</label>
+                                <div class="controls">
+                                    <?php if($result->type == 1) {
+                                        $selected1 = "selected"; 
+                                        $selected3 = $selected2 = "";
+                                    }else{
+                                        $selected3 = "selected"; 
+                                        $selected1 = $selected2 = "";
+                                    } ?>
+                                    <select class="form-control" name="type" required>
+                                        <option value="">Choose Type</option>
+                                        <option value="1" <?= $selected1; ?>>Family Visit</option>
+                                        <option value="2" <?= $selected2; ?>>Mood Change</option>
+                                        <option value="3" <?= $selected3; ?>>Body Harm</option>
+                                    </select>
+                                </div>
+                                @if ($errors->has('type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
 
                             <div class="padding-bottom-30" style="text-align: center;">
                                 <div class="">
@@ -111,24 +112,3 @@
         <!--end::Entry-->
     </div>
 @stop
-
-@section('script')
-    <script src="{{ asset('finaldesign/assets/js/pages/crud/forms/widgets/tagify.js') }}"></script>
-
-    <script type="text/javascript">
-        $('document').ready(function() {
-            $('.submit_btn').click(function() {
-                var comments = [];
-
-                if ($('.tagify').children().length) {
-                    $( "tag" ).each(function( index, element ) {
-                        // element == this
-                        comments.push($( element ).attr('title'));
-                    });
-                }
-
-                $('.comments_real').val(comments);
-            });
-        });
-    </script>
-@endsection

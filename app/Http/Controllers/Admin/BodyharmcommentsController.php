@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Bodyharms;
 use App\Bodyharmcomments;
 
 class BodyharmcommentsController extends Controller
@@ -125,6 +126,7 @@ class BodyharmcommentsController extends Controller
      */
     public function destroy($id)
     {
+        $bodyharm = Bodyharms::where('comment', $id)->delete();
         $record = Bodyharmcomments::where('id', $id)->delete();
         
         return redirect()->route('bodyharmcomments.index');

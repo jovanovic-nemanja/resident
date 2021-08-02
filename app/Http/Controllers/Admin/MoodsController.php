@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Moods;
+use App\MoodChanges;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -118,6 +119,7 @@ class MoodsController extends Controller
      */
     public function destroy($id)
     {
+        $MoodChanges = MoodChanges::where('mood', $id)->delete();
         $record = Moods::where('id', $id)->delete();
         
         return redirect()->route('moods.index');

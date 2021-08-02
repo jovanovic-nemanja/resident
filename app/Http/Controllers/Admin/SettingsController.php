@@ -122,13 +122,11 @@ class SettingsController extends Controller
      */
     public function show($id)
     {
-        $settings = DB::table('setting_tabs')
-                            ->join('groups', 'setting_tabs.id', '=', 'groups.tabId')
-                            ->where('groups.id', $id)
-                            ->select('setting_tabs.*', 'groups.*')
-                            ->get();
+        $setting_tabs = Tabs::all();
+        $result = Fields::where('id', $id)->first();
+        $fieldtypes = FieldTypes::where('fieldID', $id)->get();
 
-        return view('admin.settings.edit', compact('settings'));
+        return view('admin.settings.edit', compact('setting_tabs', 'result', 'fieldtypes'));
     }
 
     /**
@@ -151,7 +149,32 @@ class SettingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'tab_id' => 'required',
+            'fieldName' => 'required',
+            'fieldValue' => 'required'
+        ]);
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        $field = Fields::where('id', $id)->first();
+        $field->fieldName = $request->fieldName;
+        $field->tab_id = $request->tab_id;
+        $field->update();
+
+        $types = FieldTypes::where('fieldID', $id)->delete();
+
+        foreach ($request->fieldValue as $fv) {
+            $fieldtypes = new FieldTypes;
+
+            $fieldtypes->typeName = $fv;
+            $fieldtypes->fieldID = $id;
+            $fieldtypes->sign_date_field_type = $date;
+            $fieldtypes->save();
+        }
+
+        return redirect()->route('settings.index');
     }
 
     /**

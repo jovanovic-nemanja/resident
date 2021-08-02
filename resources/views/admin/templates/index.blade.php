@@ -71,12 +71,13 @@
                                                 </td>
                                                 <td>{{ $template->sign_date }}</td>
                                                 <td>
-                                                    <a href="{{ route('templates.show', $template->id) }}" class="btn btn-success">Edit</a>
-                                                    <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$template->id}}').submit();" class="btn btn-primary">Delete</a>
+                                                    <a href="{{ route('templates.show', $template->id) }}" class="btn btn-info">Edit</a>
+                                                    <a href="{{ route('templates.viewTemplate', $template->id) }}" class="btn btn-success">View</a>
+                                                    <button onclick="event.stopPropagation(); event.preventDefault(); showSwal('warning-message-and-cancel', 'delete-form-{{$template->id}}')" class="btn btn-primary" title="Delete">Delete</button>
 
                                                     <form id="delete-form-{{$template->id}}" action="{{ route('templates.destroy', $template->id) }}" method="POST" style="display: none;">
-                                                          <input type="hidden" name="_method" value="delete">
-                                                          @csrf
+                                                        <input type="hidden" name="_method" value="delete">
+                                                        @csrf
                                                     </form>
                                                 </td>
                                             </tr>
@@ -95,3 +96,20 @@
         <!--end::Entry-->
     </div>
 @stop
+
+@section('script')
+    <script type="text/javascript">
+        (function($) {
+            showSwal = function(type, value) {
+                'use strict';
+                if (type === 'warning-message-and-cancel') {
+                    if(confirm('Are you sure you want to delete that into the database? If yes, that will be removed permanently.')) {
+                        document.getElementById(value).submit();
+                    }else{
+                        console.log('cancelled');
+                    }
+                }
+            }
+        })(jQuery);
+    </script>
+@endsection
