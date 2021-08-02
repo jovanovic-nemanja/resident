@@ -3,7 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Moods;
+use App\Routes;
+use App\Relations;
 use App\Templates;
+use App\Activities;
+use App\Incidences;
+use App\Medications;
+use App\ReminderConfigs;
+use App\Bodyharmcomments;
+use App\RepresentativeTypes;
+use App\HealthCareCenterTypes;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +37,36 @@ class TemplatesController extends Controller
         return view('admin.templates.index', compact('templates'));
     }
 
+    public function viewTemplate($templateID)
+    {
+        if (@$templateID) {
+            $dates = User::getformattime();
+            $date = $dates['date'];
+
+            $record = Templates::where('id', $templateID)->first();
+            if (@$record) {
+                $record->name = $templateID;
+                $record->sign_date = $date;
+
+                $record->update();
+            }
+            $template = $record;
+
+            $activities = Activities::where('template_id', $templateID)->get();
+            $comments = Bodyharmcomments::where('template_id', $templateID)->get();
+            $healthcarecentertypes = HealthCareCenterTypes::where('template_id', $templateID)->get();
+            $incidences = Incidences::where('template_id', $templateID)->get();
+            $medications = Medications::where('template_id', $templateID)->get();
+            $moods = Moods::where('template_id', $templateID)->get();
+            $relations = Relations::where('template_id', $templateID)->get();
+            $reminderconfigs = ReminderConfigs::where('template_id', $templateID)->get();
+            $types = RepresentativeTypes::where('template_id', $templateID)->get();
+            $routes = Routes::where('template_id', $templateID)->get();
+
+            return view('admin.templates.create', compact('template', 'activities', 'comments', 'healthcarecentertypes', 'incidences', 'medications', 'moods', 'relations', 'reminderconfigs', 'types', 'routes'));
+        }            
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -34,17 +74,9 @@ class TemplatesController extends Controller
      */
     public function create()
     {
-        $dates = User::getformattime();
-        $date = $dates['date'];
+        $template = Templates::create();
 
-        $template = Templates::create([
-            'name' => $template->id,
-            'sign_date' => $date
-        ]);
-
-        $templateID = $template->id;
-
-        return view('admin.templates.create', compact('templateID'));
+        return redirect()->route('templates.viewTemplate', $template->id);
     }
 
     /**

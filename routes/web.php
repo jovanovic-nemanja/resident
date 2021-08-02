@@ -199,4 +199,15 @@ Route::put('/account/updatePassword', 'Frontend\HomeController@updatePassword')-
 
 
 Route::resource('templates', 'Admin\TemplatesController');
+Route::get('templates/viewTemplate/{templateID}', 'Admin\TemplatesController@viewTemplate')->name('templates.viewTemplate');
+
 Route::get('templates/createactivity/{templateID}', 'Admin\TemplatesController@createactivity')->name('templates.createactivity');
+Route::get('templates/createbodyharmcomment/{templateID}', 'Admin\TemplatesController@createbodyharmcomment')->name('templates.createbodyharmcomment');
+Route::get('templates/createhealthcarecentertypes/{templateID}', 'Admin\TemplatesController@createhealthcarecentertypes')->name('templates.createhealthcarecentertypes');
+Route::get('templates/createincidences/{templateID}', 'Admin\TemplatesController@createincidences')->name('templates.createincidences');
+Route::get('templates/createmedications/{templateID}', 'Admin\TemplatesController@createmedications')->name('templates.createmedications');
+Route::get('templates/createmoods/{templateID}', 'Admin\TemplatesController@createmoods')->name('templates.createmoods');
+Route::get('templates/createrelations/{templateID}', 'Admin\TemplatesController@createrelations')->name('templates.createrelations');
+Route::get('templates/createreminderconfigs/{templateID}', 'Admin\TemplatesController@createreminderconfigs')->name('templates.createreminderconfigs');
+Route::get('templates/createrepresentativetypes/{templateID}', 'Admin\TemplatesController@createrepresentativetypes')->name('templates.createrepresentativetypes');
+Route::get('templates/createroutes/{templateID}', 'Admin\TemplatesController@createroutes')->name('templates.createroutes');
