@@ -16,7 +16,7 @@
                     <!--begin::Page Heading-->
                     <div class="d-flex align-items-baseline flex-wrap mr-5">
                         <!--begin::Page Title-->
-                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Create Template - {{ $template->id }}</h2>
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Create Template - {{ $template->name }}</h2>
                         <!--end::Page Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
@@ -41,7 +41,7 @@
                 <div class="card card-custom">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Create Template - {{ $template->id }}</h3>
+                            <h3 class="card-label">Create Template - {{ $template->name }}</h3>
                         </div>
                         <div class="card-toolbar">
                             <div class="dropdown custom_drop_down">
@@ -49,25 +49,27 @@
                                     Add
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('templates.createactivity', $template->id) }}">Activity</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 1]) }}">Activity</a>
 
-                                    <a class="dropdown-item" href="{{ route('templates.createbodyharmcomment', $template->id) }}">Body Harm Comment</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 2]) }}">Body Harm Comment</a>
 
-                                    <a class="dropdown-item" href="{{ route('templates.createhealthcarecentertypes', $template->id) }}">Health Care Center Types</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 3]) }}">Health Care Center Types</a>
 
-                                    <a class="dropdown-item" href="{{ route('templates.createincidences', $template->id) }}">Incidences</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 4]) }}">Incidences</a>
 
-                                    <a class="dropdown-item" href="{{ route('templates.createmedications', $template->id) }}">Medications</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 5]) }}">Medications</a>
 
-                                    <a class="dropdown-item" href="{{ route('templates.createmoods', $template->id) }}">Moods</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 6]) }}">Moods</a>
 
-                                    <a class="dropdown-item" href="{{ route('templates.createrelations', $template->id) }}">Relations</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 7]) }}">Relations</a>
 
-                                    <a class="dropdown-item" href="{{ route('templates.createreminderconfigs', $template->id) }}">Reminder Configs</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 8]) }}">Reminder Configs</a>
 
-                                    <a class="dropdown-item" href="{{ route('templates.createrepresentativetypes', $template->id) }}">Representative Types</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 9]) }}">Representative Types</a>
 
-                                    <a class="dropdown-item" href="{{ route('templates.createroutes', $template->id) }}">Routes</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 10]) }}">Routes</a>
+
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 11]) }}">Settings</a>
                                 </div>
                             </div>
                         </div>
@@ -101,12 +103,12 @@
                                                     </td>
                                                     <td>{{ $activity->comments }}</td>
                                                     <td>
-                                                        <a href="{{ route('activities.show', $activity->id) }}" class="btn btn-success">Edit</a>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $activity->id, 1]) }}" class="btn btn-success">Edit</a>
                                                         <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$activity->id}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                        <form id="delete-form-{{$activity->id}}" action="{{ route('activities.destroy', $activity->id) }}" method="POST" style="display: none;">
-                                                              <input type="hidden" name="_method" value="delete">
-                                                              @csrf
+                                                        <form id="delete-form-{{$activity->id}}" action="{{ route('templates.destroysetting', [$activity->id, 1]) }}" method="POST" style="display: none;">
+                                                            <input type="hidden" name="_method" value="delete">
+                                                            @csrf
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -145,12 +147,12 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('bodyharmcomments.show', $comment->id) }}" class="btn btn-success">Edit</a>
-                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$comment->id}}').submit();" class="btn btn-primary">Delete</a>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $comment->id, 2]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-comment-form-{{$comment->id}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                        <form id="delete-form-{{$comment->id}}" action="{{ route('bodyharmcomments.destroy', $comment->id) }}" method="POST" style="display: none;">
-                                                              <input type="hidden" name="_method" value="delete">
-                                                              @csrf
+                                                        <form id="delete-comment-form-{{$comment->id}}" action="{{ route('templates.destroysetting', [$comment->id, 2]) }}" method="POST" style="display: none;">
+                                                            <input type="hidden" name="_method" value="delete">
+                                                            @csrf
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -187,10 +189,10 @@
                                                         {{ $healthcarecentertype->title }}
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('healthcarecentertypes.show', $healthcarecentertype->id) }}" class="btn btn-success">Edit</a>
-                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$healthcarecentertype->id}}').submit();" class="btn btn-primary">Delete</a>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $healthcarecentertype->id, 3]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-health-type-form-{{$healthcarecentertype->id}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                        <form id="delete-form-{{$healthcarecentertype->id}}" action="{{ route('healthcarecentertypes.destroy', $healthcarecentertype->id) }}" method="POST" style="display: none;">
+                                                        <form id="delete-health-type-form-{{$healthcarecentertype->id}}" action="{{ route('templates.destroysetting', [$healthcarecentertype->id, 3]) }}" method="POST" style="display: none;">
                                                             <input type="hidden" name="_method" value="delete">
                                                             @csrf
                                                         </form>
@@ -236,12 +238,12 @@
                                                         <span class="badge round-primary">{{ $incidence->sign_date }}</span>
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('incidences.show', $incidence->id) }}" class="btn btn-success">Edit</a>
-                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$incidence->id}}').submit();" class="btn btn-warning">Delete</a>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $incidence->id, 4]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-incidence-form-{{$incidence->id}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                        <form id="delete-form-{{$incidence->id}}" action="{{ route('incidences.destroy', $incidence->id) }}" method="POST" style="display: none;">
-                                                              <input type="hidden" name="_method" value="delete">
-                                                              @csrf
+                                                        <form id="delete-incidence-form-{{$incidence->id}}" action="{{ route('templates.destroysetting', [$incidence->id, 4]) }}" method="POST" style="display: none;">
+                                                            <input type="hidden" name="_method" value="delete">
+                                                            @csrf
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -290,10 +292,10 @@
                                                     </td>
                                                     <td>{{ $medication->comments }}</td>
                                                     <td>
-                                                        <a href="{{ route('medications.show', $medication->id) }}" class="btn btn-success">Edit</a>
-                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$medication->id}}').submit();" class="btn btn-primary">Delete</a>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $medication->id, 5]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-medication-form-{{$medication->id}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                        <form id="delete-form-{{$medication->id}}" action="{{ route('medications.destroy', $medication->id) }}" method="POST" style="display: none;">
+                                                        <form id="delete-medication-form-{{$medication->id}}" action="{{ route('templates.destroysetting', [$medication->id, 5]) }}" method="POST" style="display: none;">
                                                             <input type="hidden" name="_method" value="delete">
                                                             @csrf
                                                         </form>
@@ -330,10 +332,10 @@
                                                     <td>{{ $i }}</td>
                                                     <td>{{ $mood->title }}</td>
                                                     <td>
-                                                        <a href="{{ route('moods.show', $mood->id) }}" class="btn btn-success">Edit</a>
-                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$mood->id}}').submit();" class="btn btn-primary">Delete</a>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $mood->id, 6]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-mood-form-{{$mood->id}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                        <form id="delete-form-{{$mood->id}}" action="{{ route('moods.destroy', $mood->id) }}" method="POST" style="display: none;">
+                                                        <form id="delete-mood-form-{{$mood->id}}" action="{{ route('templates.destroysetting', [$mood->id, 6]) }}" method="POST" style="display: none;">
                                                             <input type="hidden" name="_method" value="delete">
                                                             @csrf
                                                         </form>
@@ -370,10 +372,10 @@
                                                     <td>{{ $i }}</td>
                                                     <td>{{ $relation->title }}</td>
                                                     <td>
-                                                        <a href="{{ route('relations.show', $relation->id) }}" class="btn btn-success">Edit</a>
-                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$relation->id}}').submit();" class="btn btn-primary">Delete</a>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $relation->id, 7]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-relation-form-{{$relation->id}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                        <form id="delete-form-{{$relation->id}}" action="{{ route('relations.destroy', $relation->id) }}" method="POST" style="display: none;">
+                                                        <form id="delete-relation-form-{{$relation->id}}" action="{{ route('templates.destroysetting', [$relation->id, 7]) }}" method="POST" style="display: none;">
                                                             <input type="hidden" name="_method" value="delete">
                                                             @csrf
                                                         </form>
@@ -417,17 +419,17 @@
                                                     </td>
                                                     <td>
                                                         @if($reminderconfig->active == 1)
-                                                            <a disabled class="btn btn-custom">Actived</a>
+                                                            <a disabled class="btn btn-custom" style="cursor: not-allowed;">Actived</a>
                                                         @else
-                                                            <a href="{{ route('reminderconfigs.active', $reminderconfig->id) }}" class="btn btn-danger">Active</a>
+                                                            <a href="{{ route('templates.activeReminderconfig', $reminderconfig->id) }}" class="btn btn-danger">Active</a>
                                                         @endif
 
-                                                        <a href="{{ route('reminderconfigs.show', $reminderconfig->id) }}" class="btn btn-success">Edit</a>
-                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$reminderconfig->id}}').submit();" class="btn btn-warning">Delete</a>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $reminderconfig->id, 8]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-reminderconfig-form-{{$reminderconfig->id}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                        <form id="delete-form-{{$reminderconfig->id}}" action="{{ route('reminderconfigs.destroy', $reminderconfig->id) }}" method="POST" style="display: none;">
-                                                              <input type="hidden" name="_method" value="delete">
-                                                              @csrf
+                                                        <form id="delete-reminderconfig-form-{{$reminderconfig->id}}" action="{{ route('templates.destroysetting', [$reminderconfig->id, 8]) }}" method="POST" style="display: none;">
+                                                            <input type="hidden" name="_method" value="delete">
+                                                            @csrf
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -464,10 +466,10 @@
                                                         {{ $type->title }}
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('representativetypes.show', $type->id) }}" class="btn btn-success">Edit</a>
-                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$type->id}}').submit();" class="btn btn-primary">Delete</a>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $type->id, 9]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-type-form-{{$type->id}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                        <form id="delete-form-{{$type->id}}" action="{{ route('representativetypes.destroy', $type->id) }}" method="POST" style="display: none;">
+                                                        <form id="delete-type-form-{{$type->id}}" action="{{ route('templates.destroysetting', [$type->id, 9]) }}" method="POST" style="display: none;">
                                                             <input type="hidden" name="_method" value="delete">
                                                             @csrf
                                                         </form>
@@ -506,12 +508,56 @@
                                                     <td>{{ $route->name }}</td>
                                                     <td>{{ $route->sign_date }}</td>
                                                     <td>
-                                                        <a href="{{ route('routes.show', $route->id) }}" class="btn btn-success">Edit</a>
-                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$route->id}}').submit();" class="btn btn-primary">Delete</a>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $route->id, 10]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-route-form-{{$route->id}}').submit();" class="btn btn-primary">Delete</a>
 
-                                                        <form id="delete-form-{{$route->id}}" action="{{ route('routes.destroy', $route->id) }}" method="POST" style="display: none;">
-                                                              <input type="hidden" name="_method" value="delete">
-                                                              @csrf
+                                                        <form id="delete-route-form-{{$route->id}}" action="{{ route('templates.destroysetting', [$route->id, 10]) }}" method="POST" style="display: none;">
+                                                            <input type="hidden" name="_method" value="delete">
+                                                            @csrf
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                    <?php $i++; } }else{ ?>
+
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                            <!--end: Datatable-->
+                        </div>
+
+                        <div class="col-lg-12 pt-5 mt-5" id="settings">
+                            <hr>
+                            <hr>
+                            <h4>Settings</h4>
+                            <br>
+                            <!--begin: Datatable-->
+                            <table class="table table-bordered table-hover table-checkable" id="kt_datatable_10" style="margin-top: 13px !important">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tab Name</th>
+                                        <th>Field Name</th>
+                                        <th>Field Created Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        if(@$settings) {
+                                            $i = 1;
+                                            foreach($settings as $setting) { ?>
+                                                <tr>
+                                                    <td>{{ $i }}</td>
+                                                    <td>{{ $setting->name }}</td>
+                                                    <td>{{ $setting->fieldName }}</td>
+                                                    <td>{{ $setting->sign_date_field }}</td>
+                                                    <td>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $setting->id, 11]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-settings-form-{{$setting->id}}').submit();" class="btn btn-primary">Delete</a>
+
+                                                        <form id="delete-settings-form-{{$setting->id}}" action="{{ route('templates.destroysetting', [$setting->id, 11]) }}" method="POST" style="display: none;">
+                                                            <input type="hidden" name="_method" value="delete">
+                                                            @csrf
                                                         </form>
                                                     </td>
                                                 </tr>

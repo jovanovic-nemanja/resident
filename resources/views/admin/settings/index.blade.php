@@ -71,7 +71,7 @@
                                                 <td>{{ $setting->fieldName }}</td>
                                                 <td>{{ $setting->sign_date_field }}</td>
                                                 <td>
-                                                    <!-- <a href="#" class="btn btn-success">Edit</a> -->
+                                                    <a href="{{ route('settings.show', $setting->id) }}" class="btn btn-success">Edit</a>
                                                     <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$setting->FieldID}}').submit();" class="btn btn-primary">Delete</a>
 
                                                     <form id="delete-form-{{$setting->FieldID}}" action="{{ route('settings.destroy', $setting->FieldID) }}" method="POST" style="display: none;">

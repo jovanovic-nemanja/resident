@@ -83,10 +83,12 @@ class ResidentController extends Controller
     {
         $setting_tab = Tabs::where('id', $id)->first();
         $user = User::where('id', $resident)->first();
+        $clinic_id = auth()->id();
 
         $resident_settings =  DB::table('fields')
                                 ->leftJoin('setting_tabs', 'setting_tabs.id', '=', 'fields.tab_id')
                                 ->where('fields.tab_id', $id)
+                                ->where('fields.clinic_id', $clinic_id)
                                 ->select('fields.*')
                                 ->get();
 

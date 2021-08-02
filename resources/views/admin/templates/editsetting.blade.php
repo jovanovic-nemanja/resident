@@ -1,4 +1,4 @@
-@extends('layouts.appsecond', ['menu' => 'settings'])
+@extends('layouts.appsecond', ['menu' => 'templates'])
 
 @section('content')
 
@@ -22,7 +22,7 @@
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('settings.index') }}" class="text-muted">Settings &nbsp;</a>
+                                <a href="{{ route('templates.viewTemplate', $templateID) }}" class="text-muted">Back &nbsp;</a>
                             </li>
                         </ul>
                         <!--end::Breadcrumb-->
@@ -41,10 +41,13 @@
                 <!--begin::Card-->
                 <div class="card card-custom">
                     <div class="card-body">
-                        <form action="{{ route('settings.update', $result->id) }}" method="POST">
+                        <form action="{{ route('templates.updatesetting', $result->id) }}" method="POST">
                             @csrf
 
                             <input type="hidden" name="_method" value="put">
+
+                            <input type="hidden" name="template_id" value="{{ $templateID }}" />
+                            <input type="hidden" name="setting_type" value="11" />
 
                             <div class="form-group {{ $errors->has('tab_id') ? 'has-error' : '' }}">
                                 <label class="col-form-label">Tabs</label>
@@ -114,7 +117,3 @@
         <!--end::Entry-->
     </div>
 @stop
-
-@section('script')
-    <!-- <script src="{{ asset('js/settingsEdit.js') }}"></script> -->
-@endsection

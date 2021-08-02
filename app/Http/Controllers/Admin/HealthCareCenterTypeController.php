@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\HealthCareCenters;
 use App\HealthCareCenterTypes;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -118,6 +119,7 @@ class HealthCareCenterTypeController extends Controller
      */
     public function destroy($id)
     {
+        $centers = HealthCareCenters::where('health_care_center_type', $id)->delete();
         $record = HealthCareCenterTypes::where('id', $id)->delete();
         
         return redirect()->route('healthcarecentertypes.index');

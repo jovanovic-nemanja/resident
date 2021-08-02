@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Relations;
+use App\FamilyVisits;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -118,6 +119,7 @@ class RelationsController extends Controller
      */
     public function destroy($id)
     {
+        $familyvisit = FamilyVisits::where('relation', $id)->delete();
         $record = Relations::where('id', $id)->delete();
         
         return redirect()->route('relations.index');
