@@ -18,6 +18,7 @@ class CreateMoodsTable extends Migration
 
             $table->string('title');
             $table->integer('clinic_id');
+            $table->integer('template_id')->nullable();
             $table->datetime('sign_date');
             
             $table->timestamps();

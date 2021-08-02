@@ -17,6 +17,7 @@ class CreateMedicationsTable extends Migration
             $table->increments('id');
             
             $table->integer('clinic_id');
+            $table->integer('template_id')->nullable();
             $table->string('name', '256');
             $table->string('dose');
             $table->string('photo', '256')->nullable();

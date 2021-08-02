@@ -11,5 +11,5 @@ class RepresentativeTypes extends Model
 {
     public $table = "representative_types";
 
-    public $fillable = ['title', 'clinic_id', 'sign_date'];
+    public $fillable = ['title', 'clinic_id', 'template_id', 'sign_date'];
 }
