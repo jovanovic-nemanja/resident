@@ -153,6 +153,12 @@
                         </a>
                     </li>
 
+                    <li class="menu-item <?= ($menu == 'clone') ? "menu-item-active" : "" ?>" aria-haspopup="true">
+                        <a href="{{ route('clone.index') }}" class="menu-link">
+                            <i class="fas fa-clone w-25px"></i><span class="menu-text pl-3">Clone Templates</span>
+                        </a>
+                    </li>
+
                     <li class="menu-item menu-item-submenu <?= ($menu == 'activities' || $menu == 'incidences' || $menu == 'medications' || $menu == 'routes' || $menu == 'bodyharmcomments' || $menu == 'reminderconfigs' || $menu == 'adminlogs' || $menu == 'switchreminder' || $menu == 'reports' || $menu == 'settings' || $menu == 'relations' || $menu == 'moods' || $menu == 'representativetypes' || $menu == 'healthcarecentertypes') ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
                         <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon svg-icon-primary svg-icon-2x">
@@ -164,7 +170,7 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-text">Setup</span>
+                            <span class="menu-text pl-3">Setup</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="menu-submenu">
