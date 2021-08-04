@@ -15,6 +15,7 @@ use App\FieldTypes;
 use App\Activities;
 use App\Incidences;
 use App\Medications;
+use App\ReportClone;
 use App\MoodChanges;
 use App\FamilyVisits;
 use App\Useractivities;
@@ -257,7 +258,7 @@ class CloneController extends Controller
                     foreach ($fieldtypes as $fv) {
                         $fieldtypes = new FieldTypes;
 
-                        $fieldtypes->typeName = $fv;
+                        $fieldtypes->typeName = $fv->typeName;
                         $fieldtypes->fieldID = $fieldID;
                         $fieldtypes->sign_date_field_type = $date;
                         $fieldtypes->save();
@@ -265,15 +266,23 @@ class CloneController extends Controller
                 }
             }
 
+            $logs = ReportClone::create([
+                'user_id' => $clinic_id,
+                'template_id' => $request->template_id,
+                'sign_date' => $date
+            ]);
+
             DB::commit();
             
             $result['status'] = "success";
+            $result['msg'] = "Successfully cloned the template to your setting list.";
             $result['redirectLink'] = route('clone.index');
 
         } catch (\Exception $e) {
             DB::rollback();
 
             $result['status'] = "failed";
+            $result['msg'] = "Sorry, Failed the cloning operation!";
             $result['redirectLink'] = '';
 
             throw $e;
