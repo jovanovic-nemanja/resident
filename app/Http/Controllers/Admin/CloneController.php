@@ -92,34 +92,193 @@ class CloneController extends Controller
         $dates = User::getformattime();
         $date = $dates['date'];
         $clinic_id = auth()->id();
+        $result = [];
 
-        $activities = Activities::where('template_id', $request->template_id)->get();
-        if($activities) {
-            foreach ($activities as $activity) {
-                $activitys = Activities::create([
-                    'title' => $activity->title,
-                    'clinic_id' => $clinic_id,
-                    'type' => $activity->type,
-                    'comments' => $activity->comments,
-                    'sign_date' => $date,
-                ]);
+        DB::beginTransaction();
 
-                if (@$activity->comments) {
-                    $arrs = explode(',', $activity->comments);
-                    foreach ($arrs as $comm) {
-                        $comments = Comments::create([
-                            'type' => 1,
-                            'sign_date' => $date,
-                            'name' => $comm,
-                            'ref_id' => $activitys['id']
-                        ]);
+        try {
+
+            $activities = Activities::where('template_id', $request->template_id)->get();
+            if($activities) {
+                foreach ($activities as $activity) {
+                    $activitys = Activities::create([
+                        'title' => $activity->title,
+                        'clinic_id' => $clinic_id,
+                        'type' => $activity->type,
+                        'comments' => $activity->comments,
+                        'sign_date' => $date,
+                    ]);
+
+                    if (@$activity->comments) {
+                        $arrs = explode(',', $activity->comments);
+                        foreach ($arrs as $comm) {
+                            $comments = Comments::create([
+                                'type' => 1,
+                                'sign_date' => $date,
+                                'name' => $comm,
+                                'ref_id' => $activitys['id']
+                            ]);
+                        }
                     }
                 }
             }
-        }
 
-        $result = route('clone.index');
-        
+            $bodyharmcomments = Bodyharmcomments::where('template_id', $request->template_id)->get();
+            if ($bodyharmcomments) {
+                foreach ($bodyharmcomments as $bodyharmcomment) {
+                    $bodyharm_comment = Bodyharmcomments::create([
+                        'name' => $bodyharmcomment->name,
+                        'clinic_id' => $clinic_id,
+                        'sign_date' => $date,
+                    ]);
+                }                
+            }
+
+            $healthtypes = HealthCareCenterTypes::where('template_id', $request->template_id)->get();
+            if ($healthtypes) {
+                foreach ($healthtypes as $healthtype) {
+                    $type = HealthCareCenterTypes::create([
+                        'title' => $healthtype->title,
+                        'clinic_id' => $clinic_id,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $incidences = Incidences::where('template_id', $request->template_id)->get();
+            if ($incidences) {
+                foreach ($incidences as $incidence) {
+                    $inc = Incidences::create([
+                        'title' => $incidence->title,
+                        'content' => $incidence->content,
+                        'type' => $incidence->type,
+                        'clinic_id' => $clinic_id,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $medications = Medications::where('template_id', $request->template_id)->get();
+            if ($medications) {
+                foreach ($medications as $medication) {
+                    $medics = Medications::create([
+                        'name' => $medication->name,
+                        'dose' => $medication->dose,
+                        'photo' => @$medication->photo,
+                        'clinic_id' => $clinic_id,
+                        'sign_date' => $date,
+                        'comments' => $medication->comments
+                    ]);
+
+                    if (@$medication->comments) {
+                        $arrs = explode(',', $medication->comments);
+                        foreach ($arrs as $comm) {
+                            $comments = Comments::create([
+                                'type' => 2,
+                                'sign_date' => $date,
+                                'name' => $comm,
+                                'ref_id' => $medics['id']
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            $moods = Moods::where('template_id', $request->template_id)->get();
+            if($moods) {
+                foreach ($moods as $mood) {
+                    $mds = Moods::create([
+                        'title' => $mood->title,
+                        'clinic_id' => $clinic_id,
+                        'sign_date' => $date
+                    ]);
+                }
+            }
+
+            $relations = Relations::where('template_id', $request->template_id)->get();
+            if ($relations) {
+                foreach ($relations as $relation) {
+                    $rls = Relations::create([
+                        'title' => $relation->title,
+                        'clinic_id' => $clinic_id,
+                        'sign_date' => $date
+                    ]);
+                }
+            }
+
+            $reminderConfigs = ReminderConfigs::where('template_id', $request->template_id)->get();
+            if ($reminderConfigs) {
+                foreach ($reminderConfigs as $reminderConfig) {
+                    $reminderConfigs = ReminderConfigs::create([
+                        'minutes' => $reminderConfig->minutes,
+                        'clinic_id' => $clinic_id,
+                        'active' => $reminderConfig->active,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $reptypes = RepresentativeTypes::where('template_id', $request->template_id)->get();
+            if ($reptypes) {
+                foreach ($reptypes as $reptype) {
+                    $rtype = RepresentativeTypes::create([
+                        'title' => $reptype->title,
+                        'clinic_id' => $clinic_id,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $routes = Routes::where('template_id', $request->template_id)->get();
+            if($routes) {
+                foreach ($routes as $route) {
+                    $rts = Routes::create([
+                        'name' => $route->name,
+                        'clinic_id' => $clinic_id,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $fields = Fields::where('template_id', $request->template_id)->get();
+            if ($fields) {
+                foreach ($fields as $field) {
+                    $fld = new Fields;
+
+                    $fld->fieldName = $field->fieldName;
+                    $fld->tab_id = $field->tab_id;
+                    $fld->clinic_id = $clinic_id;
+                    $fld->sign_date_field = $date;
+                    $fld->save();
+
+                    $fieldID = $fld->id;
+
+                    $fieldtypes = FieldTypes::where('fieldID', $field->id)->get();
+                    foreach ($fieldtypes as $fv) {
+                        $fieldtypes = new FieldTypes;
+
+                        $fieldtypes->typeName = $fv;
+                        $fieldtypes->fieldID = $fieldID;
+                        $fieldtypes->sign_date_field_type = $date;
+                        $fieldtypes->save();
+                    }
+                }
+            }
+
+            DB::commit();
+            
+            $result['status'] = "success";
+            $result['redirectLink'] = route('clone.index');
+
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            $result['status'] = "failed";
+            $result['redirectLink'] = '';
+
+            throw $e;
+        }  
+
         return response()->json($result);
     }
 
