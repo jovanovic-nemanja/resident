@@ -72,7 +72,11 @@
                                                 <td>{{ $template->sign_date }}</td>
                                                 <td>
                                                     <a href="{{ route('clone.show', $template->id) }}" class="btn btn-success">View</a>
-                                                    <button type="button" data-toggle="modal" data-target="#cloneModal-{{ $template->id }}" class="btn btn-primary clone--modal_btn" title="Clone">Clone</button>
+                                                    @if(App\ReportClone::getLog($template->id, auth()->id()))
+                                                        <button type="button" data-toggle="modal" data-target="#cloneModal-{{ $template->id }}" class="btn btn-primary clone--modal_btn" title="Clone">Clone</button>
+                                                    @else
+                                                        <button type="button" class="btn btn-default" disabled title="Cloned">Cloned</button>
+                                                    @endif                                                    
 
                                                     <!-- Modal-->
                                                     <div class="modal fade cloneModal" id="cloneModal-{{ $template->id }}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
@@ -165,7 +169,28 @@
                         data: { 'template_id' : value },
                         success: function(result, status) {
                             if(result.status == "success") {
-                                window.location.href = result.redirectLink;
+
+                                var mes = result.msg;
+                                var title = "Clone Result...";
+                                toastr.options = {
+                                    "closeButton": true,
+                                    "debug": false,
+                                    "newestOnTop": false,
+                                    "progressBar": false,
+                                    "positionClass": "toast-top-right",
+                                    "onclick": null,
+                                    "showDuration": "2000",
+                                    "hideDuration": "2000",
+                                    "timeOut": "1000",
+                                    "extendedTimeOut": "5000",
+                                };
+                                toastr.success(mes, title); //info, success, warning, error
+
+                                setTimeout(function () {
+
+                                    window.location.href = result.redirectLink;
+
+                                }, 2000);
                             }
                         }
                     })
