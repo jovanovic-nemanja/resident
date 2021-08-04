@@ -164,8 +164,8 @@
                         type: 'post',
                         data: { 'template_id' : value },
                         success: function(result, status) {
-                            if(status == "success") {
-                                window.location.href = result;
+                            if(result.status == "success") {
+                                window.location.href = result.redirectLink;
                             }
                         }
                     })
