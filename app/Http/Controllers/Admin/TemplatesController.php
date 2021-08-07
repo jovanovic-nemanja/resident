@@ -259,13 +259,12 @@ class TemplatesController extends Controller
             $this->validate(request(), [
                 'template_id' => 'required',
                 'name' => 'required',
-                'dose' => 'required'
+                'brand_name' => 'required'
             ]);
 
             $medication = Medications::create([
                 'name' => $request->name,
-                'dose' => $request->dose,
-                'photo' => @$request->photo,
+                'brand_name' => $request->brand_name,
                 'clinic_id' => $clinic_id,
                 'template_id' => $request->template_id,
                 'sign_date' => $date,
@@ -282,10 +281,6 @@ class TemplatesController extends Controller
                         'ref_id' => $medication['id']
                     ]);
                 }
-            }
-
-            if (@$request->photo) {
-                Medications::upload_file($medication->id);
             }
 
             $msg = 'Medication has been successfully created.';
@@ -614,16 +609,13 @@ class TemplatesController extends Controller
                 'template_id' => 'required',
                 'setting_type' => 'required',
                 'name' => 'required',
-                'dose' => 'required'
+                'brand_name' => 'required'
             ]);
 
             $record = Medications::where('id', $id)->first();
             if (@$record) {
                 $record->name = $request->name;
-                $record->dose = $request->dose;
-                if (@$request->photo) {
-                    $record->photo = $request->photo;
-                }
+                $record->brand_name = $request->brand_name;
                 $record->comments = $request->comments;
 
                 $record->update();
@@ -643,10 +635,6 @@ class TemplatesController extends Controller
                         'ref_id' => $record->id
                     ]);
                 }
-            }
-
-            if (@$request->photo) {
-                Medications::upload_file($record->id);
             }
         }else if($request->setting_type == 6) { //mood
             $this->validate(request(), [

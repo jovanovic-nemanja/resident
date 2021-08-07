@@ -53,8 +53,7 @@ class MedicationsController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required',
-            'dose' => 'required'
-            // 'photo' => 'required'
+            'brand_name' => 'required'
         ]);
 
         $dates = User::getformattime();
@@ -63,8 +62,7 @@ class MedicationsController extends Controller
 
         $medications = Medications::create([
             'name' => $request->name,
-            'dose' => $request->dose,
-            'photo' => @$request->photo,
+            'brand_name' => $request->brand_name,
             'clinic_id' => $clinic_id,
             'sign_date' => $date,
             'comments' => $request->comments
@@ -81,10 +79,6 @@ class MedicationsController extends Controller
                 ]);
             }
         }
-
-        if (@$request->photo) {
-            Medications::upload_file($medications->id);
-        }        
 
         return redirect()->route('medications.index')->with('flash', 'Medication has been successfully created.');
     }
@@ -124,17 +118,13 @@ class MedicationsController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required',
-            'dose' => 'required',
-            // 'photo' => 'required'
+            'brand_name' => 'required'
         ]);
 
         $record = Medications::where('id', $id)->first();
         if (@$record) {
             $record->name = $request->name;
-            $record->dose = $request->dose;
-            if (@$request->photo) {
-                $record->photo = $request->photo;
-            }
+            $record->brand_name = $request->brand_name;
             $record->comments = $request->comments;
 
             $record->update();
@@ -154,10 +144,6 @@ class MedicationsController extends Controller
                     'ref_id' => $record->id
                 ]);
             }
-        }
-
-        if (@$request->photo) {
-            Medications::upload_file($record->id);
         }
 
         return redirect()->route('medications.index');

@@ -116,13 +116,6 @@ var KTAddUser = function () {
 			_formEl,
 			{
 				fields: {
-					// photo: {
-					// 	validators: {
-					// 		notEmpty: {
-					// 			message: 'Photo is required'
-					// 		}
-					// 	}
-					// },
 					name: {
 						validators: {
 							notEmpty: {
@@ -130,10 +123,10 @@ var KTAddUser = function () {
 							}
 						}
 					},
-					dose: {
+					brand_name: {
 						validators: {
 							notEmpty: {
-								message: 'Dose is required'
+								message: 'Brand Name is required'
 							}
 						}
 					}
