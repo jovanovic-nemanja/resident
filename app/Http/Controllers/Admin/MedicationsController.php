@@ -168,4 +168,47 @@ class MedicationsController extends Controller
         
         return redirect()->route('medications.index');
     }
+
+    public function importCSV(Request $request)
+    {
+        $customerArr = $this->csvToArray($request->file);
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+        $clinic_id = auth()->id();
+
+        for ($i = 0; $i < count($customerArr); $i ++)
+        {
+            $medications = Medications::create([
+                'name' => $customerArr[$i][0],
+                'brand_name' => $customerArr[$i][1],
+                'clinic_id' => $clinic_id,
+                'sign_date' => $date
+            ]);
+        }
+
+        return redirect()->route('medications.index');
+    }
+
+    function csvToArray($filename = '', $delimiter = ',')
+    {
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+
+        $header = null;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== false)
+        {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+            {
+                if (!$header)
+                    $header = $row;
+                else
+                    $data[] = $row;
+            }
+            fclose($handle);
+        }
+
+        return $data;
+    }
 }

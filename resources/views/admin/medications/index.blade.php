@@ -45,6 +45,12 @@
                         </div>
                         <div class="card-toolbar">
                             <a href="{{ route('medications.create') }}" class="btn btn-primary font-weight-bolder">Add</a>
+
+                            <form class="form d-flex" method="POST" action="{{ route('importCSV') }}" enctype="multipart/form-data">
+                                @csrf
+                                <input type="file" name="file" class="form-control w-50" accept=".csv" required />
+                                <button type="submit" class="btn btn-success">Import CSV</button>
+                            </form>
                         </div>
                     </div>
                         
