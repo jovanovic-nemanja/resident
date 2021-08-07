@@ -847,4 +847,49 @@ class TemplatesController extends Controller
             
         return redirect()->route('templates.viewTemplate', $rec->template_id);
     }
+
+    public function importCSVAdmin(Request $request)
+    {
+        $customerArr = $this->csvToArray($request->file);
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+        $clinic_id = auth()->id();
+        $template_id = $request->template_id;
+
+        for ($i = 0; $i < count($customerArr); $i ++)
+        {
+            $medications = Medications::create([
+                'name' => $customerArr[$i][0],
+                'brand_name' => $customerArr[$i][1],
+                'clinic_id' => $clinic_id,
+                'sign_date' => $date,
+                'template_id' => $template_id
+            ]);
+        }
+
+        return redirect()->route('templates.viewTemplate', $request->template_id);
+    }
+
+    function csvToArray($filename = '', $delimiter = ',')
+    {
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+
+        $header = null;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== false)
+        {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+            {
+                if (!$header)
+                    $header = $row;
+                else
+                    $data[] = $row;
+            }
+            fclose($handle);
+        }
+
+        return $data;
+    }
 }

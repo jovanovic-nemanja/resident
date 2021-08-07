@@ -260,6 +260,13 @@
                             <hr>
                             <h4>Medications</h4>
                             <br>
+                            <form class="form d-flex" method="POST" action="{{ route('importCSVAdmin') }}" enctype="multipart/form-data">
+                                @csrf
+                                <input type="file" name="file" class="form-control w-50" accept=".csv" required />
+                                <input type="hidden" name="template_id" value="{{ $template->id }}" />
+                                <button type="submit" class="btn btn-success">Import CSV</button>
+                            </form>
+                            <br>
                             <!--begin: Datatable-->
                             <table class="table table-bordered table-hover table-checkable" id="kt_datatable_4" style="margin-top: 13px !important">
                                 <thead>

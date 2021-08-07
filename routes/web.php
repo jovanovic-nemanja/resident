@@ -60,6 +60,8 @@ Route::resource('caretaker', 'Admin\CaretakerController');
 
 
 Route::resource('medications', 'Admin\MedicationsController');
+Route::post('/importCSV', 'Admin\MedicationsController@importCSV')->name('importCSV');
+Route::post('/importCSVAdmin', 'Admin\TemplatesController@importCSVAdmin')->name('importCSVAdmin');
 
 
 
