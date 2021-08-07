@@ -61,40 +61,6 @@
                                                     <div class="col-xl-9">
                                                         <!--begin::Wizard Step 1-->
                                                         <div class="my-5 step" data-wizard-type="step-content" data-type-status="current">
-                                                            <!--begin::Group-->
-                                                            <div class="form-group row {{ $errors->has('photo') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label text-left">Photo</label>
-                                                                <div class="col-lg-9 col-xl-9">
-                                                                    <?php 
-                                                                        if(@$result->photo) {
-                                                                            $path = asset('uploads/') . "/" . $result->photo;
-                                                                        }else{
-                                                                            $path = "";
-                                                                        }
-                                                                    ?>
-                                                                    <div class="image-input image-input-outline" id="kt_user_edit_avatar" style="background-image: url(<?= $path ?>);">
-                                                                        <div class="image-input-wrapper"></div>
-                                                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                                                            <i class="fa fa-pen icon-sm text-muted"></i>
-                                                                            <input type="file" name="photo" accept=".png, .jpg, .jpeg" />
-                                                                            <input type="hidden" name="profile_avatar_remove" />
-                                                                        </label>
-                                                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                                                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="fv-plugins-message-container"></div>
-
-                                                                @if ($errors->has('photo'))
-                                                                    <span class="help-block">
-                                                                        <strong>{{ $errors->first('photo') }}</strong>
-                                                                    </span>
-                                                                @endif
-                                                            </div>
-                                                            <!--end::Group-->
-
                                                             <div class="form-group row {{ $errors->has('name') ? 'has-error' : '' }}">
                                                                 <label class="col-xl-3 col-lg-3 col-form-label">Name</label>
                                                                 <div class="col-lg-9 col-xl-9">
@@ -110,17 +76,17 @@
                                                                 @endif
                                                             </div>
 
-                                                            <div class="form-group row {{ $errors->has('dose') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Dose</label>
+                                                            <div class="form-group row {{ $errors->has('brand_name') ? 'has-error' : '' }}">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Brand Name</label>
                                                                 <div class="col-lg-9 col-xl-9">
-                                                                    <input class="form-control form-control-solid form-control-lg" name="dose" type="text" required value="{{ $result->dose }}" />
+                                                                    <input class="form-control form-control-solid form-control-lg" name="brand_name" type="text" required value="{{ $result->brand_name }}" />
                                                                 </div>
 
                                                                 <div class="fv-plugins-message-container"></div>
 
-                                                                @if ($errors->has('dose'))
+                                                                @if ($errors->has('brand_name'))
                                                                     <span class="help-block">
-                                                                        <strong>{{ $errors->first('dose') }}</strong>
+                                                                        <strong>{{ $errors->first('brand_name') }}</strong>
                                                                     </span>
                                                                 @endif
                                                             </div>

@@ -266,8 +266,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Name</th>
-                                        <th>Dose</th>
-                                        <th>Photo</th>
+                                        <th>Brand Name</th>
                                         <th>Comments</th>
                                         <th>Actions</th>
                                     </tr>
@@ -281,14 +280,7 @@
                                                     <td>{{ $i }}</td>
                                                     <td>{{ $medication->name }}</td>
                                                     <td>
-                                                        {{ $medication->dose }}
-                                                    </td>
-                                                    <td>
-                                                        <?php if($medication->photo) { ?>
-                                                            <div class="symbol symbol-circle symbol-lg-75">
-                                                                <img class="rad-50 center-block custom_img_tag" src="{{asset('uploads/').'/'.$medication->photo }}" />
-                                                            </div>
-                                                        <?php } ?>
+                                                        {{ $medication->brand_name }}
                                                     </td>
                                                     <td>{{ $medication->comments }}</td>
                                                     <td>
