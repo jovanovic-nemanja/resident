@@ -394,6 +394,38 @@
                             <!--end: Datatable-->
                         </div>
 
+                        <div class="col-lg-12 pt-5 mt-5" id="units">
+                            <hr>
+                            <hr>
+                            <h4>Units</h4>
+                            <br>
+                            <!--begin: Datatable-->
+                            <table class="table table-bordered table-hover table-checkable" id="kt_datatable_11" style="margin-top: 13px !important">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Title</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        if($units) {
+                                            $i = 1;
+                                            foreach($units as $unit) { ?>
+                                                <tr>
+                                                    <td>{{ $i }}</td>
+                                                    <td>{{ $unit->title }}</td>
+                                                    <td>{{ $unit->sign_date }}</td>
+                                                </tr>
+                                    <?php $i++; } }else{ ?>
+
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                            <!--end: Datatable-->
+                        </div>
+
                         <div class="col-lg-12 pt-5 mt-5" id="settings">
                             <hr>
                             <hr>

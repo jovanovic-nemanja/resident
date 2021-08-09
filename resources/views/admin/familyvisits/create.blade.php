@@ -44,6 +44,18 @@
                         <form action="{{ route('familyvisit.store') }}" method="POST">
                             @csrf
 
+                            <div class="form-group {{ $errors->has('sign_date') ? 'has-error' : '' }}">
+                                <label class="col-form-label">Date</label>
+                                <div class="controls">
+                                    <input type="datetime-local" name="sign_date" class="form-control sign_date" id="sign_date" required />
+                                </div>
+                                @if ($errors->has('sign_date'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sign_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
                             <div class="form-group {{ $errors->has('relation') ? 'has-error' : '' }}">
                                 <label class="col-form-label">Relation</label>
                                 <div class="controls">

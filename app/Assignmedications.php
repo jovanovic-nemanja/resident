@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use App\User;
+use App\Units;
 use App\Medications;
 use App\Assignmedications;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ class Assignmedications extends Model
 {
     public $table = "assign_medications";
 
-    public $fillable = ['medications', 'dose', 'photo', 'resident', 'route', 'sign_date', 'time', 'start_day', 'end_day'];
+    public $fillable = ['medications', 'dose', 'photo', 'units', 'resident', 'route', 'sign_date', 'time', 'start_day', 'end_day'];
 
     public static function getMedications($id) 
     {
@@ -91,5 +92,17 @@ class Assignmedications extends Model
             $medication->photo = $file->hashName();
             $medication->update();
         }
+    }
+
+    public static function getTitle($id)
+    {
+        if (@$id) {
+            $result = Units::where('id', $id)->first();
+            $res = $result->title;
+        }else{
+            $res = 'None';
+        }
+
+        return $res;
     }
 }

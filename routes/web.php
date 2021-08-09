@@ -216,3 +216,8 @@ Route::delete('templates/destroysetting/{id}/{settingtype}', 'Admin\TemplatesCon
 Route::resource('clone', 'Admin\CloneController');
 Route::get('clone/showsetting/{templateID}/{id}', 'Admin\CloneController@showsetting')->name('clone.showsetting');
 Route::post('clone/cloneSettings', 'Admin\CloneController@cloneSettings')->name('clone.cloneSettings');
+
+
+
+
+Route::resource('units', 'Admin\UnitsController');

@@ -159,7 +159,7 @@
                         </a>
                     </li>
 
-                    <li class="menu-item menu-item-submenu <?= ($menu == 'activities' || $menu == 'incidences' || $menu == 'medications' || $menu == 'routes' || $menu == 'bodyharmcomments' || $menu == 'reminderconfigs' || $menu == 'adminlogs' || $menu == 'switchreminder' || $menu == 'reports' || $menu == 'settings' || $menu == 'relations' || $menu == 'moods' || $menu == 'representativetypes' || $menu == 'healthcarecentertypes') ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
+                    <li class="menu-item menu-item-submenu <?= ($menu == 'activities' || $menu == 'incidences' || $menu == 'medications' || $menu == 'routes' || $menu == 'bodyharmcomments' || $menu == 'reminderconfigs' || $menu == 'adminlogs' || $menu == 'switchreminder' || $menu == 'reports' || $menu == 'settings' || $menu == 'relations' || $menu == 'moods' || $menu == 'representativetypes' || $menu == 'healthcarecentertypes' || $menu == 'units') ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
                         <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon svg-icon-primary svg-icon-2x">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -251,6 +251,14 @@
                                             <span></span>
                                         </i>
                                         <span class="menu-text">Body harm Comments</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item <?= ($menu == "units") ? "menu-item-active" : "" ?>" aria-haspopup="true">
+                                    <a href="{{ route('units.index') }}" class="menu-link <?= ($menu == "units") ? "menu-item-active" : "" ?>">
+                                        <i class="menu-bullet menu-bullet-dot">
+                                            <span></span>
+                                        </i>
+                                        <span class="menu-text">Units</span>
                                     </a>
                                 </li>
                                 <li class="menu-item <?= ($menu == "reminderconfigs") ? "menu-item-active" : "" ?>" aria-haspopup="true">

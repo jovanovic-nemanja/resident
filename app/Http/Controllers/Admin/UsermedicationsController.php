@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Units;
 use App\Routes;
 use App\Reports;
 use Carbon\Carbon;
@@ -138,6 +139,7 @@ class UsermedicationsController extends Controller
         $result['medications'] = Medications::where('clinic_id', $clinic_id)->get();
 
         $result['routes'] = Routes::where('clinic_id', $clinic_id)->get();
+        $result['units'] = Units::where('clinic_id', $clinic_id)->get();
 
         return view('admin.usermedications.createassign', compact('result'));
     }
@@ -157,6 +159,7 @@ class UsermedicationsController extends Controller
                 'start_day' => 'required',
                 'end_day' => 'required',
                 'photo' => 'required',
+                'units' => 'required',
                 'resident' => 'required'
             ]);
 
@@ -169,6 +172,7 @@ class UsermedicationsController extends Controller
                     'dose' => $request->dose,
                     'resident' => $request->resident,
                     'route' => $request->route,
+                    'units' => $request->units,
                     'sign_date' => $date,
                     'photo' => $request->photo,
                     'time' => @$request->time1,
@@ -187,6 +191,7 @@ class UsermedicationsController extends Controller
                     'route' => $request->route,
                     'sign_date' => $date,
                     'photo' => $request->photo,
+                    'units' => $request->units,
                     'time' => @$request->time2,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
@@ -201,6 +206,7 @@ class UsermedicationsController extends Controller
                     'dose' => $request->dose,
                     'resident' => $request->resident,
                     'route' => $request->route,
+                    'units' => $request->units,
                     'sign_date' => $date,
                     'photo' => $request->photo,
                     'time' => @$request->time3,
@@ -217,6 +223,7 @@ class UsermedicationsController extends Controller
                     'dose' => $request->dose,
                     'resident' => $request->resident,
                     'route' => $request->route,
+                    'units' => $request->units,
                     'photo' => $request->photo,
                     'sign_date' => $date,
                     'time' => @$request->time4,
@@ -314,6 +321,7 @@ class UsermedicationsController extends Controller
         $result['medications'] = Medications::where('id', $res->medications)->get();
         $result['medication'] = Medications::where('id', $res->medications)->first();
         $result['allmedications'] = Medications::all();
+        $result['units'] = Units::where('clinic_id', auth()->id())->get();
 
         $comment = $res->medications;
         $result['routes'] = Routes::all();
@@ -345,7 +353,7 @@ class UsermedicationsController extends Controller
             $this->validate(request(), [
                 'medications' => 'required',
                 'dose' => 'required',
-                'photo' => 'required',
+                'units' => 'required',
                 'start_day' => 'required',
                 'end_day' => 'required',
                 'resident' => 'required'
@@ -356,12 +364,17 @@ class UsermedicationsController extends Controller
             $time = $dates['time'];
 
             $record = Assignmedications::where('id', $id)->first();
+
             if (@$record) {
                 $record->medications = $request->medications;
                 $record->dose = $request->dose;
-                $record->photo = @$request->photo;
+                if (@$request->photo) {
+                    $record->photo = $request->photo;
+                }
+                
                 $record->resident = $request->resident;
                 $record->route = $request->route;
+                $record->units = $request->units;
                 $record->time = @$request->time;
                 $record->start_day = $request->start_day;
                 $record->end_day = $request->end_day;

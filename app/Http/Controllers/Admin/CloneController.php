@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use App\Tabs;
 use App\Moods;
+use App\Units;
 use App\Routes;
 use App\Fields;
 use App\Comments;
@@ -241,6 +242,17 @@ class CloneController extends Controller
                 }
             }
 
+            $units = Units::where('template_id', $request->template_id)->get();
+            if($units) {
+                foreach ($units as $unit) {
+                    $uts = Units::create([
+                        'title' => $unit->title,
+                        'clinic_id' => $clinic_id,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
             $fields = Fields::where('template_id', $request->template_id)->get();
             if ($fields) {
                 foreach ($fields as $field) {
@@ -313,13 +325,14 @@ class CloneController extends Controller
         $reminderconfigs = ReminderConfigs::where('template_id', $id)->get();
         $types = RepresentativeTypes::where('template_id', $id)->get();
         $routes = Routes::where('template_id', $id)->get();
+        $units = Units::where('template_id', $id)->get();
         $settings = DB::table('setting_tabs')
                             ->join('fields', 'setting_tabs.id', '=', 'fields.tab_id')
                             ->where('fields.template_id', $id)
                             ->select('setting_tabs.*', 'fields.id as FieldID', 'fields.*')
                             ->get();
 
-        return view('admin.clone.view', compact('template', 'activities', 'comments', 'healthcarecentertypes', 'incidences', 'medications', 'moods', 'relations', 'reminderconfigs', 'types', 'routes', 'settings'));
+        return view('admin.clone.view', compact('template', 'activities', 'comments', 'healthcarecentertypes', 'incidences', 'medications', 'moods', 'relations', 'reminderconfigs', 'types', 'routes', 'settings', 'units'));
     }
 
     /**

@@ -182,11 +182,19 @@
                                     <div class="form-group row {{ $errors->has('photo') ? 'has-error' : '' }}">
                                         <label class="col-xl-3 col-lg-3 col-form-label text-left">Photo</label>
                                         <div class="col-lg-9 col-xl-9">
-                                            <div class="image-input image-input-outline" id="kt_medication_avatar">
+                                            <?php 
+                                                if(@$result['usermedications']->photo) {
+                                                    $path = asset('uploads/') . "/" . $result['usermedications']->photo;
+                                                }else{
+                                                    $path = "";
+                                                }
+                                            ?>
+
+                                            <div class="image-input image-input-outline" id="kt_medication_avatar" style="background-image: url(<?= $path ?>);">
                                                 <div class="image-input-wrapper"></div>
                                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change photo">
                                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                                    <input type="file" name="photo" accept=".png, .jpg, .jpeg" required />
+                                                    <input type="file" name="photo" accept=".png, .jpg, .jpeg" />
                                                     <input type="hidden" name="medication_photo_remove" />
                                                 </label>
                                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
@@ -204,6 +212,24 @@
                                         @endif
                                     </div>
                                     <!--end::Group-->
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group {{ $errors->has('units') ? 'has-error' : '' }}">
+                                        <label class="col-form-label">Unit </label>
+                                        <select class="form-control" id="units" name="units">
+                                            <?php 
+                                                foreach ($result['units'] as $unit) { ?>
+                                                    <option <?php if($result['usermedications']->units == $unit['id']){echo 'selected';} ?> value="<?= $unit['id'] ?>"><?= $unit['title'] ?></option>
+                                            <?php } ?>
+                                        </select>
+
+                                        @if ($errors->has('units'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('units') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
 
