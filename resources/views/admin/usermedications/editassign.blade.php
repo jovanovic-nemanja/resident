@@ -120,18 +120,18 @@
                                 </div>
 
                                 <div class="col-lg-3">
-                                    <div class="form-group {{ $errors->has('route') ? 'has-error' : '' }}">
-                                        <label class="col-form-label">Route </label>
-                                        <select class="form-control" id="route" name="route">
+                                    <div class="form-group {{ $errors->has('units') ? 'has-error' : '' }}">
+                                        <label class="col-form-label">Unit </label>
+                                        <select class="form-control" id="units" name="units">
                                             <?php 
-                                                foreach ($result['routes'] as $com) { ?>
-                                                    <option <?php if($result['usermedications']->route == $com['id']){echo 'selected';} ?> value="<?= $com['id'] ?>"><?= $com['name'] ?></option>
+                                                foreach ($result['units'] as $unit) { ?>
+                                                    <option <?php if($result['usermedications']->units == $unit['id']){echo 'selected';} ?> value="<?= $unit['id'] ?>"><?= $unit['title'] ?></option>
                                             <?php } ?>
                                         </select>
 
-                                        @if ($errors->has('route'))
+                                        @if ($errors->has('units'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('route') }}</strong>
+                                                <strong>{{ $errors->first('units') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -215,18 +215,18 @@
                                 </div>
 
                                 <div class="col-lg-3">
-                                    <div class="form-group {{ $errors->has('units') ? 'has-error' : '' }}">
-                                        <label class="col-form-label">Unit </label>
-                                        <select class="form-control" id="units" name="units">
+                                    <div class="form-group {{ $errors->has('route') ? 'has-error' : '' }}">
+                                        <label class="col-form-label">Route </label>
+                                        <select class="form-control" id="route" name="route">
                                             <?php 
-                                                foreach ($result['units'] as $unit) { ?>
-                                                    <option <?php if($result['usermedications']->units == $unit['id']){echo 'selected';} ?> value="<?= $unit['id'] ?>"><?= $unit['title'] ?></option>
+                                                foreach ($result['routes'] as $com) { ?>
+                                                    <option <?php if($result['usermedications']->route == $com['id']){echo 'selected';} ?> value="<?= $com['id'] ?>"><?= $com['name'] ?></option>
                                             <?php } ?>
                                         </select>
 
-                                        @if ($errors->has('units'))
+                                        @if ($errors->has('route'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('units') }}</strong>
+                                                <strong>{{ $errors->first('route') }}</strong>
                                             </span>
                                         @endif
                                     </div>
