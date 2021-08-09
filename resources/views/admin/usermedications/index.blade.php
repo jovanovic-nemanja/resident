@@ -96,6 +96,7 @@
                                     <th>No</th>
                                     <th>Date</th>
                                     <th>Name</th>
+                                    <th>Photo</th>
                                     <th>Dose</th>
                                     <th>Time</th>
                                     <th>Route</th>

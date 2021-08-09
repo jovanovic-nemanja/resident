@@ -156,6 +156,7 @@ class UsermedicationsController extends Controller
                 'dose' => 'required',
                 'start_day' => 'required',
                 'end_day' => 'required',
+                'photo' => 'required',
                 'resident' => 'required'
             ]);
 
@@ -169,10 +170,15 @@ class UsermedicationsController extends Controller
                     'resident' => $request->resident,
                     'route' => $request->route,
                     'sign_date' => $date,
+                    'photo' => $request->photo,
                     'time' => @$request->time1,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
                 ]);
+
+                if ($request->photo) {
+                    Assignmedications::upload_file($assignmedications->id);
+                } 
             } if (@$request->time2) {
                 $assignmedications = Assignmedications::create([
                     'medications' => $request->medications,
@@ -180,10 +186,15 @@ class UsermedicationsController extends Controller
                     'resident' => $request->resident,
                     'route' => $request->route,
                     'sign_date' => $date,
+                    'photo' => $request->photo,
                     'time' => @$request->time2,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
                 ]);
+
+                if ($request->photo) {
+                    Assignmedications::upload_file($assignmedications->id);
+                } 
             } if (@$request->time3) {
                 $assignmedications = Assignmedications::create([
                     'medications' => $request->medications,
@@ -191,21 +202,31 @@ class UsermedicationsController extends Controller
                     'resident' => $request->resident,
                     'route' => $request->route,
                     'sign_date' => $date,
+                    'photo' => $request->photo,
                     'time' => @$request->time3,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
                 ]);
+
+                if ($request->photo) {
+                    Assignmedications::upload_file($assignmedications->id);
+                } 
             } if (@$request->time4) {
                 $assignmedications = Assignmedications::create([
                     'medications' => $request->medications,
                     'dose' => $request->dose,
                     'resident' => $request->resident,
                     'route' => $request->route,
+                    'photo' => $request->photo,
                     'sign_date' => $date,
                     'time' => @$request->time4,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
                 ]);
+
+                if ($request->photo) {
+                    Assignmedications::upload_file($assignmedications->id);
+                } 
             }
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully assigned.');
@@ -324,6 +345,7 @@ class UsermedicationsController extends Controller
             $this->validate(request(), [
                 'medications' => 'required',
                 'dose' => 'required',
+                'photo' => 'required',
                 'start_day' => 'required',
                 'end_day' => 'required',
                 'resident' => 'required'
@@ -337,6 +359,7 @@ class UsermedicationsController extends Controller
             if (@$record) {
                 $record->medications = $request->medications;
                 $record->dose = $request->dose;
+                $record->photo = @$request->photo;
                 $record->resident = $request->resident;
                 $record->route = $request->route;
                 $record->time = @$request->time;
@@ -345,6 +368,10 @@ class UsermedicationsController extends Controller
 
                 $record->update();
             }
+
+            if (@$request->photo) {
+                Assignmedications::upload_file($record->id);
+            } 
         }else {
             $this->validate(request(), [
                 'medications' => 'required',

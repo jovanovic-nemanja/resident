@@ -20,7 +20,7 @@ class CreateAssignMedicationsTable extends Migration
             $table->foreign('medications')->references('id')->on('medications');
             
             $table->integer('dose');
-            // $table->integer('duration');
+            $table->text('photo');
             
             $table->integer('resident')->unsigned();
             $table->foreign('resident')->references('id')->on('users');

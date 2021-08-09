@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Medications;
 use App\Assignmedications;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Assignmedications extends Model
 {
     public $table = "assign_medications";
 
-    public $fillable = ['medications', 'dose', 'resident', 'route', 'sign_date', 'time', 'start_day', 'end_day'];
+    public $fillable = ['medications', 'dose', 'photo', 'resident', 'route', 'sign_date', 'time', 'start_day', 'end_day'];
 
     public static function getMedications($id) 
     {
@@ -64,6 +66,30 @@ class Assignmedications extends Model
             // and you might want to convert to integer
             $numberDays = intval($numberDays);
             return $numberDays;
+        }
+    }
+
+    /**
+    * @param user_id
+    * This is a feature to upload a company logo
+    */
+    public static function upload_file($id, $existings = null) {
+        if(!request()->hasFile('photo')) {
+            return false;
+        }
+
+        Storage::disk('public_local')->put('uploads/', request()->file('photo'));
+
+        self::save_file($id, request()->file('photo'));
+    }
+
+    public static function save_file($id, $file) {
+        $medication = Assignmedications::where('id', $id)->first();
+
+        if($medication) {
+            Storage::disk('public_local')->delete('uploads/', $medication->photo);
+            $medication->photo = $file->hashName();
+            $medication->update();
         }
     }
 }
