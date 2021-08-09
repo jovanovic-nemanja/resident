@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use App\Tabs;
 use App\Moods;
+use App\Units;
 use App\Routes;
 use App\Fields;
 use App\Comments;
@@ -74,6 +75,7 @@ class TemplatesController extends Controller
             $reminderconfigs = ReminderConfigs::where('template_id', $templateID)->get();
             $types = RepresentativeTypes::where('template_id', $templateID)->get();
             $routes = Routes::where('template_id', $templateID)->get();
+            $units = Units::where('template_id', $templateID)->get();
             
             $clinic_id = auth()->id();
             $settings = DB::table('setting_tabs')
@@ -82,7 +84,7 @@ class TemplatesController extends Controller
                                 ->select('setting_tabs.*', 'fields.id as FieldID', 'fields.*')
                                 ->get();
 
-            return view('admin.templates.create', compact('template', 'activities', 'comments', 'healthcarecentertypes', 'incidences', 'medications', 'moods', 'relations', 'reminderconfigs', 'types', 'routes', 'settings'));
+            return view('admin.templates.create', compact('template', 'activities', 'comments', 'healthcarecentertypes', 'incidences', 'medications', 'moods', 'relations', 'reminderconfigs', 'types', 'routes', 'settings', 'units'));
         }            
     }
 
@@ -130,6 +132,8 @@ class TemplatesController extends Controller
                 $setting_tabs = Tabs::all();
 
                 return view('admin.templates.createsetting', compact('templateID', 'setting_tabs'));
+            }else if($type == 12) {  //Units
+                return view('admin.templates.createunit', compact('templateID'));
             }
         }
     }
@@ -355,6 +359,20 @@ class TemplatesController extends Controller
             ]);
 
             $msg = 'Route has been successfully created.';
+        }else if($request->setting_type == 12) { //unit
+            $this->validate(request(), [
+                'template_id' => 'required',
+                'title' => 'required'
+            ]);
+
+            $units = Units::create([
+                'title' => $request->title,
+                'clinic_id' => $clinic_id,
+                'template_id' => $request->template_id,
+                'sign_date' => $date,
+            ]);
+
+            $msg = 'Unit has been successfully created.';
         }
 
         return redirect()->route('templates.viewTemplate', $request->template_id)->with('flash', $msg);
@@ -477,6 +495,10 @@ class TemplatesController extends Controller
             $result = Routes::where('id', $id)->first();
 
             return view('admin.templates.editroute', compact('result', 'templateID'));
+        }else if($type == 12) {    //units
+            $result = Units::where('id', $id)->first();
+
+            return view('admin.templates.editunit', compact('result', 'templateID'));
         }else{  //settings
             $setting_tabs = Tabs::all();
 
@@ -701,6 +723,18 @@ class TemplatesController extends Controller
 
                 $record->update();
             }
+        }else if($request->setting_type == 12) { //unit
+            $this->validate(request(), [
+                'template_id' => 'required',
+                'title' => 'required'
+            ]);
+
+            $record = Units::where('id', $id)->first();
+            if (@$record) {
+                $record->title = $request->title;
+
+                $record->update();
+            }
         }else { //settings
             $this->validate(request(), [
                 'template_id' => 'required',
@@ -779,7 +813,8 @@ class TemplatesController extends Controller
         $reminderConfigs = ReminderConfigs::where('template_id', $id)->delete();
         $representativeTypes = RepresentativeTypes::where('template_id', $id)->delete();
         $routes = Routes::where('template_id', $id)->delete();
-        $routes = Fields::where('template_id', $id)->delete();
+        $fields = Fields::where('template_id', $id)->delete();
+        $units = Units::where('template_id', $id)->delete();
 
         $record = Templates::where('id', $id)->delete();
         
@@ -839,6 +874,9 @@ class TemplatesController extends Controller
         }else if($type == 10) {    //route
             $rec = Routes::where('id', $id)->first();
             $record = Routes::where('id', $id)->delete();
+        }else if($type == 12) {    //unit
+            $rec = Units::where('id', $id)->first();
+            $record = Units::where('id', $id)->delete();
         }else{  //settings
             $rec = Fields::where('id', $id)->first();
             $fieldtypes = FieldTypes::where('fieldID', $id)->delete();

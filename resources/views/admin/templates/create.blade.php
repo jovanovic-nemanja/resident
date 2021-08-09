@@ -69,6 +69,8 @@
 
                                     <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 10]) }}">Routes</a>
 
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 12]) }}">Units</a>
+
                                     <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 11]) }}">Settings</a>
                                 </div>
                             </div>
@@ -511,6 +513,48 @@
                                                         <a href="" onclick="event.preventDefault(); document.getElementById('delete-route-form-{{$route->id}}').submit();" class="btn btn-primary">Delete</a>
 
                                                         <form id="delete-route-form-{{$route->id}}" action="{{ route('templates.destroysetting', [$route->id, 10]) }}" method="POST" style="display: none;">
+                                                            <input type="hidden" name="_method" value="delete">
+                                                            @csrf
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                    <?php $i++; } }else{ ?>
+
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                            <!--end: Datatable-->
+                        </div>
+
+                        <div class="col-lg-12 pt-5 mt-5" id="units">
+                            <hr>
+                            <hr>
+                            <h4>Units</h4>
+                            <br>
+                            <!--begin: Datatable-->
+                            <table class="table table-bordered table-hover table-checkable" id="kt_datatable_11" style="margin-top: 13px !important">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        if($units) {
+                                            $i = 1;
+                                            foreach($units as $unit) { ?>
+                                                <tr>
+                                                    <td>{{ $i }}</td>
+                                                    <td>{{ $unit->title }}</td>
+                                                    <td>{{ $unit->sign_date }}</td>
+                                                    <td>
+                                                        <a href="{{ route('templates.showsetting', [$template->id, $unit->id, 12]) }}" class="btn btn-success">Edit</a>
+                                                        <a href="" onclick="event.preventDefault(); document.getElementById('delete-unit-form-{{$unit->id}}').submit();" class="btn btn-primary">Delete</a>
+
+                                                        <form id="delete-unit-form-{{$unit->id}}" action="{{ route('templates.destroysetting', [$unit->id, 12]) }}" method="POST" style="display: none;">
                                                             <input type="hidden" name="_method" value="delete">
                                                             @csrf
                                                         </form>

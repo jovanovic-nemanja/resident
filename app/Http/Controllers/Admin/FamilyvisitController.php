@@ -79,20 +79,18 @@ class FamilyvisitController extends Controller
         $this->validate(request(), [
             'resident' => 'required',
             'relation' => 'required',
-            'comment' => 'required'
+            'comment' => 'required',
+            'sign_date' => 'required'
         ]);
 
         DB::beginTransaction();
-
-        $dates = User::getformattime();
-        $date = $dates['date'];
 
         try {
             $familyvisit = FamilyVisits::create([
                 'resident' => $request['resident'],
                 'relation' => $request['relation'],
                 'comment' => $request['comment'],
-                'sign_date' => $date,
+                'sign_date' => $request['sign_date'],
             ]);
 
             DB::commit();
@@ -153,19 +151,18 @@ class FamilyvisitController extends Controller
     {
         $this->validate(request(), [
             'relation' => 'required',
-            'comment' => 'required'
+            'comment' => 'required',
+            'sign_date' => 'required'
         ]);
 
         $record = FamilyVisits::where('id', $id)->first();
         if (@$record) {
             $record->relation = $request->relation;
             $record->comment = $request->comment;
+            $record->sign_date = $request->sign_date;
 
             $record->update();
         }
-
-        $dates = User::getformattime();
-        $date = $dates['date'];
 
         return redirect()->route('familyvisit.indexfamilyvisit', $record->resident);
     }

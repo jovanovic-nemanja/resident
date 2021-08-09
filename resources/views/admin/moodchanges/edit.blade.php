@@ -46,6 +46,18 @@
 
                             <input type="hidden" name="_method" value="put">
 
+                            <div class="form-group {{ $errors->has('sign_date') ? 'has-error' : '' }}">
+                                <label class="col-form-label">Date</label>
+                                <div class="controls">
+                                    <input type="datetime-local" name="sign_date" class="form-control sign_date" id="sign_date" required value="{{ $result->sign_date }}" />
+                                </div>
+                                @if ($errors->has('sign_date'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sign_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
                             <div class="form-group {{ $errors->has('mood') ? 'has-error' : '' }}">
                                 <label class="col-form-label">Type</label>
                                 <div class="controls">

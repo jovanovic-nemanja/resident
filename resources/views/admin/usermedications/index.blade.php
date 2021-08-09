@@ -98,6 +98,7 @@
                                     <th>Name</th>
                                     <th>Photo</th>
                                     <th>Dose</th>
+                                    <th>Unit</th>
                                     <th>Time</th>
                                     <th>Route</th>
                                     @if(auth()->user()->hasRole('care taker'))
@@ -121,10 +122,19 @@
 		                                			<td>{{ $i }}</td>
 		                                			<td>{{ $assignmedication->start_day }} ~ {{ $assignmedication->end_day }}</td>
 		                                			<td>{{ $medications->name }}</td>
+		                                			<td>
+		                                				@if(@$assignmedication->photo)
+		                                					<img src="<?= asset('uploads/'. $assignmedication->photo )?>" style="    width: 100%;max-width: 75px; height: 75px;" />
+		                                				@else
+		                                				@endif
+		                                			</td>
 			                                        <td>
 			                                            <div class="">
 			                                                <h6>{{ $assignmedication['dose'] }}</h6>
 			                                            </div>
+			                                        </td>
+			                                        <td>
+		                                                {{ App\Assignmedications::getTitle($assignmedication['units']) }}
 			                                        </td>
 			                                        <td>
 			                                        	<span class="badge round-primary">{{ $assignmedication['time'] }}</span>
@@ -159,7 +169,7 @@
 												            </form>
 
 
-												            <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
+												            <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give</a>
 
 															<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
 											                  	<input type="hidden" name="_method" value="POST">

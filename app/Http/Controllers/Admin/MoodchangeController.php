@@ -79,20 +79,18 @@ class MoodchangeController extends Controller
         $this->validate(request(), [
             'resident' => 'required',
             'mood' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'sign_date' => 'required'
         ]);
 
         DB::beginTransaction();
-
-        $dates = User::getformattime();
-        $date = $dates['date'];
 
         try {
             $moodchange = MoodChanges::create([
                 'resident' => $request['resident'],
                 'mood' => $request['mood'],
                 'description' => $request['description'],
-                'sign_date' => $date,
+                'sign_date' => $request['sign_date'],
             ]);
 
             DB::commit();
@@ -153,13 +151,15 @@ class MoodchangeController extends Controller
     {
         $this->validate(request(), [
             'mood' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'sign_date' => 'required'
         ]);
 
         $record = MoodChanges::where('id', $id)->first();
         if (@$record) {
             $record->mood = $request->mood;
             $record->description = $request->description;
+            $record->sign_date = $request->sign_date;
 
             $record->update();
         }

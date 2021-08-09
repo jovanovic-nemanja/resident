@@ -193,6 +193,24 @@
                                     </div>
                                     <!--end::Group-->
                                 </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group {{ $errors->has('units') ? 'has-error' : '' }}">
+                                        <label class="col-form-label">Unit </label>
+                                        <select class="form-control" id="units" name="units">
+                                            <?php 
+                                                foreach ($result['units'] as $unit) { ?>
+                                                    <option value="<?= $unit['id'] ?>"><?= $unit['title'] ?></option>
+                                            <?php } ?>
+                                        </select>
+
+                                        @if ($errors->has('units'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('units') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
