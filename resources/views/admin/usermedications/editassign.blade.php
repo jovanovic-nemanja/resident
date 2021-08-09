@@ -79,8 +79,8 @@
                         </div>
                     </div>
                         
-                    <div class="card-body">
-                        <form action="{{ route('usermedications.update', $result['usermedications']->id) }}" method="POST">
+                    <div class="card-body" id="kt_wizard">
+                        <form action="{{ route('usermedications.update', $result['usermedications']->id) }}" method="POST" id="kt_form" enctype="multipart/form-data">
                             @csrf
 
                             <input type="hidden" name="_method" value="put">
@@ -109,7 +109,7 @@
                                 <div class="col-lg-3">
                                     <div class="form-group {{ $errors->has('dose') ? 'has-error' : '' }}">
                                         <label class="col-form-label">Dose</label>
-                                        <input type="number" class="form-control" name='dose' placeholder="Dose" value="{{ $result['usermedications']->dose }}" required id="dose">
+                                        <input type="text" class="form-control" name='dose' placeholder="Dose" value="{{ $result['usermedications']->dose }}" required id="dose">
                                         
                                         @if ($errors->has('dose'))
                                             <span class="help-block">
@@ -140,7 +140,7 @@
                                 <div class="col-lg-3">
                                     <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
                                         <label class="col-form-label">Time </label>
-                                        <input type="time" class="form-control" id="time" name="time" placeholder="Time" value="{{ $result['usermedications']->time }}">
+                                        <input type="time" class="form-control" id="time" name="time" placeholder="Time" value="{{ $result['usermedications']->time }}" required>
                                         @if ($errors->has('time'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('time') }}</strong>
@@ -176,11 +176,40 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="col-lg-3">
+                                    <!--begin::Group-->
+                                    <div class="form-group row {{ $errors->has('photo') ? 'has-error' : '' }}">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-left">Photo</label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <div class="image-input image-input-outline" id="kt_medication_avatar">
+                                                <div class="image-input-wrapper"></div>
+                                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change photo">
+                                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                                    <input type="file" name="photo" accept=".png, .jpg, .jpeg" required />
+                                                    <input type="hidden" name="medication_photo_remove" />
+                                                </label>
+                                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="fv-plugins-message-container"></div>
+
+                                        @if ($errors->has('photo'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('photo') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <!--end::Group-->
+                                </div>
                             </div>
 
                             <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">
                                 <div class="">
-                                    <button type="submit" class="btn btn-primary gradient-blue">Submit</button>
+                                    <button type="button" data-wizard-type="action-submit" class="btn btn-primary gradient-blue">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -195,7 +224,5 @@
 @stop
 
 @section('script')
-<script>
-    
-</script>
+<script src="{{ asset('finaldesign/assets/js/pages/custom/user/edit-assign-medication.js') }}"></script>
 @endsection
