@@ -18,6 +18,7 @@ class CreateReportsTable extends Migration
 
             $table->integer('type');    //primary activity or medication or PRN.... as 1, 2, 3
             $table->text('description');
+            $table->integer('clinic_id'); //clinic id.
             $table->integer('resident_id'); //resident id of user table.
             $table->integer('user_id'); // admin or caregiver id of user table.
             $table->datetime('sign_date');

@@ -126,6 +126,13 @@ class TFGController extends Controller
         $report['medicationName'] = $medicName;
         $report['medicationTime'] = $time;
 
+        if(auth()->user()->hasRole('clinicowner')) {
+            $report['clinic_id'] = $report['user_id'];
+        }else{
+            $user_rec = User::where('id', $report['user_id'])->first();
+            $report['clinic_id'] = $user_rec->clinic_id;
+        }
+
         Reports::AddmedicationLogs($report);
 
         return redirect()->route('tfgs.indextfg', $request->resident)->with('flash', 'TFG has been successfully created.');

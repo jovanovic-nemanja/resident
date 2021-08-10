@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => 1,
             'clinic_id' => '',
             'profile_logo' => '1.png',
-            'password' => '$2y$10$43Lgdx7qDxGdj3cDyfcw4uLj5nVQ6vsQ3obexrb/axByYf4B6roZO', // 111111
+            'password' => '$2y$10$ZeqKgYJ27cNPn6.ah6ZQZOkvf6aN3v.picv3D12FGJnjfDAyJz3Va', // bluecarehub1029
             'phone_number' => '029292162',
             'gender' => 0,
             'birthday' => '1999-10-29',

@@ -276,6 +276,14 @@ class UsermedicationsController extends Controller
 
             $report = [];
             $report['user_id'] = auth()->id();
+            
+            if(auth()->user()->hasRole('clinicowner')) {
+                $report['clinic_id'] = $report['user_id'];
+            }else{
+                $user_rec = User::where('id', $report['user_id'])->first();
+                $report['clinic_id'] = $user_rec->clinic_id;
+            }
+            
             $report['resident_id'] = $request->resident;
             $report['type'] = 3;  //1: primary activity, 2: secondary activity, 3: medication Routine, 4: PRN
             $report['medicationName'] = $medicName;

@@ -23,12 +23,20 @@ class Adminlogs extends Model
     {
     	if (@$data) {
     		$dates = User::getformattime();
+            if(auth()->user()->hasRole('clinicowner')) {
+                $clinic_id = auth()->id();
+            }else{
+                $user_rec = User::where('id', auth()->id())->first();
+                $clinic_id = $user_rec->clinic_id;
+            }
+
 	        $date = $dates['date'];
 	        $time = $dates['time'];
 
     		$res = Adminlogs::create([
 	            'caretakerId' => $data['caretakerId'],
 	            'content' => $data['content'],
+                'clinic_id' => $clinic_id,
 	            'sign_date' => $date,
 	        ]);
 
