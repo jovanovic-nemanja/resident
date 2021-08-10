@@ -23,7 +23,8 @@ class ReportsController extends Controller
      */
     public function index()
     {
-        $reports = Reports::whereDate('created_at', Carbon::today())->get();
+        $user_id = auth()->id();
+        $reports = Reports::where('clinic_id', $user_id)->whereDate('created_at', Carbon::today())->get();
         $nurses = DB::table('users')
                         ->join('role_user', 'users.id', '=', 'role_user.user_id')
                         ->where('role_user.role_id', 2)
@@ -78,7 +79,8 @@ class ReportsController extends Controller
             $query = $query->where('user_id', $request->user_id);
         }
 
-        $reports = $query->get();
+        $clinic_id = auth()->id();
+        $reports = $query->where('clinic_id', $clinic_id)->get();
         $nurses = DB::table('users')
                         ->join('role_user', 'users.id', '=', 'role_user.user_id')
                         ->where('role_user.role_id', 2)

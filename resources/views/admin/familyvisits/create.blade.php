@@ -47,7 +47,11 @@
                             <div class="form-group {{ $errors->has('sign_date') ? 'has-error' : '' }}">
                                 <label class="col-form-label">Date</label>
                                 <div class="controls">
-                                    <input type="datetime-local" name="sign_date" class="form-control sign_date" id="sign_date" required />
+                                    <?php 
+                                        $date = new DateTime(); // Date object using current date and time
+                                        $dt= $date->format('Y-m-d\TH:i:s'); 
+                                    ?>
+                                    <input type="datetime-local" name="sign_date" class="form-control sign_date" id="sign_date" required value="<?= $dt; ?>" />
                                 </div>
                                 @if ($errors->has('sign_date'))
                                     <span class="help-block">

@@ -174,6 +174,13 @@ class UseractivitiesController extends Controller
             $report['activityTime'] = $time;
             $report['activityDuration'] = $duration;
 
+            if(auth()->user()->hasRole('clinicowner')) {
+                $report['clinic_id'] = $report['user_id'];
+            }else{
+                $user_rec = User::where('id', $report['user_id'])->first();
+                $report['clinic_id'] = $user_rec->clinic_id;
+            }
+
             Reports::AddactivityLogs($report);
 
             return redirect()->route('useractivities.indexuseractivity', $request->resident)->with('flash', 'Activity has been successfully given.');

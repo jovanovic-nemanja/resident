@@ -12,7 +12,7 @@ class Reports extends Model
 {
     public $table = "reports";
 
-    public $fillable = ['type', 'description', 'resident_id', 'user_id', 'sign_date'];
+    public $fillable = ['type', 'description', 'resident_id', 'clinic_id', 'user_id', 'sign_date'];
 
     /**
     * @param array data 
@@ -30,6 +30,7 @@ class Reports extends Model
                 'type' => $data['type'],    //1: primary activity, 2: secondary activity
                 'description' => $data['activityDuration'] . " ( " . $data['activityTime'] . " ) : " . $data['activityName'],
 	            'resident_id' => $data['resident_id'],
+                'clinic_id' => $data['clinic_id'],
                 'user_id' => $data['user_id'],
 	            'sign_date' => $date,
 	        ]);
@@ -56,6 +57,7 @@ class Reports extends Model
                 'type' => $data['type'],  //1: primary activity, 2: secondary activity, 3: medication Routine, 4: PRN
                 'description' => $data['medicationTime'] . " : " . $data['medicationName'],
 	            'resident_id' => $data['resident_id'],
+                'clinic_id' => $data['clinic_id'],
                 'user_id' => $data['user_id'],
 	            'sign_date' => $date,
 	        ]);
