@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
 use App\TFG;
 use App\Tabs;
 use App\User;
@@ -586,5 +587,62 @@ class ResidentController extends Controller
         $roleuser = RoleUser::where('user_id', $id)->delete();
         
         return redirect()->route('resident.management');
+    }
+
+    /**
+     * Display the resident profile information.
+     * @author Nemanja
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function quickreport($id)
+    {
+        $user = User::where('id', $id)->first();
+        $representatives = Representatives::where('user_id', $id)->get();
+        $healthcarecenters = HealthCareCenters::where('user_id', $id)->get();
+        $setting_tabs = Tabs::all();
+
+        $resident_settings =  DB::table('resident_settings')
+                                ->leftJoin('field_types', 'field_types.id', '=', 'resident_settings.fieldVal')
+                                ->leftJoin('fields', 'fields.id', '=', 'field_types.fieldID')
+                                ->leftJoin('setting_tabs', 'setting_tabs.id', '=', 'fields.tab_id')
+                                ->where('resident_settings.user_id', $id)
+                                ->select('setting_tabs.name as tabName', 'fields.fieldName', 'field_types.typeName')
+                                ->get();
+
+        return view('admin.resident.quickreports', compact('user', 'representatives', 'healthcarecenters', 'resident_settings', 'setting_tabs'));
+    }
+
+    /**
+     * Export the pdf.
+     * @author Nemanja
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function exportPDF($id)
+    {
+        // Fetch all customers from database
+        $data = [];
+        $data['user'] = User::where('id', $id)->first();
+        $data['representatives'] = Representatives::where('user_id', $id)->get();
+        $data['healthcarecenters'] = HealthCareCenters::where('user_id', $id)->get();
+        $data['setting_tabs'] = Tabs::all();
+
+        $data['resident_settings'] =  DB::table('resident_settings')
+                                ->leftJoin('field_types', 'field_types.id', '=', 'resident_settings.fieldVal')
+                                ->leftJoin('fields', 'fields.id', '=', 'field_types.fieldID')
+                                ->leftJoin('setting_tabs', 'setting_tabs.id', '=', 'fields.tab_id')
+                                ->where('resident_settings.user_id', $id)
+                                ->select('setting_tabs.name as tabName', 'fields.fieldName', 'field_types.typeName')
+                                ->get();
+
+        // Send data to the view using loadView function of PDF facade
+        $pdf = PDF::loadView('admin.resident.exportPDF', $data);
+
+        // If you want to store the generated pdf to the server then you can use the store function
+        $pdf->save(storage_path('app/../../public/backup/'). $data['user']->firstname . '-quick-report.pdf');
+
+        // Finally, you can download the file using download function
+        return $pdf->download($data['user']->firstname . '-quick-report.pdf');
     }
 }
