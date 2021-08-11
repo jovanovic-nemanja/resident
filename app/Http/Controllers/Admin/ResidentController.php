@@ -640,7 +640,7 @@ class ResidentController extends Controller
         $pdf = PDF::loadView('admin.resident.exportPDF', $data);
 
         // If you want to store the generated pdf to the server then you can use the store function
-        $pdf->save(storage_path('app/../../public/backup/'). $data['user']->firstname . '-quick-report.pdf');
+        $pdf->save(storage_path('app/../../public/uploads/'). $data['user']->firstname . '-quick-report.pdf');
 
         // Finally, you can download the file using download function
         return $pdf->download($data['user']->firstname . '-quick-report.pdf');
