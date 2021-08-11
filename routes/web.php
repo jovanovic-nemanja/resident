@@ -29,6 +29,8 @@ Route::put('/admin/localization/update/{localizationsetting}', 'Admin\Localizati
 Route::get('/resident/add', 'Admin\ResidentController@index')->name('resident.add');
 Route::get('/resident/bodyharm', 'Admin\ResidentController@bodyharm')->name('resident.bodyharm');
 Route::get('/resident/management', 'Admin\ResidentController@management')->name('resident.management');
+Route::get('/resident/quickreport/{resident}', 'Admin\ResidentController@quickreport')->name('resident.quickreport');
+Route::get('/resident/exportPDF/{resident}', 'Admin\ResidentController@exportPDF')->name('resident.exportPDF');
 Route::resource('resident', 'Admin\ResidentController');
 Route::post('/resident/saveResidentPersonalinfo', 'Admin\ResidentController@saveResidentPersonalinfo')->name('resident.saveResidentPersonalinfo');
 Route::post('/resident/saveResidentPOAinfo', 'Admin\ResidentController@saveResidentPOAinfo')->name('resident.saveResidentPOAinfo');

@@ -143,7 +143,7 @@
                                             <div class="dropdown-menu custom_div_tag" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" href="{{ route('useractivities.indexuseractivity', $resident->id) }}">View ADL</a>
 
-                                                @if(auth()->user()->hasRole('admin'))
+                                                @if(auth()->user()->hasRole('clinicowner'))
                                                     <a class="dropdown-item" href="{{ route('useractivities.createuseractivity', ['type' => 1, 'resident' => $resident->id]) }}">Primary ADL</a>
                                                     
                                                     <a class="dropdown-item" href="{{ route('useractivities.createuseractivity', ['type' => 2, 'resident' => $resident->id]) }}">Secondary ADL</a>
@@ -160,7 +160,7 @@
                                                 Incidence
                                             </button>
                                             <div class="dropdown-menu custom_div_tag" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="{{ route('familyvisit.indexfamilyvisit', $resident->id) }}">Family visit</a>
+                                                <a class="dropdown-item" href="{{ route('familyvisit.indexfamilyvisit', $resident->id) }}">Visitation</a>
                                                 <a class="dropdown-item" href="{{ route('moodchange.indexmoodchange', $resident->id) }}">Mood Change</a>
                                                 <a class="dropdown-item" href="{{ route('bodyharm.indexbodyharm', $resident->id) }}">Body harm</a>
                                             </div>
@@ -169,6 +169,8 @@
                                         <a href="{{ route('vitalsign.indexresidentvitalsign', $resident->id) }}" class="btn btn-block btn-sm btn-danger font-weight-bolder text-uppercase py-4">Vital Sign</a>
 
                                         <a href="{{ route('reports.indexresident', $resident->id) }}" class="btn btn-block btn-sm btn-default font-weight-bolder text-uppercase py-4">Reports</a>
+
+                                        <a href="{{ route('resident.quickreport', $resident->id) }}" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4">Quick Report</a>
                                     </div>
                                     <!--end::Body-->
                                 </div>
