@@ -223,3 +223,7 @@ Route::post('clone/cloneSettings', 'Admin\CloneController@cloneSettings')->name(
 
 
 Route::resource('units', 'Admin\UnitsController');
+
+
+Route::resource('facility', 'Admin\FacilityController');
+Route::post('facility/deleteFacility', 'Admin\FacilityController@deleteFacility')->name('facility.deleteFacility');
