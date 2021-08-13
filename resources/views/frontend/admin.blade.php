@@ -80,7 +80,7 @@
                                                 <!--end::Pic-->
                                                 <!--begin::Title-->
                                                 <div class="d-flex flex-column">
-                                                    <a href="{{ route('home') }}" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0 custom_a_tag">{{ $clinicowner->firstname }}</a>
+                                                    <a href="{{ route('facility.show', $clinicowner->id) }}" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0 custom_a_tag">{{ $clinicowner->firstname }}</a>
                                                     <span class="text-muted font-weight-bold">Clinic Owner</span>
                                                     <span class="text-dark font-weight-bold text-hover-primary">{{$clinicowner->clinic_name}}</span>
                                                 </div>
@@ -90,21 +90,21 @@
                                         </div>
                                         <!--end::User-->
                                         <!--begin::Desc-->
-                                        <p class="mb-7"><a href="{{ route('home') }}" class="text-primary pr-1">{{ $clinicowner->birthday }}</a></p>
+                                        <p class="mb-7"><a href="{{ route('facility.show', $clinicowner->id) }}" class="text-primary pr-1">{{ $clinicowner->birthday }}</a></p>
                                         <!--end::Desc-->
                                         <!--begin::Info-->
                                         <div class="mb-7">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                <a href="{{ route('home') }}" class="text-muted text-hover-primary custom_a_tag">{{ $clinicowner->email }}</a>
+                                                <a href="{{ route('facility.show', $clinicowner->id) }}" class="text-muted text-hover-primary custom_a_tag">{{ $clinicowner->email }}</a>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-cente my-1">
                                                 <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
-                                                <a href="{{ route('home') }}" class="text-muted text-hover-primary custom_a_tag">{{ $clinicowner->phone_number }}</a>
+                                                <a href="{{ route('facility.show', $clinicowner->id) }}" class="text-muted text-hover-primary custom_a_tag">{{ $clinicowner->phone_number }}</a>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                <span class="text-muted font-weight-bold">{{ $clinicowner->street1 }}</span>
+                                                <span class="text-muted font-weight-bold">{{ $clinicowner->street1." ".$clinicowner->street2 }}</span>
                                             </div>
                                         </div>
                                         <!--end::Info-->
@@ -130,6 +130,8 @@
                                         @else
                                             <a class="btn btn-block btn-sm btn-default font-weight-bolder text-uppercase py-4 mt-3" style="cursor: not-allowed;">Disable</a>
                                         @endif
+
+                                        <a href="{{ route('facility.show', $clinicowner->id) }}" class="btn btn-block btn-sm btn-success font-weight-bolder text-uppercase py-4  mt-3">View Facility</a>
                                     </div>
                                     <!--end::Body-->
                                 </div>
