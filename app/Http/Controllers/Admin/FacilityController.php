@@ -73,12 +73,14 @@ class FacilityController extends Controller
         $residents = DB::table('users')
                             ->join('role_user', 'role_user.user_id', '=', 'users.id')
                             ->where('role_user.role_id', $resident_role)
+                            ->where('users.clinic_id', $id)
                             ->select('users.*')
                             ->get();
 
         $caretakers = DB::table('users')
                             ->join('role_user', 'role_user.user_id', '=', 'users.id')
                             ->where('role_user.role_id', $caretaker_role)
+                            ->where('users.clinic_id', $id)
                             ->select('users.*')
                             ->get();
         
