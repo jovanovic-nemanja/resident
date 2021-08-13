@@ -145,13 +145,13 @@ var KTAssignMedication = function () {
 							}
 						}
 					},
-					photo: {
-						validators: {
-							notEmpty: {
-								message: 'Please choose the photo. That is required'
-							}
-						}
-					},
+					// photo: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Please choose the photo. That is required'
+					// 		}
+					// 	}
+					// },
 					time1: {
 						validators: {
 							notEmpty: {
