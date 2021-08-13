@@ -173,7 +173,7 @@
                                                 <div class="image-input-wrapper"></div>
                                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change photo">
                                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                                    <input type="file" name="photo" accept=".png, .jpg, .jpeg" required />
+                                                    <input type="file" name="photo" accept=".png, .jpg, .jpeg" />
                                                     <input type="hidden" name="medication_photo_remove" />
                                                 </label>
                                                 <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">

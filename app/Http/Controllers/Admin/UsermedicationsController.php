@@ -152,13 +152,13 @@ class UsermedicationsController extends Controller
      */
     public function store(Request $request)
     {
-        if (@$request->assign) {    //assign medication for admin
+        if (@$request->assign) {    //assign medication for facility owner
             $this->validate(request(), [
                 'medications' => 'required',
                 'dose' => 'required',
                 'start_day' => 'required',
                 'end_day' => 'required',
-                'photo' => 'required',
+                // 'photo' => 'required',
                 'units' => 'required',
                 'resident' => 'required'
             ]);
@@ -174,7 +174,7 @@ class UsermedicationsController extends Controller
                     'route' => $request->route,
                     'units' => $request->units,
                     'sign_date' => $date,
-                    'photo' => $request->photo,
+                    'photo' => @$request->photo,
                     'time' => @$request->time1,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
@@ -190,7 +190,7 @@ class UsermedicationsController extends Controller
                     'resident' => $request->resident,
                     'route' => $request->route,
                     'sign_date' => $date,
-                    'photo' => $request->photo,
+                    'photo' => @$request->photo,
                     'units' => $request->units,
                     'time' => @$request->time2,
                     'start_day' => $request->start_day,
@@ -208,7 +208,7 @@ class UsermedicationsController extends Controller
                     'route' => $request->route,
                     'units' => $request->units,
                     'sign_date' => $date,
-                    'photo' => $request->photo,
+                    'photo' => @$request->photo,
                     'time' => @$request->time3,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
@@ -224,14 +224,14 @@ class UsermedicationsController extends Controller
                     'resident' => $request->resident,
                     'route' => $request->route,
                     'units' => $request->units,
-                    'photo' => $request->photo,
+                    'photo' => @$request->photo,
                     'sign_date' => $date,
                     'time' => @$request->time4,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
                 ]);
 
-                if ($request->photo) {
+                if (@$request->photo) {
                     Assignmedications::upload_file($assignmedications->id);
                 } 
             }
