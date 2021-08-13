@@ -201,28 +201,26 @@
                                                 if(@$caretakers) {
                                                     $i = 1;
                                                     foreach($caretakers as $caretaker) { ?>
-                                                        @if($caretaker->hasRole('care taker'))
-                                                            <tr>
-                                                                <td>{{ $i }}</td>
-                                                                <td>{{ $caretaker->firstname }}</td>
-                                                                <td>{{ $caretaker->username }}</td>
-                                                                <td>
-                                                                    <div class="">
-                                                                        <h6><?= $caretaker->email; ?></h6>
+                                                        <tr>
+                                                            <td>{{ $i }}</td>
+                                                            <td>{{ $caretaker->firstname }}</td>
+                                                            <td>{{ $caretaker->username }}</td>
+                                                            <td>
+                                                                <div class="">
+                                                                    <h6><?= $caretaker->email; ?></h6>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <span class="badge round-primary">{{ $caretaker->phone_number }}</span>
+                                                            </td>
+                                                            <td>
+                                                                @if($caretaker->profile_logo)
+                                                                    <div class="symbol symbol-circle">
+                                                                        <img src="{{ asset('uploads/').'/'.$caretaker->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="">
                                                                     </div>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="badge round-primary">{{ $caretaker->phone_number }}</span>
-                                                                </td>
-                                                                <td>
-                                                                    @if($caretaker->profile_logo)
-                                                                        <div class="symbol symbol-circle">
-                                                                            <img src="{{ asset('uploads/').'/'.$caretaker->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="">
-                                                                        </div>
-                                                                    @endif
-                                                                </td>
-                                                            </tr>
-                                                        @endif
+                                                                @endif
+                                                            </td>
+                                                        </tr>
                                             <?php $i++; } }else{ ?>
 
                                             <?php } ?>
