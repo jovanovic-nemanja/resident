@@ -128,7 +128,7 @@
                             </div>
 
                             <div class="card-body pt-5 pb-3 row">
-                                <div class="pt-5 m-5">
+                                <div class="row pt-5 m-5">
                                     <h4>Residents Info</h4>
                                     <hr />
 
@@ -180,12 +180,12 @@
                                 </div>
                             </div>
 
-                            <div class="card-body pt-5 pb-3 row">
-                                <div class="pt-5 m-5">
+                            <div class="card-body pt-5 pb-3">
+                                <div class="pt-5">
                                     <h4>Caregivers Info</h4>
                                     <hr />
 
-                                    <table class="table table-bordered table-hover table-checkable" id="kt_datatable_1" style="margin-top: 13px !important">
+                                    <table class="table table-bordered table-hover table-checkable w-100" id="kt_datatable_1" style="margin-top: 13px !important">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
