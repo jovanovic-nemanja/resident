@@ -408,24 +408,30 @@ class CloneController extends Controller
     {
         $dates = User::getformattime();
         $date = $dates['date'];
-        $clinic_id = auth()->id();
+        $admin_role = Role::where('name', 'admin')->first();
+        if ($admin_role) {
+            $roleuser = RoleUser::where('role_id', $admin_role->id)->first();
+            $adminID = $roleuser->user_id;
+        }else{
+            $adminID = 1;
+        }
 
         $template = Templates::where('id', $id)->first();
-        $activities = Activities::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
-        $comments = Bodyharmcomments::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
-        $healthcarecentertypes = HealthCareCenterTypes::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
-        $incidences = Incidences::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
-        $medications = Medications::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
-        $moods = Moods::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
-        $relations = Relations::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
-        $reminderconfigs = ReminderConfigs::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
-        $types = RepresentativeTypes::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
-        $routes = Routes::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
-        $units = Units::where('template_id', $id)->where('clinic_id', $clinic_id)->get();
+        $activities = Activities::where('template_id', $id)->where('clinic_id', $adminID)->get();
+        $comments = Bodyharmcomments::where('template_id', $id)->where('clinic_id', $adminID)->get();
+        $healthcarecentertypes = HealthCareCenterTypes::where('template_id', $id)->where('clinic_id', $adminID)->get();
+        $incidences = Incidences::where('template_id', $id)->where('clinic_id', $adminID)->get();
+        $medications = Medications::where('template_id', $id)->where('clinic_id', $adminID)->get();
+        $moods = Moods::where('template_id', $id)->where('clinic_id', $adminID)->get();
+        $relations = Relations::where('template_id', $id)->where('clinic_id', $adminID)->get();
+        $reminderconfigs = ReminderConfigs::where('template_id', $id)->where('clinic_id', $adminID)->get();
+        $types = RepresentativeTypes::where('template_id', $id)->where('clinic_id', $adminID)->get();
+        $routes = Routes::where('template_id', $id)->where('clinic_id', $adminID)->get();
+        $units = Units::where('template_id', $id)->where('clinic_id', $adminID)->get();
         $settings = DB::table('setting_tabs')
                             ->join('fields', 'setting_tabs.id', '=', 'fields.tab_id')
                             ->where('fields.template_id', $id)
-                            ->where('fields.clinic_id', $clinic_id)
+                            ->where('fields.clinic_id', $adminID)
                             ->select('setting_tabs.*', 'fields.id as FieldID', 'fields.*')
                             ->get();
 
