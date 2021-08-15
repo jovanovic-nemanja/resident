@@ -26,7 +26,7 @@ use App\Usermedications;
 use App\ReminderConfigs;
 use App\Representatives;
 use App\Bodyharmcomments;
-use App\AssignMedications;
+use App\Assignmedications;
 use App\Useractivityreports;
 use Illuminate\Http\Request;
 use App\RepresentativeTypes;
@@ -208,14 +208,14 @@ class CloneController extends Controller
                 $mds = Medications::where('template_id', $request->template_id)->where('clinic_id', $clinic_id)->get();
                 if($mds) {
                     foreach ($mds as $md) {
-                        $assigned_ms = AssignMedications::where('medications', $md->id)->get();
+                        $assigned_ms = Assignmedications::where('medications', $md->id)->get();
                         if($assigned_ms) {
                             foreach ($assigned_ms as $assigned_m) {
                                 $u_ms = Usermedications::where('assign_id', $assigned_m->id)->delete();
                             }
                         }
 
-                        $assigned_ms = AssignMedications::where('medications', $md->id)->delete();
+                        $assigned_ms = Assignmedications::where('medications', $md->id)->delete();
                     }   
 
                     $mds = Medications::where('template_id', $request->template_id)->where('clinic_id', $clinic_id)->delete();
