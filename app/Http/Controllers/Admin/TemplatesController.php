@@ -52,6 +52,7 @@ class TemplatesController extends Controller
 
     public function viewTemplate($templateID)
     {
+        $adminID = auth()->id();
         if (@$templateID) {
             $dates = User::getformattime();
             $date = $dates['date'];
@@ -65,17 +66,17 @@ class TemplatesController extends Controller
             }
             $template = $record;
 
-            $activities = Activities::where('template_id', $templateID)->get();
-            $comments = Bodyharmcomments::where('template_id', $templateID)->get();
-            $healthcarecentertypes = HealthCareCenterTypes::where('template_id', $templateID)->get();
-            $incidences = Incidences::where('template_id', $templateID)->get();
-            $medications = Medications::where('template_id', $templateID)->get();
-            $moods = Moods::where('template_id', $templateID)->get();
-            $relations = Relations::where('template_id', $templateID)->get();
-            $reminderconfigs = ReminderConfigs::where('template_id', $templateID)->get();
-            $types = RepresentativeTypes::where('template_id', $templateID)->get();
-            $routes = Routes::where('template_id', $templateID)->get();
-            $units = Units::where('template_id', $templateID)->get();
+            $activities = Activities::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
+            $comments = Bodyharmcomments::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
+            $healthcarecentertypes = HealthCareCenterTypes::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
+            $incidences = Incidences::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
+            $medications = Medications::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
+            $moods = Moods::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
+            $relations = Relations::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
+            $reminderconfigs = ReminderConfigs::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
+            $types = RepresentativeTypes::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
+            $routes = Routes::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
+            $units = Units::where('template_id', $templateID)->where('clinic_id', $adminID)->get();
             
             $clinic_id = auth()->id();
             $settings = DB::table('setting_tabs')
@@ -180,8 +181,7 @@ class TemplatesController extends Controller
             $this->validate(request(), [
                 'template_id' => 'required',
                 'type' => 'required',
-                'title' => 'required',
-                'type' => 'required'
+                'title' => 'required'
             ]);
 
             $activities = Activities::create([

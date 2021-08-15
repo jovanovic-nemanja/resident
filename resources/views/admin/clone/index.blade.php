@@ -72,26 +72,35 @@
                                                 <td>{{ $template->sign_date }}</td>
                                                 <td>
                                                     <a href="{{ route('clone.show', $template->id) }}" class="btn btn-success">View</a>
-                                                    @if(App\ReportClone::getLog($template->id, auth()->id()))
-                                                        <button type="button" data-toggle="modal" data-target="#cloneModal-{{ $template->id }}" class="btn btn-primary clone--modal_btn" title="Clone">Clone</button>
-                                                    @else
-                                                        <button type="button" class="btn btn-default" disabled title="Cloned">Cloned</button>
-                                                    @endif                                                    
+                                                    <button type="button" data-toggle="modal" data-target="#cloneModal-{{ $template->id }}" class="btn btn-primary clone--modal_btn" title="Clone">Clone</button>
 
                                                     <!-- Modal-->
                                                     <div class="modal fade cloneModal" id="cloneModal-{{ $template->id }}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirm to clone the template</h5>
+                                                                    @if(App\ReportClone::getLog($template->id, auth()->id()))
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Confirm to clone the template</h5>
+                                                                    @else
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Confirm to re-clone the template</h5>
+                                                                    @endif
+
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <i aria-hidden="true" class="ki ki-close"></i>
                                                                     </button>
                                                                     <input type="hidden" name="template_id" value="{{ $template->id }}" class="modal_template_id" />
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    Are you sure you want to clone that as your settings? <br> If yes, that will be cloned with your settings and you wouldn't revert it again.
-                                                                </div>
+
+                                                                @if(App\ReportClone::getLog($template->id, auth()->id()))
+                                                                    <div class="modal-body">
+                                                                        Are you sure you want to clone that as your settings? <br> If yes, that will be cloned with your settings and you wouldn't revert it again.
+                                                                    </div>
+                                                                @else
+                                                                    <div class="modal-body" style="color: red;">
+                                                                        Are you sure you want to re-clone that as your settings? <br> Please make sure that no old data is deleted. If so, please contact system administrator and don't use this tool.
+                                                                    </div>
+                                                                @endif
+
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">No</button>
                                                                     <button type="button" class="btn btn-primary font-weight-bold" onclick="event.stopPropagation(); event.preventDefault(); showSwal('clone-msg', '{{$template->id}}')">Yes</button>
