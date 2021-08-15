@@ -16,13 +16,13 @@ class CreateBodyHarmTables extends Migration
         Schema::create('body_harms', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('resident')->unsigned();
-            $table->foreign('resident')->references('id')->on('users');
+            $table->integer('resident');
+            // $table->foreign('resident')->references('id')->on('users');
 
             $table->datetime('sign_date');
 
-            $table->integer('comment')->unsigned();
-            $table->foreign('comment')->references('id')->on('body_harm_comments');
+            $table->integer('comment');
+            // $table->foreign('comment')->references('id')->on('body_harm_comments');
 
             $table->string('screenshot_3d', '2048');
             
