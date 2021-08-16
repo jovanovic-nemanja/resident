@@ -124,13 +124,13 @@ var KTAssignMedication = function () {
 							}
 						}
 					},
-					dose: {
-						validators: {
-							notEmpty: {
-								message: 'Please put the dose. That is required'
-							}
-						}
-					},
+					// dose: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Please put the dose. That is required'
+					// 		}
+					// 	}
+					// },
 					start_day: {
 						validators: {
 							notEmpty: {

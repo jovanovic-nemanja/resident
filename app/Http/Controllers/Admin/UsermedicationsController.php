@@ -155,7 +155,7 @@ class UsermedicationsController extends Controller
         if (@$request->assign) {    //assign medication for facility owner
             $this->validate(request(), [
                 'medications' => 'required',
-                'dose' => 'required',
+                // 'dose' => 'required',
                 'start_day' => 'required',
                 'end_day' => 'required',
                 // 'photo' => 'required',
@@ -169,7 +169,7 @@ class UsermedicationsController extends Controller
             if (@$request->time1) {
                 $assignmedications = Assignmedications::create([
                     'medications' => $request->medications,
-                    'dose' => $request->dose,
+                    'dose' => @$request->dose,
                     'resident' => $request->resident,
                     'route' => $request->route,
                     'units' => $request->units,
@@ -186,7 +186,7 @@ class UsermedicationsController extends Controller
             } if (@$request->time2) {
                 $assignmedications = Assignmedications::create([
                     'medications' => $request->medications,
-                    'dose' => $request->dose,
+                    'dose' => @$request->dose,
                     'resident' => $request->resident,
                     'route' => $request->route,
                     'sign_date' => $date,
@@ -203,7 +203,7 @@ class UsermedicationsController extends Controller
             } if (@$request->time3) {
                 $assignmedications = Assignmedications::create([
                     'medications' => $request->medications,
-                    'dose' => $request->dose,
+                    'dose' => @$request->dose,
                     'resident' => $request->resident,
                     'route' => $request->route,
                     'units' => $request->units,
@@ -220,7 +220,7 @@ class UsermedicationsController extends Controller
             } if (@$request->time4) {
                 $assignmedications = Assignmedications::create([
                     'medications' => $request->medications,
-                    'dose' => $request->dose,
+                    'dose' => @$request->dose,
                     'resident' => $request->resident,
                     'route' => $request->route,
                     'units' => $request->units,
@@ -360,7 +360,7 @@ class UsermedicationsController extends Controller
         if (@$request->assign) {
             $this->validate(request(), [
                 'medications' => 'required',
-                'dose' => 'required',
+                // 'dose' => 'required',
                 'units' => 'required',
                 'start_day' => 'required',
                 'end_day' => 'required',
@@ -375,7 +375,7 @@ class UsermedicationsController extends Controller
 
             if (@$record) {
                 $record->medications = $request->medications;
-                $record->dose = $request->dose;
+                $record->dose = @$request->dose;
                 if (@$request->photo) {
                     $record->photo = $request->photo;
                 }
@@ -396,7 +396,7 @@ class UsermedicationsController extends Controller
         }else {
             $this->validate(request(), [
                 'medications' => 'required',
-                'dose' => 'required',
+                // 'dose' => 'required',
                 'resident' => 'required'
             ]);
 
@@ -407,7 +407,7 @@ class UsermedicationsController extends Controller
             $record = Usermedications::where('id', $id)->first();
             if (@$record) {
                 $record->medications = $request->medications;
-                $record->dose = $request->dose;
+                $record->dose = @$request->dose;
                 $record->resident = $request->resident;
                 $record->comment = $request->comment;
                 $record->file = $request->file;

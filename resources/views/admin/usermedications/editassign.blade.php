@@ -107,15 +107,9 @@
                                 </div>
                                     
                                 <div class="col-lg-3">
-                                    <div class="form-group {{ $errors->has('dose') ? 'has-error' : '' }}">
+                                    <div class="form-group">
                                         <label class="col-form-label">Dose</label>
-                                        <input type="text" class="form-control" name='dose' placeholder="Dose" value="{{ $result['usermedications']->dose }}" required id="dose">
-                                        
-                                        @if ($errors->has('dose'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('dose') }}</strong>
-                                            </span>
-                                        @endif
+                                        <input type="text" class="form-control" name='dose' placeholder="Dose" value="{{ $result['usermedications']->dose }}" id="dose">
                                     </div>
                                 </div>
 
