@@ -18,7 +18,7 @@ class MoodChanges extends Model
     {
         if (@$mood) {
             $mood = Moods::where('id', $mood)->first();
-            $str = $mood->title;
+            $str = ($mood->title) ? $mood->title : 'None';
         }else{
             $str = "None";
         }

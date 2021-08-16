@@ -51,10 +51,13 @@ class Bodyharms extends Model
     {
     	if (@$comment_id) {
     		$res = Bodyharmcomments::where('id', $comment_id)->first();
+            if(@$res) {
+                return $res->name;
+            }else{
+                return "None";
+            }
     	}else{
-    		$res = [];
+    		return "None";
     	}
-
-    	return $res->name;
     }
 }
