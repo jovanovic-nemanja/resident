@@ -34,13 +34,13 @@ class Comments extends Model
             $res = Useractivityreports::where('assign_id', $id)->first();
             if (@$res->comment) {
             	$result = Comments::where('id', $res->comment)->first();
-                $name = $result->name;
+                $name = ($result->name) ? $result->name : 'None';
             }else{
-                $name = '';
+                $name = 'None';
             }
         }
         else{
-            $name = '';
+            $name = 'None';
         }
 
         return $name;

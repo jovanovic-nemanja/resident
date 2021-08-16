@@ -98,7 +98,11 @@ class Assignmedications extends Model
     {
         if (@$id) {
             $result = Units::where('id', $id)->first();
-            $res = $result->title;
+            if (@$result) {
+                $res = $result->title;
+            }else{
+                $res = 'None';
+            }
         }else{
             $res = 'None';
         }

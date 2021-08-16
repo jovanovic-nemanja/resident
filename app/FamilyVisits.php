@@ -18,7 +18,7 @@ class FamilyVisits extends Model
     {
         if (@$relation) {
             $relation = Relations::where('id', $relation)->first();
-            $str = $relation->title;
+            $str = ($relation->title) ? $relation->title : "None";
         }else{
             $str = "None";
         }

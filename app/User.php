@@ -170,7 +170,7 @@ class User extends Authenticatable
     public static function getUsernameById($id) {
         if (@$id) {
             $user = User::where('id', $id)->first();
-            $name = $user->firstname;
+            $name = ($user->firstname) ? $user->firstname : 'None';
         }
 
         return $name;

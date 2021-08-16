@@ -17,6 +17,6 @@ class Routes extends Model
     		$result = Routes::where('id', $id)->first();
     	}
 
-    	return $result['name'];
+    	return ($result['name']) ? $result['name'] : 'None';
     }
 }
