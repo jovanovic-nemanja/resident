@@ -168,9 +168,11 @@
 
                                         <a href="{{ route('vitalsign.indexresidentvitalsign', $resident->id) }}" class="btn btn-block btn-sm btn-danger font-weight-bolder text-uppercase py-4">Vital Sign</a>
 
-                                        <a href="{{ route('reports.indexresident', $resident->id) }}" class="btn btn-block btn-sm btn-default font-weight-bolder text-uppercase py-4">Reports</a>
+                                        @if(auth()->user()->hasRole('clinicowner'))
+                                            <a href="{{ route('reports.indexresident', $resident->id) }}" class="btn btn-block btn-sm btn-default font-weight-bolder text-uppercase py-4">Reports</a>
 
-                                        <a href="{{ route('resident.quickreport', $resident->id) }}" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4">Quick Report</a>
+                                            <a href="{{ route('resident.quickreport', $resident->id) }}" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4">Quick Report</a>
+                                        @endif
                                     </div>
                                     <!--end::Body-->
                                 </div>
