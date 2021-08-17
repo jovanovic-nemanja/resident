@@ -123,7 +123,11 @@
 
                                                 <a href="{{ route('usermedications.indexusermedication', $user->id) }}" class="btn btn-success custom_div_tag dashboard custom_drop_down">Routine</a>
                                                 <a href="{{ route('tfgs.indextfg', $user->id) }}" class="btn btn-success dashboard custom_drop_down">PRN</a>
-                                                <a href="{{ route('notifications.index') }}" class="btn btn-success dashboard custom_drop_down">Reminders</a>
+                                                @if(auth()->user()->hasRole('clinicowner'))
+                                                    <a href="{{ route('notifications.index') }}" class="btn btn-success dashboard custom_drop_down">Reminders</a>
+                                                @else
+                                                    <a disabled style="cursor: not-allowed;" class="btn btn-success dashboard custom_drop_down">Reminders</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -138,7 +142,11 @@
 
                                                 <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-custom custom_div_tag dashboard custom_drop_down">Primary ADL</a>
                                                 <a href="{{ route('useractivities.indexuseractivity', $user->id) }}" class="btn btn-custom dashboard custom_drop_down">Secondary ADL</a>
-                                                <a href="{{ route('notifications.index') }}" class="btn btn-custom dashboard custom_drop_down">Reminders</a>
+                                                @if(auth()->user()->hasRole('clinicowner'))
+                                                    <a href="{{ route('notifications.index') }}" class="btn btn-custom dashboard custom_drop_down">Reminders</a>
+                                                @else
+                                                    <a disabled style="cursor: not-allowed;" class="btn btn-custom dashboard custom_drop_down">Reminders</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
