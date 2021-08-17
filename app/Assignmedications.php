@@ -15,7 +15,7 @@ class Assignmedications extends Model
 {
     public $table = "assign_medications";
 
-    public $fillable = ['medications', 'dose', 'photo', 'units', 'resident', 'route', 'sign_date', 'time', 'start_day', 'end_day'];
+    public $fillable = ['medications', 'dose', 'photo', 'units', 'resident', 'route', 'sign_date', 'time', 'start_day', 'end_day', 'remarks'];
 
     public static function getMedications($id) 
     {

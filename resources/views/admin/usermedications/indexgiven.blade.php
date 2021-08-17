@@ -99,10 +99,10 @@
                                     <th>Dose</th>
                                     <th>Time</th>
                                     <th>Route</th>
-                                    @if(auth()->user()->hasRole('care taker'))
-										<th>Comment</th>
-									@endif
-                                    <th>Actions</th>
+                                    <th>Comment</th>
+									@if(auth()->user()->hasRole('clinicowner'))
+                                    	<th>Actions</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -135,31 +135,19 @@
 															<?php } ?>
 														</span>
 			                                        </td>
-			                                        
-		                                        	@if(auth()->user()->hasRole('care taker'))
-			                                        	<td>
-															<select class="form-control" id="comment" name="comment">
-																<option value="">Choose Comment</option>
-			                                                    @foreach($comments as $comment)
-			                                                        <option value="{{ $comment->id }}">{{ $comment->name }}</option>
-			                                                    @endforeach
-															</select>
-														</td>
-													@endif
+
+			                                        <td>{{ nl2br($assignmedication1->remarks) }}</td>
 													
-			                                        <td>
-				                                        @if(auth()->user()->hasRole('admin'))
+													@if(auth()->user()->hasRole('clinicowner'))
+				                                        <td>
 				                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$assignmedication1['id']}}').submit();">Delete</a>
 
 				                                        	<form id="delete-form-{{$assignmedication1['id']}}" action="{{ route('usermedications.destroyassign', $assignmedication1['id']) }}" method="POST" style="display: none;">
 											                  	<input type="hidden" name="_method" value="delete">
 											                  	@csrf
 												            </form>
-					                                    @endif
-					                                    @if(auth()->user()->hasRole('care taker'))
-															<a class="btn btn-primary" style="cursor: not-allowed;">Given Medication</a>
-														@endif
-													</td>
+														</td>
+													@endif
 			                                    </tr>
                                 <?php $i++; } } }else{ ?>
 
