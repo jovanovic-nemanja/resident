@@ -101,9 +101,7 @@
                                     <th>Unit</th>
                                     <th>Time</th>
                                     <th>Route</th>
-                                    @if(auth()->user()->hasRole('care taker'))
-										<th>Comment</th>
-									@endif
+                                    <th>Comment</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -146,18 +144,7 @@
 															<?php } ?>
 														</span>
 			                                        </td>
-			                                        
-		                                        	@if(auth()->user()->hasRole('care taker'))
-			                                        	<td>
-															<select class="form-control" id="comment" name="comment">
-																<option value="">Choose Comment</option>
-			                                                    @foreach($comments as $comment)
-			                                                        <option value="{{ $comment->id }}">{{ $comment->name }}</option>
-			                                                    @endforeach
-															</select>
-														</td>
-													@endif
-													
+			                                        <td>{{ nl2br($assignmedication->remarks) }}</td>
 			                                        <td>
 				                                        @if(auth()->user()->hasRole('clinicowner'))
 				                                        	<a href="{{ route('usermedications.showassign', $assignmedication['id']) }}" class="btn btn-success">Edit</a>

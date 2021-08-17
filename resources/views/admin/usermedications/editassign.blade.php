@@ -227,6 +227,15 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Remarks</label>
+                                        <textarea class="form-control" name='remarks' placeholder="Remarks" id="remarks" rows="6">{{ $result['usermedications']->remarks }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="padding-bottom-30" style="text-align: center; padding-top: 5%;">
                                 <div class="">
                                     <button type="button" data-wizard-type="action-submit" class="btn btn-primary gradient-blue">Submit</button>

@@ -79,9 +79,7 @@ class UsermedicationsController extends Controller
 
         $user = User::where('id', $id)->first();
 
-        $comments = Comments::where('type', 2)->get();
-
-        return view('admin.usermedications.indexgiven', compact('usermedications', 'user', 'arrs', 'comments'));
+        return view('admin.usermedications.indexgiven', compact('usermedications', 'user', 'arrs'));
     }
 
     /**
@@ -176,6 +174,7 @@ class UsermedicationsController extends Controller
                     'sign_date' => $date,
                     'photo' => @$request->photo,
                     'time' => @$request->time1,
+                    'remarks' => @$request->remarks,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
                 ]);
@@ -193,6 +192,7 @@ class UsermedicationsController extends Controller
                     'photo' => @$request->photo,
                     'units' => $request->units,
                     'time' => @$request->time2,
+                    'remarks' => @$request->remarks,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
                 ]);
@@ -210,6 +210,7 @@ class UsermedicationsController extends Controller
                     'sign_date' => $date,
                     'photo' => @$request->photo,
                     'time' => @$request->time3,
+                    'remarks' => @$request->remarks,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
                 ]);
@@ -227,6 +228,7 @@ class UsermedicationsController extends Controller
                     'photo' => @$request->photo,
                     'sign_date' => $date,
                     'time' => @$request->time4,
+                    'remarks' => @$request->remarks,
                     'start_day' => $request->start_day,
                     'end_day' => $request->end_day
                 ]);
@@ -386,6 +388,7 @@ class UsermedicationsController extends Controller
                 $record->time = @$request->time;
                 $record->start_day = $request->start_day;
                 $record->end_day = $request->end_day;
+                $record->remarks = @$request->remarks;
 
                 $record->update();
             }

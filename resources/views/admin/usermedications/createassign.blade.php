@@ -129,6 +129,13 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Remarks</label>
+                                        <textarea class="form-control" name='remarks' placeholder="Remarks" id="remarks" rows="6"></textarea>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row" >
