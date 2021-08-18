@@ -296,12 +296,8 @@ jQuery(document).ready(function () {
 							}
 						}).then(function () {
 							KTUtil.scrollTop();
-							$('.btn.btn-success').attr('disabled', true);
-							$('.btn.btn-success').css('cursor', 'not-allowed');
 						});
 					}else{
-						$('.btn.btn-success').attr('disabled', false);
-						$('.btn.btn-success').css('cursor', 'default');
 					}
 				}
 			});
