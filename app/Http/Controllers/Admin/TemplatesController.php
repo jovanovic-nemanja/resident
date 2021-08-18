@@ -82,6 +82,7 @@ class TemplatesController extends Controller
             $settings = DB::table('setting_tabs')
                                 ->join('fields', 'setting_tabs.id', '=', 'fields.tab_id')
                                 ->where('fields.clinic_id', $clinic_id)
+                                ->where('fields.template_id', $templateID)
                                 ->select('setting_tabs.*', 'fields.id as FieldID', 'fields.*')
                                 ->get();
 
