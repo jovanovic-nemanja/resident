@@ -125,14 +125,7 @@ var KTAddHealthcarecenter = function () {
 					firstname: {
 						validators: {
 							notEmpty: {
-								message: 'First Name is required'
-							}
-						}
-					},
-					lastname: {
-						validators: {
-							notEmpty: {
-								message: 'Last Name is required'
+								message: 'Name is required'
 							}
 						}
 					},

@@ -86,7 +86,6 @@ class HealtheCareCenterController extends Controller
             'resident' => 'required',
             'health_care_center_type' => 'required',
             'firstname' => 'required|string|max:191',
-            'lastname' => 'required|string|max:191',
             'street1' => 'required|string|max:191',
             'city' => 'required'
         ]);
@@ -100,7 +99,6 @@ class HealtheCareCenterController extends Controller
             $healthcarecenter = HealthCareCenters::create([
                 'firstname' => $request['firstname'],
                 'user_id' => $request['resident'],
-                'lastname' => $request['lastname'],
                 'health_care_center_type' => $request['health_care_center_type'],
                 'street1' => $request['street1'],
                 'street2' => @$request['street2'],
@@ -173,7 +171,6 @@ class HealtheCareCenterController extends Controller
         $this->validate(request(), [
             'health_care_center_type' => 'required',
             'firstname' => 'required|string|max:191',
-            'lastname' => 'required|string|max:191',
             'street1' => 'required|string|max:191',
             'city' => 'required'
         ]);
@@ -187,7 +184,6 @@ class HealtheCareCenterController extends Controller
         if (@$record) {
             $record->health_care_center_type = $request->health_care_center_type;
             $record->firstname = $request->firstname;
-            $record->lastname = $request->lastname;
             $record->street1 = $request->street1;
             $record->street2 = @$request->street2;
             $record->city = $request->city;

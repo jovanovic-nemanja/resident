@@ -55,7 +55,7 @@
                                     <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
                                         <div class="col-xl-12 col-xxl-10">
                                             <!--begin::Wizard Form-->
-                                            <form class="form" id="kt_form" action="{{ route('caretaker.store') }}" method="POST" enctype="multipart/form-data">
+                                            <form class="form" id="kt_form">
                                                 @csrf
 
                                                 <div class="row justify-content-center">

@@ -107,7 +107,7 @@
                                                 <td>{{ $i }}</td>
                                                 <td>{{ App\HealthCareCenters::getTypeasstring($healthcarecenter->health_care_center_type) }}</td>
                                                 <td>
-                                                    {{ $healthcarecenter->firstname. " " .$healthcarecenter->lastname }}
+                                                    {{ $healthcarecenter->firstname }}
                                                 </td>
                                                 <td>{{ $healthcarecenter->street1." ".$healthcarecenter->street2 }}</td>
                                                 <td>{{ $healthcarecenter->city }}</td>

@@ -17,12 +17,12 @@
                     <!--begin::Page Heading-->
                     <div class="d-flex align-items-baseline flex-wrap mr-5">
                         <!--begin::Page Title-->
-                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Add Health Care Center Type</h2>
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Add Health Provider</h2>
                         <!--end::Page Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('healthcarecentertypes.index') }}" class="text-muted">Health Care Center Types &nbsp;</a>
+                                <a href="{{ route('healthcarecentertypes.index') }}" class="text-muted">Health Provider &nbsp;</a>
                             </li>
                         </ul>
                         <!--end::Breadcrumb-->
