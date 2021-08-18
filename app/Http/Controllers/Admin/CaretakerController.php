@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class CaretakerController extends Controller
 {
@@ -90,6 +91,60 @@ class CaretakerController extends Controller
         }  
 
         return redirect()->route('caretaker.index')->with('flash', 'Successfully added caretaker.');
+    }
+
+    public function storeAJAX(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'username' => 'required|string|unique:users',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'profile_logo'      => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
+        }
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        $clinic_id = auth()->id();
+        
+        DB::beginTransaction();
+
+        try {
+            $profile_logo = User::upload_caregiver_profile($request->profile_logo);
+
+            $user = User::create([
+                'firstname' => $request['firstname'],
+                'lastname' => $request['lastname'],
+                'username' => $request['username'],
+                'email' => $request['email'],
+                'clinic_id' => $clinic_id,
+                'profile_logo' => $profile_logo,
+                'password' => Hash::make($request['password']),
+                'phone_number' => $request['phone_number'],
+                'sign_date' => $date,
+            ]);
+
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => 2,
+            ]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }  
+
+        return response()->json(['status' => "success", 'msg' => 'Successfully added caretaker.', 'url' => route('caretaker.index')]);
     }
 
     /**

@@ -228,4 +228,33 @@ class User extends Authenticatable
 
         return $result;
     }
+
+    /**
+    * @return file name
+    * @since 2021-08-18
+    * @author Nemanja
+    * This is a feature to upload a screen shot image
+    */
+    public static function upload_caregiver_profile($file) 
+    {
+        $image = $file;
+
+        $location = "uploads/";
+
+        $image_parts = explode(";base64,", $image);
+
+        $image_base64 = base64_decode($image_parts[1]);
+
+        $filename = "caregiver_".uniqid().'.png';
+
+        $file = $location . $filename;
+
+        if (file_put_contents($file, $image_base64)) {
+            $result = $filename;
+        }else{
+            $result = "";
+        }
+
+        return $result;
+    }
 }

@@ -16,7 +16,7 @@
                     <!--begin::Page Heading-->
                     <div class="d-flex align-items-baseline flex-wrap mr-5">
                         <!--begin::Page Title-->
-                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Health Care Center Types</h2>
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Health Provider</h2>
                         <!--end::Page Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
@@ -41,7 +41,7 @@
                 <div class="card card-custom">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Health Care Center Types</h3>
+                            <h3 class="card-label">Health Provider</h3>
                         </div>
                         <div class="card-toolbar">
                             <a href="{{ route('healthcarecentertypes.create') }}" class="btn btn-primary font-weight-bolder">Add</a>

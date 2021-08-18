@@ -53,7 +53,7 @@
 
                                     <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 2]) }}">Body Harm Comment</a>
 
-                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 3]) }}">Health Care Center Types</a>
+                                    <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 3]) }}">Health Provider</a>
 
                                     <a class="dropdown-item" href="{{ route('templates.createsetting', [$template->id, 4]) }}">Incidences</a>
 
@@ -169,7 +169,7 @@
                         <div class="col-lg-6 pt-5 mt-5" id="healthcare_types">
                             <hr>
                             <hr>
-                            <h4>Health Care Center Types</h4>
+                            <h4>Health Provider</h4>
                             <br>
                             <!--begin: Datatable-->
                             <table class="table table-bordered table-hover table-checkable" id="kt_datatable_2" style="margin-top: 13px !important">

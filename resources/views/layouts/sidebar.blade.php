@@ -160,7 +160,7 @@
                                         <i class="menu-bullet menu-bullet-dot">
                                             <span></span>
                                         </i>
-                                        <span class="menu-text">Health Care Center Types</span>
+                                        <span class="menu-text">Health Provider</span>
                                     </a>
                                 </li>
                                 <li class="menu-item <?= ($menu == "incidences") ? "menu-item-active" : "" ?>" aria-haspopup="true">

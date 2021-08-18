@@ -12,7 +12,7 @@ class HealthCareCenters extends Model
 {
     public $table = "health_care_centers";
 
-    public $fillable = ['user_id', 'health_care_center_type', 'firstname', 'lastname', 'street1', 'street2', 'city', 'phone', 'fax', 'sign_date'];
+    public $fillable = ['user_id', 'health_care_center_type', 'firstname', 'street1', 'street2', 'city', 'phone', 'fax', 'sign_date'];
 
     public static function getTypeasstring($id)
     {

@@ -160,7 +160,9 @@ Route::get('/getbodyharmcomments', 'Admin\BodyharmcommentsController@getbodyharm
 Route::get('/getNotificationdata', 'Admin\NotificationsController@getNotificationdata');
 Route::get('/updateIsread', 'Admin\NotificationsController@updateIsread');
 Route::post('/storeStorage', 'Admin\BodyharmController@storeStorage')->name('bodyharm.storeStorage');
+
 Route::post('/validationUsername', 'Admin\CaretakerController@validationUsername')->name('caretaker.validationUsername');
+Route::post('/residentstoreAJAX', 'Admin\CaretakerController@storeAJAX')->name('caretaker.storeAJAX');
 
 
 Route::get('/indexbyfilter', 'Admin\ReportsController@indexbyfilter')->name('indexbyfilter');

@@ -124,9 +124,9 @@
 
                                                             <!--begin::Group-->
                                                             <div class="form-group row {{ $errors->has('firstname') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">First Name<span style="color: red;">*</span> </label>
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Name<span style="color: red;">*</span> </label>
                                                                 <div class="col-lg-9 col-xl-9">
-                                                                    <input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="{{ $result['healthcarecenter']->firstname }}" />
+                                                                    <textarea class="form-control form-control-solid form-control-lg" name="firstname" rows="8">{{ $result['healthcarecenter']->firstname }}</textarea>
                                                                 </div>
 
                                                                 <div class="fv-plugins-message-container"></div>
@@ -134,23 +134,6 @@
                                                                 @if ($errors->has('firstname'))
                                                                     <span class="help-block">
                                                                         <strong>{{ $errors->first('firstname') }}</strong>
-                                                                    </span>
-                                                                @endif
-                                                            </div>
-                                                            <!--end::Group-->
-
-                                                            <!--begin::Group-->
-                                                            <div class="form-group row {{ $errors->has('lastname') ? 'has-error' : '' }}">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Last Name<span style="color: red;">*</span> </label>
-                                                                <div class="col-lg-9 col-xl-9">
-                                                                    <input class="form-control form-control-solid form-control-lg" name="lastname" type="text" value="{{ $result['healthcarecenter']->lastname }}" />
-                                                                </div>
-
-                                                                <div class="fv-plugins-message-container"></div>
-
-                                                                @if ($errors->has('lastname'))
-                                                                    <span class="help-block">
-                                                                        <strong>{{ $errors->first('lastname') }}</strong>
                                                                     </span>
                                                                 @endif
                                                             </div>

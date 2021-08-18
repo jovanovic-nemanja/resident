@@ -77,7 +77,8 @@ var KTAddUser = function () {
 							}
 						}).then(function (result) {
 							if (result.value) {
-								_formEl.submit(); // Submit form
+								// _formEl.submit(); // Submit form
+								submitCaregiverForm();
 							} else if (result.dismiss === 'cancel') {
 								Swal.fire({
 									text: "Your form has not been submitted!.",
@@ -186,6 +187,69 @@ var KTAddUser = function () {
 				}
 			}
 		));
+	}
+
+	function submitCaregiverForm() {
+		var formData = new FormData();
+		var profile_logo_url = $('#kt_form .image-input-wrapper').css('background-image');
+		var profile_logo = profile_logo_url.replace('url(','').replace(')','').replace(/\"/gi, "");
+		
+		var firstname = $('#kt_form input[name="firstname"]').val();
+		var lastname = $('#kt_form input[name="lastname"]').val();
+		var username = $('#kt_form input[name="username"]').val();
+		var email = $('#kt_form input[name="email"]').val();
+		var password = $('#kt_form input[name="password"]').val();
+		var password_confirmation = $('#kt_form input[name="password_confirmation"]').val();
+		var phone_number = $('#kt_form input[name="phone_number"]').val();
+
+		formData.append("profile_logo", profile_logo);
+		formData.append("firstname", firstname);
+		formData.append("lastname", lastname);
+		formData.append("email", email);
+		formData.append("username", username);
+		formData.append("phone_number", phone_number);
+		formData.append("password", password);
+		formData.append("password_confirmation", password_confirmation);
+
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+		$.ajax({
+			url: "/residentstoreAJAX",
+			type: 'POST',
+			contentType: false,
+		    cache: false,
+		    processData: false,
+			data: formData,
+
+			success: function(result, status) {
+				if (result.status == "failed") {
+					swal.fire({
+		                text: result.msg,
+		                icon: "error",
+		                buttonsStyling: false,
+		                confirmButtonText: "Ok, got it!",
+		                confirmButtonClass: "btn font-weight-bold btn-light"
+		            }).then(function() {
+						KTUtil.scrollTop();
+					});
+				}else{
+					swal.fire({
+		                text: result.msg,
+		                icon: "success",
+		                buttonsStyling: false,
+		                confirmButtonText: "Ok, got it!",
+		                confirmButtonClass: "btn font-weight-bold btn-light-primary"
+		            }).then(function() {
+						KTUtil.scrollTop();
+						window.location.href = result.url;
+					});
+				}
+			}
+		});
 	}
 
 	var _initAvatar = function () {
