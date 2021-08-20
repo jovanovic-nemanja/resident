@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Role;
 use App\User;
 use App\Tabs;
 use App\Moods;
 use App\Units;
 use App\Routes;
 use App\Fields;
+use App\RoleUser;
 use App\Comments;
 use App\Bodyharms;
 use App\Relations;
@@ -930,5 +932,255 @@ class TemplatesController extends Controller
         }
 
         return $data;
+    }
+
+    /**
+     * Duplicate the template info.
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicate(Request $request)
+    {
+        $this->validate(request(), [
+            'template_id' => 'required'
+        ]);
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        $admin_role = Role::where('name', 'admin')->first();
+        if ($admin_role) {
+            $roleuser = RoleUser::where('role_id', $admin_role->id)->first();
+            $adminID = $roleuser->user_id;
+        }else{
+            $adminID = 1;
+        }
+
+        DB::beginTransaction();
+
+        try {
+
+            $record = Templates::where('id', $request->template_id)->first();
+            if (@$record) {
+                $old_template_name = $record->name;
+
+                $new_record = Templates::create([
+                    'name' => $old_template_name."_copy",
+                    'sign_date' => $date
+                ]);
+            }
+
+            $activities = Activities::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if($activities) {
+                
+                foreach ($activities as $activity) {
+                    $activitys = Activities::create([
+                        'title' => $activity->title,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'type' => $activity->type,
+                        'comments' => $activity->comments,
+                        'sign_date' => $date,
+                    ]);
+
+                    if (@$activity->comments) {
+                        $arrs = explode(',', $activity->comments);
+                        foreach ($arrs as $comm) {
+                            $comments = Comments::create([
+                                'type' => 1,
+                                'sign_date' => $date,
+                                'name' => $comm,
+                                'ref_id' => $activitys['id']
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            $bodyharmcomments = Bodyharmcomments::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if ($bodyharmcomments) {
+                
+                foreach ($bodyharmcomments as $bodyharmcomment) {
+                    $bodyharm_comment = Bodyharmcomments::create([
+                        'name' => $bodyharmcomment->name,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'sign_date' => $date,
+                    ]);
+                }                
+            }
+
+            $healthtypes = HealthCareCenterTypes::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if ($healthtypes) {
+
+                foreach ($healthtypes as $healthtype) {
+                    $type = HealthCareCenterTypes::create([
+                        'title' => $healthtype->title,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $incidences = Incidences::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if ($incidences) {
+
+                foreach ($incidences as $incidence) {
+                    $inc = Incidences::create([
+                        'title' => $incidence->title,
+                        'content' => $incidence->content,
+                        'type' => $incidence->type,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $medications = Medications::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if ($medications) {
+
+                foreach ($medications as $medication) {
+                    $medics = Medications::create([
+                        'name' => $medication->name,
+                        'brand_name' => $medication->brand_name,
+                        'photo' => @$medication->photo,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'sign_date' => $date,
+                        'comments' => $medication->comments
+                    ]);
+
+                    if (@$medication->comments) {
+                        $arrs = explode(',', $medication->comments);
+                        foreach ($arrs as $comm) {
+                            $comments = Comments::create([
+                                'type' => 2,
+                                'sign_date' => $date,
+                                'name' => $comm,
+                                'ref_id' => $medics['id']
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            $moods = Moods::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if($moods) {
+
+                foreach ($moods as $mood) {
+                    $mds = Moods::create([
+                        'title' => $mood->title,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'sign_date' => $date
+                    ]);
+                }
+            }
+
+            $relations = Relations::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if ($relations) {
+
+                foreach ($relations as $relation) {
+                    $rls = Relations::create([
+                        'title' => $relation->title,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'sign_date' => $date
+                    ]);
+                }
+            }
+
+            $reminderConfigs = ReminderConfigs::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if ($reminderConfigs) {
+
+                foreach ($reminderConfigs as $reminderConfig) {
+                    $reminderConfigs = ReminderConfigs::create([
+                        'minutes' => $reminderConfig->minutes,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'active' => $reminderConfig->active,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $reptypes = RepresentativeTypes::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if ($reptypes) {
+
+                foreach ($reptypes as $reptype) {
+                    $rtype = RepresentativeTypes::create([
+                        'title' => $reptype->title,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $routes = Routes::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if($routes) {
+
+                foreach ($routes as $route) {
+                    $rts = Routes::create([
+                        'name' => $route->name,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $units = Units::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if($units) {
+
+                foreach ($units as $unit) {
+                    $uts = Units::create([
+                        'title' => $unit->title,
+                        'clinic_id' => $adminID,
+                        'template_id' => $new_record->id,
+                        'sign_date' => $date,
+                    ]);
+                }
+            }
+
+            $fields = Fields::where('template_id', $request->template_id)->where('clinic_id', $adminID)->get();
+            if ($fields) {
+
+                foreach ($fields as $field) {
+                    $fld = new Fields;
+
+                    $fld->fieldName = $field->fieldName;
+                    $fld->tab_id = $field->tab_id;
+                    $fld->clinic_id = $adminID;
+                    $fld->template_id = $new_record->id;
+                    $fld->sign_date_field = $date;
+                    $fld->save();
+
+                    $fieldID = $fld->id;
+
+                    $fieldtypes = FieldTypes::where('fieldID', $field->id)->get();
+                    foreach ($fieldtypes as $fv) {
+                        $fieldtypes = new FieldTypes;
+
+                        $fieldtypes->typeName = $fv->typeName;
+                        $fieldtypes->fieldID = $fieldID;
+                        $fieldtypes->sign_date_field_type = $date;
+                        $fieldtypes->save();
+                    }
+                }
+            }
+
+            DB::commit();
+            
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }  
+
+        return redirect()->route('templates.index');
     }
 }

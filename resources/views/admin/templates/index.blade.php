@@ -71,8 +71,19 @@
                                                 </td>
                                                 <td>{{ $template->sign_date }}</td>
                                                 <td>
-                                                    <a href="{{ route('templates.show', $template->id) }}" class="btn btn-info">Edit</a>
-                                                    <a href="{{ route('templates.viewTemplate', $template->id) }}" class="btn btn-success">View</a>
+                                                    <a href="{{ route('templates.show', $template->id) }}" class="btn btn-info" title="Edit">Edit</a>
+                                                    <a href="{{ route('templates.viewTemplate', $template->id) }}" class="btn btn-success" title="View">View</a>
+                                                    
+
+                                                    <button onclick="event.stopPropagation(); event.preventDefault(); showSwal('duplicate-template', 'duplicate-template-form-{{$template->id}}')" class="btn btn-info" title="Duplicate">Duplicate</button>
+
+                                                    <form id="duplicate-template-form-{{$template->id}}" action="{{ route('templates.duplicate') }}" method="POST" style="display: none;">
+                                                        @csrf
+
+                                                        <input type="hidden" name="template_id" value="{{ $template->id }}" />
+                                                    </form>
+
+                                                    
                                                     <button onclick="event.stopPropagation(); event.preventDefault(); showSwal('warning-message-and-cancel', 'delete-form-{{$template->id}}')" class="btn btn-primary" title="Delete">Delete</button>
 
                                                     <form id="delete-form-{{$template->id}}" action="{{ route('templates.destroy', $template->id) }}" method="POST" style="display: none;">
@@ -104,6 +115,12 @@
                 'use strict';
                 if (type === 'warning-message-and-cancel') {
                     if(confirm('Are you sure you want to delete that into the database? If yes, that will be removed permanently.')) {
+                        document.getElementById(value).submit();
+                    }else{
+                        console.log('cancelled');
+                    }
+                }if (type === 'duplicate-template') {
+                    if(confirm('Are you sure you want to duplicate that into the database? If yes, that will be duplicate with same information.')) {
                         document.getElementById(value).submit();
                     }else{
                         console.log('cancelled');
