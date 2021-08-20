@@ -129,6 +129,23 @@ var KTAddHealthcarecenter = function () {
 							}
 						}
 					},
+					email: {
+						validators: {
+							notEmpty: {
+								message: 'Email is required'
+							},
+							emailAddress: {
+								message: 'The value is not a valid email address'
+							}
+						}
+					},
+					zip_code: {
+						validators: {
+							notEmpty: {
+								message: 'Zip Code is required'
+							}
+						}
+					},
 					street1: {
 						validators: {
 							notEmpty: {
