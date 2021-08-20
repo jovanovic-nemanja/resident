@@ -99,7 +99,7 @@
                                                     <div class="col-xl-9">
                                                         <!--begin::Wizard Step 1-->
                                                         <div class="my-5 step" data-wizard-type="step-content" data-type-status="current">
-                                                            <h5 class="text-dark font-weight-bold mb-10">Resident Representative's Info:</h5>
+                                                            <h5 class="text-dark font-weight-bold mb-10">Health Care Provider</h5>
 
                                                             <div class="form-group row {{ $errors->has('health_care_center_type') ? 'has-error' : '' }}">
                                                                 <label class="col-xl-3 col-lg-3 col-form-label">Type<span style="color: red;">*</span> </label>
@@ -126,7 +126,7 @@
                                                             <div class="form-group row {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                                                 <label class="col-xl-3 col-lg-3 col-form-label">Name<span style="color: red;">*</span> </label>
                                                                 <div class="col-lg-9 col-xl-9">
-                                                                    <textarea class="form-control form-control-solid form-control-lg" name="firstname" rows="8">{{ $result['healthcarecenter']->firstname }}</textarea>
+                                                                    <textarea class="form-control form-control-solid form-control-lg" name="firstname" rows="2">{{ $result['healthcarecenter']->firstname }}</textarea>
                                                                 </div>
 
                                                                 <div class="fv-plugins-message-container"></div>
@@ -134,6 +134,40 @@
                                                                 @if ($errors->has('firstname'))
                                                                     <span class="help-block">
                                                                         <strong>{{ $errors->first('firstname') }}</strong>
+                                                                    </span>
+                                                                @endif
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row {{ $errors->has('email') ? 'has-error' : '' }}">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Email<span style="color: red;">*</span> </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input type="email" name="email" class="form-control form-control-solid form-control-lg" placeholder="Email" value="{{ $result['healthcarecenter']->email }}" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+
+                                                                @if ($errors->has('email'))
+                                                                    <span class="help-block">
+                                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                                    </span>
+                                                                @endif
+                                                            </div>
+                                                            <!--end::Group-->
+
+                                                            <!--begin::Group-->
+                                                            <div class="form-group row {{ $errors->has('zip_code') ? 'has-error' : '' }}">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Zip Code<span style="color: red;">*</span> </label>
+                                                                <div class="col-lg-9 col-xl-9">
+                                                                    <input type="text" name="zip_code" class="form-control form-control-solid form-control-lg" placeholder="Zip Code" value="{{ $result['healthcarecenter']->zip_code }}" />
+                                                                </div>
+
+                                                                <div class="fv-plugins-message-container"></div>
+
+                                                                @if ($errors->has('zip_code'))
+                                                                    <span class="help-block">
+                                                                        <strong>{{ $errors->first('zip_code') }}</strong>
                                                                     </span>
                                                                 @endif
                                                             </div>

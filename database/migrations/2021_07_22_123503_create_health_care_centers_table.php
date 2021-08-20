@@ -19,6 +19,8 @@ class CreateHealthCareCentersTable extends Migration
             $table->integer('user_id');
             $table->integer('health_care_center_type')->defaultValue(1);
             $table->string('firstname');
+            $table->string('email');
+            $table->text('zip_code');   
             $table->string('street1');
             $table->string('street2')->nullable();
             $table->string('city');
