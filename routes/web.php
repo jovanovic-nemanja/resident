@@ -214,6 +214,7 @@ Route::post('templates/storeSetting', 'Admin\TemplatesController@storeSetting')-
 Route::post('templates/storeSettings', 'Admin\TemplatesController@storeSettings')->name('templates.storeSettings');
 Route::put('templates/updatesetting/{activity}', 'Admin\TemplatesController@updatesetting')->name('templates.updatesetting');
 Route::delete('templates/destroysetting/{id}/{settingtype}', 'Admin\TemplatesController@destroysetting')->name('templates.destroysetting');
+Route::post('templates/duplicate', 'Admin\TemplatesController@duplicate')->name('templates.duplicate');
 
 
 
