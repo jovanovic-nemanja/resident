@@ -98,7 +98,9 @@
 								<?php 
                             		if(@$resident_settings) {
                                 		$i = 1;
-	                                	foreach($resident_settings as $resident_setting) { ?>
+	                                	foreach($resident_settings as $resident_setting) { 
+                                            if(@$resident_setting->fieldName) {
+                                            ?>
 		                                	<tr>
                                                 <td>{{ $i }}</td>
                                                 <td>{{ $resident_setting->fieldName }}</td>
@@ -113,7 +115,7 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                <?php $i++; } }else{ ?>
+                                <?php $i++; } } }else{ ?>
 
                                 <?php } ?>
                             </tbody>
