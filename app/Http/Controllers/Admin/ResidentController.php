@@ -68,6 +68,7 @@ class ResidentController extends Controller
                                 ->leftJoin('setting_tabs', 'setting_tabs.id', '=', 'fields.tab_id')
                                 ->where('resident_settings.user_id', $resident)
                                 ->where('fields.tab_id', $id)
+                                ->where('field_types.typeName', '!=', 'None')
                                 ->select('setting_tabs.name as tabName', 'fields.fieldName', 'field_types.typeName', 'resident_settings.id')
                                 ->get();
 
