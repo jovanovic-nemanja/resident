@@ -184,17 +184,21 @@
 												            </form>
 					                                    @endif
 					                                    @if(auth()->user()->hasRole('care taker'))
-															<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
+															@if($flag == 1)
+												            	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
 
-															<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
-											                  	<input type="hidden" name="_method" value="POST">
-											                  	@csrf
+																<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
+												                  	<input type="hidden" name="_method" value="POST">
+												                  	@csrf
 
-											                  	<input type="hidden" name="resident" value="{{ $user->id }}">
-											                  	<input type="hidden" name="comment" class="comm_val" />
-                                								<input type="hidden" name="assign_id" value="{{ $assignmedication['id'] }}">
-                                								<input type="hidden" name="type" value="{{ $assignmedication['type'] }}">
-												            </form>
+												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
+												                  	<input type="hidden" name="comment" class="comm_val" />
+	                                								<input type="hidden" name="assign_id" value="{{ $assignmedication['id'] }}">
+	                                								<input type="hidden" name="type" value="{{ $assignmedication['type'] }}">
+													            </form>
+												            @else
+												            	<a class="btn btn-disabled" style="cursor: not-allowed;">Given</a>
+												            @endif
 														@endif
 													</td>
 			                                    </tr>
