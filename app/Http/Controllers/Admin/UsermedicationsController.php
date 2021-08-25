@@ -16,6 +16,7 @@ use App\Comments;
 use App\Medications;
 use App\Usermedications;
 use App\Assignmedications;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\DB;
 
 
@@ -56,7 +57,19 @@ class UsermedicationsController extends Controller
     public function indexusermedication($id)
     {
         $usermedications = Usermedications::where('resident', $id)->orderBy('sign_date', 'asc')->get();
-        $assignmedications = Assignmedications::where('resident', $id)->orderBy('time')->get();
+        $cur_server_time = Carbon::now()->format('H:i:s');
+        $cur_server_day = Carbon::now()->format('Y-m-d');
+
+        if(auth()->user()->hasRole('clinicowner')) {
+            $assignmedications = Assignmedications::where('resident', $id)->orderBy('start_day')->get();
+        }else{
+            $assignmedications = Assignmedications::where('resident', $id)->where('start_day', $cur_server_day)
+                ->whereBetween('time', [
+                        Carbon::now()->subHours(1)->format('Y-m-d H:i:s'),
+                        $cur_server_time ])
+                ->orderBy('start_day')->get();
+        }
+
         $arrs = $assignmedications;
 
         $user = User::where('id', $id)->first();
@@ -74,7 +87,7 @@ class UsermedicationsController extends Controller
     public function indexusermedicationgiven($id)
     {
         $usermedications = Usermedications::where('resident', $id)->orderBy('sign_date', 'asc')->get();
-        $assignmedications = Assignmedications::where('resident', $id)->orderBy('time')->get();
+        $assignmedications = Assignmedications::where('resident', $id)->orderBy('start_day')->get();
         $arrs = $assignmedications;
 
         $user = User::where('id', $id)->first();
@@ -153,10 +166,8 @@ class UsermedicationsController extends Controller
         if (@$request->assign) {    //assign medication for facility owner
             $this->validate(request(), [
                 'medications' => 'required',
-                // 'dose' => 'required',
                 'start_day' => 'required',
                 'end_day' => 'required',
-                // 'photo' => 'required',
                 'units' => 'required',
                 'resident' => 'required'
             ]);
@@ -164,78 +175,82 @@ class UsermedicationsController extends Controller
             $dates = User::getformattime();
             $date = $dates['date'];
 
-            if (@$request->time1) {
-                $assignmedications = Assignmedications::create([
-                    'medications' => $request->medications,
-                    'dose' => @$request->dose,
-                    'resident' => $request->resident,
-                    'route' => $request->route,
-                    'units' => $request->units,
-                    'sign_date' => $date,
-                    'photo' => @$request->photo,
-                    'time' => @$request->time1,
-                    'remarks' => @$request->remarks,
-                    'start_day' => $request->start_day,
-                    'end_day' => $request->end_day
-                ]);
+            $period = CarbonPeriod::create($request->start_day, $request->end_day);
+            // Iterate over the period
+            foreach ($period as $dt) {
+                if (@$request->time1) {
+                    $assignmedications = Assignmedications::create([
+                        'medications' => $request->medications,
+                        'dose' => @$request->dose,
+                        'resident' => $request->resident,
+                        'route' => $request->route,
+                        'units' => $request->units,
+                        'sign_date' => $date,
+                        'photo' => @$request->photo,
+                        'time' => @$request->time1,
+                        'remarks' => @$request->remarks,
+                        'start_day' => $dt->format('Y-m-d'),
+                        'end_day' => $dt->format('Y-m-d')
+                    ]);
 
-                if ($request->photo) {
-                    Assignmedications::upload_file($assignmedications->id);
-                } 
-            } if (@$request->time2) {
-                $assignmedications = Assignmedications::create([
-                    'medications' => $request->medications,
-                    'dose' => @$request->dose,
-                    'resident' => $request->resident,
-                    'route' => $request->route,
-                    'sign_date' => $date,
-                    'photo' => @$request->photo,
-                    'units' => $request->units,
-                    'time' => @$request->time2,
-                    'remarks' => @$request->remarks,
-                    'start_day' => $request->start_day,
-                    'end_day' => $request->end_day
-                ]);
+                    if ($request->photo) {
+                        Assignmedications::upload_file($assignmedications->id);
+                    } 
+                } if (@$request->time2) {
+                    $assignmedications = Assignmedications::create([
+                        'medications' => $request->medications,
+                        'dose' => @$request->dose,
+                        'resident' => $request->resident,
+                        'route' => $request->route,
+                        'sign_date' => $date,
+                        'photo' => @$request->photo,
+                        'units' => $request->units,
+                        'time' => @$request->time2,
+                        'remarks' => @$request->remarks,
+                        'start_day' => $dt->format('Y-m-d'),
+                        'end_day' => $dt->format('Y-m-d')
+                    ]);
 
-                if ($request->photo) {
-                    Assignmedications::upload_file($assignmedications->id);
-                } 
-            } if (@$request->time3) {
-                $assignmedications = Assignmedications::create([
-                    'medications' => $request->medications,
-                    'dose' => @$request->dose,
-                    'resident' => $request->resident,
-                    'route' => $request->route,
-                    'units' => $request->units,
-                    'sign_date' => $date,
-                    'photo' => @$request->photo,
-                    'time' => @$request->time3,
-                    'remarks' => @$request->remarks,
-                    'start_day' => $request->start_day,
-                    'end_day' => $request->end_day
-                ]);
+                    if ($request->photo) {
+                        Assignmedications::upload_file($assignmedications->id);
+                    } 
+                } if (@$request->time3) {
+                    $assignmedications = Assignmedications::create([
+                        'medications' => $request->medications,
+                        'dose' => @$request->dose,
+                        'resident' => $request->resident,
+                        'route' => $request->route,
+                        'units' => $request->units,
+                        'sign_date' => $date,
+                        'photo' => @$request->photo,
+                        'time' => @$request->time3,
+                        'remarks' => @$request->remarks,
+                        'start_day' => $dt->format('Y-m-d'),
+                        'end_day' => $dt->format('Y-m-d')
+                    ]);
 
-                if ($request->photo) {
-                    Assignmedications::upload_file($assignmedications->id);
-                } 
-            } if (@$request->time4) {
-                $assignmedications = Assignmedications::create([
-                    'medications' => $request->medications,
-                    'dose' => @$request->dose,
-                    'resident' => $request->resident,
-                    'route' => $request->route,
-                    'units' => $request->units,
-                    'photo' => @$request->photo,
-                    'sign_date' => $date,
-                    'time' => @$request->time4,
-                    'remarks' => @$request->remarks,
-                    'start_day' => $request->start_day,
-                    'end_day' => $request->end_day
-                ]);
+                    if ($request->photo) {
+                        Assignmedications::upload_file($assignmedications->id);
+                    } 
+                } if (@$request->time4) {
+                    $assignmedications = Assignmedications::create([
+                        'medications' => $request->medications,
+                        'dose' => @$request->dose,
+                        'resident' => $request->resident,
+                        'route' => $request->route,
+                        'units' => $request->units,
+                        'photo' => @$request->photo,
+                        'sign_date' => $date,
+                        'time' => @$request->time4,
+                        'remarks' => @$request->remarks,
+                        'start_day' => $dt->format('Y-m-d'),
+                        'end_day' => $dt->format('Y-m-d')
+                    ]);
 
-                if (@$request->photo) {
-                    Assignmedications::upload_file($assignmedications->id);
-                } 
+                    if (@$request->photo) {
+                        Assignmedications::upload_file($assignmedications->id);
+                    } 
+                }
             }
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully assigned.');
@@ -365,7 +380,7 @@ class UsermedicationsController extends Controller
                 // 'dose' => 'required',
                 'units' => 'required',
                 'start_day' => 'required',
-                'end_day' => 'required',
+                // 'end_day' => 'required',
                 'resident' => 'required'
             ]);
 
@@ -387,7 +402,7 @@ class UsermedicationsController extends Controller
                 $record->units = $request->units;
                 $record->time = @$request->time;
                 $record->start_day = $request->start_day;
-                $record->end_day = $request->end_day;
+                // $record->end_day = $request->end_day;
                 $record->remarks = @$request->remarks;
 
                 $record->update();

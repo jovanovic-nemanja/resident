@@ -95,11 +95,12 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Date</th>
+                                    <th>Time</th>
                                     <th>Name</th>
                                     <th>Photo</th>
                                     <th>Dose</th>
                                     <th>Unit</th>
-                                    <th>Time</th>
+                                    
                                     <th>Route</th>
                                     <th>Comment</th>
                                     <th>Actions</th>
@@ -119,11 +120,14 @@
 	                                                ?>
 
 		                                			<td>{{ $i }}</td>
-		                                			<td>{{ $assignmedication->start_day }} ~ {{ $assignmedication->end_day }}</td>
+		                                			<td>{{ $assignmedication->start_day }}</td>
+		                                			<td>
+			                                        	<span class="badge round-primary">{{ $assignmedication['time'] }}</span>
+			                                        </td>
 		                                			<td>{{ $medications->name }}</td>
 		                                			<td>
 		                                				@if(@$assignmedication->photo)
-		                                					<img src="<?= asset('uploads/'. $assignmedication->photo )?>" style="    width: 100%;max-width: 75px; height: 75px;" />
+		                                					<img src="<?= asset('uploads/'. $assignmedication->photo )?>" style="width: 100%; max-width: 75px; height: 75px;" />
 		                                				@else
 		                                				@endif
 		                                			</td>
@@ -135,9 +139,7 @@
 			                                        <td>
 		                                                {{ App\Assignmedications::getTitle($assignmedication['units']) }}
 			                                        </td>
-			                                        <td>
-			                                        	<span class="badge round-primary">{{ $assignmedication['time'] }}</span>
-			                                        </td>
+			                                        
 			                                        <td>
 														<span class="badge round-primary">
 															<?php if($assignmedication['route'] != NULL) { ?>
