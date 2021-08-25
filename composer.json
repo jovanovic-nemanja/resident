@@ -14,7 +14,8 @@
         "laravel/cashier": "^8.0",
         "laravel/framework": "5.6.*",
         "laravel/socialite": "^3.2.0",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "nesbot/carbon": "1.29.0 as 1.25.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

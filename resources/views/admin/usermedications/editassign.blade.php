@@ -147,25 +147,12 @@
                             <div class="row" >
                                 <div class="col-lg-3">
                                     <div class="form-group {{ $errors->has('start_day') ? 'has-error' : '' }}">
-                                        <label class="col-form-label">Start day</label>
+                                        <label class="col-form-label">Day</label>
                                         <input type="date" name="start_day" id="start_day" class="form-control start_day" required value="{{ $result['usermedications']->start_day }}">
 
                                         @if ($errors->has('start_day'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('start_day') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3">
-                                    <div class="form-group {{ $errors->has('end_day') ? 'has-error' : '' }}">
-                                        <label class="col-form-label">End day</label>
-                                        <input type="date" name="end_day" id="end_day" class="form-control end_day" required value="{{ $result['usermedications']->end_day }}">
-                                        
-                                        @if ($errors->has('end_day'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('end_day') }}</strong>
                                             </span>
                                         @endif
                                     </div>
