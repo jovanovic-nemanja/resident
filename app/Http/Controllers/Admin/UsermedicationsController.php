@@ -353,7 +353,7 @@ class UsermedicationsController extends Controller
         $result['units'] = Units::where('clinic_id', auth()->id())->get();
 
         $comment = $res->medications;
-        $result['routes'] = Routes::all();
+        $result['routes'] = Routes::where('clinic_id', auth()->id())->get();
 
         return view('admin.usermedications.editassign', compact('result'));
     }
