@@ -120,7 +120,7 @@
 	                                                ?>
 
 		                                			<td>{{ $i }}</td>
-		                                			<td>{{ $assignmedication->start_day }}</td>
+		                                			<td>{{ $assignmedication->start_day }} ~ {{ $assignmedication->end_day }}</td>
 		                                			<td>
 			                                        	<span class="badge round-primary">{{ $assignmedication['time'] }}</span>
 			                                        </td>

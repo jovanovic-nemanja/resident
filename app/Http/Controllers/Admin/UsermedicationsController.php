@@ -60,15 +60,17 @@ class UsermedicationsController extends Controller
         $cur_server_time = Carbon::now()->format('H:i:s');
         $cur_server_day = Carbon::now()->format('Y-m-d');
 
-        if(auth()->user()->hasRole('clinicowner')) {
-            $assignmedications = Assignmedications::where('resident', $id)->orderBy('start_day')->get();
-        }else{
-            $assignmedications = Assignmedications::where('resident', $id)->where('start_day', $cur_server_day)
-                ->whereBetween('time', [
-                        Carbon::now()->subHours(1)->format('Y-m-d H:i:s'),
-                        $cur_server_time ])
-                ->orderBy('start_day')->get();
-        }
+        // if(auth()->user()->hasRole('clinicowner')) {
+        //     $assignmedications = Assignmedications::where('resident', $id)->orderBy('start_day')->get();
+        // }else{
+        //     $assignmedications = Assignmedications::where('resident', $id)->where('start_day', $cur_server_day)
+        //         ->whereBetween('time', [
+        //                 Carbon::now()->subHours(1)->format('Y-m-d H:i:s'),
+        //                 $cur_server_time ])
+        //         ->orderBy('start_day')->get();
+        // }
+
+        $assignmedications = Assignmedications::where('resident', $id)->orderBy('start_day')->get();
 
         $arrs = $assignmedications;
 
@@ -177,7 +179,7 @@ class UsermedicationsController extends Controller
 
             $period = CarbonPeriod::create($request->start_day, $request->end_day);
             // Iterate over the period
-            foreach ($period as $dt) {
+            // foreach ($period as $dt) {
                 if (@$request->time1) {
                     $assignmedications = Assignmedications::create([
                         'medications' => $request->medications,
@@ -189,8 +191,10 @@ class UsermedicationsController extends Controller
                         'photo' => @$request->photo,
                         'time' => @$request->time1,
                         'remarks' => @$request->remarks,
-                        'start_day' => $dt->format('Y-m-d'),
-                        'end_day' => $dt->format('Y-m-d')
+                        // 'start_day' => $dt->format('Y-m-d'),
+                        // 'end_day' => $dt->format('Y-m-d')
+                        'start_day' => $request->start_day,
+                        'end_day' => $request->end_day
                     ]);
 
                     if ($request->photo) {
@@ -207,8 +211,8 @@ class UsermedicationsController extends Controller
                         'units' => $request->units,
                         'time' => @$request->time2,
                         'remarks' => @$request->remarks,
-                        'start_day' => $dt->format('Y-m-d'),
-                        'end_day' => $dt->format('Y-m-d')
+                        'start_day' => $request->start_day,
+                        'end_day' => $request->end_day
                     ]);
 
                     if ($request->photo) {
@@ -225,8 +229,8 @@ class UsermedicationsController extends Controller
                         'photo' => @$request->photo,
                         'time' => @$request->time3,
                         'remarks' => @$request->remarks,
-                        'start_day' => $dt->format('Y-m-d'),
-                        'end_day' => $dt->format('Y-m-d')
+                        'start_day' => $request->start_day,
+                        'end_day' => $request->end_day
                     ]);
 
                     if ($request->photo) {
@@ -243,15 +247,15 @@ class UsermedicationsController extends Controller
                         'sign_date' => $date,
                         'time' => @$request->time4,
                         'remarks' => @$request->remarks,
-                        'start_day' => $dt->format('Y-m-d'),
-                        'end_day' => $dt->format('Y-m-d')
+                        'start_day' => $request->start_day,
+                        'end_day' => $request->end_day
                     ]);
 
                     if (@$request->photo) {
                         Assignmedications::upload_file($assignmedications->id);
                     } 
                 }
-            }
+            // }
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully assigned.');
         }else{  //give medication for care taker or admin
