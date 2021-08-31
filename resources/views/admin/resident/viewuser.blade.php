@@ -159,8 +159,10 @@
                                             <div class="d-flex flex-column">
                                                 <a href="{{ route('bodyharm.indexbodyharm', $user->id) }}" class="text-dark text-hover-primary font-weight-bold font-size-h4 mb-3">Incidence</a>
 
-                                                <a href="#" class="btn btn-warning custom_div_tag dashboard custom_drop_down">Family Visit</a>
-                                                <a href="#" class="btn btn-warning dashboard custom_drop_down">Mood Change</a>
+                                                <a href="{{ route('familyvisit.indexfamilyvisit', $user->id) }}" class="btn btn-warning custom_div_tag dashboard custom_drop_down">Visitation</a>
+
+                                                <a href="{{ route('moodchange.indexmoodchange', $user->id) }}" class="btn btn-warning dashboard custom_drop_down">Mood Change</a>
+                                                
                                                 <a href="{{ route('bodyharm.indexbodyharm', $user->id) }}" class="btn btn-warning dashboard custom_drop_down">Body Harm</a>
                                             </div>
                                         </div>
