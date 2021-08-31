@@ -112,7 +112,7 @@
                                 		$i = 1;
 	                                	foreach($arrs as $assignmedication) { 
 	                                		$flag = App\Usermedications::getassignedMedication($assignmedication['id']);
-	                                		// if ($flag == 1) { 
+	                                		if ($flag == 1) { 
 	                                			?>
 		                                		<tr role='row' data-toggle="collapse" data-target="#demo<?= $assignmedication['id'] ?>" class="odd accordion-toggle">
 		                                			<?php 
@@ -204,7 +204,7 @@
 														@endif
 													</td>
 			                                    </tr>
-                                <?php $i++; } }else{ ?>
+                                <?php $i++; } } } else{ ?>
 
                                 <?php } ?>
                             </tbody>
