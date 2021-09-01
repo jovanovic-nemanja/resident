@@ -20,7 +20,8 @@ class Kernel extends ConsoleKernel
         Commands\DailyActivityCommand::class,
         Commands\WeeklyActivityCommand::class,
         Commands\MonthlyActivityCommand::class,
-        'App\Console\Commands\DatabaseBackUp'
+        'App,\Console\Commands\DatabaseBackUp',
+        'App\Console\Commands\DailyAssignMedications'
     ];
 
     /**
@@ -32,6 +33,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('database:backup')->daily();
+        $schedule->command('dailyassignmedications:duplicate')->daily();
         
         // $enable = Switchreminder::first();
         
