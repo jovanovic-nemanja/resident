@@ -406,7 +406,7 @@ class UsermedicationsController extends Controller
                 $record->units = $request->units;
                 $record->time = @$request->time;
                 $record->start_day = $request->start_day;
-                // $record->end_day = $request->end_day;
+                $record->end_day = $request->end_day;
                 $record->remarks = @$request->remarks;
 
                 $record->update();
