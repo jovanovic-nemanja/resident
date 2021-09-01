@@ -111,8 +111,8 @@
                             		if(@$arrs) {
                                 		$i = 1;
 	                                	foreach($arrs as $assignmedication) { 
-	                                		$flag = App\Usermedications::getassignedMedication($assignmedication['id']);
-	                                		if ($flag == 1) { 
+	                                		// $flag = App\Usermedications::getassignedMedication($assignmedication['id']);
+	                                		// if ($flag == 1) { 
 	                                			?>
 		                                		<tr role='row' data-toggle="collapse" data-target="#demo<?= $assignmedication['id'] ?>" class="odd accordion-toggle">
 		                                			<?php 
@@ -158,11 +158,7 @@
 											                  	@csrf
 												            </form>
 
-												            @if($flag == 1)
-												            	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give</a>
-												            @else
-												            	<a class="btn btn-disabled" style="cursor: not-allowed;">Given</a>
-												            @endif
+											            	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give</a>
 
 															<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
 											                  	<input type="hidden" name="_method" value="POST">
@@ -186,25 +182,21 @@
 												            </form>
 					                                    @endif
 					                                    @if(auth()->user()->hasRole('care taker'))
-															@if($flag == 1)
-												            	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
+											            	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
 
-																<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
-												                  	<input type="hidden" name="_method" value="POST">
-												                  	@csrf
+															<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
+											                  	<input type="hidden" name="_method" value="POST">
+											                  	@csrf
 
-												                  	<input type="hidden" name="resident" value="{{ $user->id }}">
-												                  	<input type="hidden" name="comment" class="comm_val" />
-	                                								<input type="hidden" name="assign_id" value="{{ $assignmedication['id'] }}">
-	                                								<input type="hidden" name="type" value="{{ $assignmedication['type'] }}">
-													            </form>
-												            @else
-												            	<a class="btn btn-disabled" style="cursor: not-allowed;">Given</a>
-												            @endif
+											                  	<input type="hidden" name="resident" value="{{ $user->id }}">
+											                  	<input type="hidden" name="comment" class="comm_val" />
+                                								<input type="hidden" name="assign_id" value="{{ $assignmedication['id'] }}">
+                                								<input type="hidden" name="type" value="{{ $assignmedication['type'] }}">
+												            </form>
 														@endif
 													</td>
 			                                    </tr>
-                                <?php $i++; } } } else{ ?>
+                                <?php $i++; } } else{ ?>
 
                                 <?php } ?>
                             </tbody>

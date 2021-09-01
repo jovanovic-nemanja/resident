@@ -107,49 +107,49 @@
                             </thead>
                             <tbody>
 								<?php 
-                            		if(@$arrs) {
+                            		if(@$usermedications) {
                                 		$i = 1;
-	                                	foreach($arrs as $assignmedication1) { 
-	                                		$flag1 = App\Usermedications::getassignedMedication($assignmedication1['id']);
-	                                		if($flag1 == 2) { ?>
-		                                		<tr role='row' data-toggle="collapse" data-target="#demo<?= $assignmedication1['id'] ?>" class="odd accordion-toggle">
+	                                	foreach($usermedications as $usermedication) { 
+	                                		$assignmedication = App\Assignmedications::getassigned($usermedication['assign_id']);
+	                                			?>
+		                                		<tr role='row' data-toggle="collapse" data-target="#demo<?= $usermedication['id'] ?>" class="odd accordion-toggle">
 		                                			<?php 
-	                                                	$medications1 = App\Assignmedications::getMedications($assignmedication1['id']);
+	                                                	$medications1 = App\Assignmedications::getMedications($assignmedication['id']);
 	                                                ?>
 
 		                                			<td>{{ $i }}</td>
-		                                			<td><?= date_format(date_create($assignmedication1['sign_date']), 'Y-m-d'); ?></td>
+		                                			<td><?= date_format(date_create($usermedication['sign_date']), 'Y-m-d'); ?></td>
 		                                			<td>{{ $medications1->name }}</td>
 			                                        <td>
 			                                            <div class="">
-			                                                <h6>{{ $assignmedication1['dose'] }}</h6>
+			                                                <h6>{{ $assignmedication['dose'] }}</h6>
 			                                            </div>
 			                                        </td>
 			                                        <td>
-			                                        	<span class="badge round-primary">{{ $assignmedication1['time'] }}</span>
+			                                        	<span class="badge round-primary">{{ $assignmedication['time'] }}</span>
 			                                        </td>
 			                                        <td>
 														<span class="badge round-primary">
-															<?php if($assignmedication1['route'] != NULL) { ?>
-																{{ App\Routes::getRoutename($assignmedication1['route']) }}
+															<?php if($assignmedication['route'] != NULL) { ?>
+																{{ App\Routes::getRoutename($assignmedication['route']) }}
 															<?php } ?>
 														</span>
 			                                        </td>
 
-			                                        <td>{{ nl2br($assignmedication1->remarks) }}</td>
+			                                        <td>{{ nl2br($assignmedication->remarks) }}</td>
 													
 													@if(auth()->user()->hasRole('clinicowner'))
 				                                        <td>
-				                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$assignmedication1['id']}}').submit();">Delete</a>
+				                                        	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$usermedication['id']}}').submit();">Delete</a>
 
-				                                        	<form id="delete-form-{{$assignmedication1['id']}}" action="{{ route('usermedications.destroyassign', $assignmedication1['id']) }}" method="POST" style="display: none;">
+				                                        	<form id="delete-form-{{$usermedication['id']}}" action="{{ route('usermedications.destroy', $usermedication['id']) }}" method="POST" style="display: none;">
 											                  	<input type="hidden" name="_method" value="delete">
 											                  	@csrf
 												            </form>
 														</td>
 													@endif
 			                                    </tr>
-                                <?php $i++; } } }else{ ?>
+                                <?php $i++; } } else{ ?>
 
                                 <?php } ?>
                             </tbody>
