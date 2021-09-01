@@ -16,7 +16,7 @@ use App\Comments;
 use App\Medications;
 use App\Usermedications;
 use App\Assignmedications;
-use Carbon\CarbonPeriod;
+// use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\DB;
 
 
@@ -177,84 +177,84 @@ class UsermedicationsController extends Controller
             $dates = User::getformattime();
             $date = $dates['date'];
 
-            $period = CarbonPeriod::create($request->start_day, $request->end_day);
+            // $period = CarbonPeriod::create($request->start_day, $request->end_day);
             // Iterate over the period
             // foreach ($period as $dt) {
-                if (@$request->time1) {
-                    $assignmedications = Assignmedications::create([
-                        'medications' => $request->medications,
-                        'dose' => @$request->dose,
-                        'resident' => $request->resident,
-                        'route' => $request->route,
-                        'units' => $request->units,
-                        'sign_date' => $date,
-                        'photo' => @$request->photo,
-                        'time' => @$request->time1,
-                        'remarks' => @$request->remarks,
-                        // 'start_day' => $dt->format('Y-m-d'),
-                        // 'end_day' => $dt->format('Y-m-d')
-                        'start_day' => $request->start_day,
-                        'end_day' => $request->end_day
-                    ]);
+            if (@$request->time1) {
+                $assignmedications = Assignmedications::create([
+                    'medications' => $request->medications,
+                    'dose' => @$request->dose,
+                    'resident' => $request->resident,
+                    'route' => $request->route,
+                    'units' => $request->units,
+                    'sign_date' => $date,
+                    'photo' => @$request->photo,
+                    'time' => @$request->time1,
+                    'remarks' => @$request->remarks,
+                    // 'start_day' => $dt->format('Y-m-d'),
+                    // 'end_day' => $dt->format('Y-m-d')
+                    'start_day' => $request->start_day,
+                    'end_day' => $request->end_day
+                ]);
 
-                    if ($request->photo) {
-                        Assignmedications::upload_file($assignmedications->id);
-                    } 
-                } if (@$request->time2) {
-                    $assignmedications = Assignmedications::create([
-                        'medications' => $request->medications,
-                        'dose' => @$request->dose,
-                        'resident' => $request->resident,
-                        'route' => $request->route,
-                        'sign_date' => $date,
-                        'photo' => @$request->photo,
-                        'units' => $request->units,
-                        'time' => @$request->time2,
-                        'remarks' => @$request->remarks,
-                        'start_day' => $request->start_day,
-                        'end_day' => $request->end_day
-                    ]);
+                if ($request->photo) {
+                    Assignmedications::upload_file($assignmedications->id);
+                } 
+            } if (@$request->time2) {
+                $assignmedications = Assignmedications::create([
+                    'medications' => $request->medications,
+                    'dose' => @$request->dose,
+                    'resident' => $request->resident,
+                    'route' => $request->route,
+                    'sign_date' => $date,
+                    'photo' => @$request->photo,
+                    'units' => $request->units,
+                    'time' => @$request->time2,
+                    'remarks' => @$request->remarks,
+                    'start_day' => $request->start_day,
+                    'end_day' => $request->end_day
+                ]);
 
-                    if ($request->photo) {
-                        Assignmedications::upload_file($assignmedications->id);
-                    } 
-                } if (@$request->time3) {
-                    $assignmedications = Assignmedications::create([
-                        'medications' => $request->medications,
-                        'dose' => @$request->dose,
-                        'resident' => $request->resident,
-                        'route' => $request->route,
-                        'units' => $request->units,
-                        'sign_date' => $date,
-                        'photo' => @$request->photo,
-                        'time' => @$request->time3,
-                        'remarks' => @$request->remarks,
-                        'start_day' => $request->start_day,
-                        'end_day' => $request->end_day
-                    ]);
+                if ($request->photo) {
+                    Assignmedications::upload_file($assignmedications->id);
+                } 
+            } if (@$request->time3) {
+                $assignmedications = Assignmedications::create([
+                    'medications' => $request->medications,
+                    'dose' => @$request->dose,
+                    'resident' => $request->resident,
+                    'route' => $request->route,
+                    'units' => $request->units,
+                    'sign_date' => $date,
+                    'photo' => @$request->photo,
+                    'time' => @$request->time3,
+                    'remarks' => @$request->remarks,
+                    'start_day' => $request->start_day,
+                    'end_day' => $request->end_day
+                ]);
 
-                    if ($request->photo) {
-                        Assignmedications::upload_file($assignmedications->id);
-                    } 
-                } if (@$request->time4) {
-                    $assignmedications = Assignmedications::create([
-                        'medications' => $request->medications,
-                        'dose' => @$request->dose,
-                        'resident' => $request->resident,
-                        'route' => $request->route,
-                        'units' => $request->units,
-                        'photo' => @$request->photo,
-                        'sign_date' => $date,
-                        'time' => @$request->time4,
-                        'remarks' => @$request->remarks,
-                        'start_day' => $request->start_day,
-                        'end_day' => $request->end_day
-                    ]);
+                if ($request->photo) {
+                    Assignmedications::upload_file($assignmedications->id);
+                } 
+            } if (@$request->time4) {
+                $assignmedications = Assignmedications::create([
+                    'medications' => $request->medications,
+                    'dose' => @$request->dose,
+                    'resident' => $request->resident,
+                    'route' => $request->route,
+                    'units' => $request->units,
+                    'photo' => @$request->photo,
+                    'sign_date' => $date,
+                    'time' => @$request->time4,
+                    'remarks' => @$request->remarks,
+                    'start_day' => $request->start_day,
+                    'end_day' => $request->end_day
+                ]);
 
-                    if (@$request->photo) {
-                        Assignmedications::upload_file($assignmedications->id);
-                    } 
-                }
+                if (@$request->photo) {
+                    Assignmedications::upload_file($assignmedications->id);
+                } 
+            }
             // }
 
             return redirect()->route('usermedications.indexusermedication', $request->resident)->with('flash', 'Medication has been successfully assigned.');
