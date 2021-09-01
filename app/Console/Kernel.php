@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
         Commands\DailyActivityCommand::class,
         Commands\WeeklyActivityCommand::class,
         Commands\MonthlyActivityCommand::class,
-        'App,\Console\Commands\DatabaseBackUp',
+        'App\Console\Commands\DatabaseBackUp',
         'App\Console\Commands\DailyAssignMedications'
     ];
 
