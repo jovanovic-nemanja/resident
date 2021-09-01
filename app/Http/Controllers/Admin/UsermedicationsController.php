@@ -70,7 +70,11 @@ class UsermedicationsController extends Controller
         //         ->orderBy('start_day')->get();
         // }
 
-        $assignmedications = Assignmedications::where('resident', $id)->orderBy('start_day')->get();
+        $assignmedications = Assignmedications::where('resident', $id)
+                                    // ->whereDate('start_day', '<=', $cur_server_day)
+                                    ->whereDate('end_day', '>=', $cur_server_day)
+                                    ->orderBy('start_day')
+                                    ->get();
 
         $arrs = $assignmedications;
 

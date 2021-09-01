@@ -109,4 +109,13 @@ class Assignmedications extends Model
 
         return $res;
     }
+
+    public static function getassigned($id)
+    {
+        if ($id) {
+            $record = Assignmedications::where('id', $id)->first();
+
+            return $record;
+        }
+    }
 }
