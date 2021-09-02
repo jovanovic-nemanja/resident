@@ -69,4 +69,21 @@ class Usermedications extends Model
             return 1;
         }
     }
+
+    public static function validateAssignmedicationstatus($id)
+    {
+        if (@$id) {
+            $current = User::getformattime();
+            $cur_day = $current['dates'];
+
+            $result = Usermedications::where('assign_id', $id)->whereDate('sign_date', $cur_day)->first();
+            if (@$result) {
+                return 2;
+            }else{
+                return 1;
+            }
+        }else{
+            return 1;
+        }
+    }
 }
