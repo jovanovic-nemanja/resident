@@ -110,7 +110,8 @@
                                         $i = 1;
                                         foreach($arrs as $useractivity1) { 
                                             $boolean = App\Useractivities::getCalculateDaysById($useractivity1->id);
-                                            if($boolean == -1) { ?>
+                                            // if($boolean == -1) { 
+                                                ?>
                                                 <tr>
                                                     <?php 
                                                         $useractivities1 = $useractivity1->getActivities($useractivity1->id);
@@ -148,7 +149,7 @@
                                                         @endif
                                                     </td>
                                                 </tr>
-                                <?php $i++; } } }else{ ?>
+                                <?php $i++; } }else{ ?>
 
                                 <?php } ?>
                             </tbody>
