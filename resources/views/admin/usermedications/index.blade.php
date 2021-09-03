@@ -111,7 +111,9 @@
                             		if(@$arrs) {
                                 		$i = 1;
 	                                	foreach($arrs as $assignmedication) { 
-	                                		$valid = App\Usermedications::validateAssignmedicationstatus($assignmedication['id']); ?>
+	                                		$valid = App\Usermedications::validateAssignmedicationstatus($assignmedication['id']); 
+	                                		if($valid == 1) {
+	                                			?>
 		                                		<tr role='row' data-toggle="collapse" data-target="#demo<?= $assignmedication['id'] ?>" class="odd accordion-toggle">
 		                                			<?php 
 	                                                	$medications = App\Assignmedications::getMedications($assignmedication['id']);
@@ -156,11 +158,7 @@
 											                  	@csrf
 												            </form>
 
-												            @if($valid == 1)
 											            	<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give</a>
-											            	@else
-											            		<button type="button" class="btn btn-default" disabled style="cursor: not-allowed;">Given</button>
-											            	@endif
 
 															<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
 											                  	<input type="hidden" name="_method" value="POST">
@@ -184,11 +182,7 @@
 												            </form>
 					                                    @endif
 					                                    @if(auth()->user()->hasRole('care taker'))
-					                                    	@if($valid == 1)
-											            		<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
-											            	@else
-											            		<button style="cursor: not-allowed;" type="button" class="btn btn-default" disabled>Given</button>
-											            	@endif
+										            		<a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('give-medication-form-{{$assignmedication['id']}}').submit();">Give Medication</a>
 
 															<form id="give-medication-form-{{$assignmedication['id']}}" action="{{ route('usermedications.store') }}" method="POST" style="display: none;">
 											                  	<input type="hidden" name="_method" value="POST">
@@ -202,7 +196,7 @@
 														@endif
 													</td>
 			                                    </tr>
-                                <?php $i++; } } else{ ?>
+                                <?php $i++; } } } else{ ?>
 
                                 <?php } ?>
                             </tbody>
