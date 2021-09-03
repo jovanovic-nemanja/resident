@@ -15,8 +15,12 @@ class Routes extends Model
     {
     	if (@$id) {
     		$result = Routes::where('id', $id)->first();
-    	}
 
-    	return ($result['name']) ? $result['name'] : 'None';
+            if(@$result) {
+                return $result['name'];
+            }
+    	}else{
+            return 'None';
+        }
     }
 }
