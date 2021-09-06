@@ -124,7 +124,13 @@
 		                                			<td>
 			                                        	<span class="badge round-primary">{{ $assignmedication['time'] }}</span>
 			                                        </td>
-		                                			<td>{{ $medications->name }}</td>
+		                                			<td>
+		                                				@if(auth()->user()->hasRole('clinicowner'))
+		                                					<a href="{{ route('medications.show', $assignmedication->medications) }}" target="_blank">{{ $medications->name }}</a>
+		                                				@else
+		                                					{{ $medications->name }}
+		                                				@endif
+		                                			</td>
 		                                			<td>
 		                                				@if(@$assignmedication->photo)
 		                                					<img src="<?= asset('uploads/'. $assignmedication->photo )?>" style="width: 100%; max-width: 75px; height: 75px;" />
