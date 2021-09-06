@@ -46,6 +46,7 @@ class MedicationsCommand extends Command
     {
         $cur_date = User::getformattime();
         $cur_day = Carbon::parse($cur_date['dates']);
+        $userid = auth()->id();
 
         $assign_medications = DB::table('assign_medications')
                             ->select('assign_medications.*', 'medications.*', 'assign_medications.sign_date as assign_date', 'users.*', 'medications.name as med_name', 'users.firstname as u_name')
@@ -53,6 +54,7 @@ class MedicationsCommand extends Command
                             ->Join('users', 'users.id', '=', 'assign_medications.resident')
                             ->whereDate('assign_medications.start_day', '<=', $cur_day)
                             ->whereDate('assign_medications.end_day', '>=', $cur_day)
+                            ->where('users.clinic_id', $userid)
                             ->get();
 
         if (@$assign_medications) {

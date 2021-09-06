@@ -45,6 +45,7 @@ class WeeklyActivityCommand extends Command
     public function handle()
     {
         $cur_date = User::getformattime();
+        $userid = auth()->id();
         $cur_day = Carbon::parse($cur_date['dates']);
 
         /*
@@ -63,6 +64,7 @@ class WeeklyActivityCommand extends Command
                             ->where('user_activities.type', 2)
                             ->whereDate('user_activities.start_day', '<=', $cur_day)
                             ->whereDate('user_activities.end_day', '>=', $cur_day)
+                            ->where('users.clinic_id', $userid)
                             ->get();
 
         if (@$user_activities) {

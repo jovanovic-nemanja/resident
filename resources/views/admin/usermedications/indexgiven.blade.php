@@ -119,7 +119,13 @@
 
 		                                			<td>{{ $i }}</td>
 		                                			<td><?= date_format(date_create($usermedication['sign_date']), 'Y-m-d'); ?></td>
-		                                			<td>{{ $medications1->name }}</td>
+		                                			<td>
+		                                				@if(auth()->user()->hasRole('clinicowner'))
+		                                					<a href="{{ route('medications.show', $medications1->id) }}" target="_blank">{{ $medications1->name }}</a>
+		                                				@else
+		                                					{{ $medications1->name }}
+		                                				@endif
+		                                			</td>
 			                                        <td>
 			                                            <div class="">
 			                                                <h6>{{ $assignmedication['dose'] }}</h6>

@@ -46,7 +46,8 @@ class MonthlyActivityCommand extends Command
     {
         $cur_date = User::getformattime();
         $cur_day = Carbon::parse($cur_date['dates']);
-
+        $userid = auth()->id();
+        
         /*
             SELECT * FROM user_activities
                 INNER JOIN activities on activities.id = user_activities.activities
@@ -63,6 +64,7 @@ class MonthlyActivityCommand extends Command
                             ->where('user_activities.type', 3)
                             ->whereDate('user_activities.start_day', '<=', $cur_day)
                             ->whereDate('user_activities.end_day', '>=', $cur_day)
+                            ->where('users.clinic_id', $userid)
                             ->get();
 
         if (@$user_activities) {

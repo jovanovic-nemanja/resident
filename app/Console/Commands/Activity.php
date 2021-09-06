@@ -46,6 +46,7 @@ class DailyActivityCommand extends Command
     {
         $cur_date = User::getformattime();
         $cur_day = Carbon::parse($cur_date['dates']);
+        $userid = auth()->id();
 
         /*
             SELECT user_activities.*, activities.*, users.*, users.name as u_name, activities.type as act_type 
@@ -64,6 +65,7 @@ class DailyActivityCommand extends Command
                             ->where('user_activities.type', 1)
                             ->whereDate('user_activities.start_day', '<=', $cur_day)
                             ->whereDate('user_activities.end_day', '>=', $cur_day)
+                            ->where('users.clinic_id', $userid)
                             ->get();
 
         if (@$user_activities) {
