@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Role;
+use Route;
 use App\RoleUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class CaretakerController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'manager'])->except(['validationUsername']);
+        $this->middleware(['auth', 'manager'])->except(['validationUsername', 'getOutlink']);
     }
 
     /**
@@ -231,7 +233,7 @@ class CaretakerController extends Controller
     public function validationUsername(Request $request)
     {
         if($request->username) {
-            $user = User::where('username', $request->username)->first();
+            $user = User::where('username', $request->username)->first();   
             if(@$user) {
                 $status = false;
                 $msg = "Sorry, Please change the entered username. This seems to used by someone. Username is Unique field.";
@@ -245,5 +247,42 @@ class CaretakerController extends Controller
         }
 
         return response()->json(['status' => $status, 'msg' => $msg]); 
+    }
+
+    /**
+     * get users who enabled the looking for job status in bluecarecoach.com
+     * @author Nemanja
+     * @since 2021-09-24
+     * @return user lists
+     */
+    public function getExternaldata()
+    {
+        $outlink = "https://bluecarecoach.com/api/v1/getUserswithLookingjob";
+        $caretakers = $this->runExternallink($outlink);
+
+        return view('admin.caretaker.indexbluecarecoach', compact('caretakers'));
+    }
+
+    private function runExternallink($link)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $link,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_TIMEOUT => 30000,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                // Set Here Your Requesred Headers
+                'Content-Type: application/json',
+            ),
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        return json_decode($response);
     }
 }
