@@ -82,7 +82,7 @@
                                                 <td>
                                                     @if($caretaker->profile_logo)
                                                         <div class="symbol symbol-circle symbol-lg-75">
-                                                            <img src="<?= "https://bluecarecoach.com/uploads/A04pRArVpEiHxDS2eTsHS9wc4tTWdUrBMMd3LLuJ.jpeg" ?>" class="rad-50 center-block custom_img_tag" alt="">
+                                                            <img src="<?= "https://bluecarecoach.com/uploads/".$caretaker->profile_logo ?>" class="rad-50 center-block custom_img_tag" alt="">
                                                         </div>
                                                     @endif
                                                 </td>
