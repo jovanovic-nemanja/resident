@@ -41,7 +41,7 @@
                 <div class="card card-custom">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Manage Care givers
+                            <h3 class="card-label">Looking for Job actived - Care givers
                         </div>
                         <div class="card-toolbar">
                             <!--begin::Button-->
@@ -58,11 +58,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Name</th>
-                                    <th>Username</th>
                                     <th>Email Address</th>
                                     <th>Phone Number</th>
                                     <th>Profile_photo</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,37 +68,25 @@
                                     if(@$caretakers) {
                                         $i = 1;
                                         foreach($caretakers as $caretaker) { ?>
-                                            @if($caretaker->hasRole('care taker'))
-                                                <tr>
-                                                    <td>{{ $i }}</td>
-                                                    <td>{{ $caretaker->firstname }}</td>
-                                                    <td>{{ $caretaker->username }}</td>
-                                                    <td>
-                                                        <div class="">
-                                                            <h6><?= $caretaker->email; ?></h6>
+                                            <tr>
+                                                <td>{{ $i }}</td>
+                                                <td>{{ $caretaker->firstname." ".$caretaker->lastname }}</td>
+                                                <td>
+                                                    <div class="">
+                                                        <h6><?= $caretaker->email; ?></h6>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="badge round-primary">{{ $caretaker->phone_number }}</span>
+                                                </td>
+                                                <td>
+                                                    @if($caretaker->profile_logo)
+                                                        <div class="symbol symbol-circle symbol-lg-75">
+                                                            <img src="<?= "https://bluecarecoach.com/uploads/A04pRArVpEiHxDS2eTsHS9wc4tTWdUrBMMd3LLuJ.jpeg" ?>" class="rad-50 center-block custom_img_tag" alt="">
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge round-primary">{{ $caretaker->phone_number }}</span>
-                                                    </td>
-                                                    <td>
-                                                        @if($caretaker->profile_logo)
-                                                            <div class="symbol symbol-circle symbol-lg-75">
-                                                                <img src="{{ asset('uploads/').'/'.$caretaker->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="">
-                                                            </div>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('caretaker.show', $caretaker->id) }}" class="btn btn-success">Edit</a>
-                                                        <a href="" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('delete-form-{{$caretaker->id}}').submit();">Delete</a>
-
-                                                        <form id="delete-form-{{$caretaker->id}}" action="{{ route('caretaker.destroy', $caretaker->id) }}" method="POST" style="display: none;">
-                                                              <input type="hidden" name="_method" value="delete">
-                                                              @csrf
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                                    @endif
+                                                </td>
+                                            </tr>
                                 <?php $i++; } }else{ ?>
 
                                 <?php } ?>

@@ -56,8 +56,12 @@ Route::resource('activities', 'Admin\ActivitiesController');
 Route::resource('incidences', 'Admin\IncidencesController');
 
 
-
+// Route::get('caretaker/getExternaldata', function () {
+//     return 'Hello World';
+// });
+Route::get('caretaker/getExternaldata', 'Admin\CaretakerController@getExternaldata')->name('caretaker.getExternaldata');
 Route::resource('caretaker', 'Admin\CaretakerController');
+
 
 
 
