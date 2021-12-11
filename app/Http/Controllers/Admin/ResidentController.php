@@ -677,7 +677,7 @@ class ResidentController extends Controller
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "{\"destinations\":[{\"to_name\":\"Aman\",\"to_company\":\"Millcreek Residential Care Services LLC.\",\"fax_number\":\"".$phone_number."\"}],\"fax_options\":{\"image_resolution\":\"STANDARD\",\"include_cover_page\":true,\"cover_page_options\":{\"from_name\":\"Mary Adams\",\"subject\":\"Endorsement\",\"message\":\"Excepteur sint occaecat cupidatat non proident\"},\"retry_options\":{\"non_billable\":2,\"billable\":3,\"human_answer\":1}},\"documents\":[{\"document_type\":\"TXT\",\"document_content\":\"".$PDF."\"}]}",
+            CURLOPT_POSTFIELDS => "{\"destinations\":[{\"to_name\":\"Aman\",\"to_company\":\"Millcreek Residential Care Services LLC.\",\"fax_number\":\"".$phone_number."\"}],\"fax_options\":{\"image_resolution\":\"STANDARD\",\"include_cover_page\":true,\"cover_page_options\":{\"from_name\":\"Blue Care Hub\",\"subject\":\"Quick Report PDF\",\"message\":\"Resident Quick Report PDF\"},\"retry_options\":{\"non_billable\":2,\"billable\":3,\"human_answer\":1}},\"documents\":[{\"document_type\":\"PDF\",\"document_content\":\"".$PDF."\"}]}",
             CURLOPT_HTTPHEADER => array(
                 "authorization: " . $bearer_token,
                 "content-type: application/json",
