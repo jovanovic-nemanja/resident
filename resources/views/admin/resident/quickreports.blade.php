@@ -105,8 +105,10 @@
                         <div class="card card-custom gutter-b">
                             <div class="row d-flex">
                                 <div class="col-lg-9"></div>
-                                <div class="col-lg-2 mt-5 pt-5">
+                                <div class="col-lg-3 mt-5 pt-5">
                                     <a href="{{ route('resident.exportPDF', $user->id) }}" class="btn btn-block btn-sm btn-danger font-weight-bolder text-uppercase py-4">Export PDF</a>
+
+                                    <a href="{{ route('resident.sendReportFax', $user->id) }}" class="btn btn-block btn-sm btn-success font-weight-bolder text-uppercase py-4">Send eFax</a>
                                 </div>
                             </div>
 

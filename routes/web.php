@@ -32,6 +32,11 @@ Route::get('/resident/management', 'Admin\ResidentController@management')->name(
 Route::get('/resident/quickreport/{resident}', 'Admin\ResidentController@quickreport')->name('resident.quickreport');
 Route::get('/resident/exportPDF/{resident}', 'Admin\ResidentController@exportPDF')->name('resident.exportPDF');
 Route::resource('resident', 'Admin\ResidentController');
+
+Route::get('/resident/sendReportFax/{resident}', 'Admin\ResidentController@sendReportFax')->name('resident.sendReportFax');
+
+Route::resource('resident', 'Admin\ResidentController');
+
 Route::post('/resident/saveResidentPersonalinfo', 'Admin\ResidentController@saveResidentPersonalinfo')->name('resident.saveResidentPersonalinfo');
 Route::post('/resident/saveResidentPOAinfo', 'Admin\ResidentController@saveResidentPOAinfo')->name('resident.saveResidentPOAinfo');
 Route::post('/resident/saveResidentPhysicianinfo', 'Admin\ResidentController@saveResidentPhysicianinfo')->name('resident.saveResidentPhysicianinfo');

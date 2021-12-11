@@ -587,4 +587,113 @@ class ResidentController extends Controller
         // Finally, you can download the file using download function
         return $pdf->download($data['user']->firstname . '-quick-report.pdf');
     }
+
+    /**
+     * Send the pdf via eFax.
+     * @author Nemanja
+     * @param  int  $id
+     * @since 2021-12-11
+     * @return \Illuminate\Http\Response
+     */
+    public function sendReportFax($id)
+    {
+        // Fetch all customers from database
+        $data = [];
+        $data['user'] = User::where('id', $id)->first();
+        $data['representatives'] = Representatives::where('user_id', $id)->get();
+        $data['healthcarecenters'] = HealthCareCenters::where('user_id', $id)->get();
+        $data['setting_tabs'] = Tabs::all();
+
+        $data['resident_settings'] =  DB::table('resident_settings')
+                                ->leftJoin('field_types', 'field_types.id', '=', 'resident_settings.fieldVal')
+                                ->leftJoin('fields', 'fields.id', '=', 'field_types.fieldID')
+                                ->leftJoin('setting_tabs', 'setting_tabs.id', '=', 'fields.tab_id')
+                                ->where('resident_settings.user_id', $id)
+                                ->select('setting_tabs.name as tabName', 'fields.fieldName', 'field_types.typeName')
+                                ->get();
+
+        // Send data to the view using loadView function of PDF facade
+        $pdf = PDF::loadView('admin.resident.exportPDF', $data);
+
+        // If you want to store the generated pdf to the server then you can use the store function
+        $PDF_name = $data['user']->firstname . '-quick-report.pdf';
+        $pdf->save(storage_path('app/../../public/uploads/'). $PDF_name);
+
+        $access_token = $this->generateoauthtoken();
+
+        if ($access_token) {
+            $this->sendFax($access_token, $PDF_name);
+        }
+
+        // Finally, you can download the file using download function
+        // return $pdf->download($data['user']->firstname . '-quick-report.pdf');
+    }
+
+    private function generateoauthtoken()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.securedocex.com/tokens",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "grant_type=client_credentials",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Basic NDAyN2I5YTItMDNiYi00OGUyLWEwMjgtODYxMTFhYTYwZWViOlNjcEhxb1U0ZklDc3M2TWg=",
+                "content-type: application/x-www-form-urlencoded"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return '';
+        } else {
+            $result_response = json_decode($response, true);
+            return $result_response["access_token"];
+        }
+    }
+
+    private function sendFax($access_token, $PDF_name)
+    {
+        $curl = curl_init();
+        $bearer_token = "bearer " . $access_token;
+        $user_id = env('FAX_USER_ID');
+        $phone_number = env('FAX_PHONE_NUMBER');
+        $PDF = base64_encode(file_get_contents(storage_path('app/../../public/uploads/'). $PDF_name));
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.securedocex.com/faxes",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "{\"destinations\":[{\"to_name\":\"Aman\",\"to_company\":\"Millcreek Residential Care Services LLC.\",\"fax_number\":\"".$phone_number."\"}],\"fax_options\":{\"image_resolution\":\"STANDARD\",\"include_cover_page\":true,\"cover_page_options\":{\"from_name\":\"Mary Adams\",\"subject\":\"Endorsement\",\"message\":\"Excepteur sint occaecat cupidatat non proident\"},\"retry_options\":{\"non_billable\":2,\"billable\":3,\"human_answer\":1}},\"documents\":[{\"document_type\":\"TXT\",\"document_content\":\"".$PDF."\"}]}",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: " . $bearer_token,
+                "content-type: application/json",
+                "user-id: " . $user_id
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
+    }
 }
