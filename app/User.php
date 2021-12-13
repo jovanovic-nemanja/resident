@@ -257,4 +257,42 @@ class User extends Authenticatable
 
         return $result;
     }
+
+    /**
+    * @return oAuth Token
+    * @since 2021-12-13
+    * @author Nemanja
+    * This is a feature to get generated personal access token in efax system
+    */
+    public static function generateoauthtoken()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.securedocex.com/tokens",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "grant_type=client_credentials",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Basic NDAyN2I5YTItMDNiYi00OGUyLWEwMjgtODYxMTFhYTYwZWViOlNjcEhxb1U0ZklDc3M2TWg=",
+                "content-type: application/x-www-form-urlencoded"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return '';
+        } else {
+            $result_response = json_decode($response, true);
+            return $result_response["access_token"];
+        }
+    }
 }

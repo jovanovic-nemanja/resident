@@ -619,7 +619,7 @@ class ResidentController extends Controller
         $PDF_name = $data['user']->firstname . '-quick-report.pdf';
         $pdf->save(storage_path('app/../../public/uploads/'). $PDF_name);
 
-        $access_token = $this->generateoauthtoken();
+        $access_token = User::generateoauthtoken();
 
         if ($access_token) {
             $this->sendFax($access_token, $PDF_name);
@@ -627,38 +627,6 @@ class ResidentController extends Controller
 
         // Finally, you can download the file using download function
         // return $pdf->download($data['user']->firstname . '-quick-report.pdf');
-    }
-
-    private function generateoauthtoken()
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.securedocex.com/tokens",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "grant_type=client_credentials",
-            CURLOPT_HTTPHEADER => array(
-                "authorization: Basic NDAyN2I5YTItMDNiYi00OGUyLWEwMjgtODYxMTFhYTYwZWViOlNjcEhxb1U0ZklDc3M2TWg=",
-                "content-type: application/x-www-form-urlencoded"
-            ),
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-            return '';
-        } else {
-            $result_response = json_decode($response, true);
-            return $result_response["access_token"];
-        }
     }
 
     private function sendFax($access_token, $PDF_name)
