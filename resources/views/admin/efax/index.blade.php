@@ -60,19 +60,28 @@
                                     <th>Originating Fax Number</th>
                                     <th>Origination Fax TSID</th>
                                     <th>Completed Time</th>
+                                    <th>Fax Image</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
                                     if(@$lists) {
                                         $i = 1;
-                                        foreach($lists['faxes'] as $list) { ?>
+                                        foreach($lists['faxes'] as $list) {
+                                            $image = App\User::getImageEfax($list['fax_id']);
+                                            if(@$image['pages'][0]['image']) {
+                                                $data = $image['pages'][0]['image'];
+                                            }else{
+                                                $data = '';
+                                            }
+                                         ?>
                                             <tr>
                                                 <td>{{ $i }}</td>
                                                 <td>{{ $list['fax_id'] }}</td>
                                                 <td>{{ $list['originating_fax_number'] }}</td>
                                                 <td>{{ $list['originating_fax_tsid'] }}</td>
                                                 <td>{{ date('Y-m-d H:i:s', strtotime($list['completed_timestamp'])) }}</td>
+                                                <td><a href="data:image/png;base64, <?= $data; ?>" download="<?= $list['fax_id'] ?>.png"><img src="data:image/png;base64, <?= $data; ?>" class="max-h-75px rad-50 center-block custom_img_tag" /></a></td>
                                             </tr>
                                 <?php $i++; } }else{ ?>
 

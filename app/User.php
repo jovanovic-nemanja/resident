@@ -295,4 +295,45 @@ class User extends Authenticatable
             return $result_response["access_token"];
         }
     }
+
+    /**
+    * @return Efax Image
+    * @since 2021-12-13
+    * @author Nemanja
+    * This is a feature to get fax image
+    */
+    public static function getImageEfax($fax_id)
+    {
+        $curl = curl_init();
+        $token = User::generateoauthtoken();
+        $access_token = "bearer " . $token;
+        $user_id = env('FAX_USER_ID');
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.securedocex.com/faxes/" . $fax_id . "/image/pages",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 300,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: " . $access_token,
+                "user-id: " . $user_id
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $result = json_decode($response, true);
+            // dd($result['pages'][0]['image']);
+            return $result;
+        }
+    }
 }
