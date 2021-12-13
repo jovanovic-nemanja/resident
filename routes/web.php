@@ -234,6 +234,11 @@ Route::post('clone/cloneSettings', 'Admin\CloneController@cloneSettings')->name(
 
 
 
+
+Route::resource('efax', 'Admin\EfaxController');
+
+
+
 Route::resource('units', 'Admin\UnitsController');
 
 

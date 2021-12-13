@@ -101,6 +101,12 @@
                         </a>
                     </li>
 
+                    <li class="menu-item <?= ($menu == 'efax') ? "menu-item-active" : "" ?>" aria-haspopup="true">
+                        <a href="{{ route('efax.index') }}" class="menu-link">
+                            <i class="fas fa-clone w-25px"></i><span class="menu-text pl-3">Efax Received List</span>
+                        </a>
+                    </li>
+
                     <li class="menu-item menu-item-submenu <?= ($menu == 'activities' || $menu == 'incidences' || $menu == 'medications' || $menu == 'routes' || $menu == 'bodyharmcomments' || $menu == 'reminderconfigs' || $menu == 'adminlogs' || $menu == 'switchreminder' || $menu == 'reports' || $menu == 'settings' || $menu == 'relations' || $menu == 'moods' || $menu == 'representativetypes' || $menu == 'healthcarecentertypes' || $menu == 'units') ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
                         <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon svg-icon-primary svg-icon-2x">
