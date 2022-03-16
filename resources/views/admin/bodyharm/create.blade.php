@@ -48,5 +48,5 @@
 @stop
 
 @section('script')
-	<script type="module" src="{{ asset('js/3d.js') }}"></script>
+	<script type="module" src="{{ asset('js/3d-chile-male.js') }}"></script>
 @endsection

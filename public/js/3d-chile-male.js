@@ -278,11 +278,12 @@ import * as THREE from '/3d/src/build/three.module.js';
 
 			var loader = new GLTFLoader();
 
-			loader.load( '/3d/src/models/gltf/whole/123.glb', function ( gltf ) {
+			loader.load( '/3d/src/models/gltf/whole/child-male.glb', function ( gltf ) {
 
 				mesh = gltf.scene.children[ 0 ].children[0];
 				scene.add( mesh );
 				mesh.scale.set( 10, 10, 10 );
+				console.log(mesh)
 			} );
 
 		}
